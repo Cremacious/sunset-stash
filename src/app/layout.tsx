@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/components/ui/header/Navbar';
 import { Toaster } from 'sonner';
+import Footer from '@/components/ui/Footer';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -29,13 +30,14 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="min-h-screen bg-gradient-to-br from-orange-400 via-pink-500 to-blue-600 relative overflow-hidden">
+        <div className="min-h-screen bg-gradient-to-br from-orange-400 via-pink-500 to-blue-600 relative overflow-hidden flex flex-col">
           <div className="absolute inset-0">
             <div className="absolute top-10 left-10 w-20 h-20 bg-yellow-300 rounded-full blur-sm opacity-80 animate-pulse"></div>
           </div>
           <Navbar />
-          {children}
+          <main className="flex-1">{children}</main>
           <Toaster />
+          <Footer />
         </div>
       </body>
     </html>

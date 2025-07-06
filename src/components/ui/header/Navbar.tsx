@@ -21,6 +21,40 @@ const Navbar = () => {
           </div>
         </div>
 
+        {/* Navigation Links - Hidden on mobile, shown on larger screens */}
+        <div className="hidden lg:flex items-center space-x-6">
+          <button
+            onClick={() => router.push('/dashboard')}
+            className="text-white/90 hover:text-white text-sm font-medium transition-colors duration-200 hover:drop-shadow-md"
+          >
+            Dashboard
+          </button>
+          <button
+            onClick={() => router.push('/purchases')}
+            className="text-white/90 hover:text-white text-sm font-medium transition-colors duration-200 hover:drop-shadow-md"
+          >
+            Purchases
+          </button>
+          <button
+            onClick={() => router.push('/stash')}
+            className="text-white/90 hover:text-white text-sm font-medium transition-colors duration-200 hover:drop-shadow-md"
+          >
+            Stash
+          </button>
+          <button
+            onClick={() => router.push('/social')}
+            className="text-white/90 hover:text-white text-sm font-medium transition-colors duration-200 hover:drop-shadow-md"
+          >
+            Social
+          </button>
+          <button
+            onClick={() => router.push('/friends')}
+            className="text-white/90 hover:text-white text-sm font-medium transition-colors duration-200 hover:drop-shadow-md"
+          >
+            Friends
+          </button>
+        </div>
+
         <div className="flex gap-2 md:gap-3">
           <button
             onClick={() => router.push('/sign-in')}
