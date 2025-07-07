@@ -1,240 +1,532 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 const SocialPage = () => {
   const router = useRouter();
 
-  // Mock data for demonstration
-  const posts = [
+  const [searchEmail, setSearchEmail] = useState('');
+  const [timelineFilter, setTimelineFilter] = useState('all'); // 'all', 'user', 'friends'
+
+  // Mock friends data
+  const friends = [
     {
       id: 1,
-      user: 'Sarah M.',
-      avatar: '👩‍🦰',
-      activity: 'Movie Night',
-      date: '2 hours ago',
-      text: "Just picked up some Blue Dream from Trulieve! Perfect for tonight's Marvel marathon 🎬✨",
-      strain: 'Blue Dream',
-      thc: '22%',
-      cbd: '0.5%',
-      type: 'Flower',
-      dispensary: 'Trulieve',
-      likes: 12,
-      comments: 3,
+      name: 'Jake Rodriguez',
+      email: 'jake.r@email.com',
+      avatar: 'JR',
+      color: 'from-blue-400 to-purple-500',
+      addedDate: '2025-01-14',
+      status: 'online',
+      lastActivity: '2 hours ago',
+      mutualFriends: 3,
     },
     {
       id: 2,
-      user: 'Mike D.',
-      avatar: '👨‍🦲',
-      activity: 'Workout',
-      date: '4 hours ago',
-      text: 'Pre-workout with some Durban Poison! Ready to crush this leg day 💪',
-      strain: 'Durban Poison',
-      thc: '18%',
-      cbd: '1%',
-      type: 'Vape Cart',
-      dispensary: 'Curaleaf',
-      likes: 8,
-      comments: 1,
+      name: 'Maria Santos',
+      email: 'maria.santos@email.com',
+      avatar: 'MS',
+      color: 'from-green-400 to-emerald-500',
+      addedDate: '2025-01-13',
+      status: 'offline',
+      lastActivity: '1 day ago',
+      mutualFriends: 7,
     },
     {
       id: 3,
-      user: 'Alex K.',
-      avatar: '🧑‍🦱',
-      activity: 'Chill Time',
-      date: '6 hours ago',
-      text: 'Loving this new live rosin from Jungle Boys. The terp profile is incredible! 🌿',
-      strain: 'Mimosa',
-      thc: '78%',
-      cbd: '0.2%',
-      type: 'Live Rosin',
-      dispensary: 'Jungle Boys',
-      likes: 15,
-      comments: 5,
+      name: 'Alex Thompson',
+      email: 'alex.t@email.com',
+      avatar: 'AT',
+      color: 'from-pink-400 to-red-500',
+      addedDate: '2025-01-12',
+      status: 'online',
+      lastActivity: '30 minutes ago',
+      mutualFriends: 2,
+    },
+    {
+      id: 4,
+      name: 'Sarah Chen',
+      email: 'sarah.chen@email.com',
+      avatar: 'SC',
+      color: 'from-purple-400 to-indigo-500',
+      addedDate: '2025-01-10',
+      status: 'offline',
+      lastActivity: '3 days ago',
+      mutualFriends: 5,
     },
   ];
 
-  const getActivityIcon = (activity: string): string => {
-    switch (activity.toLowerCase()) {
-      case 'movie night':
-        return '🎬';
-      case 'workout':
-        return '💪';
-      case 'chill time':
-        return '😌';
-      case 'munchies':
-        return '🍿';
-      default:
-        return '🌿';
+  // Mock social posts data
+  const socialPosts = [
+    {
+      id: 1,
+      type: 'purchase',
+      author: {
+        name: 'You',
+        avatar: 'ME',
+        color: 'from-orange-400 to-yellow-500',
+        isUser: true,
+      },
+      timestamp: '2025-01-15T14:30:00Z',
+      timeAgo: '2 hours ago',
+      content: 'Just picked up some Blue Dream from Trulieve! 🌸',
+      data: {
+        dispensary: 'Trulieve',
+        items: ['Blue Dream', 'Mango Cart'],
+        total: 77.5,
+      },
+      likes: 8,
+      comments: 3,
+      liked: true,
+    },
+    {
+      id: 2,
+      type: 'review',
+      author: {
+        name: 'Jake Rodriguez',
+        avatar: 'JR',
+        color: 'from-blue-400 to-purple-500',
+        isUser: false,
+      },
+      timestamp: '2025-01-15T10:15:00Z',
+      timeAgo: '6 hours ago',
+      content:
+        'Wedding Cake is amazing for evening relaxation. Highly recommend! ⭐⭐⭐⭐⭐',
+      data: {
+        strain: 'Wedding Cake',
+        rating: 5,
+        effects: ['Relaxed', 'Sleepy', 'Happy'],
+      },
+      likes: 12,
+      comments: 7,
+      liked: false,
+    },
+    {
+      id: 3,
+      type: 'stash_update',
+      author: {
+        name: 'Maria Santos',
+        avatar: 'MS',
+        color: 'from-green-400 to-emerald-500',
+        isUser: false,
+      },
+      timestamp: '2025-01-14T16:45:00Z',
+      timeAgo: '1 day ago',
+      content: 'Added some premium Live Rosin to my stash collection 🍯',
+      data: {
+        item: 'Gorilla Glue Live Rosin',
+        category: 'concentrate',
+        thc: 82.3,
+      },
+      likes: 6,
+      comments: 2,
+      liked: true,
+    },
+    {
+      id: 4,
+      type: 'achievement',
+      author: {
+        name: 'Alex Thompson',
+        avatar: 'AT',
+        color: 'from-pink-400 to-red-500',
+        isUser: false,
+      },
+      timestamp: '2025-01-14T09:20:00Z',
+      timeAgo: '1 day ago',
+      content:
+        'Unlocked Cannabis Connoisseur badge! 🏆 Tried 25 different strains this month.',
+      data: {
+        badge: 'Cannabis Connoisseur',
+        milestone: '25 strains',
+      },
+      likes: 15,
+      comments: 5,
+      liked: false,
+    },
+    {
+      id: 5,
+      type: 'purchase',
+      author: {
+        name: 'Sarah Chen',
+        avatar: 'SC',
+        color: 'from-purple-400 to-indigo-500',
+        isUser: false,
+      },
+      timestamp: '2025-01-13T18:30:00Z',
+      timeAgo: '2 days ago',
+      content:
+        'First time trying RSO capsules from Rise. Excited to see how they work! 💊',
+      data: {
+        dispensary: 'Rise',
+        items: ['RSO Capsules'],
+        total: 45.0,
+      },
+      likes: 4,
+      comments: 8,
+      liked: false,
+    },
+  ];
+
+  // Filter posts based on timeline filter
+  const filteredPosts = socialPosts.filter((post) => {
+    if (timelineFilter === 'user') return post.author.isUser;
+    if (timelineFilter === 'friends') return !post.author.isUser;
+    return true; // 'all'
+  });
+
+  const handleSearchFriend = () => {
+    if (searchEmail.trim()) {
+      console.log('Searching for friend:', searchEmail);
+      // In real app, this would search for users by email
+      setSearchEmail('');
     }
   };
 
-  interface TypeColorMap {
-    [key: string]: string;
-  }
+  const handleLikePost = (postId: number) => {
+    console.log('Toggling like for post:', postId);
+    // In real app, this would update the like status
+  };
 
-  const getTypeColor = (type: string): string => {
-    const typeColorMap: TypeColorMap = {
-      flower: 'from-green-500 to-emerald-600',
-      'vape cart': 'from-blue-500 to-cyan-600',
-      'live rosin': 'from-purple-500 to-pink-600',
-      concentrate: 'from-amber-500 to-orange-600',
+  const getCategoryIcon = (category: string) => {
+    const categoryMap: Record<string, string> = {
+      flower: '🌸',
+      vape: '💨',
+      concentrate: '🍯',
+      edible: '🍪',
+      topical: '🧴',
     };
-    return typeColorMap[type.toLowerCase()] || 'from-gray-500 to-gray-600';
+    return categoryMap[category] || '🌿';
+  };
+
+  const getPostIcon = (type: string) => {
+    const typeMap: Record<string, string> = {
+      purchase: '🛒',
+      review: '⭐',
+      stash_update: '🏺',
+      achievement: '🏆',
+    };
+    return typeMap[type] || '📝';
+  };
+
+  const renderPostContent = (post: (typeof socialPosts)[0]) => {
+    switch (post.type) {
+      case 'purchase':
+        if (!post.data?.total || !post.data?.items) return null;
+        return (
+          <div className="bg-green-50 rounded-lg p-3 border border-green-200 mt-2">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-sm font-medium text-green-800">
+                Purchase at {post.data.dispensary}
+              </span>
+              <span className="text-lg font-bold text-green-600">
+                ${post.data.total.toFixed(2)}
+              </span>
+            </div>
+            <div className="flex flex-wrap gap-1">
+              {post.data.items.map((item: string, index: number) => (
+                <span
+                  key={index}
+                  className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-green-100 text-green-800"
+                >
+                  {item}
+                </span>
+              ))}
+            </div>
+          </div>
+        );
+      case 'review':
+        if (!post.data?.rating || !post.data?.effects) return null;
+        return (
+          <div className="bg-yellow-50 rounded-lg p-3 border border-yellow-200 mt-2">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-sm font-medium text-yellow-800">
+                Reviewed {post.data.strain}
+              </span>
+              <div className="flex">
+                {[...Array(5)].map((_, i) => (
+                  <span
+                    key={i}
+                    className={`text-sm ${
+                      i < (post.data?.rating || 0)
+                        ? 'text-yellow-500'
+                        : 'text-gray-300'
+                    }`}
+                  >
+                    ⭐
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div className="flex flex-wrap gap-1">
+              {post.data.effects.map((effect: string, index: number) => (
+                <span
+                  key={index}
+                  className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-yellow-100 text-yellow-800"
+                >
+                  {effect}
+                </span>
+              ))}
+            </div>
+          </div>
+        );
+      case 'stash_update':
+        if (!post.data?.category || !post.data?.item) return null;
+        return (
+          <div className="bg-blue-50 rounded-lg p-3 border border-blue-200 mt-2">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-sm font-medium text-blue-800">
+                Added to Stash
+              </span>
+              <span className="text-sm text-blue-600">
+                {post.data.thc}% THC
+              </span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <span className="text-lg">
+                {getCategoryIcon(post.data.category)}
+              </span>
+              <span className="text-sm font-medium text-blue-800">
+                {post.data.item}
+              </span>
+            </div>
+          </div>
+        );
+      case 'achievement':
+        if (!post.data?.badge) return null;
+        return (
+          <div className="bg-purple-50 rounded-lg p-3 border border-purple-200 mt-2">
+            <div className="flex items-center space-x-3">
+              <div className="w-10 h-10 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full flex items-center justify-center">
+                <span className="text-white font-bold">🏆</span>
+              </div>
+              <div>
+                <p className="text-sm font-medium text-purple-800">
+                  {post.data.badge}
+                </p>
+                <p className="text-xs text-purple-600">{post.data.milestone}</p>
+              </div>
+            </div>
+          </div>
+        );
+      default:
+        return null;
+    }
   };
 
   return (
-    <div className="space-y-8  bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl p-6 ">
-      {/* Header */}
-      <div className="text-center">
-        <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full shadow-2xl mb-6">
-          <span className="text-4xl">🌐</span>
-        </div>
-        <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">
-          Social Feed
-        </h1>
-        <p className="text-gray-600 text-lg">
-          See what your friends are enjoying 🌿
-        </p>
-      </div>
+    <div className="space-y-6">
 
-      {/* Create Post Button */}
-      <div className="w-full">
-        <Button
-          onClick={() => router.push('/social/new-post')}
-          className="w-full bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white shadow-lg hover:shadow-xl transition-all duration-200"
-        >
-          <span className="text-xl mr-2">✍️</span>
-          Share Your Experience
-        </Button>
-      </div>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* left Column - Timeline */}
+        <div className="lg:col-span-2 space-y-6 p-6 bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl ">
+          {/* Timeline Filters */}
+          <div className="bg-white rounded-lg border border-gray-200 p-4">
+            <div className="flex items-center justify-between">
+              <h2 className="text-lg font-semibold text-gray-900 flex items-center">
+                <span className="text-xl mr-2">📰</span>
+                Activity Timeline
+              </h2>
+              <div className="flex items-center space-x-2">
+                <Label htmlFor="filter" className="text-sm">
+                  Show:
+                </Label>
+                <Select
+                  value={timelineFilter}
+                  onValueChange={setTimelineFilter}
+                >
+                  <SelectTrigger className="w-32 h-8 text-sm">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All Posts</SelectItem>
+                    <SelectItem value="user">Your Posts</SelectItem>
+                    <SelectItem value="friends">Friends Only</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+          </div>
 
-      {/* Filter and Search */}
-      <div className="flex flex-col sm:flex-row gap-3 sm:gap-2 items-stretch sm:items-center">
-        <div className="flex space-x-2 flex-shrink-0">
-          <Button variant="outline" size="sm" className="text-gray-600">
-            All Activities
-          </Button>
-          <Button variant="outline" size="sm" className="text-gray-600">
-            Friends Only
-          </Button>
-        </div>
-        <Input className="bg-white flex-1" placeholder="Search posts..." />
-      </div>
-
-      {/* Posts Feed */}
-      <div className="space-y-6 gap-4 grid md:grid-cols-4">
-        {posts.map((post) => (
-          <Card
-            key={post.id}
-            className="bg-white shadow-xl border-0 hover:shadow-2xl transition-all duration-300"
-          >
-            <CardHeader className="pb-3">
-              <div className="flex items-start justify-between">
-                <div className="flex items-center space-x-3">
-                  <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-2xl">
-                    {post.avatar}
+          {/* Timeline Posts */}
+          <div className="space-y-4">
+            {filteredPosts.map((post) => (
+              <div
+                key={post.id}
+                className="bg-white rounded-lg border border-gray-200 p-6 hover:shadow-md transition-all"
+              >
+                <div className="flex items-start space-x-3">
+                  <div
+                    className={`w-10 h-10 bg-gradient-to-r ${post.author.color} rounded-full flex items-center justify-center flex-shrink-0`}
+                  >
+                    <span className="text-white font-semibold text-sm">
+                      {post.author.avatar}
+                    </span>
                   </div>
-                  <div>
-                    <CardTitle className="text-lg font-bold text-gray-800">
-                      {post.user}
-                    </CardTitle>
-                    <div className="flex items-center space-x-2 text-sm text-gray-600">
-                      <span>{getActivityIcon(post.activity)}</span>
-                      <span>{post.activity}</span>
-                      <span>•</span>
-                      <span>{post.date}</span>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center space-x-2 mb-1">
+                      <p className="text-sm font-semibold text-gray-900">
+                        {post.author.name}
+                      </p>
+                      <span className="text-lg">{getPostIcon(post.type)}</span>
+                      <p className="text-xs text-gray-500">{post.timeAgo}</p>
+                    </div>
+
+                    <p className="text-gray-800 mb-2">{post.content}</p>
+
+                    {renderPostContent(post)}
+
+                    <div className="flex items-center space-x-4 mt-4 pt-3 border-t border-gray-100">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => handleLikePost(post.id)}
+                        className={`flex items-center space-x-1 text-xs ${
+                          post.liked
+                            ? 'text-red-600 hover:text-red-700'
+                            : 'text-gray-500 hover:text-red-600'
+                        }`}
+                      >
+                        <span>{post.liked ? '❤️' : '🤍'}</span>
+                        <span>{post.likes}</span>
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="flex items-center space-x-1 text-xs text-gray-500 hover:text-blue-600"
+                      >
+                        <span>💬</span>
+                        <span>{post.comments}</span>
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="flex items-center space-x-1 text-xs text-gray-500 hover:text-green-600"
+                      >
+                        <span>🔄</span>
+                        <span>Share</span>
+                      </Button>
                     </div>
                   </div>
                 </div>
               </div>
-            </CardHeader>
+            ))}
+          </div>
 
-            <CardContent className="space-y-4">
-              {/* Post Text */}
-              <p className="text-gray-800 leading-relaxed">{post.text}</p>
+          {/* Load More */}
+          <div className="text-center">
+            <Button  className="px-8">
+              Load More Posts
+            </Button>
+          </div>
+        </div>
+        {/* right Column - Friends & Search */}
+        <div className="space-y-6 ">
+          {/* Recent Friends */}
+          <div className="p-6 bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl ">
+            <div className="bg-white rounded-lg border border-gray-200 px-2 py-4 md:p-6 ">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-lg font-semibold text-gray-900 flex items-center">
+                  <span className="text-xl mr-2">🤝</span>
+                  Recent Friends
+                </h2>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => router.push('/friends')}
+                  className="text-xs"
+                >
+                  View All ({friends.length})
+                </Button>
+              </div>
 
-              {/* Strain Info Card */}
-              <div className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg p-4 border border-gray-200">
-                <div className="flex items-center space-x-3 mb-3">
+              <div className="space-y-3">
+                {friends.slice(0, 3).map((friend) => (
                   <div
-                    className={`w-8 h-8 bg-gradient-to-r ${getTypeColor(
-                      post.type
-                    )} rounded-full flex items-center justify-center`}
+                    key={friend.id}
+                    className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
                   >
-                    <span className="text-white text-sm font-bold">
-                      {post.type === 'Flower'
-                        ? '🌸'
-                        : post.type === 'Vape Cart'
-                        ? '💨'
-                        : '🧪'}
-                    </span>
+                    <div
+                      className={`w-10 h-10 bg-gradient-to-r ${friend.color} rounded-full flex items-center justify-center flex-shrink-0`}
+                    >
+                      <span className="text-white font-semibold text-sm">
+                        {friend.avatar}
+                      </span>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-semibold text-gray-900">
+                        {friend.name}
+                      </p>
+                      <div className="flex items-center space-x-2">
+                        <div
+                          className={`w-2 h-2 rounded-full ${
+                            friend.status === 'online'
+                              ? 'bg-green-500'
+                              : 'bg-gray-400'
+                          }`}
+                        />
+                        <p className="text-xs text-gray-500">
+                          {friend.lastActivity}
+                        </p>
+                      </div>
+                    </div>
+                    <Button size="sm" variant="outline" className="text-xs">
+                      View
+                    </Button>
                   </div>
-                  <div>
-                    <h4 className="font-bold text-gray-800">{post.strain}</h4>
-                    <p className="text-sm text-gray-600">
-                      {post.type} • {post.dispensary}
-                    </p>
-                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          {/* Friend Search */}
+          <div className="p-6 bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl">
+            <div className="bg-white rounded-lg border border-gray-200 p-6">
+              <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                <span className="text-xl mr-2">🔍</span>
+                Find Friends
+              </h2>
+              <div className="space-y-3">
+                <div>
+                  <Label htmlFor="email">Search by Email</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="friend@email.com"
+                    value={searchEmail}
+                    onChange={(e) => setSearchEmail(e.target.value)}
+                    onKeyPress={(e) =>
+                      e.key === 'Enter' && handleSearchFriend()
+                    }
+                  />
                 </div>
-
-                <div className="grid grid-cols-2 gap-3 text-sm">
-                  <div className="bg-white p-2 rounded border">
-                    <p className="text-gray-600 mb-1">THC</p>
-                    <p className="font-semibold text-gray-800">{post.thc}</p>
-                  </div>
-                  <div className="bg-white p-2 rounded border">
-                    <p className="text-gray-600 mb-1">CBD</p>
-                    <p className="font-semibold text-gray-800">{post.cbd}</p>
-                  </div>
-                </div>
+                <Button
+                  onClick={handleSearchFriend}
+                  className="w-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white"
+                  disabled={!searchEmail.trim()}
+                >
+                  Send Friend Request
+                </Button>
               </div>
 
-              {/* Interaction Buttons */}
-              <div className="flex items-center justify-between pt-2 border-t border-gray-100">
-                <div className="flex space-x-4">
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="text-gray-600 hover:text-orange-600"
-                  >
-                    <span className="mr-1">👍</span>
-                    {post.likes}
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="text-gray-600 hover:text-orange-600"
-                  >
-                    <span className="mr-1">💬</span>
-                    {post.comments}
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="text-gray-600 hover:text-orange-600"
-                  >
-                    <span className="mr-1">↗️</span>
-                    Share
-                  </Button>
-                </div>
+              <div className="mt-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
+                <p className="text-sm text-blue-800">
+                  💡 <strong>Tip:</strong> Ask friends for their email to
+                  connect and share your cannabis journey together!
+                </p>
               </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-
-      {/* Load More */}
-      <div className="text-center">
-        <Button
-          variant="outline"
-          className="bg-white/50 backdrop-blur-sm border-orange-200/50 hover:bg-orange-100/50"
-        >
-          Load More Posts
-        </Button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

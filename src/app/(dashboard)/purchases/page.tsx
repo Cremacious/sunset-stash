@@ -11,6 +11,8 @@ import {
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import PurchaseListCard from '@/components/purchases/PurchaseListCard';
+import ConnectWithFriends from '@/components/social/ConnectWithFriends';
 
 const PurchasesPage = () => {
   const router = useRouter();
@@ -30,9 +32,25 @@ const PurchasesPage = () => {
       },
       date: '2025-01-14',
       dispensary: 'Trulieve',
-      items: [{ name: 'Wedding Cake', category: 'flower', price: 52.0 }],
+      items: [
+        {
+          id: 1,
+          name: 'Wedding Cake',
+          category: 'flower',
+          type: 'flower',
+          amount: '1g',
+          price: 52.0,
+          thc: 20,
+          cbd: 0.1,
+          lineage: 'Triangle Kush x Animal Mints',
+          notes: 'Shared with friends!',
+          dateAdded: '2025-01-14',
+        },
+      ],
       total: 52.0,
       timeAgo: '1 day ago',
+      notes: 'Shared with friends!',
+      createdAt: '2025-01-14T10:00:00Z',
     },
     {
       id: 2,
@@ -43,9 +61,25 @@ const PurchasesPage = () => {
       },
       date: '2025-01-13',
       dispensary: 'Curaleaf',
-      items: [{ name: 'Live Rosin Cart', category: 'vape', price: 68.0 }],
+      items: [
+        {
+          id: 1,
+          name: 'Live Rosin Cart',
+          category: 'vape',
+          type: 'vape',
+          amount: '1g',
+          price: 68.0,
+          thc: 80,
+          cbd: 0.2,
+          lineage: '',
+          notes: '',
+          dateAdded: '2025-01-13',
+        },
+      ],
       total: 68.0,
       timeAgo: '2 days ago',
+      notes: '',
+      createdAt: '2025-01-13T11:30:00Z',
     },
     {
       id: 3,
@@ -56,9 +90,25 @@ const PurchasesPage = () => {
       },
       date: '2025-01-12',
       dispensary: 'Rise',
-      items: [{ name: 'RSO Capsules', category: 'edible', price: 45.0 }],
+      items: [
+        {
+          id: 1,
+          name: 'RSO Capsules',
+          category: 'edible',
+          type: 'edible',
+          amount: '10ct',
+          price: 45.0,
+          thc: 50,
+          cbd: 1.0,
+          lineage: '',
+          notes: 'Great for pain relief.',
+          dateAdded: '2025-01-12',
+        },
+      ],
       total: 45.0,
       timeAgo: '3 days ago',
+      notes: 'Great for pain relief.',
+      createdAt: '2025-01-12T09:15:00Z',
     },
   ];
 
@@ -66,88 +116,49 @@ const PurchasesPage = () => {
   const purchases = [
     {
       id: 1,
-      date: '2025-01-15',
       dispensary: 'Trulieve',
+      date: '2025-01-14',
+      total: 52.0,
       items: [
-        { name: 'Blue Dream', category: 'flower', amount: '3.5g', price: 45.5 },
-        { name: 'Mango Cart', category: 'vape', amount: '0.5g', price: 32.0 },
+        {
+          id: 1,
+          name: 'Wedding Cake',
+          category: 'flower',
+          type: 'flower',
+          amount: '1g',
+          price: 52.0,
+          thc: 20,
+          cbd: 0.1,
+          lineage: 'Triangle Kush x Animal Mints',
+          notes: 'Great quality and service!',
+          dateAdded: '2025-01-14',
+        },
       ],
-      total: 77.5,
-      paymentMethod: 'Card',
+      notes: 'Great quality and service!',
+      createdAt: '2025-01-14T10:00:00Z',
     },
     {
       id: 2,
-      date: '2025-01-12',
-      dispensary: 'Curaleaf',
+      dispensary: 'poop',
+      date: '2025-01-14',
+      total: 52.0,
       items: [
         {
-          name: 'Gorilla Glue Rosin',
-          category: 'concentrate',
-          amount: '1g',
-          price: 65.0,
-        },
-        {
-          name: 'Pain Relief Cream',
-          category: 'topical',
-          amount: '30ml',
-          price: 28.0,
-        },
-      ],
-      total: 93.0,
-      paymentMethod: 'Cash',
-    },
-    {
-      id: 3,
-      date: '2025-01-08',
-      dispensary: 'Rise',
-      items: [
-        {
-          name: 'Gummy Bears',
-          category: 'edible',
-          amount: '10-pack',
-          price: 25.0,
-        },
-        { name: 'Sour Diesel', category: 'flower', amount: '7g', price: 89.0 },
-      ],
-      total: 114.0,
-      paymentMethod: 'Card',
-    },
-    {
-      id: 4,
-      date: '2025-01-05',
-      dispensary: 'MedMen',
-      items: [
-        { name: 'OG Kush Cart', category: 'vape', amount: '1g', price: 48.0 },
-        {
-          name: 'Purple Punch',
+          id: 1,
+          name: 'Wedding Cake',
           category: 'flower',
-          amount: '3.5g',
-          price: 42.0,
+          type: 'flower',
+          amount: '1g',
+          price: 52.0,
+          thc: 20,
+          cbd: 0.1,
+          lineage: 'Triangle Kush x Animal Mints',
+          notes: 'Great quality and service!',
+          dateAdded: '2025-01-14',
         },
       ],
-      total: 90.0,
-      paymentMethod: 'Card',
-    },
-    {
-      id: 5,
-      date: '2024-12-28',
-      dispensary: 'Trulieve',
-      items: [
-        {
-          name: 'Live Resin',
-          category: 'concentrate',
-          amount: '0.5g',
-          price: 38.0,
-        },
-        {
-          name: 'Chocolate Bar',
-          category: 'edible',
-          amount: '100mg',
-          price: 22.0,
-        },
-      ],
-      total: 60.0,
-      paymentMethod: 'Card',
+      notes: 'Great quality and service!',
+      createdAt: '2025-01-14T10:00:00Z',
     },
   ];
 
@@ -171,95 +182,86 @@ const PurchasesPage = () => {
     return matchesSearch && matchesDate;
   });
 
-  const getCategoryIcon = (category: string) => {
-    const categoryMap: Record<string, string> = {
-      flower: '🌸',
-      vape: '💨',
-      concentrate: '🍯',
-      edible: '🍪',
-      topical: '🧴',
-    };
-    return categoryMap[category] || '🌿';
-  };
-
   return (
-    <div className="space-y-6  bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl p-6 mx-auto">
-      <div className="flex flex-col md:flex-row gap-2 md:justify-between items-center">
-        <Button className="w-full md:w-auto" asChild>
-          <Link href="/purchases/new">Add New Purchase</Link>
-        </Button>
+    <div className="space-y-6">
+      <div className="bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl p-6 space-y-4">
+        <div className="flex flex-col md:flex-row gap-2 md:justify-between items-center ">
+          <Button className="w-full md:w-auto" asChild>
+            <Link href="/purchases/new">Add New Purchase</Link>
+          </Button>
 
-        <div className="flex space-x-2 items-center ">
-          <Select value={selectedMonth} onValueChange={setSelectedMonth}>
-            <SelectTrigger className="w-32 h-9 text-sm bg-white">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="01">Jan</SelectItem>
-              <SelectItem value="02">Feb</SelectItem>
-              <SelectItem value="03">Mar</SelectItem>
-              <SelectItem value="04">Apr</SelectItem>
-              <SelectItem value="05">May</SelectItem>
-              <SelectItem value="06">Jun</SelectItem>
-              <SelectItem value="07">Jul</SelectItem>
-              <SelectItem value="08">Aug</SelectItem>
-              <SelectItem value="09">Sep</SelectItem>
-              <SelectItem value="10">Oct</SelectItem>
-              <SelectItem value="11">Nov</SelectItem>
-              <SelectItem value="12">Dec</SelectItem>
-            </SelectContent>
-          </Select>
-          <Select value={selectedYear} onValueChange={setSelectedYear}>
-            <SelectTrigger className="w-25 h-9 text-sm bg-white">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="2025">2025</SelectItem>
-              <SelectItem value="2024">2024</SelectItem>
-            </SelectContent>
-          </Select>
-          {/* <Input className="bg-white" placeholder="Search strains..." /> */}
+          <div className="flex space-x-2 items-center ">
+            <Select value={selectedMonth} onValueChange={setSelectedMonth}>
+              <SelectTrigger className="w-32 h-9 text-sm bg-white">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="01">Jan</SelectItem>
+                <SelectItem value="02">Feb</SelectItem>
+                <SelectItem value="03">Mar</SelectItem>
+                <SelectItem value="04">Apr</SelectItem>
+                <SelectItem value="05">May</SelectItem>
+                <SelectItem value="06">Jun</SelectItem>
+                <SelectItem value="07">Jul</SelectItem>
+                <SelectItem value="08">Aug</SelectItem>
+                <SelectItem value="09">Sep</SelectItem>
+                <SelectItem value="10">Oct</SelectItem>
+                <SelectItem value="11">Nov</SelectItem>
+                <SelectItem value="12">Dec</SelectItem>
+              </SelectContent>
+            </Select>
+            <Select value={selectedYear} onValueChange={setSelectedYear}>
+              <SelectTrigger className="w-25 h-9 text-sm bg-white">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="2025">2025</SelectItem>
+                <SelectItem value="2024">2024</SelectItem>
+              </SelectContent>
+            </Select>
+            {/* <Input className="bg-white" placeholder="Search strains..." /> */}
+          </div>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+          <div className="bg-white rounded-lg border border-gray-200 p-3 text-center">
+            <p className="text-lg font-bold text-gray-900">
+              {purchases.length}
+            </p>
+            <p className="text-xs text-gray-500">Total Purchases</p>
+          </div>
+          <div className="bg-white rounded-lg border border-gray-200 p-3 text-center">
+            <p className="text-lg font-bold text-gray-900">
+              ${purchases.length}
+            </p>
+            <p className="text-xs text-gray-500">Total This Month</p>
+          </div>
+          <div className="bg-white rounded-lg border border-gray-200 p-3 text-center">
+            <p className="text-lg font-bold text-gray-900">
+              ${purchases.reduce((sum, p) => sum + p.total, 0).toFixed(0)}
+            </p>
+            <p className="text-xs text-gray-500">All Time Spent</p>
+          </div>
+          <div className="bg-white rounded-lg border border-gray-200 p-3 text-center">
+            <p className="text-lg font-bold text-gray-900">
+              {[...new Set(purchases.map((p) => p.dispensary))].length}
+            </p>
+            <p className="text-xs text-gray-500">Dispensaries</p>
+          </div>
+          <div className="bg-white rounded-lg border border-gray-200 p-3 text-center">
+            <p className="text-lg font-bold text-gray-900">
+              $
+              {(
+                purchases.reduce((sum, p) => sum + p.total, 0) /
+                purchases.length
+              ).toFixed(0)}
+            </p>
+            <p className="text-xs text-gray-500">Avg Purchase</p>
+          </div>
         </div>
       </div>
-
-      {/* Compact Category Overview */}
-
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-        <div className="bg-white rounded-lg border border-gray-200 p-3 text-center">
-          <p className="text-lg font-bold text-gray-900">{purchases.length}</p>
-          <p className="text-xs text-gray-500">Total Purchases</p>
-        </div>
-        <div className="bg-white rounded-lg border border-gray-200 p-3 text-center">
-          <p className="text-lg font-bold text-gray-900">${purchases.length}</p>
-          <p className="text-xs text-gray-500">Total This Month</p>
-        </div>
-        <div className="bg-white rounded-lg border border-gray-200 p-3 text-center">
-          <p className="text-lg font-bold text-gray-900">
-            ${purchases.reduce((sum, p) => sum + p.total, 0).toFixed(0)}
-          </p>
-          <p className="text-xs text-gray-500">All Time Spent</p>
-        </div>
-        <div className="bg-white rounded-lg border border-gray-200 p-3 text-center">
-          <p className="text-lg font-bold text-gray-900">
-            {[...new Set(purchases.map((p) => p.dispensary))].length}
-          </p>
-          <p className="text-xs text-gray-500">Dispensaries</p>
-        </div>
-        <div className="bg-white rounded-lg border border-gray-200 p-3 text-center">
-          <p className="text-lg font-bold text-gray-900">
-            $
-            {(
-              purchases.reduce((sum, p) => sum + p.total, 0) / purchases.length
-            ).toFixed(0)}
-          </p>
-          <p className="text-xs text-gray-500">Avg Purchase</p>
-        </div>
-      </div>
-      {/* Main Content Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 ">
-        {/* Your Purchases - Left Column */}
-        <div className="lg:col-span-2 space-y-3">
-          <div className="flex items-center justify-between">
+        <div className="lg:col-span-2 space-y-3 bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl">
+          <div className="flex items-center justify-between px-6 pt-6">
             <h2 className="text-lg font-semibold text-gray-900">
               Your Purchases
             </h2>
@@ -267,53 +269,11 @@ const PurchasesPage = () => {
               {filteredPurchases.length} purchases
             </span>
           </div>
-          <div className=" p-4 space-y-4">
+          <div className="space-y-4">
             {filteredPurchases.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 p-6">
                 {filteredPurchases.map((purchase) => (
-                  <div
-                    key={purchase.id}
-                    className="bg-white rounded-lg border border-gray-200 p-4 hover:shadow-md transition-all"
-                  >
-                    <div className="flex justify-between items-start mb-2">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-8 h-8 bg-gradient-to-r from-gray-400 to-gray-500 rounded-lg flex items-center justify-center">
-                          <span className="text-white text-xs font-semibold">
-                            {purchase.dispensary.charAt(0)}
-                          </span>
-                        </div>
-                        <div>
-                          <h3 className="font-semibold text-gray-900 text-sm">
-                            {purchase.dispensary}
-                          </h3>
-                          <p className="text-xs text-gray-500">
-                            {purchase.date}
-                          </p>
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <p className="font-bold text-green-600">
-                          ${purchase.total.toFixed(2)}
-                        </p>
-                        <p className="text-xs text-gray-500">
-                          {purchase.items.length} items
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="flex flex-wrap gap-1">
-                      {purchase.items.map((item, index) => (
-                        <span
-                          key={index}
-                          className="inline-flex items-center space-x-1 bg-gray-100 rounded-full px-2 py-1 text-xs"
-                        >
-                          <span>{getCategoryIcon(item.category)}</span>
-                          <span className="text-gray-700">{item.name}</span>
-                          <span className="text-gray-500">${item.price}</span>
-                        </span>
-                      ))}
-                    </div>
-                  </div>
+                  <PurchaseListCard key={purchase.id} purchase={purchase} />
                 ))}
               </div>
             ) : (
@@ -334,9 +294,7 @@ const PurchasesPage = () => {
             )}
           </div>
         </div>
-
-        {/* Friends Activity - Right Column */}
-        <div className="space-y-3">
+        <div className="space-y-3 bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl p-6">
           <div className="flex items-center justify-between">
             <h2 className="text-lg font-semibold text-gray-900">
               Friends Activity
@@ -348,68 +306,9 @@ const PurchasesPage = () => {
 
           <div className="space-y-3">
             {friendsPurchases.map((purchase) => (
-              <div
-                key={purchase.id}
-                className="bg-white rounded-lg border border-gray-200 p-3 hover:shadow-md transition-all"
-              >
-                <div className="flex items-start space-x-3">
-                  <div
-                    className={`w-8 h-8 bg-gradient-to-r ${purchase.friend.color} rounded-full flex items-center justify-center flex-shrink-0`}
-                  >
-                    <span className="text-white text-xs font-semibold">
-                      {purchase.friend.avatar}
-                    </span>
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center space-x-2 mb-1">
-                      <p className="text-sm font-semibold text-gray-900">
-                        {purchase.friend.name}
-                      </p>
-                      <p className="text-xs text-gray-500">
-                        {purchase.timeAgo}
-                      </p>
-                    </div>
-                    <p className="text-xs text-gray-600 mb-2">
-                      Picked up from{' '}
-                      <span className="font-medium">{purchase.dispensary}</span>
-                    </p>
-                    <div className="flex items-center justify-between">
-                      <span className="inline-flex items-center space-x-1 bg-gray-100 rounded-full px-2 py-1 text-xs">
-                        <span>
-                          {getCategoryIcon(purchase.items[0].category)}
-                        </span>
-                        <span className="text-gray-700">
-                          {purchase.items[0].name}
-                        </span>
-                      </span>
-                      <span className="text-sm font-semibold text-green-600">
-                        ${purchase.total.toFixed(2)}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <PurchaseListCard key={purchase.id} purchase={purchase} />
             ))}
-
-            {/* Friends Activity CTA */}
-            <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg border border-blue-200 p-4 text-center">
-              <div className="text-2xl mb-2">👥</div>
-              <h3 className="text-sm font-semibold text-gray-800 mb-1">
-                Connect with Friends
-              </h3>
-              <p className="text-xs text-gray-600 mb-3">
-                Follow friends to see their purchases and get strain
-                recommendations
-              </p>
-              <Button
-                onClick={() => router.push('/friends')}
-                size="sm"
-                variant="outline"
-                className="text-xs"
-              >
-                Find Friends
-              </Button>
-            </div>
+            <ConnectWithFriends />
           </div>
         </div>
       </div>
