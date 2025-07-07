@@ -48,21 +48,8 @@ const NewStashItemPage = () => {
   };
 
   return (
-    <div className="bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl ">
+    <div className="bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl py-6 px-1">
       <div className="max-w-4xl mx-auto space-y-8">
-        {/* Header */}
-        <div className="text-center">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full shadow-2xl mb-6">
-            <span className="text-4xl">🌿</span>
-          </div>
-          <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-2">
-            Add New Strain
-          </h1>
-          <p className="text-gray-600 text-lg">
-            Track your new cannabis addition to your stash 🏺
-          </p>
-        </div>
-
         {/* Form Card */}
         <Card className="bg-white shadow-xl border-0">
           <CardHeader>
@@ -278,10 +265,7 @@ const NewStashItemPage = () => {
               >
                 Cancel
               </Button>
-              <Button
-                onClick={handleSubmit}
-                className="flex-1 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white"
-              >
+              <Button onClick={handleSubmit} className="flex-1">
                 Add to Stash
               </Button>
             </div>

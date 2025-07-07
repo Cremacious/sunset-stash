@@ -2,10 +2,12 @@
 
 import { useRouter } from 'next/navigation';
 
+import Sidebar from './Sidebar';
+
 const Navbar = () => {
   const router = useRouter();
   return (
-    <nav className="relative z-20 px-4 py-6 md:px-8 mb-10">
+    <nav className="relative z-20 px-4 md:px-8 mb-10 bg-white/10 backdrop-blur-md p-4 border border-white/20">
       <div className="flex justify-between items-center max-w-7xl mx-auto">
         <div className="flex items-center space-x-3">
           <div className="w-10 h-10 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center shadow-lg">
@@ -19,6 +21,9 @@ const Navbar = () => {
               Florida Cannabis Community
             </p>
           </div>
+        </div>
+        <div className="flex md:hidden">
+          <Sidebar />
         </div>
 
         {/* Navigation Links - Hidden on mobile, shown on larger screens */}
@@ -55,7 +60,7 @@ const Navbar = () => {
           </button>
         </div>
 
-        <div className="flex gap-2 md:gap-3">
+        <div className="hidden md:flex gap-2 md:gap-3">
           <button
             onClick={() => router.push('/sign-in')}
             className="px-3 py-2 md:px-4 md:py-2 text-sm text-white border border-white/40 rounded-lg hover:bg-white/10 transition-all duration-200 backdrop-blur-sm font-medium"
