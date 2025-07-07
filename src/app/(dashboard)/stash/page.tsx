@@ -9,6 +9,8 @@ import {
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
+import { Input } from '@/components/ui/input';
+import Link from 'next/link';
 
 const StashPage = () => {
   const router = useRouter();
@@ -104,9 +106,9 @@ const StashPage = () => {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl p-6">
       {/* Header */}
-      <div className="text-center">
+      {/* <div className="text-center">
         <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full shadow-2xl mb-6">
           <span className="text-4xl">🏺</span>
         </div>
@@ -116,12 +118,12 @@ const StashPage = () => {
         <p className="text-gray-600 text-lg">
           Track your strains, effects, and experiences 🌿
         </p>
-      </div>
+      </div> */}
 
       {/* Quick Stats */}
 
       {/* Quick Actions */}
-      <Card className="bg-white shadow-xl border-0">
+      {/* <Card className="bg-white shadow-xl border-0">
         <CardHeader>
           <CardTitle className="text-xl font-bold text-gray-800 flex items-center">
             <span className="text-2xl mr-3">⚡</span>
@@ -156,19 +158,23 @@ const StashPage = () => {
             </Button>
           </div>
         </CardContent>
-      </Card>
+      </Card> */}
 
       {/* Stash Items Grid */}
       <div className="space-y-6">
-        <div className="flex justify-between items-center">
-          <h2 className="text-2xl font-bold text-gray-800">Your Strains</h2>
-          <div className="flex space-x-2">
+        <div className="flex flex-col md:flex-row gap-2 md:justify-between items-center">
+          <Button className="w-full md:w-auto" asChild>
+            <Link href="/stash/new">Add New</Link>
+          </Button>
+
+          <div className="flex space-x-2 items-center ">
             <Button variant="outline" size="sm" className="text-gray-600">
               Filter
             </Button>
             <Button variant="outline" size="sm" className="text-gray-600">
               Sort
             </Button>
+            <Input className="bg-white" placeholder="Search strains..." />
           </div>
         </div>
 
@@ -200,39 +206,21 @@ const StashPage = () => {
                         </CardDescription>
                       </div>
                     </div>
-                    <div className="text-right">
-                      <div className="flex items-center text-yellow-500 mb-1">
-                        <span className="text-sm">⭐ {item.rating}</span>
-                      </div>
-                      <p className="text-xs text-gray-500">
-                        Last used: {item.lastUsed}
-                      </p>
-                    </div>
                   </div>
                 </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="grid grid-cols-2 gap-2 text-sm">
+                <CardContent className="space-y-4 text-center">
+                  <div className="grid grid-cols-3 gap-2 text-sm">
                     <div className="bg-gray-50 p-2 rounded">
-                      <p className="text-gray-600">THC</p>
+                      <p className="text-gray-600 mb-1">Category</p>
+                      <p className="font-semibold text-gray-800">Concentrate</p>
+                    </div>
+                    <div className="bg-gray-50 p-2 rounded">
+                      <p className="text-gray-600 mb-1">THC</p>
                       <p className="font-semibold text-gray-800">{item.thc}%</p>
                     </div>
                     <div className="bg-gray-50 p-2 rounded">
-                      <p className="text-gray-600">CBD</p>
+                      <p className="text-gray-600 mb-1">CBD</p>
                       <p className="font-semibold text-gray-800">{item.cbd}%</p>
-                    </div>
-                  </div>
-
-                  <div>
-                    <p className="text-sm text-gray-600 mb-2">Effects:</p>
-                    <div className="flex flex-wrap gap-1">
-                      {item.effects.map((effect, index) => (
-                        <span
-                          key={index}
-                          className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded"
-                        >
-                          {effect}
-                        </span>
-                      ))}
                     </div>
                   </div>
 
@@ -243,11 +231,6 @@ const StashPage = () => {
                     </p>
                   </div>
 
-                  <div className="flex justify-between items-center text-sm text-gray-600">
-                    <span>From {item.dispensary}</span>
-                    <span>${item.price}</span>
-                  </div>
-
                   <div className="flex space-x-2">
                     <Button
                       size="sm"
@@ -255,13 +238,6 @@ const StashPage = () => {
                       className="flex-1 text-xs"
                     >
                       Edit
-                    </Button>
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      className="flex-1 text-xs"
-                    >
-                      Log Use
                     </Button>
                   </div>
                 </CardContent>
@@ -315,8 +291,10 @@ const StashPage = () => {
 
             <div className="text-center p-4 bg-gradient-to-br from-orange-50 to-pink-50 rounded-lg border border-orange-200">
               <div className="text-2xl mb-2">⭐</div>
-              <h4 className="font-semibold text-gray-800">Average Rating</h4>
-              <p className="text-sm text-gray-600">4.8/5</p>
+              <h4 className="font-semibold text-gray-800">
+                Most Common Category
+              </h4>
+              <p className="text-sm text-gray-600">Flower</p>
             </div>
           </div>
         </CardContent>
