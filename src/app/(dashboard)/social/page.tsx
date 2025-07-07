@@ -126,7 +126,7 @@ const SocialPage = () => {
       </div>
 
       {/* Posts Feed */}
-      <div className="space-y-6 gap-4 grid md:grid-cols-2">
+      <div className="space-y-6 gap-4 grid md:grid-cols-4">
         {posts.map((post) => (
           <Card
             key={post.id}
