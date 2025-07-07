@@ -11,17 +11,17 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useState, use } from 'react';
 
 interface EditPurchasePageProps {
-  params: {
+  params: Promise<{
     purchaseId: string;
-  };
+  }>;
 }
 
 const EditPurchasePage = ({ params }: EditPurchasePageProps) => {
   const router = useRouter();
-  const { purchaseId } = params;
+  const { purchaseId } = use(params);
 
   // Mock existing purchase data - in real app, this would come from API/database
   const existingPurchase = {

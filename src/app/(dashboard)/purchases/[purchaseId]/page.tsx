@@ -2,16 +2,17 @@
 
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
+import { use } from 'react';
 
 interface PurchaseDetailsPageProps {
-  params: {
+  params: Promise<{
     purchaseId: string;
-  };
+  }>;
 }
 
 const PurchaseDetailsPage = ({ params }: PurchaseDetailsPageProps) => {
   const router = useRouter();
-  const { purchaseId } = params;
+  const { purchaseId } = use(params);
 
   // Mock purchase data - in real app, this would come from API/database
   const purchase = {
