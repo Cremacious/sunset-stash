@@ -1,7 +1,6 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import {
   Select,
   SelectContent,
@@ -9,6 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
@@ -243,104 +243,55 @@ const PurchasesPage = () => {
   };
 
   return (
-    <div className="space-y-6">
-      {/* Compact Header */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-4">
-          <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-blue-500 rounded-xl flex items-center justify-center">
-            <span className="text-2xl">💳</span>
-          </div>
-          <div>
-            <h1 className="text-2xl font-bold text-gray-900">Purchases</h1>
-            <p className="text-gray-600">
-              Track spending & see friend activity
-            </p>
-          </div>
-        </div>
-        <Button
-          onClick={() => router.push('/purchases/new')}
-          className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white"
-        >
-          + New Purchase
+    <div className="space-y-6  bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl p-6 mx-auto">
+      <div className="flex flex-col md:flex-row gap-2 md:justify-between items-center">
+        <Button className="w-full md:w-auto" asChild>
+          <Link href="/purchases/new">Add New Purchase</Link>
         </Button>
-      </div>
 
-      {/* Compact Filters */}
-      <div className="flex flex-wrap gap-3 items-center">
-        <Select value={selectedMonth} onValueChange={setSelectedMonth}>
-          <SelectTrigger className="w-32 h-9 text-sm">
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="01">Jan</SelectItem>
-            <SelectItem value="02">Feb</SelectItem>
-            <SelectItem value="03">Mar</SelectItem>
-            <SelectItem value="04">Apr</SelectItem>
-            <SelectItem value="05">May</SelectItem>
-            <SelectItem value="06">Jun</SelectItem>
-            <SelectItem value="07">Jul</SelectItem>
-            <SelectItem value="08">Aug</SelectItem>
-            <SelectItem value="09">Sep</SelectItem>
-            <SelectItem value="10">Oct</SelectItem>
-            <SelectItem value="11">Nov</SelectItem>
-            <SelectItem value="12">Dec</SelectItem>
-          </SelectContent>
-        </Select>
-
-        <Select value={selectedYear} onValueChange={setSelectedYear}>
-          <SelectTrigger className="w-20 h-9 text-sm">
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="2025">2025</SelectItem>
-            <SelectItem value="2024">2024</SelectItem>
-          </SelectContent>
-        </Select>
-
-        <Input
-          placeholder="Search..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-48 h-9 text-sm"
-        />
-
-        <div className="ml-auto text-right">
-          <p className="text-lg font-bold text-green-600">
-            ${totalMonthlySpending.toFixed(2)}
-          </p>
-          <p className="text-xs text-gray-500">this month</p>
+        <div className="flex space-x-2 items-center ">
+          <Select value={selectedMonth} onValueChange={setSelectedMonth}>
+            <SelectTrigger className="w-32 h-9 text-sm bg-white">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="01">Jan</SelectItem>
+              <SelectItem value="02">Feb</SelectItem>
+              <SelectItem value="03">Mar</SelectItem>
+              <SelectItem value="04">Apr</SelectItem>
+              <SelectItem value="05">May</SelectItem>
+              <SelectItem value="06">Jun</SelectItem>
+              <SelectItem value="07">Jul</SelectItem>
+              <SelectItem value="08">Aug</SelectItem>
+              <SelectItem value="09">Sep</SelectItem>
+              <SelectItem value="10">Oct</SelectItem>
+              <SelectItem value="11">Nov</SelectItem>
+              <SelectItem value="12">Dec</SelectItem>
+            </SelectContent>
+          </Select>
+          <Select value={selectedYear} onValueChange={setSelectedYear}>
+            <SelectTrigger className="w-25 h-9 text-sm bg-white">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="2025">2025</SelectItem>
+              <SelectItem value="2024">2024</SelectItem>
+            </SelectContent>
+          </Select>
+          {/* <Input className="bg-white" placeholder="Search strains..." /> */}
         </div>
       </div>
 
       {/* Compact Category Overview */}
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
-        {categoryData.map((category) => (
-          <div
-            key={category.key}
-            className="bg-white rounded-lg p-3 border border-gray-200 hover:shadow-md transition-all"
-          >
-            <div className="flex items-center space-x-2 mb-1">
-              <span className="text-lg">{category.icon}</span>
-              <span className="text-sm font-medium text-gray-700">
-                {category.name}
-              </span>
-            </div>
-            <p className="text-lg font-bold text-gray-900">
-              ${category.amount.toFixed(2)}
-            </p>
-            <p className="text-xs text-gray-500">
-              {totalMonthlySpending > 0
-                ? ((category.amount / totalMonthlySpending) * 100).toFixed(0)
-                : 0}
-              %
-            </p>
-          </div>
-        ))}
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+
+      <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
         <div className="bg-white rounded-lg border border-gray-200 p-3 text-center">
           <p className="text-lg font-bold text-gray-900">{purchases.length}</p>
           <p className="text-xs text-gray-500">Total Purchases</p>
+        </div>
+        <div className="bg-white rounded-lg border border-gray-200 p-3 text-center">
+          <p className="text-lg font-bold text-gray-900">${purchases.length}</p>
+          <p className="text-xs text-gray-500">Total This Month</p>
         </div>
         <div className="bg-white rounded-lg border border-gray-200 p-3 text-center">
           <p className="text-lg font-bold text-gray-900">
@@ -376,7 +327,7 @@ const PurchasesPage = () => {
               {filteredPurchases.length} purchases
             </span>
           </div>
-          <div className="bg-white rounded-lg border border-gray-200 p-4 space-y-4">
+          <div className=" p-4 space-y-4">
             {filteredPurchases.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {filteredPurchases.map((purchase) => (
@@ -436,11 +387,7 @@ const PurchasesPage = () => {
                     ? 'Try different search terms'
                     : 'No purchases this month'}
                 </p>
-                <Button
-                  onClick={() => router.push('/purchases/new')}
-                  size="sm"
-                  className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white"
-                >
+                <Button onClick={() => router.push('/purchases/new')} size="sm">
                   Add Purchase
                 </Button>
               </div>
