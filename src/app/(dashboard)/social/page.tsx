@@ -57,7 +57,7 @@ const SocialPage = () => {
     },
   ];
 
-  const getActivityIcon = (activity) => {
+  const getActivityIcon = (activity: string): string => {
     switch (activity.toLowerCase()) {
       case 'movie night':
         return '🎬';
@@ -72,19 +72,18 @@ const SocialPage = () => {
     }
   };
 
-  const getTypeColor = (type) => {
-    switch (type.toLowerCase()) {
-      case 'flower':
-        return 'from-green-500 to-emerald-600';
-      case 'vape cart':
-        return 'from-blue-500 to-cyan-600';
-      case 'live rosin':
-        return 'from-purple-500 to-pink-600';
-      case 'concentrate':
-        return 'from-amber-500 to-orange-600';
-      default:
-        return 'from-gray-500 to-gray-600';
-    }
+  interface TypeColorMap {
+    [key: string]: string;
+  }
+
+  const getTypeColor = (type: string): string => {
+    const typeColorMap: TypeColorMap = {
+      flower: 'from-green-500 to-emerald-600',
+      'vape cart': 'from-blue-500 to-cyan-600',
+      'live rosin': 'from-purple-500 to-pink-600',
+      concentrate: 'from-amber-500 to-orange-600',
+    };
+    return typeColorMap[type.toLowerCase()] || 'from-gray-500 to-gray-600';
   };
 
   return (

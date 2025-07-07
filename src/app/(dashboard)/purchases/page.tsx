@@ -17,7 +17,7 @@ const PurchasesPage = () => {
 
   const [selectedMonth, setSelectedMonth] = useState('01');
   const [selectedYear, setSelectedYear] = useState('2025');
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm] = useState('');
 
   // Mock friends purchase data
   const friendsPurchases = [
@@ -150,66 +150,6 @@ const PurchasesPage = () => {
       paymentMethod: 'Card',
     },
   ];
-
-  // Calculate monthly spending by category
-  const monthlyData = purchases
-    .filter((purchase) => {
-      const purchaseDate = new Date(purchase.date);
-      const purchaseMonth = (purchaseDate.getMonth() + 1)
-        .toString()
-        .padStart(2, '0');
-      const purchaseYear = purchaseDate.getFullYear().toString();
-      return purchaseMonth === selectedMonth && purchaseYear === selectedYear;
-    })
-    .reduce((acc, purchase) => {
-      purchase.items.forEach((item) => {
-        acc[item.category] = (acc[item.category] || 0) + item.price;
-      });
-      return acc;
-    }, {} as Record<string, number>);
-
-  const categoryData = [
-    {
-      name: 'Flower',
-      key: 'flower',
-      amount: monthlyData.flower || 0,
-      icon: '🌸',
-      color: 'from-green-400 to-emerald-500',
-    },
-    {
-      name: 'Vape',
-      key: 'vape',
-      amount: monthlyData.vape || 0,
-      icon: '💨',
-      color: 'from-blue-400 to-cyan-500',
-    },
-    {
-      name: 'Concentrate',
-      key: 'concentrate',
-      amount: monthlyData.concentrate || 0,
-      icon: '🍯',
-      color: 'from-yellow-400 to-orange-500',
-    },
-    {
-      name: 'Edible',
-      key: 'edible',
-      amount: monthlyData.edible || 0,
-      icon: '🍪',
-      color: 'from-purple-400 to-pink-500',
-    },
-    {
-      name: 'Topical',
-      key: 'topical',
-      amount: monthlyData.topical || 0,
-      icon: '🧴',
-      color: 'from-indigo-400 to-purple-500',
-    },
-  ];
-
-  const totalMonthlySpending = categoryData.reduce(
-    (sum, cat) => sum + cat.amount,
-    0
-  );
 
   // Filter purchases based on search and date
   const filteredPurchases = purchases.filter((purchase) => {
