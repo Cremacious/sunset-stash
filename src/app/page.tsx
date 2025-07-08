@@ -8,14 +8,24 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import Logo from '../../public/sunset-stash-logo.png';
+import Image from 'next/image';
 
 export default function Home() {
   const router = useRouter();
 
   return (
     <div>
+      <div className="flex justify-center ">
+        <Image
+          className="rounded-full"
+          src={Logo}
+          alt="Logo"
+          height={400}
+          width={400}
+        />
+      </div>
       {/* Tropical background with floating elements */}
-
       {/* Hero Section */}
       <section className="relative z-10 px-4 py-12 md:py-20">
         <div className="max-w-6xl mx-auto text-center">
@@ -230,7 +240,6 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-   
     </div>
   );
 }

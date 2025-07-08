@@ -4,6 +4,8 @@ import { useRouter } from 'next/navigation';
 import { signOut, useSession } from '@/lib/auth-client';
 import Sidebar from './Sidebar';
 import { Button } from '../ui/button';
+import Logo from '../../../public/sunset-stash-logo.png';
+import Image from 'next/image';
 
 const Navbar = () => {
   const router = useRouter();
@@ -37,16 +39,20 @@ const Navbar = () => {
     <nav className="relative z-20 px-4 md:px-8 mb-10 bg-white/10 backdrop-blur-md p-4 border border-white/20">
       <div className="flex justify-between items-center max-w-7xl mx-auto">
         <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center shadow-lg">
+          {/* <div className="w-10 h-10 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center shadow-lg">
             <span className="text-2xl">🌅</span>
-          </div>
+          </div> */}
+          <Image
+            className="rounded-full"
+            src={Logo}
+            alt="Logo"
+            height={50}
+            width={50}
+          />
           <div>
             <h1 className="text-xl md:text-2xl font-bold text-white drop-shadow-md">
               Sunset Stash
             </h1>
-            <p className="text-xs text-white/80 hidden sm:block">
-              Florida Cannabis Community
-            </p>
           </div>
         </div>
         <div className="flex md:hidden">

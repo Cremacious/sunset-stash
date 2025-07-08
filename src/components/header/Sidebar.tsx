@@ -11,6 +11,8 @@ import { Menu } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Button } from '../ui/button';
+import Logo from '../../../public/sunset-stash-logo.png';
+import Image from 'next/image';
 
 interface Routes {
   name: string;
@@ -36,16 +38,17 @@ const Sidebar = ({ routes }: { routes: Routes[] }) => {
       <SheetContent className="bg-gradient-to-br from-pink-500/95 to-blue-600/95 backdrop-blur-md border-none px-2">
         <SheetHeader className="mb-8">
           <div className="flex items-center space-x-3 mb-4">
-            <div className="w-12 h-12 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center shadow-lg">
-              <span className="text-3xl">🌅</span>
-            </div>
+            <Image
+              className="rounded-full"
+              src={Logo}
+              alt="Logo"
+              height={50}
+              width={50}
+            />
             <div>
               <SheetTitle className="text-2xl font-bold text-white drop-shadow-md">
                 Sunset Stash
               </SheetTitle>
-              <SheetDescription className="text-white/80 text-sm">
-                Florida Cannabis Community
-              </SheetDescription>
             </div>
           </div>
         </SheetHeader>
