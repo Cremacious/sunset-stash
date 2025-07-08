@@ -12,20 +12,8 @@ const Navbar = () => {
   const session = useSession();
 
   const handleSignOut = async () => {
-    try {
-      await signOut({
-        fetchOptions: {
-          onError: (ctx) => {
-            console.error('Sign out error:', ctx.error);
-          },
-        },
-      });
-
-      router.push('/');
-    } catch (error) {
-      console.error('Sign out failed:', error);
-      router.push('/');
-    }
+    await signOut();
+    router.push('/');
   };
 
   const routes = [
@@ -71,7 +59,7 @@ const Navbar = () => {
         </div>
 
         <div className="hidden md:flex gap-2 md:gap-3">
-          {session ? (
+          {session.data?.user ? (
             <Button onClick={handleSignOut}>Sign Out</Button>
           ) : (
             <>
@@ -83,7 +71,7 @@ const Navbar = () => {
               </button>
               <button
                 onClick={() => router.push('/sign-up')}
-                className="px-3 py-2 md:px-4 md:py-2 text-sm bg-white text-orange-600 font-semibold rounded-lg hover:bg-white/90 transition-all duration-200 shadow-lg"
+                className="px-3 py-2 md:px-4 md:py-2 text-sm bg-white text-purple-600 font-semibold rounded-lg hover:bg-white/90 transition-all duration-200 shadow-lg"
               >
                 Get Started
               </button>
