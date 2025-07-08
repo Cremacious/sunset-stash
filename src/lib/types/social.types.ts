@@ -53,3 +53,7 @@ export type Friendship = {
     email: string;
   };
 };
+
+export type Friend = {
+  name: string;
+};

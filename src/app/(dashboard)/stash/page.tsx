@@ -9,7 +9,8 @@ const StashPage = () => {
   // Mock data for demonstration
   const stashItems = [
     {
-      id: 1,
+      id: '1',
+      userId: 'user-123',
       name: 'Blue Dream',
       category: 'Flower',
       type: 'Hybrid',
@@ -21,7 +22,8 @@ const StashPage = () => {
       dateAdded: '2025-01-05',
     },
     {
-      id: 2,
+      id: '2',
+      userId: 'user-123',
       name: 'OG Kush',
       category: 'Flower',
       type: 'Indica',
@@ -33,7 +35,8 @@ const StashPage = () => {
       dateAdded: '2025-01-10',
     },
     {
-      id: 3,
+      id: '3',
+      userId: 'user-123',
       name: 'Sour Diesel',
       category: 'Concentrate',
       type: 'Sativa',

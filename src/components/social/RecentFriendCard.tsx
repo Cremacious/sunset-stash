@@ -1,5 +1,5 @@
 import { Button } from '../ui/button';
-import { Friend } from '@/lib/types/social.types';
+import { Friend } from '@/lib/types';
 
 const RecentFriendCard = ({ friend }: { friend: Friend }) => {
   return (
