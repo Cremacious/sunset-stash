@@ -47,7 +47,7 @@ const SignUpForm = () => {
         );
       } else {
         toast.success('Sign up successful!');
-        router.push('/dashboard'); // Redirect to home or another page after successful sign up
+        router.push('/dashboard'); 
       }
     } catch (error) {
       console.error('Form submission error', error);
@@ -128,7 +128,9 @@ const SignUpForm = () => {
           )}
         />
 
-        <Button type="submit">Submit</Button>
+        <Button className="w-full mt-4" type="submit">
+          Submit
+        </Button>
       </form>
     </Form>
   );

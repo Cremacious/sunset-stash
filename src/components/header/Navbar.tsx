@@ -1,11 +1,38 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-
+import { signOut, useSession } from '@/lib/auth-client';
 import Sidebar from './Sidebar';
+import { Button } from '../ui/button';
 
 const Navbar = () => {
   const router = useRouter();
+  const session = useSession();
+
+  const handleSignOut = async () => {
+    try {
+      await signOut({
+        fetchOptions: {
+          onError: (ctx) => {
+            console.error('Sign out error:', ctx.error);
+          },
+        },
+      });
+
+      router.push('/');
+    } catch (error) {
+      console.error('Sign out failed:', error);
+      router.push('/');
+    }
+  };
+
+  const routes = [
+    { name: 'Dashboard', href: '/dashboard' },
+    { name: 'Purchases', href: '/purchases' },
+    { name: 'Stash', href: '/stash' },
+    { name: 'Social', href: '/social' },
+  ];
+
   return (
     <nav className="relative z-20 px-4 md:px-8 mb-10 bg-white/10 backdrop-blur-md p-4 border border-white/20">
       <div className="flex justify-between items-center max-w-7xl mx-auto">
@@ -23,50 +50,39 @@ const Navbar = () => {
           </div>
         </div>
         <div className="flex md:hidden">
-          <Sidebar />
+          <Sidebar routes={routes} />
         </div>
-
-        {/* Navigation Links - Hidden on mobile, shown on larger screens */}
-        <div className="hidden lg:flex items-center space-x-6">
-          <button
-            onClick={() => router.push('/dashboard')}
-            className="text-white/90 hover:text-white text-sm font-medium transition-colors duration-200 hover:drop-shadow-md"
-          >
-            Dashboard
-          </button>
-          <button
-            onClick={() => router.push('/purchases')}
-            className="text-white/90 hover:text-white text-sm font-medium transition-colors duration-200 hover:drop-shadow-md"
-          >
-            Purchases
-          </button>
-          <button
-            onClick={() => router.push('/stash')}
-            className="text-white/90 hover:text-white text-sm font-medium transition-colors duration-200 hover:drop-shadow-md"
-          >
-            Stash
-          </button>
-          <button
-            onClick={() => router.push('/social')}
-            className="text-white/90 hover:text-white text-sm font-medium transition-colors duration-200 hover:drop-shadow-md"
-          >
-            Social
-          </button>
+        <div className="hidden lg:flex items-center space-x-8">
+          {routes.map((route) => (
+            <button
+              key={route.href}
+              onClick={() => router.push(route.href)}
+              className="text-white hover:text-purple-600 text-lg font-bold transition-colors duration-200 hover:drop-shadow-md"
+            >
+              {route.name}
+            </button>
+          ))}
         </div>
 
         <div className="hidden md:flex gap-2 md:gap-3">
-          <button
-            onClick={() => router.push('/sign-in')}
-            className="px-3 py-2 md:px-4 md:py-2 text-sm text-white border border-white/40 rounded-lg hover:bg-white/10 transition-all duration-200 backdrop-blur-sm font-medium"
-          >
-            Sign In
-          </button>
-          <button
-            onClick={() => router.push('/sign-up')}
-            className="px-3 py-2 md:px-4 md:py-2 text-sm bg-white text-orange-600 font-semibold rounded-lg hover:bg-white/90 transition-all duration-200 shadow-lg"
-          >
-            Get Started
-          </button>
+          {session ? (
+            <Button onClick={handleSignOut}>Sign Out</Button>
+          ) : (
+            <>
+              <button
+                onClick={() => router.push('/sign-in')}
+                className="px-3 py-2 md:px-4 md:py-2 text-sm text-white border border-white/40 rounded-lg hover:bg-white/10 transition-all duration-200 backdrop-blur-sm font-medium"
+              >
+                Sign In
+              </button>
+              <button
+                onClick={() => router.push('/sign-up')}
+                className="px-3 py-2 md:px-4 md:py-2 text-sm bg-white text-orange-600 font-semibold rounded-lg hover:bg-white/90 transition-all duration-200 shadow-lg"
+              >
+                Get Started
+              </button>
+            </>
+          )}
         </div>
       </div>
     </nav>
