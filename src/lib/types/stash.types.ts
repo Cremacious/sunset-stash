@@ -1,5 +1,5 @@
 export type StashItem = {
-  id: number;
+  id: string;
   name: string;
   category: string;
   type: string;
@@ -8,5 +8,6 @@ export type StashItem = {
   cbd: number;
   lineage: string;
   notes: string;
-  dateAdded: string;
+  dateAdded: string; // Will be converted from DateTime for display
+  userId: string;
 };

@@ -1,15 +1,16 @@
 export type Purchase = {
-  id: number;
+  id: string;
   dispensary: string;
-  date: string;
+  date: string; // Will be converted from DateTime for display
   total: number;
   items: PurchaseItem[];
   notes: string;
-  createdAt: string;
+  createdAt: string; // Will be converted from DateTime for display
+  userId: string;
 };
 
 export type PurchaseItem = {
-  id: number;
+  id: string;
   name: string;
   category: string;
   type: string;
@@ -19,5 +20,5 @@ export type PurchaseItem = {
   cbd: number;
   lineage: string;
   notes: string;
-  dateAdded: string;
+  purchaseId: string;
 };

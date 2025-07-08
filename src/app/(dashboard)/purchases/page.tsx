@@ -24,17 +24,13 @@ const PurchasesPage = () => {
   // Mock friends purchase data
   const friendsPurchases = [
     {
-      id: 1,
-      friend: {
-        name: 'Jake S.',
-        avatar: 'JS',
-        color: 'from-blue-400 to-purple-500',
-      },
-      date: '2025-01-14',
+      id: '1',
       dispensary: 'Trulieve',
+      date: '2025-01-14',
+      total: 52.0,
       items: [
         {
-          id: 1,
+          id: '1-1',
           name: 'Wedding Cake',
           category: 'flower',
           type: 'flower',
@@ -43,85 +39,50 @@ const PurchasesPage = () => {
           thc: 20,
           cbd: 0.1,
           lineage: 'Triangle Kush x Animal Mints',
-          notes: 'Shared with friends!',
-          dateAdded: '2025-01-14',
+          notes: 'Great quality and service!',
+          purchaseId: '1',
         },
       ],
-      total: 52.0,
-      timeAgo: '1 day ago',
-      notes: 'Shared with friends!',
+      notes: 'Great quality and service!',
       createdAt: '2025-01-14T10:00:00Z',
+      userId: 'demo-user',
     },
     {
-      id: 2,
-      friend: {
-        name: 'Maria R.',
-        avatar: 'MR',
-        color: 'from-green-400 to-emerald-500',
-      },
-      date: '2025-01-13',
-      dispensary: 'Curaleaf',
+      id: '2',
+      dispensary: 'poop',
+      date: '2025-01-14',
+      total: 52.0,
       items: [
         {
-          id: 1,
-          name: 'Live Rosin Cart',
-          category: 'vape',
-          type: 'vape',
+          id: '2-1',
+          name: 'Wedding Cake',
+          category: 'flower',
+          type: 'flower',
           amount: '1g',
-          price: 68.0,
-          thc: 80,
-          cbd: 0.2,
-          lineage: '',
-          notes: '',
-          dateAdded: '2025-01-13',
+          price: 52.0,
+          thc: 20,
+          cbd: 0.1,
+          lineage: 'Triangle Kush x Animal Mints',
+          notes: 'Great quality and service!',
+          purchaseId: '2',
         },
       ],
-      total: 68.0,
-      timeAgo: '2 days ago',
-      notes: '',
-      createdAt: '2025-01-13T11:30:00Z',
-    },
-    {
-      id: 3,
-      friend: {
-        name: 'Alex T.',
-        avatar: 'AT',
-        color: 'from-pink-400 to-red-500',
-      },
-      date: '2025-01-12',
-      dispensary: 'Rise',
-      items: [
-        {
-          id: 1,
-          name: 'RSO Capsules',
-          category: 'edible',
-          type: 'edible',
-          amount: '10ct',
-          price: 45.0,
-          thc: 50,
-          cbd: 1.0,
-          lineage: '',
-          notes: 'Great for pain relief.',
-          dateAdded: '2025-01-12',
-        },
-      ],
-      total: 45.0,
-      timeAgo: '3 days ago',
-      notes: 'Great for pain relief.',
-      createdAt: '2025-01-12T09:15:00Z',
+      notes: 'Great quality and service!',
+      createdAt: '2025-01-14T10:00:00Z',
+      userId: 'demo-user',
     },
   ];
 
   // Mock purchase data
   const purchases = [
     {
-      id: 1,
+      id: '1',
       dispensary: 'Trulieve',
       date: '2025-01-14',
       total: 52.0,
       items: [
         {
-          id: 1,
+          id: '1-1',
           name: 'Wedding Cake',
           category: 'flower',
           type: 'flower',
@@ -131,20 +92,21 @@ const PurchasesPage = () => {
           cbd: 0.1,
           lineage: 'Triangle Kush x Animal Mints',
           notes: 'Great quality and service!',
-          dateAdded: '2025-01-14',
+          purchaseId: '1',
         },
       ],
       notes: 'Great quality and service!',
       createdAt: '2025-01-14T10:00:00Z',
+      userId: 'demo-user',
     },
     {
-      id: 2,
+      id: '2',
       dispensary: 'poop',
       date: '2025-01-14',
       total: 52.0,
       items: [
         {
-          id: 1,
+          id: '2-1',
           name: 'Wedding Cake',
           category: 'flower',
           type: 'flower',
@@ -154,33 +116,14 @@ const PurchasesPage = () => {
           cbd: 0.1,
           lineage: 'Triangle Kush x Animal Mints',
           notes: 'Great quality and service!',
-          dateAdded: '2025-01-14',
+          purchaseId: '2',
         },
       ],
       notes: 'Great quality and service!',
       createdAt: '2025-01-14T10:00:00Z',
+      userId: 'demo-user',
     },
   ];
-
-  // Filter purchases based on search and date
-  const filteredPurchases = purchases.filter((purchase) => {
-    const matchesSearch =
-      searchTerm === '' ||
-      purchase.dispensary.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      purchase.items.some((item) =>
-        item.name.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-
-    const purchaseDate = new Date(purchase.date);
-    const purchaseMonth = (purchaseDate.getMonth() + 1)
-      .toString()
-      .padStart(2, '0');
-    const purchaseYear = purchaseDate.getFullYear().toString();
-    const matchesDate =
-      purchaseMonth === selectedMonth && purchaseYear === selectedYear;
-
-    return matchesSearch && matchesDate;
-  });
 
   return (
     <div className="space-y-6">
@@ -265,14 +208,12 @@ const PurchasesPage = () => {
             <h2 className="text-lg font-semibold text-gray-900">
               Your Purchases
             </h2>
-            <span className="text-sm text-gray-500">
-              {filteredPurchases.length} purchases
-            </span>
+            <span className="text-sm text-gray-500">filtered purchases</span>
           </div>
           <div className="space-y-4">
-            {filteredPurchases.length > 0 ? (
+            {purchases.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3 p-6">
-                {filteredPurchases.map((purchase) => (
+                {purchases.map((purchase) => (
                   <PurchaseListCard key={purchase.id} purchase={purchase} />
                 ))}
               </div>

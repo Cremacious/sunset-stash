@@ -8,20 +8,48 @@ export type Post = {
   content: string;
   stashItems: StashItem[];
   comments: Comment[];
-  createdAt: string;
+  createdAt: string; // Will be converted from DateTime for display
+  userId: string;
 };
 
 export type Comment = {
   id: string;
   author: string;
   content: string;
-  comments: Comment[];
-  createdAt: string;
+  postId: string;
+  parentId?: string; // For nested comments/replies
+  replies: Comment[];
+  createdAt: string; // Will be converted from DateTime for display
+  userId: string;
 };
 
-export type Friend = {
+export type FriendRequest = {
   id: string;
-  name: string;
-  email: string;
-  createdAt: string;
+  senderId: string;
+  receiverId: string;
+  status: 'pending' | 'accepted' | 'rejected';
+  createdAt: string; // Will be converted from DateTime for display
+  updatedAt: string; // Will be converted from DateTime for display
+  sender: {
+    id: string;
+    name: string;
+    email: string;
+  };
+  receiver: {
+    id: string;
+    name: string;
+    email: string;
+  };
+};
+
+export type Friendship = {
+  id: string;
+  userId: string;
+  friendId: string;
+  createdAt: string; // Will be converted from DateTime for display
+  friend: {
+    id: string;
+    name: string;
+    email: string;
+  };
 };

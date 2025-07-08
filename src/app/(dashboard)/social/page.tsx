@@ -46,7 +46,7 @@ const SocialPage = () => {
       content: 'Watched a movie with the boys',
       stashItems: [
         {
-          id: 43,
+          id: '43',
           name: 'Blue Dream',
           category: 'flower',
           type: 'bud',
@@ -56,10 +56,12 @@ const SocialPage = () => {
           lineage: 'Blueberry x Haze',
           notes: 'Smooth and relaxing',
           dateAdded: '2025-01-15',
+          userId: 'user-1',
         },
       ],
       comments: [],
       createdAt: '2025-01-15T12:00:00Z',
+      userId: 'user-1',
     },
   ];
 

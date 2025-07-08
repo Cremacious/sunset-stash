@@ -24,6 +24,18 @@ model User {
   updatedAt     DateTime
   sessions      Session[]
   accounts      Account[]
+  
+  // User's content
+  stashItems    StashItem[]
+  posts         Post[]
+  purchases     Purchase[]
+  comments      Comment[]
+  
+  // Friend relationships
+  sentFriendRequests     FriendRequest[] @relation("SentRequests")
+  receivedFriendRequests FriendRequest[] @relation("ReceivedRequests")
+  friends                Friendship[]    @relation("UserFriends")
+  friendOf               Friendship[]    @relation("FriendOfUser")
 
   @@unique([email])
   @@map("user")
@@ -72,4 +84,108 @@ model Verification {
   updatedAt  DateTime?
 
   @@map("verification")
+}
+
+model StashItem {
+    id            String    @id @default(cuid())
+    name          String
+    category      String    @default("")
+    type          String    @default("")
+    amount        String    @default("")
+    thc           Float     @default(0)
+    cbd           Float     @default(0)
+    lineage       String    @default("")
+    notes         String    @default("")
+    dateAdded     DateTime  @default(now())
+    userId        String
+    user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+    posts         PostStashItem[]
+}
+
+model PurchaseItem {
+    id         String   @id @default(cuid())
+    name       String
+    category   String   @default("")
+    type       String   @default("")
+    amount     String   @default("")
+    price      Float    @default(0)
+    thc        Float    @default(0)
+    cbd        Float    @default(0)
+    lineage    String   @default("")
+    notes      String   @default("")
+    purchaseId String
+    purchase   Purchase @relation(fields: [purchaseId], references: [id], onDelete: Cascade)
+}
+
+model Purchase {
+    id         String        @id @default(cuid())
+    dispensary String
+    date       DateTime
+    total      Float         @default(0)
+    items      PurchaseItem[]
+    notes      String        @default("")
+    createdAt  DateTime      @default(now())
+    userId     String
+    user       User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Post {
+     id         String        @id @default(cuid())
+     author     String
+     activity   String
+     content    String
+     comments   Comment[]
+     createdAt  DateTime      @default(now())
+     stashItems PostStashItem[]
+     userId     String
+     user       User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Comment {
+       id         String        @id @default(cuid())
+       author     String
+       content    String
+       postId     String
+       post       Post          @relation(fields: [postId], references: [id], onDelete: Cascade)
+       parentId   String?       // For nested comments/replies
+       parent     Comment?      @relation("CommentReplies", fields: [parentId], references: [id])
+       replies    Comment[]     @relation("CommentReplies")
+       createdAt  DateTime      @default(now())
+       userId     String
+       user       User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model PostStashItem {
+    postId     String
+    stashItemId String
+    post       Post      @relation(fields: [postId], references: [id], onDelete: Cascade)
+    stashItem  StashItem @relation(fields: [stashItemId], references: [id], onDelete: Cascade)
+
+    @@id([postId, stashItemId])
+}
+
+model FriendRequest {
+  id          String   @id @default(cuid())
+  senderId    String
+  receiverId  String
+  status      String   @default("pending") // "pending", "accepted", "rejected"
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  sender      User     @relation("SentRequests", fields: [senderId], references: [id], onDelete: Cascade)
+  receiver    User     @relation("ReceivedRequests", fields: [receiverId], references: [id], onDelete: Cascade)
+  
+  @@unique([senderId, receiverId])
+}
+
+model Friendship {
+  id        String   @id @default(cuid())
+  userId    String
+  friendId  String
+  createdAt DateTime @default(now())
+  
+  user      User     @relation("UserFriends", fields: [userId], references: [id], onDelete: Cascade)
+  friend    User     @relation("FriendOfUser", fields: [friendId], references: [id], onDelete: Cascade)
+  
+  @@unique([userId, friendId])
 }
