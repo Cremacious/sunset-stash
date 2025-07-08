@@ -59,7 +59,7 @@ const Sidebar = ({ routes }: { routes: Routes[] }) => {
                 key={route.name}
                 variant="ghost"
                 onClick={() => handleButtonClick(route.href)}
-                className="font-bold w-full text-center px-4 py-6 text-white hover:text-white hover:bg-white/20 rounded-lg transition-all duration-200  backdrop-blur-sm border border-white/10 hover:border-white/30"
+                className="text-xl font-bold w-full text-center px-4 py-6 text-white hover:text-white hover:bg-white/20 rounded-lg transition-all duration-200  backdrop-blur-sm border border-white/10 hover:border-white/30"
               >
                 {route.name}
               </Button>
@@ -69,13 +69,13 @@ const Sidebar = ({ routes }: { routes: Routes[] }) => {
           <div className="pt-6 border-t border-white/20 space-y-3">
             <Button
               onClick={() => handleButtonClick('/sign-in')}
-              className="w-full px-4 py-6  rounded-lg hover:bg-white/10 transition-all duration-200 backdrop-blur-sm font-medium"
+              className="text-xl font-bold  w-full px-4 py-6  rounded-lg hover:bg-white/10 transition-all duration-200 backdrop-blur-sm"
             >
               Sign In
             </Button>
             <Button
               onClick={() => handleButtonClick('/sign-up')}
-              className="w-full px-4 py-6 bg-white text-purple-600 font-semibold rounded-lg hover:bg-white/90 transition-all duration-200 shadow-lg"
+              className="text-xl font-bold  w-full px-4 py-6 bg-white text-purple-600 rounded-lg hover:bg-white/90 transition-all duration-200 shadow-lg"
             >
               Get Started
             </Button>
