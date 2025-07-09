@@ -14,6 +14,7 @@ import { useState } from 'react';
 import TimelinePost from '@/components/social/TimelinePost';
 import RecentFriendCard from '@/components/social/RecentFriendCard';
 import FindFriends from '@/components/social/FindFriends';
+import Link from 'next/link';
 
 const SocialPage = () => {
   const router = useRouter();
@@ -126,6 +127,9 @@ const SocialPage = () => {
                 <span className="text-xl mr-2">📰</span>
                 Activity Timeline
               </h2>
+              <Button asChild>
+                <Link href="/social/new-post">New Post</Link>
+              </Button>
               <div className="flex items-center space-x-2">
                 <Label htmlFor="filter" className="text-sm">
                   Show:

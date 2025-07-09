@@ -1,5 +1,3 @@
-'use client';
-
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -8,142 +6,142 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-
-interface StashItem {
-  id: number;
-  name: string;
-  type: string;
-  thc: number;
-  cbd: number;
-  category: string;
-  notes: string;
-}
+import PostForm from '@/components/social/PostForm';
 
 const NewPostPage = () => {
-  const router = useRouter();
-  const [selectedStashItems, setSelectedStashItems] = useState<StashItem[]>([]);
-  const [postText, setPostText] = useState('');
-  const [activity, setActivity] = useState('');
-  const [showStashSelector, setShowStashSelector] = useState(false);
+  // const [selectedStashItems, setSelectedStashItems] = useState<StashItem[]>([]);
+  // const [postText, setPostText] = useState('');
+  // const [activity, setActivity] = useState('');
+  // const [showStashSelector, setShowStashSelector] = useState(false);
 
   // Mock stash data
   const stashItems = [
     {
-      id: 1,
+      id: '1',
       name: 'Blue Dream',
       type: 'flower',
       thc: 22,
       cbd: 0.5,
       category: 'Hybrid',
       notes: 'Perfect for creativity and relaxation',
+      amount: '1',
+      lineage: 'Blueberry x Haze',
+      dateAdded: new Date().toISOString(),
+      userId: '1',
     },
     {
-      id: 2,
+      id: '2',
       name: 'Girl Scout Cookies',
       type: 'flower',
       thc: 25,
       cbd: 0.3,
       category: 'Hybrid',
       notes: 'Great for evening use',
+      amount: '1',
+      lineage: 'OG Kush x Durban Poison',
+      dateAdded: new Date().toISOString(),
+      userId: '1',
     },
     {
-      id: 3,
+      id: '3',
       name: 'Jack Herer',
       type: 'vape',
       thc: 78,
       cbd: 1.2,
       category: 'Sativa',
       notes: 'Energizing morning strain',
+      amount: '1',
+      lineage: 'Haze x Northern Lights #5 x Shiva Skunk',
+      dateAdded: new Date().toISOString(),
+      userId: '1',
     },
     {
-      id: 4,
+      id: '4',
       name: 'OG Kush Live Rosin',
       type: 'concentrate',
       thc: 85,
       cbd: 0.8,
       category: 'Indica',
       notes: 'Premium quality, amazing flavor',
+      amount: '1',
+      lineage: 'Chemdawg x Hindu Kush',
+      dateAdded: new Date().toISOString(),
+      userId: '1',
     },
     {
-      id: 5,
+      id: '5',
       name: 'Durban Poison',
       type: 'vape',
       thc: 82,
       cbd: 0.2,
       category: 'Sativa',
       notes: 'Perfect pre-workout strain',
+      amount: '1',
+      lineage: 'Durban',
+      dateAdded: new Date().toISOString(),
+      userId: '1',
     },
   ];
 
-  const activities = [
-    { value: 'chill', label: 'Chill Time', icon: '😌' },
-    { value: 'workout', label: 'Workout', icon: '💪' },
-    { value: 'movie', label: 'Movie Night', icon: '🎬' },
-    { value: 'munchies', label: 'Munchies', icon: '🍿' },
-    { value: 'creative', label: 'Creative Time', icon: '🎨' },
-    { value: 'social', label: 'Hanging Out', icon: '👥' },
-    { value: 'nature', label: 'Nature Walk', icon: '🌲' },
-    { value: 'gaming', label: 'Gaming', icon: '🎮' },
-    { value: 'music', label: 'Listening to Music', icon: '🎵' },
-    { value: 'reading', label: 'Reading', icon: '📚' },
-  ];
+  // const activities = [
+  //   { value: 'chill', label: 'Chill Time', icon: '😌' },
+  //   { value: 'workout', label: 'Workout', icon: '💪' },
+  //   { value: 'movie', label: 'Movie Night', icon: '🎬' },
+  //   { value: 'munchies', label: 'Munchies', icon: '🍿' },
+  //   { value: 'creative', label: 'Creative Time', icon: '🎨' },
+  //   { value: 'social', label: 'Hanging Out', icon: '👥' },
+  //   { value: 'nature', label: 'Nature Walk', icon: '🌲' },
+  //   { value: 'gaming', label: 'Gaming', icon: '🎮' },
+  //   { value: 'music', label: 'Listening to Music', icon: '🎵' },
+  //   { value: 'reading', label: 'Reading', icon: '📚' },
+  // ];
 
-  const getTypeIcon = (type: string) => {
-    switch (type) {
-      case 'flower':
-        return '🌸';
-      case 'vape':
-        return '💨';
-      case 'concentrate':
-        return '🧪';
-      default:
-        return '🌿';
-    }
-  };
+  // const getTypeIcon = (type: string) => {
+  //   switch (type) {
+  //     case 'flower':
+  //       return '🌸';
+  //     case 'vape':
+  //       return '💨';
+  //     case 'concentrate':
+  //       return '🧪';
+  //     default:
+  //       return '🌿';
+  //   }
+  // };
 
-  const getTypeColor = (type: string) => {
-    switch (type) {
-      case 'flower':
-        return 'from-green-500 to-emerald-600';
-      case 'vape':
-        return 'from-blue-500 to-cyan-600';
-      case 'concentrate':
-        return 'from-purple-500 to-pink-600';
-      default:
-        return 'from-gray-500 to-gray-600';
-    }
-  };
+  // const getTypeColor = (type: string) => {
+  //   switch (type) {
+  //     case 'flower':
+  //       return 'from-green-500 to-emerald-600';
+  //     case 'vape':
+  //       return 'from-blue-500 to-cyan-600';
+  //     case 'concentrate':
+  //       return 'from-purple-500 to-pink-600';
+  //     default:
+  //       return 'from-gray-500 to-gray-600';
+  //   }
+  // };
 
-  const toggleStashItem = (item: StashItem) => {
-    setSelectedStashItems((prev) => {
-      const isSelected = prev.find((selected) => selected.id === item.id);
-      if (isSelected) {
-        return prev.filter((selected) => selected.id !== item.id);
-      } else {
-        return [...prev, item];
-      }
-    });
-  };
+  // const toggleStashItem = (item: StashItem) => {
+  //   setSelectedStashItems((prev) => {
+  //     const isSelected = prev.find((selected) => selected.id === item.id);
+  //     if (isSelected) {
+  //       return prev.filter((selected) => selected.id !== item.id);
+  //     } else {
+  //       return [...prev, item];
+  //     }
+  //   });
+  // };
 
-  const handleSubmit = () => {
-    // Handle post submission
-    console.log({
-      text: postText,
-      activity,
-      stashItems: selectedStashItems,
-    });
-    router.push('/social');
-  };
+  // const handleSubmit = () => {
+  //   // Handle post submission
+  //   console.log({
+  //     text: postText,
+  //     activity,
+  //     stashItems: selectedStashItems,
+  //   });
+  //   router.push('/social');
+  // };
 
   return (
     <div className="space-y-8 bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl flex justify-center py-6 px-1">
@@ -160,8 +158,9 @@ const NewPostPage = () => {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
+          <PostForm stashItems={stashItems} />
           {/* Activity Selection */}
-          <div className="space-y-2">
+          {/* <div className="space-y-2">
             <Label
               htmlFor="activity"
               className="text-sm font-medium text-gray-700"
@@ -183,10 +182,10 @@ const NewPostPage = () => {
                 ))}
               </SelectContent>
             </Select>
-          </div>
+          </div> */}
 
           {/* Post Text */}
-          <div className="space-y-2">
+          {/* <div className="space-y-2">
             <Label
               htmlFor="postText"
               className="text-sm font-medium text-gray-700"
@@ -200,11 +199,11 @@ const NewPostPage = () => {
               className="w-full min-h-[120px] p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent resize-none"
               placeholder="What's on your mind? How are you feeling? What strain are you enjoying?"
             />
-          </div>
+          </div> */}
 
           {/* Stash Item Selection */}
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
+          {/* <div className="space-y-4"> */}
+          {/* <div className="flex items-center justify-between">
               <Label className="text-sm font-medium text-gray-700">
                 Include strains from your stash
               </Label>
@@ -217,10 +216,10 @@ const NewPostPage = () => {
               >
                 {showStashSelector ? 'Hide Stash' : 'Browse Stash'}
               </Button>
-            </div>
+            </div> */}
 
-            {/* Selected Stash Items */}
-            {selectedStashItems.length > 0 && (
+          {/* Selected Stash Items */}
+          {/* {selectedStashItems.length > 0 && (
               <div className="space-y-3">
                 <h4 className="text-sm font-medium text-gray-700">
                   Selected Strains:
@@ -265,10 +264,10 @@ const NewPostPage = () => {
                   ))}
                 </div>
               </div>
-            )}
+            )} */}
 
-            {/* Stash Item Browser */}
-            {showStashSelector && (
+          {/* Stash Item Browser */}
+          {/* {showStashSelector && (
               <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
                 <h4 className="text-sm font-medium text-gray-700 mb-3">
                   Choose from your stash:
@@ -311,22 +310,22 @@ const NewPostPage = () => {
                     ))}
                 </div>
               </div>
-            )}
-          </div>
+            )} */}
+          {/* </div> */}
 
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-gray-200">
             <Button
               type="button"
               variant="outline"
-              onClick={() => router.push('/social')}
+              // onClick={() => router.push('/social')}
               className="flex-1"
             >
               Cancel
             </Button>
             <Button
-              onClick={handleSubmit}
-              disabled={!postText.trim() || !activity}
+              // onClick={handleSubmit}
+              // disabled={!postText.trim() || !activity}
               className="flex-1 bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white shadow-lg hover:shadow-xl transition-all duration-200"
             >
               Share Post
