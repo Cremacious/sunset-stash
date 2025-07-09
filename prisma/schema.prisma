@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
   output   = "../src/generated/prisma"
@@ -15,36 +9,31 @@ datasource db {
 }
 
 model User {
-  id            String    @id
-  name          String
-  email         String
-  emailVerified Boolean
-  image         String?
-  createdAt     DateTime
-  updatedAt     DateTime
-  sessions      Session[]
-  accounts      Account[]
-  
-  // User's content
-  stashItems    StashItem[]
-  posts         Post[]
-  purchases     Purchase[]
-  comments      Comment[]
-  
-  // Friend relationships
-  sentFriendRequests     FriendRequest[] @relation("SentRequests")
+  id                     String          @id
+  name                   String
+  email                  String          @unique
+  emailVerified          Boolean
+  image                  String?
+  createdAt              DateTime
+  updatedAt              DateTime
+  comments               Comment[]
   receivedFriendRequests FriendRequest[] @relation("ReceivedRequests")
-  friends                Friendship[]    @relation("UserFriends")
+  sentFriendRequests     FriendRequest[] @relation("SentRequests")
   friendOf               Friendship[]    @relation("FriendOfUser")
+  friends                Friendship[]    @relation("UserFriends")
+  posts                  Post[]
+  purchases              Purchase[]
+  stashItems             StashItem[]
+  accounts               Account[]
+  sessions               Session[]
 
-  @@unique([email])
   @@map("user")
 }
 
 model Session {
   id        String   @id
   expiresAt DateTime
-  token     String
+  token     String   @unique
   createdAt DateTime
   updatedAt DateTime
   ipAddress String?
@@ -52,7 +41,6 @@ model Session {
   userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@unique([token])
   @@map("session")
 }
 
@@ -61,7 +49,6 @@ model Account {
   accountId             String
   providerId            String
   userId                String
-  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   accessToken           String?
   refreshToken          String?
   idToken               String?
@@ -71,6 +58,7 @@ model Account {
   password              String?
   createdAt             DateTime
   updatedAt             DateTime
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("account")
 }
@@ -87,94 +75,93 @@ model Verification {
 }
 
 model StashItem {
-    id            String    @id @default(cuid())
-    name          String
-    category      String    @default("")
-    type          String    @default("")
-    amount        String    @default("")
-    thc           Float     @default(0)
-    cbd           Float     @default(0)
-    lineage       String    @default("")
-    notes         String    @default("")
-    dateAdded     DateTime  @default(now())
-    userId        String
-    user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-    posts         PostStashItem[]
+  id        String          @id @default(cuid())
+  name      String
+  category  String          @default("")
+  type      String          @default("")
+  amount    String          @default("")
+  thc       Float           @default(0)
+  cbd       Float           @default(0)
+  lineage   String          @default("")
+  notes     String          @default("")
+  dateAdded DateTime        @default(now())
+  userId    String
+  posts     PostStashItem[]
+  user      User            @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model PurchaseItem {
-    id         String   @id @default(cuid())
-    name       String
-    category   String   @default("")
-    type       String   @default("")
-    amount     String   @default("")
-    price      Float    @default(0)
-    thc        Float    @default(0)
-    cbd        Float    @default(0)
-    lineage    String   @default("")
-    notes      String   @default("")
-    purchaseId String
-    purchase   Purchase @relation(fields: [purchaseId], references: [id], onDelete: Cascade)
+  id         String   @id @default(cuid())
+  name       String
+  category   String   @default("")
+  type       String   @default("")
+  amount     String   @default("")
+  price      Float    @default(0)
+  thc        Float    @default(0)
+  cbd        Float    @default(0)
+  lineage    String   @default("")
+  notes      String   @default("")
+  purchaseId String
+  purchase   Purchase @relation(fields: [purchaseId], references: [id], onDelete: Cascade)
 }
 
 model Purchase {
-    id         String        @id @default(cuid())
-    dispensary String
-    date       DateTime
-    total      Float         @default(0)
-    items      PurchaseItem[]
-    notes      String        @default("")
-    createdAt  DateTime      @default(now())
-    userId     String
-    user       User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id         String         @id @default(cuid())
+  dispensary String
+  date       DateTime
+  total      Float          @default(0)
+  notes      String         @default("")
+  createdAt  DateTime       @default(now())
+  userId     String
+  user       User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items      PurchaseItem[]
 }
 
 model Post {
-     id         String        @id @default(cuid())
-     author     String
-     activity   String
-     content    String
-     comments   Comment[]
-     createdAt  DateTime      @default(now())
-     stashItems PostStashItem[]
-     userId     String
-     user       User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id         String          @id @default(cuid())
+  author     String
+  activity   String
+  content    String
+  createdAt  DateTime        @default(now())
+  userId     String
+  comments   Comment[]
+  user       User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  stashItems PostStashItem[]
 }
 
 model Comment {
-       id         String        @id @default(cuid())
-       author     String
-       content    String
-       postId     String
-       post       Post          @relation(fields: [postId], references: [id], onDelete: Cascade)
-       parentId   String?       // For nested comments/replies
-       parent     Comment?      @relation("CommentReplies", fields: [parentId], references: [id])
-       replies    Comment[]     @relation("CommentReplies")
-       createdAt  DateTime      @default(now())
-       userId     String
-       user       User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id        String    @id @default(cuid())
+  author    String
+  content   String
+  postId    String
+  parentId  String?
+  createdAt DateTime  @default(now())
+  userId    String
+  parent    Comment?  @relation("CommentReplies", fields: [parentId], references: [id])
+  replies   Comment[] @relation("CommentReplies")
+  post      Post      @relation(fields: [postId], references: [id], onDelete: Cascade)
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model PostStashItem {
-    postId     String
-    stashItemId String
-    post       Post      @relation(fields: [postId], references: [id], onDelete: Cascade)
-    stashItem  StashItem @relation(fields: [stashItemId], references: [id], onDelete: Cascade)
+  postId      String
+  stashItemId String
+  post        Post      @relation(fields: [postId], references: [id], onDelete: Cascade)
+  stashItem   StashItem @relation(fields: [stashItemId], references: [id], onDelete: Cascade)
 
-    @@id([postId, stashItemId])
+  @@id([postId, stashItemId])
 }
 
 model FriendRequest {
-  id          String   @id @default(cuid())
-  senderId    String
-  receiverId  String
-  status      String   @default("pending") // "pending", "accepted", "rejected"
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  
-  sender      User     @relation("SentRequests", fields: [senderId], references: [id], onDelete: Cascade)
-  receiver    User     @relation("ReceivedRequests", fields: [receiverId], references: [id], onDelete: Cascade)
-  
+  id         String   @id @default(cuid())
+  senderId   String
+  receiverId String
+  status     String   @default("pending")
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  receiver   User     @relation("ReceivedRequests", fields: [receiverId], references: [id], onDelete: Cascade)
+  sender     User     @relation("SentRequests", fields: [senderId], references: [id], onDelete: Cascade)
+
   @@unique([senderId, receiverId])
 }
 
@@ -183,9 +170,8 @@ model Friendship {
   userId    String
   friendId  String
   createdAt DateTime @default(now())
-  
-  user      User     @relation("UserFriends", fields: [userId], references: [id], onDelete: Cascade)
   friend    User     @relation("FriendOfUser", fields: [friendId], references: [id], onDelete: Cascade)
-  
+  user      User     @relation("UserFriends", fields: [userId], references: [id], onDelete: Cascade)
+
   @@unique([userId, friendId])
 }

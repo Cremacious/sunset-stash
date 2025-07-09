@@ -25,23 +25,25 @@ import {
 import { Textarea } from '@/components/ui/textarea';
 import { stashFormSchema } from '@/lib/validators/stash.validator';
 import { createStashItem } from '@/lib/actions/stash.actions';
+import { useRouter } from 'next/navigation';
 
 const StashForm = () => {
+  const router = useRouter();
   const form = useForm<z.infer<typeof stashFormSchema>>({
     resolver: zodResolver(stashFormSchema),
   });
 
   async function onSubmit(values: z.infer<typeof stashFormSchema>) {
-    console.log('Form submitted with values:', values);
-    // const response = await createStashItem(values);
-    // if (response.success) {
-    //   toast.success('Stash item created successfully!');
-    //   form.reset();
-    // } else {
-    //   toast.error(
-    //     response.message || 'Failed to create stash item. Please try again.'
-    //   );
-    // }
+    const response = await createStashItem(values);
+    if (response.success) {
+      toast.success('Stash item created successfully!');
+      form.reset();
+      router.push('/stash');
+    } else {
+      toast.error(
+        response.message || 'Failed to create stash item. Please try again.'
+      );
+    }
   }
 
   return (

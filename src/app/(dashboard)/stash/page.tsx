@@ -4,50 +4,12 @@ import Link from 'next/link';
 import StashCard from '@/components/stash/StashCard';
 import StashAnalytics from '@/components/stash/StashAnalytics';
 import NoStashFound from '@/components/stash/NoStashFound';
+import { getUserStashItems } from '@/lib/actions/stash.actions';
 
-const StashPage = () => {
-  // Mock data for demonstration
-  const stashItems = [
-    {
-      id: '1',
-      userId: 'user-123',
-      name: 'Blue Dream',
-      category: 'Flower',
-      type: 'Hybrid',
-      amount: '3.5g',
-      thc: 18,
-      cbd: 1,
-      lineage: 'Blueberry x Haze',
-      notes: 'Perfect for creativity and relaxation',
-      dateAdded: '2025-01-05',
-    },
-    {
-      id: '2',
-      userId: 'user-123',
-      name: 'OG Kush',
-      category: 'Flower',
-      type: 'Indica',
-      amount: '1g',
-      thc: 22,
-      cbd: 0.5,
-      lineage: 'Chemdawg x Hindu Kush',
-      notes: 'Great for stress relief and sleep',
-      dateAdded: '2025-01-10',
-    },
-    {
-      id: '3',
-      userId: 'user-123',
-      name: 'Sour Diesel',
-      category: 'Concentrate',
-      type: 'Sativa',
-      amount: '0.5g',
-      thc: 25,
-      cbd: 0.2,
-      lineage: 'Chemdawg x Super Skunk',
-      notes: 'Energizing and uplifting effects',
-      dateAdded: '2025-01-15',
-    },
-  ];
+// TODO: Fix type error with dateAdded
+const StashPage = async () => {
+  const result = await getUserStashItems();
+  const stashItems = result.data ?? [];
 
   return (
     <div className="space-y-8 ">
@@ -70,7 +32,16 @@ const StashPage = () => {
         {stashItems.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {stashItems.map((item) => (
-              <StashCard key={item.id} stashItem={item} />
+              <StashCard
+                key={item.id}
+                stashItem={{
+                  ...item,
+                  dateAdded:
+                    typeof item.dateAdded === 'string'
+                      ? item.dateAdded
+                      : item.dateAdded.toISOString(),
+                }}
+              />
             ))}
           </div>
         ) : (
