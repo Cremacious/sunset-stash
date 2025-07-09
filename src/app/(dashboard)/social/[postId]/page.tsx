@@ -1,5 +1,6 @@
 'use client';
 
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useRouter } from 'next/navigation';
@@ -157,8 +158,11 @@ const PostPage = ({ params }: PostPageProps) => {
       </div>
 
       {/* Main Post */}
-      <Card className="bg-white shadow-xl border-0 max-w-4xl mx-auto">
-        <div className="bg-white p-2 md:p-6">
+      <Card className="bg-white shadow-xl border-0 max-w-4xl mx-auto">    {/* <div className="flex items-center space-x-1 text-xs bg-purple-50 text-purple-700 border border-purple-200 rounded-full px-2 py-1">
+                    <span>{getActivityIcon(post.activity)}</span>
+                    <span>{post.activity}</span>
+                  </div> */}
+        <div className="bg-white p-2 md:px-6">
           {/* Header matching TimelinePost */}
           <div className="flex items-start justify-between mb-4">
             <div className="flex items-center space-x-3 flex-1 min-w-0">
@@ -175,10 +179,6 @@ const PostPage = ({ params }: PostPageProps) => {
                   <p className="text-sm sm:text-base font-semibold text-gray-900">
                     {post.user}
                   </p>
-                  <div className="flex items-center space-x-1 text-xs bg-purple-50 text-purple-700 border border-purple-200 rounded-full px-2 py-1">
-                    <span>{getActivityIcon(post.activity)}</span>
-                    <span>{post.activity}</span>
-                  </div>
                 </div>
               </div>
             </div>
@@ -189,7 +189,10 @@ const PostPage = ({ params }: PostPageProps) => {
               </p>
             </div>
           </div>
-
+          <Badge className="flex items-center space-x-1 text-xs mb-2 bg-purple-50 text-purple-700 border border-purple-200 rounded-full px-2 py-1">
+            <span>{getActivityIcon(post.activity)}</span>
+            <span>{post.activity}</span>
+          </Badge>
           {/* Post Content */}
           <div className="mb-4">
             <p className="text-gray-800 text-sm sm:text-base leading-relaxed">
@@ -220,7 +223,7 @@ const PostPage = ({ params }: PostPageProps) => {
         </div>
 
         {/* Detailed Strain Information (expanded section) */}
-        <CardContent className="pt-6">
+        <CardContent className="pt-2">
           <h3 className="text-lg font-semibold text-gray-800 mb-4">
             Strain Details
           </h3>
