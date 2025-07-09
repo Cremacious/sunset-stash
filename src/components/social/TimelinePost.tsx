@@ -12,7 +12,7 @@ const TimelinePost = ({ post }: { post: Post }) => {
   };
 
   return (
-    <div className="bg-white rounded-lg border border-gray-200 p-4 sm:p-6 hover:shadow-md transition-all">
+    <div className="bg-white rounded-lg border border-gray-200 p-4 sm:p-6 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
       {/* Header: Author info (left) and Date (right) */}
       <div className="flex items-start justify-between mb-4">
         {/* Left side: Initials, Name, and Activity */}
@@ -27,7 +27,7 @@ const TimelinePost = ({ post }: { post: Post }) => {
               <p className="text-sm sm:text-base font-semibold text-gray-900">
                 {post.author}
               </p>
-              <Badge className="bg-purple-500 text-xs">{post.activity}</Badge>
+              <Badge className="bg-blue-500 text-xs">{post.activity}</Badge>
             </div>
           </div>
         </div>
