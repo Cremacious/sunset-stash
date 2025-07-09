@@ -13,9 +13,7 @@ const TimelinePost = ({ post }: { post: Post }) => {
 
   return (
     <div className="bg-white rounded-lg border border-gray-200 p-4 sm:p-6 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
-      {/* Header: Author info (left) and Date (right) */}
       <div className="flex items-start justify-between mb-4">
-        {/* Left side: Initials, Name, and Activity */}
         <div className="flex items-center space-x-3 flex-1 min-w-0">
           <div className="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center flex-shrink-0">
             <span className="text-white font-semibold text-sm">
@@ -27,12 +25,16 @@ const TimelinePost = ({ post }: { post: Post }) => {
               <p className="text-sm sm:text-base font-semibold text-gray-900">
                 {post.author}
               </p>
-              <Badge className="bg-blue-500 text-xs">{post.activity}</Badge>
+              <Badge
+                variant="outline"
+                className="text-xs bg-purple-50 text-purple-700 border-purple-200"
+              >
+                {post.activity}
+              </Badge>
             </div>
           </div>
         </div>
 
-        {/* Right side: Date only */}
         <div className="flex-shrink-0 ml-4">
           <p className="text-xs text-gray-500 whitespace-nowrap">
             {post.createdAt}
@@ -40,23 +42,17 @@ const TimelinePost = ({ post }: { post: Post }) => {
         </div>
       </div>
 
-      {/* Post Content */}
       <div className="mb-4">
         <p className="text-gray-800 text-sm sm:text-base leading-relaxed">
           {post.content}
         </p>
       </div>
 
-      {/* Stash Items (if any) */}
       {post.stashItems && post.stashItems.length > 0 && (
         <div className="mb-4">
           <div className="flex flex-wrap gap-2">
             {post.stashItems.map((item, index) => (
-              <Badge
-                key={index}
-                variant="outline"
-                className="text-xs bg-purple-50 text-purple-700 border-purple-200"
-              >
+              <Badge key={index} className="text-xs bg-blue-500">
                 {item.name}
               </Badge>
             ))}

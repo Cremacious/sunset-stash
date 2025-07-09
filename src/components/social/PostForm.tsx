@@ -24,10 +24,12 @@ import { PostFormSchema } from '@/lib/validators/post.validator';
 import { useState } from 'react';
 import { StashItem } from '@/lib/types';
 import { Label } from '../ui/label';
+import { useRouter } from 'next/navigation';
 
 const PostForm = ({ stashItems }: { stashItems: StashItem[] }) => {
   const [selectedStashItems, setSelectedStashItems] = useState<StashItem[]>([]);
   const [showStashSelector, setShowStashSelector] = useState(false);
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof PostFormSchema>>({
     resolver: zodResolver(PostFormSchema),
@@ -122,7 +124,7 @@ const PostForm = ({ stashItems }: { stashItems: StashItem[] }) => {
             variant="outline"
             size="sm"
             onClick={() => setShowStashSelector(!showStashSelector)}
-            className="text-orange-600 border-orange-300 hover:bg-orange-50"
+            className="text-purple-600 border-purple-300 hover:bg-purple-50"
           >
             {showStashSelector ? 'Hide Stash' : 'Browse Stash'}
           </Button>
@@ -141,13 +143,6 @@ const PostForm = ({ stashItems }: { stashItems: StashItem[] }) => {
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-3">
-                      <div
-                        className={`w-8 h-8 bg-gradient-to-r rounded-full flex items-center justify-center`}
-                      >
-                        {/* <span className="text-white text-sm">
-                          {getTypeIcon(item.type)}
-                        </span> */}
-                      </div>
                       <div>
                         <h5 className="font-semibold text-gray-800">
                           {item.name}
@@ -162,7 +157,7 @@ const PostForm = ({ stashItems }: { stashItems: StashItem[] }) => {
                       variant="ghost"
                       size="sm"
                       onClick={() => toggleStashItem(item)}
-                      className="text-red-500 hover:text-red-700 hover:bg-red-50"
+                      className="text-purple-500 hover:text-purple-700 hover:bg-purple-50"
                     >
                       Remove
                     </Button>
@@ -190,15 +185,13 @@ const PostForm = ({ stashItems }: { stashItems: StashItem[] }) => {
                   <div
                     key={item.id}
                     onClick={() => toggleStashItem(item)}
-                    className="bg-white rounded-lg p-3 border border-gray-200 hover:border-orange-300 hover:bg-orange-50 cursor-pointer transition-all duration-200"
+                    className="bg-white rounded-lg p-3 border border-gray-200 hover:border-purple-300 hover:bg-purple-50 cursor-pointer transition-all duration-200"
                   >
                     <div className="flex items-center space-x-3">
                       <div
                         className={`w-8 h-8 bg-gradient-to-r rounded-full flex items-center justify-center`}
                       >
-                        <span className="text-white text-sm">
-                          {/* {getTypeIcon(item.type)} */}
-                        </span>
+                        <span className="text-white text-sm"></span>
                       </div>
                       <div className="flex-1">
                         <h5 className="font-semibold text-gray-800">
@@ -208,14 +201,27 @@ const PostForm = ({ stashItems }: { stashItems: StashItem[] }) => {
                           {item.category} • THC: {item.thc}%
                         </p>
                       </div>
-                      <div className="text-orange-500">+</div>
+                      <div className="text-purple-500">+</div>
                     </div>
                   </div>
                 ))}
             </div>
           </div>
         )}
-        <Button type="submit">Submit</Button>
+        {/* <Button type="submit">Submit</Button> */}
+        <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-gray-200">
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => router.push('/social')}
+            className="flex-1"
+          >
+            Cancel
+          </Button>
+          <Button type="submit" className="flex-1 ">
+            Share Post
+          </Button>
+        </div>
       </form>
     </Form>
   );

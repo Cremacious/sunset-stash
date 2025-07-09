@@ -123,12 +123,8 @@ const SocialPage = () => {
           {/* Timeline Filters */}
           <div className="bg-white rounded-lg border border-gray-200 p-4">
             <div className="flex items-center justify-between">
-              <h2 className="text-lg font-semibold text-gray-900 flex items-center">
-                <span className="text-xl mr-2">📰</span>
-                Activity Timeline
-              </h2>
               <Button asChild>
-                <Link href="/social/new-post">New Post</Link>
+                <Link href="/social/new-post">Create New Post</Link>
               </Button>
               <div className="flex items-center space-x-2">
                 <Label htmlFor="filter" className="text-sm">

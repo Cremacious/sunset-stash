@@ -13,9 +13,7 @@ const FindFriends = () => {
         <Label htmlFor="email">Search by Email</Label>
         <Input id="email" type="email" placeholder="friend@email.com" />
 
-        <Button className="w-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white">
-          Send Friend Request
-        </Button>
+        <Button className="w-full">Send Friend Request</Button>
       </div>
 
       <div className="mt-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
