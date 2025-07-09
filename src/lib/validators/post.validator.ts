@@ -1,7 +1,7 @@
 // src/lib/validators/post.validator.ts
 import { z } from 'zod';
 
-export const PostFormSchema = z.object({
+export const postFormSchema = z.object({
   activity: z.string().min(1, 'Please select an activity'),
   content: z
     .string()
@@ -10,4 +10,4 @@ export const PostFormSchema = z.object({
   stashItemIds: z.array(z.string()).optional(),
 });
 
-export type PostFormData = z.infer<typeof PostFormSchema>;
+export type PostFormData = z.infer<typeof postFormSchema>;

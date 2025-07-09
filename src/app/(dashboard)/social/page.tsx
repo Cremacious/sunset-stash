@@ -9,16 +9,38 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import TimelinePost from '@/components/social/TimelinePost';
 import RecentFriendCard from '@/components/social/RecentFriendCard';
 import FindFriends from '@/components/social/FindFriends';
 import Link from 'next/link';
+import { getUserStashItems } from '@/lib/actions/stash.actions';
+import { StashItem } from '@/lib/types/stash.types';
 
 const SocialPage = () => {
   const router = useRouter();
-
   const [timelineFilter, setTimelineFilter] = useState('all'); // 'all', 'user', 'friends'
+  const [stashItems, setStashItems] = useState<StashItem[]>([]);
+
+  // Load user's stash items
+  useEffect(() => {
+    const loadStashItems = async () => {
+      try {
+        const result = await getUserStashItems();
+        if (result.success && result.data) {
+          // Convert Date to string for dateAdded field
+          const convertedItems = result.data.map((item) => ({
+            ...item,
+            dateAdded: item.dateAdded.toISOString().split('T')[0], // Convert to YYYY-MM-DD format
+          }));
+          setStashItems(convertedItems);
+        }
+      } catch (error) {
+        console.error('Error loading stash items:', error);
+      }
+    };
+    loadStashItems();
+  }, []);
 
   // Mock friends data
   const friends = [

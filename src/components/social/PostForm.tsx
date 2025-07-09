@@ -20,19 +20,20 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
-import { PostFormSchema } from '@/lib/validators/post.validator';
+import { postFormSchema } from '@/lib/validators/post.validator';
 import { useState } from 'react';
 import { StashItem } from '@/lib/types';
 import { Label } from '../ui/label';
 import { useRouter } from 'next/navigation';
+import { createPost } from '@/lib/actions/post.actions';
 
 const PostForm = ({ stashItems }: { stashItems: StashItem[] }) => {
   const [selectedStashItems, setSelectedStashItems] = useState<StashItem[]>([]);
   const [showStashSelector, setShowStashSelector] = useState(false);
   const router = useRouter();
 
-  const form = useForm<z.infer<typeof PostFormSchema>>({
-    resolver: zodResolver(PostFormSchema),
+  const form = useForm<z.infer<typeof postFormSchema>>({
+    resolver: zodResolver(postFormSchema),
     defaultValues: {
       activity: '',
       content: '',
@@ -40,7 +41,7 @@ const PostForm = ({ stashItems }: { stashItems: StashItem[] }) => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof PostFormSchema>) {
+  async function onSubmit(values: z.infer<typeof postFormSchema>) {
     try {
       const stashItemIds = selectedStashItems.map((item) => item.id);
 
@@ -49,10 +50,13 @@ const PostForm = ({ stashItems }: { stashItems: StashItem[] }) => {
         content: values.content,
         stashItemIds: stashItemIds,
       };
-
       console.log('Submitting:', postData);
-
-      toast.success('Post created successfully!');
+      const response = await createPost(postData);
+      if (response.success) {
+        toast.success('Post created successfully!');
+      } else {
+        toast.error('Failed to create post. Please try again.');
+      }
     } catch (error) {
       console.error('Form submission error', error);
       toast.error('Failed to submit the form. Please try again.');
