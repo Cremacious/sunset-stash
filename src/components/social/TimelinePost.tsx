@@ -60,10 +60,8 @@ const TimelinePost = ({ post }: { post: Post }) => {
         </div>
       )}
 
-      {/* Bottom border */}
       <div className="border-t border-gray-100 pt-3">
         <div className="flex items-center justify-between">
-          {/* Comments Button - Bottom Left */}
           <Button
             variant="ghost"
             size="sm"
@@ -73,8 +71,6 @@ const TimelinePost = ({ post }: { post: Post }) => {
             <span className="hidden sm:inline">Comments</span>
             <span className="sm:hidden">{post.comments.length}</span>
           </Button>
-
-          {/* View Post Button - Bottom Right */}
           <Button className="text-xs sm:text-sm hover:bg-purple-50 hover:border-purple-300 hover:text-purple-700">
             View Post
           </Button>

@@ -158,33 +158,72 @@ const PostPage = ({ params }: PostPageProps) => {
 
       {/* Main Post */}
       <Card className="bg-white shadow-xl border-0 max-w-4xl mx-auto">
-        <CardHeader className="pb-3">
-          <div className="flex items-start justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-3xl">
-                {post.avatar}
+        <div className="bg-white p-2 md:p-6">
+          {/* Header matching TimelinePost */}
+          <div className="flex items-start justify-between mb-4">
+            <div className="flex items-center space-x-3 flex-1 min-w-0">
+              <div className="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center flex-shrink-0">
+                <span className="text-white font-semibold text-sm">
+                  {post.user
+                    .split(' ')
+                    .map((n) => n[0])
+                    .join('')}
+                </span>
               </div>
-              <div>
-                <CardTitle className="text-xl font-bold text-gray-800">
-                  {post.user}
-                </CardTitle>
-                <div className="flex items-center space-x-2 text-sm text-gray-600">
-                  <span>{getActivityIcon(post.activity)}</span>
-                  <span>{post.activity}</span>
-                  <span>•</span>
-                  <span>{post.date}</span>
+              <div className="min-w-0 flex-1">
+                <div className="flex items-center space-x-2 flex-wrap">
+                  <p className="text-sm sm:text-base font-semibold text-gray-900">
+                    {post.user}
+                  </p>
+                  <div className="flex items-center space-x-1 text-xs bg-purple-50 text-purple-700 border border-purple-200 rounded-full px-2 py-1">
+                    <span>{getActivityIcon(post.activity)}</span>
+                    <span>{post.activity}</span>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </CardHeader>
-        <CardContent className="space-y-6">
-          {/* Post Text */}
-          <div className="text-gray-800 leading-relaxed text-lg">
-            {post.text}
+
+            <div className="flex-shrink-0 ml-4 mt-2">
+              <p className="text-xs text-gray-500 whitespace-nowrap">
+                {post.date}
+              </p>
+            </div>
           </div>
 
-          {/* Strain Information */}
+          {/* Post Content */}
+          <div className="mb-4">
+            <p className="text-gray-800 text-sm sm:text-base leading-relaxed">
+              {post.text}
+            </p>
+          </div>
+
+          {/* Bottom section matching TimelinePost */}
+          <div className="border-t border-gray-100 pt-3">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-4">
+                <button className="flex items-center space-x-1 text-xs text-gray-500 hover:text-blue-600 px-2 py-1">
+                  <span>💬</span>
+                  <span className="hidden sm:inline">
+                    {post.totalComments} Comments
+                  </span>
+                  <span className="sm:hidden">{post.totalComments}</span>
+                </button>
+              </div>
+              <Button
+                onClick={() => router.push(`/social/${post.id}/edit`)}
+                className="text-xs sm:text-sm hover:bg-purple-50 hover:border-purple-300 hover:text-purple-700"
+              >
+                Edit Post
+              </Button>
+            </div>
+          </div>
+        </div>
+
+        {/* Detailed Strain Information (expanded section) */}
+        <CardContent className="pt-6">
+          <h3 className="text-lg font-semibold text-gray-800 mb-4">
+            Strain Details
+          </h3>
           <div className="space-y-4">
             {post.strains.map((strain) => (
               <div
@@ -202,9 +241,9 @@ const PostPage = ({ params }: PostPageProps) => {
                     </span>
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-gray-800">
+                    <h4 className="text-xl font-bold text-gray-800">
                       {strain.name}
-                    </h3>
+                    </h4>
                     <p className="text-gray-600">
                       {strain.type} • {strain.dispensary} • {strain.size}
                     </p>
@@ -233,39 +272,6 @@ const PostPage = ({ params }: PostPageProps) => {
                 </div>
               </div>
             ))}
-          </div>
-
-          {/* Post Stats */}
-          <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-            <div className="flex space-x-6">
-              <Button
-                variant="ghost"
-                size="lg"
-                className="text-gray-600 hover:text-orange-600"
-              >
-                <span className="mr-2 text-xl">👍</span>
-                {post.likes} Likes
-              </Button>
-              <Button
-                variant="ghost"
-                size="lg"
-                className="text-gray-600 hover:text-orange-600"
-              >
-                <span className="mr-2 text-xl">💬</span>
-                {post.totalComments} Comments
-              </Button>
-              <Button
-                variant="ghost"
-                size="lg"
-                className="text-gray-600 hover:text-orange-600"
-              >
-                <span className="mr-2 text-xl">↗️</span>
-                Share
-              </Button>
-            </div>
-            <div className="flex justify-end px-6">
-              <Button>Edit Post</Button>
-            </div>
           </div>
         </CardContent>
       </Card>
