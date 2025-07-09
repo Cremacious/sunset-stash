@@ -1,7 +1,6 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
 import {
   Select,
   SelectContent,
@@ -127,9 +126,6 @@ const SocialPage = () => {
                 <Link href="/social/new-post">Create New Post</Link>
               </Button>
               <div className="flex items-center space-x-2">
-                <Label htmlFor="filter" className="text-sm">
-                  Show:
-                </Label>
                 <Select
                   value={timelineFilter}
                   onValueChange={setTimelineFilter}

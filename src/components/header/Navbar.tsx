@@ -51,7 +51,7 @@ const Navbar = () => {
             <button
               key={route.href}
               onClick={() => router.push(route.href)}
-              className="text-white hover:text-purple-600 text-lg font-bold transition-colors duration-200 hover:drop-shadow-md"
+              className="text-white hover:text-purple-600 text-lg font-bold transition-colors duration-200 hover:drop-shadow-md hover:cursor-pointer"
             >
               {route.name}
             </button>
@@ -65,13 +65,13 @@ const Navbar = () => {
             <>
               <button
                 onClick={() => router.push('/sign-in')}
-                className="px-3 py-2 md:px-4 md:py-2 text-sm text-white border border-white/40 rounded-lg hover:bg-white/10 transition-all duration-200 backdrop-blur-sm font-medium"
+                className="px-3 py-2 md:px-4 md:py-2 text-sm text-white border border-white/40 rounded-lg hover:bg-white/10 transition-all duration-200 backdrop-blur-sm font-medium hover:cursor-pointer"
               >
                 Sign In
               </button>
               <button
                 onClick={() => router.push('/sign-up')}
-                className="px-3 py-2 md:px-4 md:py-2 text-sm bg-white text-purple-600 font-semibold rounded-lg hover:bg-white/90 transition-all duration-200 shadow-lg"
+                className="px-3 py-2 md:px-4 md:py-2 text-sm bg-white text-purple-600 font-semibold rounded-lg hover:bg-white/90 transition-all duration-200 shadow-lg hover:cursor-pointer"
               >
                 Get Started
               </button>
