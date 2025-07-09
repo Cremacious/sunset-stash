@@ -37,7 +37,7 @@ const Sidebar = ({ routes }: { routes: Routes[] }) => {
           className="text-white bg-white/20 backdrop-blur-sm rounded-2xl p-2 border border-white/30 hover:bg-white/30 transition-all duration-200"
         />
       </SheetTrigger>
-      <SheetContent className="bg-gradient-to-br from-pink-500/95 to-blue-600/95 backdrop-blur-md border-none px-2">
+      <SheetContent className="bg-white/10 backdrop-blur-md p-4 border border-white/20 px-2">
         <SheetHeader className="mb-8">
           <div className="flex items-center space-x-3 mb-4">
             <Image
