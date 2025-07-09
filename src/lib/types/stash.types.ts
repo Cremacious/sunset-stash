@@ -8,6 +8,6 @@ export type StashItem = {
   cbd: number;
   lineage: string;
   notes: string;
-  dateAdded: string; // Will be converted from DateTime for display
+  dateAdded: string; 
   userId: string;
 };

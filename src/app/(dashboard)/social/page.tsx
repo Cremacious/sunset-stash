@@ -1,5 +1,3 @@
-'use client';
-
 import { Button } from '@/components/ui/button';
 import {
   Select,
@@ -8,39 +6,42 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { useRouter } from 'next/navigation';
-import { useState, useEffect } from 'react';
 import TimelinePost from '@/components/social/TimelinePost';
 import RecentFriendCard from '@/components/social/RecentFriendCard';
 import FindFriends from '@/components/social/FindFriends';
 import Link from 'next/link';
-import { getUserStashItems } from '@/lib/actions/stash.actions';
-import { StashItem } from '@/lib/types/stash.types';
+import { getUserPosts } from '@/lib/actions/post.actions';
+import { Post } from '@/lib/types/social.types';
 
-const SocialPage = () => {
-  const router = useRouter();
-  const [timelineFilter, setTimelineFilter] = useState('all'); // 'all', 'user', 'friends'
-  const [stashItems, setStashItems] = useState<StashItem[]>([]);
+const SocialPage = async () => {
+  const socialPosts = await getUserPosts();
 
-  // Load user's stash items
-  useEffect(() => {
-    const loadStashItems = async () => {
-      try {
-        const result = await getUserStashItems();
-        if (result.success && result.data) {
-          // Convert Date to string for dateAdded field
-          const convertedItems = result.data.map((item) => ({
-            ...item,
-            dateAdded: item.dateAdded.toISOString().split('T')[0], // Convert to YYYY-MM-DD format
-          }));
-          setStashItems(convertedItems);
-        }
-      } catch (error) {
-        console.error('Error loading stash items:', error);
-      }
-    };
-    loadStashItems();
-  }, []);
+  // Define the type for what getUserPosts actually returns
+  type PostWithStashItems = {
+    id: string;
+    author: string;
+    activity: string;
+    content: string;
+    createdAt: Date;
+    userId: string;
+    stashItems: Array<{
+      postId: string;
+      stashItemId: string;
+      stashItem: {
+        id: string;
+        name: string;
+        category: string;
+        type: string;
+        amount: string;
+        thc: number;
+        cbd: number;
+        lineage: string;
+        notes: string;
+        dateAdded: Date;
+        userId: string;
+      };
+    }>;
+  };
 
   // Mock friends data
   const friends = [
@@ -58,84 +59,6 @@ const SocialPage = () => {
     },
   ];
 
-  // Mock social posts data
-  const socialPosts = [
-    {
-      id: '1',
-      author: 'Billy Dee',
-      activity: 'Chill Time',
-      content: 'Watched a movie with the boys',
-      stashItems: [
-        {
-          id: '43',
-          name: 'Blue Dream',
-          category: 'flower',
-          type: 'bud',
-          amount: '3.5g',
-          thc: 21.5,
-          cbd: 0.5,
-          lineage: 'Blueberry x Haze',
-          notes: 'Smooth and relaxing',
-          dateAdded: '2025-01-15',
-          userId: 'user-1',
-        },
-      ],
-      comments: [],
-      createdAt: '2025-01-15T12:00:00Z',
-      userId: 'user-1',
-    },
-    {
-      id: '2',
-      author: 'Billy Dee',
-      activity: 'Chill Time',
-      content:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-      stashItems: [
-        {
-          id: '43',
-          name: 'Blue Dream',
-          category: 'flower',
-          type: 'bud',
-          amount: '3.5g',
-          thc: 21.5,
-          cbd: 0.5,
-          lineage: 'Blueberry x Haze',
-          notes: 'Smooth and relaxing',
-          dateAdded: '2025-01-15',
-          userId: 'user-1',
-        },
-      ],
-      comments: [],
-      createdAt: '2025-01-15T12:00:00Z',
-      userId: 'user-1',
-    },
-    {
-      id: '4',
-      author: 'Billy Dee',
-      activity: 'Chill Time',
-      content:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-      stashItems: [
-        {
-          id: '43',
-          name: 'Blue Dream',
-          category: 'flower',
-          type: 'bud',
-          amount: '3.5g',
-          thc: 21.5,
-          cbd: 0.5,
-          lineage: 'Blueberry x Haze',
-          notes: 'Smooth and relaxing',
-          dateAdded: '2025-01-15',
-          userId: 'user-1',
-        },
-      ],
-      comments: [],
-      createdAt: '2025-01-15T12:00:00Z',
-      userId: 'user-1',
-    },
-  ];
-
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -148,10 +71,7 @@ const SocialPage = () => {
                 <Link href="/social/new-post">Create New Post</Link>
               </Button>
               <div className="flex items-center space-x-2">
-                <Select
-                  value={timelineFilter}
-                  onValueChange={setTimelineFilter}
-                >
+                <Select>
                   <SelectTrigger className="w-32 h-8 text-sm">
                     <SelectValue />
                   </SelectTrigger>
@@ -167,9 +87,30 @@ const SocialPage = () => {
 
           {/* Timeline Posts */}
           <div className="space-y-4">
-            {socialPosts.map((post) => (
-              <TimelinePost key={post.id} post={post} />
-            ))}
+            {socialPosts && socialPosts.length > 0 ? (
+              socialPosts.map((post: PostWithStashItems) => (
+                <TimelinePost
+                  key={post.id}
+                  post={
+                    {
+                      ...post,
+                      comments: [], // Add empty comments array since we're not loading comments yet
+                      createdAt: post.createdAt.toISOString(), // Convert Date to string
+                      stashItems: post.stashItems.map((si) => ({
+                        ...si.stashItem,
+                        dateAdded: si.stashItem.dateAdded
+                          .toISOString()
+                          .split('T')[0],
+                      })),
+                    } as Post
+                  }
+                />
+              ))
+            ) : (
+              <div className="text-center text-gray-500 py-8">
+                <p>No posts yet. Create your first post!</p>
+              </div>
+            )}
           </div>
 
           {/* Load More */}
@@ -187,12 +128,7 @@ const SocialPage = () => {
                   <span className="text-xl mr-2">🤝</span>
                   Recent Friends
                 </h2>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => router.push('/friends')}
-                  className="text-xs"
-                >
+                <Button variant="outline" size="sm" className="text-xs">
                   View All ({friends.length})
                 </Button>
               </div>

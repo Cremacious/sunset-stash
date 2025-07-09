@@ -69,35 +69,36 @@ export async function createPost(data: z.infer<typeof postFormSchema>) {
   }
 }
 
-export async function getUserPost() {
+export async function getUserPosts() {
   try {
     const session = await auth.api.getSession({
       headers: await headers(),
     });
     if (!session?.user.id) {
-      return {
-        success: false,
-        error: 'User session not found. Please sign in again.',
-      };
+      console.log('No session found');
+      return [];
     }
     const existingUser = await prisma.user.findUnique({
       where: { id: session.user.id },
     });
     if (!existingUser) {
-      throw new Error('User not found');
+      console.log('User not found');
+      return [];
     }
     const posts = await prisma.post.findMany({
       where: { author: existingUser.id },
       include: {
-        stashItems: true,
+        stashItems: {
+          include: {
+            stashItem: true,
+          },
+        },
       },
     });
-    return {
-      success: true,
-      data: posts,
-    };
+    console.log('Posts found:', posts);
+    return posts || [];
   } catch (error) {
-    console.log(error);
-    return { success: false, message: 'Failed to retrieve posts' };
+    console.log('Error in getUserPosts:', error);
+    return [];
   }
 }
