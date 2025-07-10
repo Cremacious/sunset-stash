@@ -12,6 +12,7 @@ import FindFriends from '@/components/social/FindFriends';
 import Link from 'next/link';
 import { getUserPosts } from '@/lib/actions/post.actions';
 import { Post } from '@/lib/types/social.types';
+import { MessageSquare } from 'lucide-react';
 
 const SocialPage = async () => {
   const socialPosts = await getUserPosts();
@@ -107,16 +108,21 @@ const SocialPage = async () => {
                 />
               ))
             ) : (
-              <div className="text-center text-gray-500 py-8">
-                <p>No posts yet. Create your first post!</p>
+              <div className="bg-white p-12 flex flex-col justify-center items-center rounded-lg shadow-md">
+                <MessageSquare className="text-purple-500 w-24 h-full mb-4" />
+                <p className="text-center">
+                  You have no posts yet. Create your first post!
+                </p>
               </div>
             )}
           </div>
 
           {/* Load More */}
-          <div className="text-center">
-            <Button className="px-8">Load More Posts</Button>
-          </div>
+          {socialPosts && socialPosts.length > 0 && (
+            <div className="text-center">
+              <Button className="px-8">Load More Posts</Button>
+            </div>
+          )}
         </div>
         {/* right Column - Friends & Search */}
         <div className="space-y-4 ">

@@ -26,6 +26,7 @@ import { StashItem } from '@/lib/types';
 import { Label } from '../ui/label';
 import { useRouter } from 'next/navigation';
 import { createPost } from '@/lib/actions/post.actions';
+import { Container } from 'lucide-react';
 
 const PostForm = ({ stashItems }: { stashItems: StashItem[] }) => {
   const [selectedStashItems, setSelectedStashItems] = useState<StashItem[]>([]);
@@ -74,11 +75,13 @@ const PostForm = ({ stashItems }: { stashItems: StashItem[] }) => {
     console.log(selectedStashItems);
   };
 
+  // bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl flex justify-center py-6 px-1
+
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-8 max-w-3xl mx-auto py-10"
+        className="space-y-8 max-w-3xl mx-auto py-10 "
       >
         <FormField
           control={form.control}
@@ -177,38 +180,45 @@ const PostForm = ({ stashItems }: { stashItems: StashItem[] }) => {
             <h4 className="text-sm font-medium text-gray-700 mb-3">
               Choose from your stash:
             </h4>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-60 overflow-y-auto">
-              {stashItems
-                .filter(
-                  (item) =>
-                    !selectedStashItems.find(
-                      (selected) => selected.id === item.id
-                    )
-                )
-                .map((item) => (
-                  <div
-                    key={item.id}
-                    onClick={() => toggleStashItem(item)}
-                    className="bg-white rounded-lg p-3 border border-gray-200 hover:border-purple-300 hover:bg-purple-50 cursor-pointer transition-all duration-200"
-                  >
-                    <div className="flex items-center space-x-3">
-                      <div
-                        className={`w-8 h-8 bg-gradient-to-r rounded-full flex items-center justify-center`}
-                      >
-                        <span className="text-white text-sm"></span>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-60 overflow-y-auto justify-items-center">
+              {stashItems && stashItems.length > 0 ? (
+                stashItems
+                  .filter(
+                    (item) =>
+                      !selectedStashItems.find(
+                        (selected) => selected.id === item.id
+                      )
+                  )
+                  .map((item) => (
+                    <div
+                      key={item.id}
+                      onClick={() => toggleStashItem(item)}
+                      className="bg-white rounded-lg p-3 border border-gray-200 hover:border-purple-300 hover:bg-purple-50 cursor-pointer transition-all duration-200"
+                    >
+                      <div className="flex items-center space-x-3">
+                        <div
+                          className={`w-8 h-8 bg-gradient-to-r rounded-full flex items-center justify-center`}
+                        >
+                          <span className="text-white text-sm"></span>
+                        </div>
+                        <div className="flex-1">
+                          <h5 className="font-semibold text-gray-800">
+                            {item.name}
+                          </h5>
+                          <p className="text-sm text-gray-600">
+                            {item.category} • THC: {item.thc}%
+                          </p>
+                        </div>
+                        <div className="text-purple-500">+</div>
                       </div>
-                      <div className="flex-1">
-                        <h5 className="font-semibold text-gray-800">
-                          {item.name}
-                        </h5>
-                        <p className="text-sm text-gray-600">
-                          {item.category} • THC: {item.thc}%
-                        </p>
-                      </div>
-                      <div className="text-purple-500">+</div>
                     </div>
-                  </div>
-                ))}
+                  ))
+              ) : (
+                <div className="col-span-full flex flex-col justify-center items-center py-8">
+                  <Container className="text-purple-500 w-24 h-24 mb-4" />
+                  <p className="text-center">You have no stash items yet.</p>
+                </div>
+              )}
             </div>
           </div>
         )}
