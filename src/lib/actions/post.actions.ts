@@ -102,3 +102,46 @@ export async function getUserPosts() {
     return [];
   }
 }
+
+export async function getPostById(postId: string) {
+  try {
+    const post = await prisma.post.findUnique({
+      where: {
+        id: postId,
+      },
+      include: {
+        stashItems: {
+          include: {
+            stashItem: true,
+          },
+        },
+        user: {
+          select: {
+            name: true,
+            id: true,
+          },
+        },
+      },
+    });
+
+    if (!post) {
+      return {
+        success: false,
+        error: 'Post not found',
+        data: null,
+      };
+    }
+
+    return {
+      success: true,
+      data: post,
+    };
+  } catch (error) {
+    console.error('Error fetching post:', error);
+    return {
+      success: false,
+      error: 'Failed to fetch post',
+      data: null,
+    };
+  }
+}

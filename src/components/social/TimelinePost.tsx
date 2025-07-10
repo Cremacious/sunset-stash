@@ -1,6 +1,7 @@
 import { Button } from '../ui/button';
 import { Post } from '@/lib/types/social.types';
 import { Badge } from '../ui/badge';
+import Link from 'next/link';
 
 const TimelinePost = ({ post }: { post: Post }) => {
   // Generate initials from author name
@@ -71,8 +72,11 @@ const TimelinePost = ({ post }: { post: Post }) => {
             <span className="hidden sm:inline">Comments</span>
             <span className="sm:hidden">{post.comments.length}</span>
           </Button>
-          <Button className="text-xs sm:text-sm hover:bg-purple-50 hover:border-purple-300 hover:text-purple-700">
-            View Post
+          <Button
+            asChild
+            className="text-xs sm:text-sm hover:bg-purple-50 hover:border-purple-300 hover:text-purple-700"
+          >
+            <Link href={`/social/${post.id}`}>View Post</Link>
           </Button>
         </div>
       </div>
