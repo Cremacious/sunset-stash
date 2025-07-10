@@ -10,27 +10,79 @@ import {
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 import QuickActions from '@/components/dashboard/QuickActions';
+import RecentPurchases from '@/components/purchases/RecentPurchases';
 
 const DashboardPage = () => {
   const router = useRouter();
 
   // Mock data for demonstration
-  const recentPurchases = [
+  // const recentPurchases = [
+  //   {
+  //     id: 1,
+  //     dispensary: 'Trulieve',
+  //     amount: 45.5,
+  //     items: 2,
+  //     date: '2025-01-05',
+  //   },
+  //   {
+  //     id: 2,
+  //     dispensary: 'Curaleaf',
+  //     amount: 89.25,
+  //     items: 3,
+  //     date: '2025-01-03',
+  //   },
+  //   { id: 3, dispensary: 'Rise', amount: 67.8, items: 1, date: '2024-12-30' },
+  // ];
+
+  const purchases = [
     {
-      id: 1,
+      id: '1',
       dispensary: 'Trulieve',
-      amount: 45.5,
-      items: 2,
-      date: '2025-01-05',
+      date: '2025-01-14',
+      total: 52.0,
+      items: [
+        {
+          id: '1-1',
+          name: 'Wedding Cake',
+          category: 'flower',
+          type: 'flower',
+          amount: '1g',
+          price: 52.0,
+          thc: 20,
+          cbd: 0.1,
+          lineage: 'Triangle Kush x Animal Mints',
+          notes: 'Great quality and service!',
+          purchaseId: '1',
+        },
+      ],
+      notes: 'Great quality and service!',
+      createdAt: '2025-01-14T10:00:00Z',
+      userId: 'demo-user',
     },
     {
-      id: 2,
-      dispensary: 'Curaleaf',
-      amount: 89.25,
-      items: 3,
-      date: '2025-01-03',
+      id: '2',
+      dispensary: 'poop',
+      date: '2025-01-14',
+      total: 52.0,
+      items: [
+        {
+          id: '2-1',
+          name: 'Wedding Cake',
+          category: 'flower',
+          type: 'flower',
+          amount: '1g',
+          price: 52.0,
+          thc: 20,
+          cbd: 0.1,
+          lineage: 'Triangle Kush x Animal Mints',
+          notes: 'Great quality and service!',
+          purchaseId: '2',
+        },
+      ],
+      notes: 'Great quality and service!',
+      createdAt: '2025-01-14T10:00:00Z',
+      userId: 'demo-user',
     },
-    { id: 3, dispensary: 'Rise', amount: 67.8, items: 1, date: '2024-12-30' },
   ];
 
   const stashCount = 0; // Change this to 0 to show empty state, or any number > 0 to show stash items
@@ -42,63 +94,7 @@ const DashboardPage = () => {
       {/* Main Content Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Recent Purchases */}
-        <div className="bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl p-6">
-          <Card className="bg-white shadow-xl border-0">
-            <CardHeader>
-              <CardTitle className="text-xl font-bold text-gray-800 flex items-center justify-between">
-                <div className="flex items-center">
-                  <span className="text-2xl mr-3">💳</span>
-                  Recent Purchases
-                </div>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => router.push('/purchases')}
-                  className="text-orange-500 border-orange-200 hover:bg-orange-50"
-                >
-                  View All
-                </Button>
-              </CardTitle>
-              <CardDescription>Your latest dispensary visits</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {recentPurchases.map((purchase) => (
-                  <div
-                    key={purchase.id}
-                    className="flex justify-between items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer"
-                  >
-                    <div>
-                      <h4 className="font-semibold text-gray-800">
-                        {purchase.dispensary}
-                      </h4>
-                      <p className="text-sm text-gray-600">
-                        {purchase.items} items • {purchase.date}
-                      </p>
-                    </div>
-                    <div className="text-right">
-                      <p className="font-bold text-green-600">
-                        ${purchase.amount}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-                {recentPurchases.length === 0 && (
-                  <div className="text-center py-8 text-gray-500">
-                    <span className="text-4xl block mb-2">🛒</span>
-                    <p>No purchases yet</p>
-                    <Button
-                      onClick={() => router.push('/purchases/new')}
-                      className="mt-4 bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600"
-                    >
-                      Log Your First Purchase
-                    </Button>
-                  </div>
-                )}
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+        <RecentPurchases purchases={purchases} />
         {/* Recently Added Stash Items */}
         <div className="bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl p-6">
           <Card className="bg-white shadow-xl border-0">

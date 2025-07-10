@@ -8,13 +8,12 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '../ui/button';
 import FindFriends from './FindFriends';
+import { ReactNode } from 'react';
 
-const FindFriendDialog = () => {
+const FindFriendDialog = ({ children }: { children: ReactNode }) => {
   return (
     <Dialog>
-      <DialogTrigger>
-        <Button>Open Dialog</Button>
-      </DialogTrigger>
+      <DialogTrigger>{children}</DialogTrigger>
       <DialogContent>
         <DialogTitle>Find Friends</DialogTitle>
         <FindFriends />

@@ -9,6 +9,8 @@ import {
 import { useRouter } from 'next/navigation';
 import { CircleDollarSign, Container, SmilePlus, Pen } from 'lucide-react';
 import Link from 'next/link';
+import FindFriendDialog from '../social/FindFriendDialog';
+
 const QuickActions = () => {
   const router = useRouter();
 
@@ -51,20 +53,15 @@ const QuickActions = () => {
                 <span className="font-medium">Create Post</span>
               </div>
             </Link>
-  
 
-
-
+            <FindFriendDialog>
               <div className="h-auto p-4 bg-gradient-to-r from-purple-500 to-blue-600 hover:from-purple-600 hover:to-blue-700 text-white flex flex-col items-center space-y-2 rounded-xl">
                 <span className="text-2xl">
                   <SmilePlus size={50} />
                 </span>
                 <span className="font-medium">Find Friends</span>
               </div>
-
-
-              
-        
+            </FindFriendDialog>
           </div>
         </CardContent>
       </Card>
