@@ -11,7 +11,7 @@ import StashForm from '@/components/stash/StashForm';
 
 const NewStashItemPage = () => {
   return (
-    <div className="bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl py-6 px-1">
+    <div className="relative w-full flex justify-center py-6 px-1">
       <div className="max-w-4xl mx-auto space-y-8">
         {/* Form Card */}
         <Card className="bg-white shadow-xl border-0">

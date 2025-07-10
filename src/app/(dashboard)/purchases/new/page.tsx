@@ -14,7 +14,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 // TODO: Add Type to form
-// TODO: Add lineage 
+// TODO: Add lineage
 
 const NewPurchasePage = () => {
   const router = useRouter();
@@ -127,8 +127,8 @@ const NewPurchasePage = () => {
   };
 
   return (
-    <div className="bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl px-1">
-      <div className="max-w-4xl mx-auto space-y-6 ">
+    <div className="relative w-full flex justify-center py-6 px-1">
+      <div className="max-w-4xl mx-auto space-y-6 bg-white shadow-xl rounded-xl p-2 md:p-6">
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
@@ -446,15 +446,15 @@ const NewPurchasePage = () => {
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 mb-4">
-          <Button onClick={handleSubmit} className="flex-1 ">
-            Save Purchase
-          </Button>
           <Button
             onClick={() => router.back()}
             variant="outline"
             className="flex-1 text-gray-600 border-gray-300 hover:bg-gray-50"
           >
             Cancel
+          </Button>
+          <Button onClick={handleSubmit} className="flex-1 ">
+            Save Purchase
           </Button>
         </div>
       </div>

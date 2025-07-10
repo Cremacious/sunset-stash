@@ -37,11 +37,12 @@ const Navbar = () => {
             height={50}
             width={50}
           />
-          <div>
+
+          <button onClick={() => router.push('/')}>
             <h1 className="text-xl md:text-2xl font-bold text-white drop-shadow-md">
               Sunset Stash
             </h1>
-          </div>
+          </button>
         </div>
         <div className="flex md:hidden">
           <Sidebar routes={routes} />
