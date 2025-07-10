@@ -12,8 +12,8 @@ const StashPage = async () => {
   const stashItems = result.data ?? [];
 
   return (
-    <div className="space-y-8 ">
-      <div className="space-y-6 bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl p-6">
+    <div className="space-y-4 ">
+      <div className="space-y-6 bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl p-2 md:p-6">
         <div className="flex flex-col md:flex-row gap-2 md:justify-between items-center">
           <Button className="w-full md:w-auto" asChild>
             <Link href="/stash/new">Add New Stash Item</Link>

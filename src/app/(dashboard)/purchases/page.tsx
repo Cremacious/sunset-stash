@@ -126,8 +126,8 @@ const PurchasesPage = () => {
   ];
 
   return (
-    <div className="space-y-6">
-      <div className="bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl p-6 space-y-4">
+    <div className="space-y-4">
+      <div className="bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl p-2 md:p-6 space-y-4">
         <div className="flex flex-col md:flex-row gap-2 md:justify-between items-center ">
           <Button className="w-full md:w-auto" asChild>
             <Link href="/purchases/new">Add New Purchase</Link>
@@ -212,7 +212,7 @@ const PurchasesPage = () => {
           </div>
           <div className="space-y-4">
             {purchases.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 p-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 p-2 md:p-6">
                 {purchases.map((purchase) => (
                   <PurchaseListCard key={purchase.id} purchase={purchase} />
                 ))}
@@ -235,8 +235,10 @@ const PurchasesPage = () => {
             )}
           </div>
         </div>
-        <div className="space-y-3 bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl p-6">
-          <div className="flex items-center justify-between">
+      </div>
+      <div className="space-y-3 bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl p-2 md:p-6">
+        <div className="flex items-center justify-between">
+          <div className="flex justify-center items-center space-x-6 px-2 pt-2">
             <h2 className="text-lg font-semibold text-gray-900">
               Friends Activity
             </h2>
@@ -244,13 +246,13 @@ const PurchasesPage = () => {
               View All
             </Button>
           </div>
+        </div>
 
-          <div className="space-y-3">
-            {friendsPurchases.map((purchase) => (
-              <PurchaseListCard key={purchase.id} purchase={purchase} />
-            ))}
-            <ConnectWithFriends />
-          </div>
+        <div className="space-y-3">
+          {friendsPurchases.map((purchase) => (
+            <PurchaseListCard key={purchase.id} purchase={purchase} />
+          ))}
+          <ConnectWithFriends />
         </div>
       </div>
     </div>

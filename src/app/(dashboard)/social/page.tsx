@@ -60,10 +60,10 @@ const SocialPage = async () => {
   ];
 
   return (
-    <div className="space-y-6">
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <div className="">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         {/* left Column - Timeline */}
-        <div className="lg:col-span-2 space-y-6 p-6 bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl ">
+        <div className="lg:col-span-2 space-y-6 md:p-6 p-2 bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl ">
           {/* Timeline Filters */}
           <div className="bg-white rounded-lg border border-gray-200 p-4">
             <div className="flex items-center justify-between">
@@ -119,9 +119,9 @@ const SocialPage = async () => {
           </div>
         </div>
         {/* right Column - Friends & Search */}
-        <div className="space-y-6 ">
+        <div className="space-y-4 ">
           {/* Recent Friends */}
-          <div className="p-6 bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl ">
+          <div className="md:p-6 p-2 bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl ">
             <div className="bg-white rounded-lg border border-gray-200 px-2 py-4 md:p-6 ">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-lg font-semibold text-gray-900 flex items-center">
@@ -141,7 +141,7 @@ const SocialPage = async () => {
             </div>
           </div>
           {/* Friend Search */}
-          <div className="p-6 bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl">
+          <div className="md:p-6 p-2 bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl">
             <FindFriends />
           </div>
         </div>

@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 const StashAnalytics = () => {
   return (
-    <div className="bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl p-6">
+    <div className="bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl p-2 md:p-6">
       <Card className="bg-white shadow-xl border-0">
         <CardHeader>
           <CardTitle className="text-xl font-bold text-gray-800 text-center">
@@ -39,19 +39,6 @@ const StashAnalytics = () => {
                 </p>
               </div>
             </div>
-            {/* 
-            <div className="text-center p-4 bg-purple-100 rounded-lg">
-              <h4 className="font-semibold text-gray-800">
-                Most Common Category
-              </h4>
-              <div className="text-2xl mb-2">💪</div>
-              <p className="">Flower</p>
-            </div>
-            <div className="text-center p-4 bg-purple-100 rounded-lg">
-              <h4 className="font-semibold text-gray-800">Most Common Type</h4>
-              <div className="text-2xl mb-2">🌱</div>
-              <p className="">Indica</p>
-            </div> */}
           </div>
         </CardContent>
       </Card>
