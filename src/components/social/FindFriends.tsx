@@ -4,13 +4,9 @@ import { Label } from '../ui/label';
 
 const FindFriends = () => {
   return (
-    <div className="bg-white rounded-lg border border-gray-200 p-6">
-      <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-        <span className="text-xl mr-2">🔍</span>
-        Find Friends
-      </h2>
+    <div className="bg-white rounded-lg p-4 md:p-6">
       <div className="space-y-2">
-        <Label htmlFor="email">Search by Email</Label>
+        <Label htmlFor="email">Search Friends by Email</Label>
         <Input id="email" type="email" placeholder="friend@email.com" />
 
         <Button className="w-full">Send Friend Request</Button>

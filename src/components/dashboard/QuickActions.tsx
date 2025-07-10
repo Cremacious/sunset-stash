@@ -51,14 +51,20 @@ const QuickActions = () => {
                 <span className="font-medium">Create Post</span>
               </div>
             </Link>
-            <Link href={'/social/find-friends'}>
+  
+
+
+
               <div className="h-auto p-4 bg-gradient-to-r from-purple-500 to-blue-600 hover:from-purple-600 hover:to-blue-700 text-white flex flex-col items-center space-y-2 rounded-xl">
                 <span className="text-2xl">
                   <SmilePlus size={50} />
                 </span>
                 <span className="font-medium">Find Friends</span>
               </div>
-            </Link>
+
+
+              
+        
           </div>
         </CardContent>
       </Card>

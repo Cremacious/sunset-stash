@@ -72,6 +72,7 @@ const SocialPage = async () => {
               <Button asChild>
                 <Link href="/social/new-post">Create New Post</Link>
               </Button>
+         
               <div className="flex items-center space-x-2">
                 <Select>
                   <SelectTrigger className="w-32 h-8 text-sm">
