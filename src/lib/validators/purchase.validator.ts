@@ -11,7 +11,7 @@ export const purchaseItemSchema = z.object({
   cbd: z.coerce.number().min(0).max(100).optional(),
   lineage: z.string().optional(),
   notes: z.string().optional(),
-  addToStash: z.boolean().default(false),
+  addToStash: z.boolean().optional(),
 });
 
 export const purchaseFormSchema = z.object({
