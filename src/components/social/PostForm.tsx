@@ -27,6 +27,7 @@ import { Label } from '../ui/label';
 import { useRouter } from 'next/navigation';
 import { createPost } from '@/lib/actions/post.actions';
 import { Container } from 'lucide-react';
+import { Sun } from 'lucide-react';
 
 const PostForm = ({ stashItems }: { stashItems: StashItem[] }) => {
   const [selectedStashItems, setSelectedStashItems] = useState<StashItem[]>([]);
@@ -54,6 +55,7 @@ const PostForm = ({ stashItems }: { stashItems: StashItem[] }) => {
       console.log('Submitting:', postData);
       const response = await createPost(postData);
       if (response.success) {
+        router.push('/social');
         toast.success('Post created successfully!');
       } else {
         toast.error('Failed to create post. Please try again.');
@@ -75,7 +77,7 @@ const PostForm = ({ stashItems }: { stashItems: StashItem[] }) => {
     console.log(selectedStashItems);
   };
 
-  // bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl flex justify-center py-6 px-1
+  const { isSubmitting } = form.formState;
 
   return (
     <Form {...form}>
@@ -232,8 +234,16 @@ const PostForm = ({ stashItems }: { stashItems: StashItem[] }) => {
           >
             Cancel
           </Button>
-          <Button type="submit" className="flex-1 ">
-            Share Post
+          <Button
+            disabled={!form.formState.isDirty || isSubmitting}
+            type="submit"
+            className="flex-1 "
+          >
+            {isSubmitting ? (
+              <Sun className="animate-spin text-yellow-300" />
+            ) : (
+              'Create Post'
+            )}
           </Button>
         </div>
       </form>

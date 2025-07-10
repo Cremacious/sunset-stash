@@ -43,7 +43,7 @@ export async function createPost(data: z.infer<typeof postFormSchema>) {
         activity: parsedData.activity,
         content: parsedData.content,
         userId: existingUser.id,
-        author: existingUser.id,
+        author: existingUser.name,
       },
     });
 
@@ -86,7 +86,7 @@ export async function getUserPosts() {
       return [];
     }
     const posts = await prisma.post.findMany({
-      where: { author: existingUser.id },
+      where: { userId: existingUser.id },
       include: {
         stashItems: {
           include: {
