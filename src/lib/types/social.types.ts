@@ -56,4 +56,5 @@ export type Friendship = {
 
 export type Friend = {
   name: string;
+  id: string;
 };

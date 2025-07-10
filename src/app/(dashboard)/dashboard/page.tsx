@@ -37,19 +37,6 @@ const DashboardPage = () => {
 
   return (
     <div className="space-y-8">
-      {/* Welcome Header */}
-      <div className="text-center">
-        <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-orange-500 to-pink-500 rounded-full shadow-2xl mb-6">
-          <span className="text-4xl">🌺</span>
-        </div>
-        <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-orange-600 to-pink-600 bg-clip-text text-transparent mb-2">
-          Welcome to Your Paradise
-        </h1>
-        <p className="text-gray-600 text-lg">
-          Track your journey, connect with friends, and explore new strains 🌴
-        </p>
-      </div>
-
       <QuickActions />
 
       {/* Main Content Grid */}

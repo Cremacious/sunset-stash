@@ -7,12 +7,13 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import TimelinePost from '@/components/social/TimelinePost';
-import RecentFriendCard from '@/components/social/RecentFriendCard';
+// import RecentFriendCard from '@/components/social/RecentFriendCard';
 import FindFriends from '@/components/social/FindFriends';
 import Link from 'next/link';
 import { getUserPosts } from '@/lib/actions/post.actions';
 import { Post } from '@/lib/types/social.types';
 import { MessageSquare } from 'lucide-react';
+import RecentFriends from '@/components/social/RecentFriends';
 
 const SocialPage = async () => {
   const socialPosts = await getUserPosts();
@@ -53,7 +54,7 @@ const SocialPage = async () => {
       createdAt: '2025-01-13',
     },
     {
-      id: '1',
+      id: '2',
       name: 'Jake Rodriguez',
       email: 'jake.r@email.com',
       createdAt: '2025-01-13',
@@ -124,29 +125,10 @@ const SocialPage = async () => {
             </div>
           )}
         </div>
-        {/* right Column - Friends & Search */}
-        <div className="space-y-4 ">
-          {/* Recent Friends */}
-          <div className="md:p-6 p-2 bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl ">
-            <div className="bg-white rounded-lg border border-gray-200 px-2 py-4 md:p-6 ">
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-semibold text-gray-900 flex items-center">
-                  <span className="text-xl mr-2">🤝</span>
-                  Recent Friends
-                </h2>
-                <Button variant="outline" size="sm" className="text-xs">
-                  View All ({friends.length})
-                </Button>
-              </div>
 
-              <div className="space-y-3">
-                {friends.slice(0, 3).map((friend) => (
-                  <RecentFriendCard key={friend.id} friend={friend} />
-                ))}
-              </div>
-            </div>
-          </div>
-          {/* Friend Search */}
+        <div className="space-y-4 ">
+          <RecentFriends friends={friends} />
+
           <div className="md:p-6 p-2 bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl">
             <FindFriends />
           </div>

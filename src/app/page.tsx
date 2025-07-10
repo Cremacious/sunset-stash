@@ -10,9 +10,9 @@ import Image from 'next/image';
 
 const Home = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-400 via-pink-500 to-purple-600">
+    <div className="min-h-screen ">
       {/* Hero Section */}
-      <section className="relative px-4 py-16 md:py-24">
+      <div className="px-4 py-4 md:py-8">
         <div className="max-w-7xl mx-auto">
           {/* Logo and Title */}
           <div className="text-center mb-16">
@@ -49,10 +49,10 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </section>
+      </div>
 
       {/* Main Features Showcase */}
-      <section className="relative px-4 py-16">
+      <div className="px-4 py-6">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h3 className="text-3xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg">
@@ -64,7 +64,7 @@ const Home = () => {
           </div>
 
           {/* Feature Cards Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-1 ">
             {/* Purchase Tracking Feature */}
             <div className="bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl p-6">
               <Card className="bg-white shadow-xl border-0 h-full">
@@ -285,10 +285,10 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </section>
+      </div>
 
       {/* How It Works Section */}
-      <section className="relative px-4 py-16">
+      <div className="px-4 py-6">
         <div className="max-w-6xl mx-auto">
           <div className="bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl p-8">
             <Card className="bg-white shadow-xl border-0">
@@ -394,10 +394,10 @@ const Home = () => {
             </Card>
           </div>
         </div>
-      </section>
+      </div>
 
       {/* Call to Action */}
-      <section className="relative px-4 py-16">
+      <div className=" px-4 py-6 ">
         <div className="max-w-4xl mx-auto text-center">
           <div className="bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl p-8">
             <Card className="bg-white shadow-xl border-0">
@@ -451,7 +451,7 @@ const Home = () => {
             </Card>
           </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 };
