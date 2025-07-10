@@ -209,7 +209,6 @@ const PostPage = async ({
               <div className="min-w-0 flex-1">
                 <div className="flex items-center space-x-2 flex-wrap">
                   <p className="text-sm sm:text-base font-semibold text-gray-900">
-                    {/* {post.user} */}
                     {post.author}
                   </p>
                 </div>
@@ -218,21 +217,21 @@ const PostPage = async ({
 
             <div className="flex-shrink-0 ml-4 mt-2">
               <p className="text-xs text-gray-500 whitespace-nowrap">
-                {/* {post.date} */}
+                {post.createdAt instanceof Date
+                  ? post.createdAt.toLocaleString()
+                  : post.createdAt}
               </p>
             </div>
           </div>
           <Badge className="flex items-center space-x-1 text-xs mb-2 bg-purple-50 text-purple-700 border border-purple-200 rounded-full px-2 py-1">
-            {/* <span>{getActivityIcon(post.activity)}</span>
-            <span>{post.activity}</span> */}
+            {/* <span>{getActivityIcon(post.activity)}</span> */}
+            <span>{post.activity}</span>
           </Badge>
-          {/* Post Content */}
           <div className="mb-4">
             <p className="text-gray-800 text-sm sm:text-base leading-relaxed">
-              {/* {post.text} */}
+              {post.content}
             </p>
           </div>
-
           {/* Bottom section matching TimelinePost */}
           <div className="border-t border-gray-100 pt-3">
             <div className="flex items-center justify-between">

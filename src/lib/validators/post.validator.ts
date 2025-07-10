@@ -6,7 +6,7 @@ export const postFormSchema = z.object({
   content: z
     .string()
     .min(1, 'Please write some content')
-    .max(500, 'Content too long'),
+    .max(1000, 'Content too long'),
   stashItemIds: z.array(z.string()).optional(),
 });
 
