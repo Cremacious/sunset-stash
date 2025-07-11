@@ -1,4 +1,4 @@
-import PurchaseForm from '@/components/purchases/PurchaseFormNew';
+import PurchaseForm from '@/components/purchases/PurchaseForm';
 
 const NewPurchasePage = () => {
   return (
