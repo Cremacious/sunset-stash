@@ -75,6 +75,7 @@ const PurchasesPage = () => {
   return (
     <div className="space-y-4">
       <div className="bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl p-2 md:p-6 space-y-4">
+
         <div className="flex flex-col md:flex-row gap-2 md:justify-between items-center ">
           <Button className="w-full md:w-auto" asChild>
             <Link href="/purchases/new">Add New Purchase</Link>
@@ -112,6 +113,7 @@ const PurchasesPage = () => {
             {/* <Input className="bg-white" placeholder="Search strains..." /> */}
           </div>
         </div>
+        
         <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
           <div className="bg-white rounded-lg border border-gray-200 p-3 text-center">
             <p className="text-lg font-bold text-gray-900">
