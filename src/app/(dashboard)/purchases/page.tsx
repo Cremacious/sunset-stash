@@ -12,6 +12,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import PurchaseCard from '@/components/purchases/PurchaseCard';
+import { samplePurchases } from '@/lib/sampleData';
 
 const PurchasesPage = () => {
   const router = useRouter();
@@ -21,61 +22,69 @@ const PurchasesPage = () => {
   const [searchTerm] = useState('');
 
   // Mock purchase data
-  const purchases = [
-    {
-      id: '1',
-      dispensary: 'Trulieve',
-      date: '2025-01-14',
-      total: 52.0,
-      items: [
-        {
-          id: '1-1',
-          name: 'Wedding Cake',
-          category: 'flower',
-          type: 'flower',
-          amount: '1g',
-          price: 52.0,
-          thc: 20,
-          cbd: 0.1,
-          lineage: 'Triangle Kush x Animal Mints',
-          notes: 'Great quality and service!',
-          purchaseId: '1',
-        },
-      ],
-      notes: 'Great quality and service!',
-      createdAt: '2025-01-14T10:00:00Z',
-      userId: 'demo-user',
-    },
-    {
-      id: '2',
-      dispensary: 'poop',
-      date: '2025-01-14',
-      total: 52.0,
-      items: [
-        {
-          id: '2-1',
-          name: 'Wedding Cake',
-          category: 'flower',
-          type: 'flower',
-          amount: '1g',
-          price: 52.0,
-          thc: 20,
-          cbd: 0.1,
-          lineage: 'Triangle Kush x Animal Mints',
-          notes: 'Great quality and service!',
-          purchaseId: '2',
-        },
-      ],
-      notes: 'Great quality and service!',
-      createdAt: '2025-01-14T10:00:00Z',
-      userId: 'demo-user',
-    },
-  ];
+  // const purchases = [
+  //   {
+  //     id: '1',
+  //     dispensary: 'Trulieve',
+  //     date: '2025-01-14',
+  //     total: 52.0,
+  //     items: [
+  //       {
+  //         id: '1-1',
+  //         name: 'Wedding Cake',
+  //         category: 'flower',
+  //         type: 'flower',
+  //         amount: '1g',
+  //         price: 52.0,
+  //         thc: 20,
+  //         cbd: 0.1,
+  //         lineage: 'Triangle Kush x Animal Mints',
+  //         notes: 'Great quality and service!',
+  //         purchaseId: '1',
+  //       },
+  //     ],
+  //     notes: 'Great quality and service!',
+  //     createdAt: '2025-01-14T10:00:00Z',
+  //     userId: 'demo-user',
+  //   },
+  //   {
+  //     id: '2',
+  //     dispensary: 'poop',
+  //     date: '2025-01-14',
+  //     total: 52.0,
+  //     items: [
+  //       {
+  //         id: '2-1',
+  //         name: 'Wedding Cake',
+  //         category: 'flower',
+  //         type: 'flower',
+  //         amount: '1g',
+  //         price: 52.0,
+  //         thc: 20,
+  //         cbd: 0.1,
+  //         lineage: 'Triangle Kush x Animal Mints',
+  //         notes: 'Great quality and service!',
+  //         purchaseId: '2',
+  //       },
+  //     ],
+  //     notes: 'Great quality and service!',
+  //     createdAt: '2025-01-14T10:00:00Z',
+  //     userId: 'demo-user',
+  //   },
+  // ];
+
+  // Ensure date and createdAt are strings for compatibility with PurchaseCard
+  const purchases = samplePurchases.map((p) => ({
+    ...p,
+    date:
+      typeof p.date === 'string' ? p.date : p.date.toISOString().split('T')[0],
+    createdAt:
+      typeof p.createdAt === 'string' ? p.createdAt : p.createdAt.toISOString(),
+  }));
 
   return (
     <div className="space-y-4">
       <div className="bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl p-2 md:p-6 space-y-4">
-
         <div className="flex flex-col md:flex-row gap-2 md:justify-between items-center ">
           <Button className="w-full md:w-auto" asChild>
             <Link href="/purchases/new">Add New Purchase</Link>
@@ -113,7 +122,7 @@ const PurchasesPage = () => {
             {/* <Input className="bg-white" placeholder="Search strains..." /> */}
           </div>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
           <div className="bg-white rounded-lg border border-gray-200 p-3 text-center">
             <p className="text-lg font-bold text-gray-900">
@@ -160,7 +169,7 @@ const PurchasesPage = () => {
         </div>
         <div className="space-y-4">
           {purchases.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 p-2 md:p-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-2 md:p-6">
               {purchases.map((purchase) => (
                 // <PurchaseListCard key={purchase.id} purchase={purchase} />
                 <PurchaseCard key={purchase.id} purchase={purchase} />

@@ -7,18 +7,17 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import TimelinePost from '@/components/social/TimelinePost';
-// import RecentFriendCard from '@/components/social/RecentFriendCard';
 import FindFriends from '@/components/social/FindFriends';
 import Link from 'next/link';
-import { getUserPosts } from '@/lib/actions/post.actions';
+// import { getUserPosts } from '@/lib/actions/post.actions';
 import { Post } from '@/lib/types/social.types';
 import { MessageSquare } from 'lucide-react';
 import RecentFriends from '@/components/social/RecentFriends';
-
+import { samplePosts } from '@/lib/sampleData';
 const SocialPage = async () => {
-  const socialPosts = await getUserPosts();
+  // const socialPosts = await getUserPosts();
+  const socialPosts = samplePosts;
 
-  // Define the type for what getUserPosts actually returns
   type PostWithStashItems = {
     id: string;
     author: string;
@@ -45,7 +44,6 @@ const SocialPage = async () => {
     }>;
   };
 
-  // Mock friends data
   const friends = [
     {
       id: '1',
@@ -89,7 +87,7 @@ const SocialPage = async () => {
           </div>
 
           {/* Timeline Posts */}
-          <div className="">
+          <div className="space-y-4">
             {socialPosts && socialPosts.length > 0 ? (
               socialPosts.map((post: PostWithStashItems) => (
                 <TimelinePost
@@ -97,8 +95,8 @@ const SocialPage = async () => {
                   post={
                     {
                       ...post,
-                      comments: [], // Add empty comments array since we're not loading comments yet
-                      createdAt: post.createdAt.toISOString(), // Convert Date to string
+                      comments: [],
+                      createdAt: post.createdAt.toISOString(),
                       stashItems: post.stashItems.map((si) => ({
                         ...si.stashItem,
                         dateAdded: si.stashItem.dateAdded
