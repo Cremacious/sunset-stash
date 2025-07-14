@@ -12,7 +12,7 @@ import { Purchase } from '@/lib/types';
 const RecentPurchases = ({ purchases }: { purchases: Purchase[] }) => {
   return (
     <div className="bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl p-6">
-      <Card className="bg-white shadow-xl border-0">
+      <Card className="bg-white shadow-xl border-0 h-full">
         <CardHeader>
           <CardTitle className="text-xl font-bold text-gray-800 flex items-center justify-between">
             <div className="flex items-center">

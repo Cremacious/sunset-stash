@@ -72,7 +72,7 @@ const SocialPage = async () => {
               <Button asChild>
                 <Link href="/social/new-post">Create New Post</Link>
               </Button>
-         
+
               <div className="flex items-center space-x-2">
                 <Select>
                   <SelectTrigger className="w-32 h-8 text-sm">
@@ -89,7 +89,7 @@ const SocialPage = async () => {
           </div>
 
           {/* Timeline Posts */}
-          <div className="space-y-4">
+          <div className="">
             {socialPosts && socialPosts.length > 0 ? (
               socialPosts.map((post: PostWithStashItems) => (
                 <TimelinePost
@@ -110,7 +110,7 @@ const SocialPage = async () => {
                 />
               ))
             ) : (
-              <div className="bg-white p-12 flex flex-col justify-center items-center rounded-lg shadow-md">
+              <div className="bg-white p-12 flex flex-col justify-center items-center rounded-lg shadow-md min-h-screen">
                 <MessageSquare className="text-purple-500 w-24 h-full mb-4" />
                 <p className="text-center">
                   You have no posts yet. Create your first post!

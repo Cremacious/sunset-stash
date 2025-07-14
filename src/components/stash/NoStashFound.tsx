@@ -7,7 +7,7 @@ import { Container } from 'lucide-react';
 const NoStashFound = () => {
   const router = useRouter();
   return (
-    <Card className="bg-white shadow-xl border-0">
+    <Card className="bg-white border-none shadow-none">
       <CardContent className="text-center py-12">
         <div className="flex justify-center">
           <Container className="text-purple-600" size={100} />

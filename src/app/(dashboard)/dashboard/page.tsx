@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 import QuickActions from '@/components/dashboard/QuickActions';
 import RecentPurchases from '@/components/purchases/RecentPurchases';
+import NoStashFound from '@/components/stash/NoStashFound';
 
 const DashboardPage = () => {
   const router = useRouter();
@@ -95,9 +96,10 @@ const DashboardPage = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Recent Purchases */}
         <RecentPurchases purchases={purchases} />
+
         {/* Recently Added Stash Items */}
         <div className="bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl p-6">
-          <Card className="bg-white shadow-xl border-0">
+          <Card className="bg-white shadow-xl border-0 h-full">
             <CardHeader>
               <CardTitle className="text-xl font-bold text-gray-800 flex items-center justify-between">
                 <div className="flex items-center">
@@ -118,7 +120,6 @@ const DashboardPage = () => {
             <CardContent>
               {stashCount > 0 ? (
                 <div className="space-y-4">
-                  {/* Mock stash items for demonstration */}
                   {[...Array(stashCount)].map((_, index) => (
                     <div
                       key={index}
@@ -135,22 +136,23 @@ const DashboardPage = () => {
                   ))}
                 </div>
               ) : (
-                <div className="text-center py-12">
-                  <span className="text-6xl mb-4">🏺</span>
-                  <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                    Your stash is empty
-                  </h3>
-                  <p className="text-gray-600 mb-6">
-                    Start building your cannabis collection by adding your first
-                    strain!
-                  </p>
-                  <Button
-                    onClick={() => router.push('/stash/new')}
-                    className="bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white"
-                  >
-                    Add Your First Strain
-                  </Button>
-                </div>
+                <NoStashFound />
+                // <div className="text-center py-12">
+                //   <span className="text-6xl mb-4">🏺</span>
+                //   <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                //     Your stash is empty
+                //   </h3>
+                //   <p className="text-gray-600 mb-6">
+                //     Start building your cannabis collection by adding your first
+                //     strain!
+                //   </p>
+                //   <Button
+                //     onClick={() => router.push('/stash/new')}
+                //     className="bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white"
+                //   >
+                //     Add Your First Strain
+                //   </Button>
+                // </div>
               )}
             </CardContent>
           </Card>
