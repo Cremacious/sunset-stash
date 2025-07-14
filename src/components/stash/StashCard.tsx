@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import {
   Card,
   CardContent,
@@ -9,7 +10,6 @@ import { Button } from '../ui/button';
 import { StashItem } from '@/lib/types/stash.types';
 
 const StashCard = ({ stashItem }: { stashItem: StashItem }) => {
-    
   return (
     <Card className="bg-white shadow-xl border-0 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
       <CardHeader className="pb-3">
@@ -55,8 +55,16 @@ const StashCard = ({ stashItem }: { stashItem: StashItem }) => {
         </div>
 
         <div className="flex space-x-2">
-          <Button size="sm" variant="outline" className="flex-1 text-xs">
-            Edit
+          <Button
+            asChild
+            size="sm"
+            variant="outline"
+            className="flex-1 text-xs"
+          >
+            <Link href={`/stash/${stashItem.id}/edit`}>Edit</Link>
+          </Button>
+          <Button asChild size="sm" className="flex-1 text-xs">
+            <Link href={`/stash/${stashItem.id}`}>View</Link>
           </Button>
         </div>
       </CardContent>

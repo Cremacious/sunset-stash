@@ -76,3 +76,31 @@ export async function getUserStashItems() {
     };
   }
 }
+
+export async function getStashItemById(stashItemId: string) {
+  try {
+    const stashItem = await prisma.stashItem.findUnique({
+      where: {
+        id: stashItemId,
+      },
+    });
+    if (!stashItem) {
+      return {
+        success: false,
+        error: 'Post not found',
+        data: null,
+      };
+    }
+    return {
+      success: true,
+      data: stashItem,
+    };
+  } catch (error) {
+    console.error('Error fetching post:', error);
+    return {
+      success: false,
+      error: 'Failed to fetch post',
+      data: null,
+    };
+  }
+}

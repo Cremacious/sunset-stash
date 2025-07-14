@@ -1,439 +1,178 @@
-'use client';
-
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+// import { getStashItemById } from '@/lib/actions/stash.actions';
+// import { notFound } from 'next/navigation';
+import Link from 'next/link';
+import {
+  ArrowLeft,
+  Edit3,
+  Leaf,
+  Beaker,
+  Scale,
+  Calendar,
+  FileText,
+} from 'lucide-react';
 
-const StashItemPage = () => {
-  const router = useRouter();
+const StashItemPage = async ({
+  params,
+}: {
+  params: Promise<{ stashItemId: string }>;
+}) => {
+  const { stashItemId } = await params;
 
-  // Mock stash item data - in real app this would come from params and database
+  // Mock data - replace this with actual data fetching later
   const stashItem = {
-    id: 1,
+    id: stashItemId,
     name: 'Blue Dream',
-    category: 'Flower',
-    type: 'Hybrid',
-    thc: 18,
-    cbd: 1,
+    category: 'Hybrid',
+    type: 'Flower',
     amount: '3.5g',
-    rating: 4.8,
-    lineage: 'Blueberry × Haze',
-    dispensary: 'Trulieve',
-    price: 45.5,
-    dateAdded: '2025-01-05',
-    lastUsed: '2025-01-10',
-    totalUses: 12,
-    effects: ['Creative', 'Relaxed', 'Happy', 'Euphoric'],
-    flavors: ['Sweet', 'Berry', 'Citrus'],
+    thc: 22.5,
+    cbd: 0.5,
+    lineage: 'Blueberry x Haze',
     notes:
-      'Perfect for creativity and relaxation. The berry flavor is really prominent and the effects are well-balanced. Great for afternoon use when I want to be productive but chill.',
-    images: ['/placeholder-strain1.jpg', '/placeholder-strain2.jpg'],
+      'Perfect for creative sessions and relaxation. Great for movie nights and social activities. The flavor is sweet with berry undertones and provides an uplifting yet calming effect.',
+    dateAdded: new Date('2025-01-15'),
+    userId: 'user-1',
   };
 
-  // Mock comments data
-  const [comments, setComments] = useState([
-    {
-      id: 1,
-      user: {
-        name: 'Jake S.',
-        avatar: 'JS',
-        color: 'from-blue-400 to-purple-500',
-      },
-      content:
-        'Yooo I love Blue Dream! Got some from Curaleaf last week and it was fire 🔥',
-      timestamp: '2 hours ago',
-      likes: 3,
-    },
-    {
-      id: 2,
-      user: {
-        name: 'Maria R.',
-        avatar: 'MR',
-        color: 'from-green-400 to-emerald-500',
-      },
-      content:
-        'This is one of my favorites too! Perfect for creative sessions. The taste is incredible.',
-      timestamp: '4 hours ago',
-      likes: 5,
-    },
-    {
-      id: 3,
-      user: {
-        name: 'Alex T.',
-        avatar: 'AT',
-        color: 'from-pink-400 to-red-500',
-      },
-      content:
-        'Been wanting to try this strain! How does it compare to Green Crack for energy?',
-      timestamp: '1 day ago',
-      likes: 1,
-    },
-  ]);
-
-  const [newComment, setNewComment] = useState('');
-
-  const handleAddComment = () => {
-    if (newComment.trim()) {
-      const comment = {
-        id: comments.length + 1,
-        user: {
-          name: 'You',
-          avatar: 'YU',
-          color: 'from-orange-400 to-pink-500',
-        },
-        content: newComment,
-        timestamp: 'Just now',
-        likes: 0,
-      };
-      setComments([comment, ...comments]);
-      setNewComment('');
-    }
+  const formatDate = (date: Date | string) => {
+    const dateObj = typeof date === 'string' ? new Date(date) : date;
+    return dateObj.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
   };
 
-  const getTypeColor = (type: string) => {
-    switch (type.toLowerCase()) {
-      case 'indica':
-        return 'from-purple-400 to-indigo-500';
+  const getCategoryColor = (category: string) => {
+    switch (category.toLowerCase()) {
       case 'sativa':
-        return 'from-green-400 to-emerald-500';
-      case 'hybrid':
-        return 'from-orange-400 to-pink-500';
-      default:
-        return 'from-gray-400 to-gray-500';
-    }
-  };
-
-  const getTypeIcon = (type: string) => {
-    switch (type.toLowerCase()) {
+        return 'text-green-600 bg-green-50';
       case 'indica':
-        return '🌙';
-      case 'sativa':
-        return '☀️';
+        return 'text-purple-600 bg-purple-50';
       case 'hybrid':
-        return '🌅';
+        return 'text-blue-600 bg-blue-50';
       default:
-        return '🌿';
+        return 'text-gray-600 bg-gray-50';
     }
   };
 
   return (
-    <div className="max-w-6xl mx-auto space-y-8">
+    <div className="space-y-8">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <Button
-          onClick={() => router.back()}
-          variant="outline"
-          className="text-gray-600"
-        >
-          ← Back to Stash
-        </Button>
-        <div className="flex space-x-2">
-          <Button variant="outline" size="sm">
-            Edit
+      <div className="flex items-center space-x-4">
+        <Link href="/stash">
+          <Button variant="outline" className="bg-white/50 backdrop-blur-sm">
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Back to Stash
           </Button>
-          <Button variant="outline" size="sm">
-            Share
-          </Button>
-        </div>
+        </Link>
+        <h1 className="text-2xl font-bold text-gray-800">Stash Item Details</h1>
       </div>
 
-      {/* Main Content Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Left Column - Main Details */}
-        <div className="lg:col-span-2 space-y-6">
-          {/* Strain Header Card */}
-          <Card className="bg-white shadow-xl border-0">
-            <CardHeader>
-              <div className="flex items-start justify-between">
-                <div className="flex items-center space-x-4">
-                  <div
-                    className={`w-16 h-16 bg-gradient-to-r ${getTypeColor(
-                      stashItem.type
-                    )} rounded-full flex items-center justify-center shadow-lg`}
-                  >
-                    <span className="text-3xl">
-                      {getTypeIcon(stashItem.type)}
-                    </span>
-                  </div>
-                  <div>
-                    <CardTitle className="text-2xl font-bold text-gray-800">
-                      {stashItem.name}
-                    </CardTitle>
-                    <CardDescription className="text-lg">
-                      {stashItem.type} • {stashItem.category} •{' '}
-                      {stashItem.amount}
-                    </CardDescription>
-                    <div className="flex items-center mt-2">
-                      <span className="text-yellow-500 text-lg">
-                        ⭐ {stashItem.rating}
-                      </span>
-                      <span className="text-gray-500 text-sm ml-2">
-                        ({stashItem.totalUses} uses)
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <div className="text-right">
-                  <p className="text-2xl font-bold text-green-600">
-                    ${stashItem.price}
-                  </p>
-                  <p className="text-sm text-gray-500">
-                    From {stashItem.dispensary}
-                  </p>
-                </div>
+      {/* Main Stash Item Card */}
+      <Card className="bg-white shadow-xl border-0 max-w-4xl mx-auto">
+        <div className="bg-white p-2 md:px-6">
+          {/* Header with Edit Button */}
+          <div className="flex items-start justify-between mb-4">
+            <div className="flex items-center space-x-3 flex-1 min-w-0">
+              <div className="w-12 h-12 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center flex-shrink-0">
+                <Leaf className="w-6 h-6 text-white" />
               </div>
-            </CardHeader>
-          </Card>
-
-          {/* Potency & Details */}
-          <Card className="bg-white shadow-xl border-0">
-            <CardHeader>
-              <CardTitle className="text-xl font-bold text-gray-800 flex items-center">
-                <span className="text-2xl mr-3">🧪</span>
-                Potency & Details
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-                <div className="text-center p-4 bg-green-50 rounded-lg border border-green-200">
-                  <p className="text-2xl font-bold text-green-700">
-                    {stashItem.thc}%
-                  </p>
-                  <p className="text-sm text-green-600">THC</p>
+              <div className="min-w-0 flex-1">
+                <div className="flex items-center space-x-2 mb-2">
+                  <h2 className="text-xl sm:text-2xl font-bold text-gray-800">
+                    {stashItem.name}
+                  </h2>
                 </div>
-                <div className="text-center p-4 bg-blue-50 rounded-lg border border-blue-200">
-                  <p className="text-2xl font-bold text-blue-700">
-                    {stashItem.cbd}%
-                  </p>
-                  <p className="text-sm text-blue-600">CBD</p>
-                </div>
-                <div className="text-center p-4 bg-purple-50 rounded-lg border border-purple-200">
-                  <p className="text-sm font-bold text-purple-700">
-                    {stashItem.type}
-                  </p>
-                  <p className="text-xs text-purple-600">Type</p>
-                </div>
-                <div className="text-center p-4 bg-orange-50 rounded-lg border border-orange-200">
-                  <p className="text-sm font-bold text-orange-700">
+                <div className="flex items-center gap-2 mb-1">
+                  <span
+                    className={`px-3 py-1 rounded-full text-sm font-medium ${getCategoryColor(
+                      stashItem.category
+                    )}`}
+                  >
                     {stashItem.category}
-                  </p>
-                  <p className="text-xs text-orange-600">Category</p>
+                  </span>
+                  <span className="px-3 py-1 rounded-full text-sm font-medium text-gray-600 bg-gray-100">
+                    {stashItem.type}
+                  </span>
                 </div>
               </div>
+            </div>
 
-              <div className="space-y-4">
-                <div>
-                  <h4 className="font-semibold text-gray-800 mb-2">
-                    Lineage/Genetics
-                  </h4>
-                  <p className="text-gray-600 bg-gray-50 p-3 rounded-lg">
-                    {stashItem.lineage}
-                  </p>
-                </div>
+            <div className="flex-shrink-0 ml-4">
+              <Link href={`/stash/${stashItemId}/edit`}>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="text-xs sm:text-sm hover:bg-purple-50 hover:border-purple-300 hover:text-purple-700"
+                >
+                  <Edit3 className="w-4 h-4 mr-1" />
+                  Edit
+                </Button>
+              </Link>
+            </div>
+          </div>
 
-                <div>
-                  <h4 className="font-semibold text-gray-800 mb-2">Effects</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {stashItem.effects.map((effect, index) => (
-                      <span
-                        key={index}
-                        className="text-sm bg-blue-100 text-blue-800 px-3 py-1 rounded-full"
-                      >
-                        {effect}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+          {/* Date Added */}
+          <div className="flex items-center gap-2 text-gray-500 text-sm mb-4">
+            <Calendar className="w-4 h-4" />
+            <span>Added on {formatDate(stashItem.dateAdded)}</span>
+          </div>
 
-                <div>
-                  <h4 className="font-semibold text-gray-800 mb-2">
-                    Flavors & Aroma
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {stashItem.flavors.map((flavor, index) => (
-                      <span
-                        key={index}
-                        className="text-sm bg-green-100 text-green-800 px-3 py-1 rounded-full"
-                      >
-                        {flavor}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+          {/* Key Stats Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-4">
+              <div className="flex items-center gap-2 mb-2">
+                <Scale className="w-5 h-5 text-green-600" />
+                <h3 className="font-semibold text-gray-800">Amount</h3>
               </div>
-            </CardContent>
-          </Card>
+              <p className="text-2xl font-bold text-green-600">
+                {stashItem.amount}
+              </p>
+            </div>
 
-          {/* Personal Notes */}
-          <Card className="bg-white shadow-xl border-0">
-            <CardHeader>
-              <CardTitle className="text-xl font-bold text-gray-800 flex items-center">
-                <span className="text-2xl mr-3">📝</span>
-                Your Notes
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                <p className="text-gray-700 leading-relaxed">
-                  &ldquo;{stashItem.notes}&rdquo;
-                </p>
+            <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg p-4">
+              <div className="flex items-center gap-2 mb-2">
+                <Beaker className="w-5 h-5 text-purple-600" />
+                <h3 className="font-semibold text-gray-800">THC</h3>
               </div>
-            </CardContent>
-          </Card>
+              <p className="text-2xl font-bold text-purple-600">
+                {stashItem.thc}%
+              </p>
+            </div>
 
-          {/* Usage History */}
-          <Card className="bg-white shadow-xl border-0">
-            <CardHeader>
-              <CardTitle className="text-xl font-bold text-gray-800 flex items-center">
-                <span className="text-2xl mr-3">📊</span>
-                Usage History
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                <div className="text-center p-4 bg-blue-50 rounded-lg">
-                  <p className="text-xl font-bold text-blue-700">
-                    {stashItem.totalUses}
-                  </p>
-                  <p className="text-sm text-blue-600">Total Uses</p>
-                </div>
-                <div className="text-center p-4 bg-green-50 rounded-lg">
-                  <p className="text-sm font-bold text-green-700">
-                    {stashItem.lastUsed}
-                  </p>
-                  <p className="text-xs text-green-600">Last Used</p>
-                </div>
-                <div className="text-center p-4 bg-purple-50 rounded-lg">
-                  <p className="text-sm font-bold text-purple-700">
-                    {stashItem.dateAdded}
-                  </p>
-                  <p className="text-xs text-purple-600">Added to Stash</p>
-                </div>
+            <div className="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-lg p-4">
+              <div className="flex items-center gap-2 mb-2">
+                <Beaker className="w-5 h-5 text-blue-600" />
+                <h3 className="font-semibold text-gray-800">CBD</h3>
               </div>
-            </CardContent>
-          </Card>
+              <p className="text-2xl font-bold text-blue-600">
+                {stashItem.cbd}%
+              </p>
+            </div>
+          </div>
+
+          {/* Lineage Section */}
+          <div className="bg-gray-50 rounded-lg p-4 mb-6">
+            <h3 className="font-semibold text-gray-800 mb-2 flex items-center gap-2">
+              <FileText className="w-5 h-5" />
+              Lineage
+            </h3>
+            <p className="text-gray-700 text-lg">{stashItem.lineage}</p>
+          </div>
+
+          {/* Notes Section */}
+          <div className="bg-gradient-to-r from-yellow-50 to-orange-50 rounded-lg p-4">
+            <h3 className="font-semibold text-gray-800 mb-3 flex items-center gap-2">
+              <FileText className="w-5 h-5" />
+              Notes
+            </h3>
+            <p className="text-gray-700 leading-relaxed">{stashItem.notes}</p>
+          </div>
         </div>
-
-        {/* Right Column - Comments Section */}
-        <div className="space-y-6">
-          {/* Quick Actions */}
-          {/* <Card className="bg-white shadow-xl border-0">
-            <CardHeader>
-              <CardTitle className="text-lg font-bold text-gray-800">
-                Quick Actions
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              <Button className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white">
-                Log Usage
-              </Button>
-              <Button variant="outline" className="w-full">
-                Update Rating
-              </Button>
-              <Button variant="outline" className="w-full">
-                Add Photos
-              </Button>
-            </CardContent>
-          </Card> */}
-
-          {/* Friends Comments */}
-          <Card className="bg-white shadow-xl border-0">
-            <CardHeader>
-              <CardTitle className="text-lg font-bold text-gray-800 flex items-center">
-                <span className="text-xl mr-2">💬</span>
-                Friends Comments
-              </CardTitle>
-              <CardDescription>
-                See what your friends think about this strain
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              {/* Add Comment */}
-              <div className="space-y-3">
-                <div className="flex space-x-3">
-                  <div className="w-8 h-8 bg-gradient-to-r from-orange-400 to-pink-500 rounded-full flex items-center justify-center flex-shrink-0">
-                    <span className="text-white text-xs font-semibold">YU</span>
-                  </div>
-                  <div className="flex-1 space-y-2">
-                    <Input
-                      placeholder="Share your thoughts..."
-                      value={newComment}
-                      onChange={(e) => setNewComment(e.target.value)}
-                      className="border-gray-200 focus:border-green-500"
-                    />
-                    <Button
-                      onClick={handleAddComment}
-                      size="sm"
-                      className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white"
-                      disabled={!newComment.trim()}
-                    >
-                      Post Comment
-                    </Button>
-                  </div>
-                </div>
-              </div>
-
-              {/* Comments List */}
-              <div className="space-y-4 max-h-96 overflow-y-auto">
-                {comments.map((comment) => (
-                  <div
-                    key={comment.id}
-                    className="flex space-x-3 p-3 bg-gray-50 rounded-lg"
-                  >
-                    <div
-                      className={`w-8 h-8 bg-gradient-to-r ${comment.user.color} rounded-full flex items-center justify-center flex-shrink-0`}
-                    >
-                      <span className="text-white text-xs font-semibold">
-                        {comment.user.avatar}
-                      </span>
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center space-x-2 mb-1">
-                        <p className="text-sm font-semibold text-gray-800">
-                          {comment.user.name}
-                        </p>
-                        <p className="text-xs text-gray-500">
-                          {comment.timestamp}
-                        </p>
-                      </div>
-                      <p className="text-sm text-gray-700 mb-2">
-                        {comment.content}
-                      </p>
-                      <div className="flex items-center space-x-3">
-                        <button className="flex items-center space-x-1 text-xs text-gray-500 hover:text-red-500">
-                          <span>❤️</span>
-                          <span>{comment.likes}</span>
-                        </button>
-                        <button className="text-xs text-gray-500 hover:text-blue-500">
-                          Reply
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {comments.length === 0 && (
-                <div className="text-center py-8 text-gray-500">
-                  <span className="text-3xl block mb-2">💬</span>
-                  <p className="text-sm">No comments yet</p>
-                  <p className="text-xs">
-                    Be the first to share your thoughts!
-                  </p>
-                </div>
-              )}
-            </CardContent>
-          </Card>
-        </div>
-      </div>
+      </Card>
     </div>
   );
 };
