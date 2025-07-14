@@ -1,16 +1,18 @@
 import { StashItem } from '@/lib/types';
+import { Badge } from '../ui/badge';
 
 const StashItemListCard = ({ stashItem }: { stashItem: StashItem }) => {
   return (
     <div
       key={stashItem.id}
-      className="p-4 bg-gray-50 rounded-lg border border-gray-200 hover:bg-gray-100 transition-colors cursor-pointer"
+      className="p-4 space-y-2 rounded-lg border border-gray-200 cursor-pointer hover:shadow-lg"
     >
       <h4 className="font-semibold text-gray-800">{stashItem.name}</h4>
-      <p className="text-sm text-gray-600">
-        {stashItem.type ?? 'Indica'} •{' '}
-        {stashItem.thc ? `${stashItem.thc}% THC` : '20% THC'}
-      </p>
+      <div className="space-x-2">
+        <Badge className="bg-purple-500">{stashItem.type}</Badge>
+        <Badge className="bg-purple-500">{stashItem.thc}</Badge>
+        <Badge className="bg-purple-500">{stashItem.category}</Badge>
+      </div>
     </div>
   );
 };
