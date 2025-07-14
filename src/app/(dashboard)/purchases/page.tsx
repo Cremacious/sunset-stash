@@ -12,7 +12,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import PurchaseListCard from '@/components/purchases/PurchaseListCard';
-import ConnectWithFriends from '@/components/social/ConnectWithFriends';
+// import ConnectWithFriends from '@/components/social/ConnectWithFriends';
 
 const PurchasesPage = () => {
   const router = useRouter();
@@ -20,58 +20,6 @@ const PurchasesPage = () => {
   const [selectedMonth, setSelectedMonth] = useState('01');
   const [selectedYear, setSelectedYear] = useState('2025');
   const [searchTerm] = useState('');
-
-  // Mock friends purchase data
-  const friendsPurchases = [
-    {
-      id: '1',
-      dispensary: 'Trulieve',
-      date: '2025-01-14',
-      total: 52.0,
-      items: [
-        {
-          id: '1-1',
-          name: 'Wedding Cake',
-          category: 'flower',
-          type: 'flower',
-          amount: '1g',
-          price: 52.0,
-          thc: 20,
-          cbd: 0.1,
-          lineage: 'Triangle Kush x Animal Mints',
-          notes: 'Great quality and service!',
-          purchaseId: '1',
-        },
-      ],
-      notes: 'Great quality and service!',
-      createdAt: '2025-01-14T10:00:00Z',
-      userId: 'demo-user',
-    },
-    {
-      id: '2',
-      dispensary: 'poop',
-      date: '2025-01-14',
-      total: 52.0,
-      items: [
-        {
-          id: '2-1',
-          name: 'Wedding Cake',
-          category: 'flower',
-          type: 'flower',
-          amount: '1g',
-          price: 52.0,
-          thc: 20,
-          cbd: 0.1,
-          lineage: 'Triangle Kush x Animal Mints',
-          notes: 'Great quality and service!',
-          purchaseId: '2',
-        },
-      ],
-      notes: 'Great quality and service!',
-      createdAt: '2025-01-14T10:00:00Z',
-      userId: 'demo-user',
-    },
-  ];
 
   // Mock purchase data
   const purchases = [
@@ -202,57 +150,36 @@ const PurchasesPage = () => {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 ">
-        <div className="lg:col-span-2 space-y-3 bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl">
-          <div className="flex items-center justify-between px-6 pt-6">
-            <h2 className="text-lg font-semibold text-gray-900">
-              Your Purchases
-            </h2>
-            <span className="text-sm text-gray-500">filtered purchases</span>
-          </div>
-          <div className="space-y-4">
-            {purchases.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 p-2 md:p-6">
-                {purchases.map((purchase) => (
-                  <PurchaseListCard key={purchase.id} purchase={purchase} />
-                ))}
-              </div>
-            ) : (
-              <div className="bg-white rounded-lg border border-gray-200 p-8 text-center">
-                <div className="text-4xl mb-2">📋</div>
-                <h3 className="font-semibold text-gray-800 mb-1">
-                  No purchases found
-                </h3>
-                <p className="text-sm text-gray-600 mb-4">
-                  {searchTerm
-                    ? 'Try different search terms'
-                    : 'No purchases this month'}
-                </p>
-                <Button onClick={() => router.push('/purchases/new')} size="sm">
-                  Add Purchase
-                </Button>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-      <div className="space-y-3 bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl p-2 md:p-6">
-        <div className="flex items-center justify-between">
-          <div className="flex justify-center items-center space-x-6 px-2 pt-2">
-            <h2 className="text-lg font-semibold text-gray-900">
-              Friends Activity
-            </h2>
-            <Button variant="outline" size="sm" className="text-xs">
-              View All
-            </Button>
-          </div>
-        </div>
 
-        <div className="space-y-3">
-          {friendsPurchases.map((purchase) => (
-            <PurchaseListCard key={purchase.id} purchase={purchase} />
-          ))}
-          <ConnectWithFriends />
+      <div className="lg:col-span-2 space-y-3 bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl min-h-screen">
+        <div className="flex items-center justify-between px-6 pt-6">
+          <h2 className="text-lg font-semibold text-gray-900">
+            Your Purchases
+          </h2>
+        </div>
+        <div className="space-y-4">
+          {purchases.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 p-2 md:p-6">
+              {purchases.map((purchase) => (
+                <PurchaseListCard key={purchase.id} purchase={purchase} />
+              ))}
+            </div>
+          ) : (
+            <div className="bg-white rounded-lg border border-gray-200 p-8 text-center">
+              <div className="text-4xl mb-2">📋</div>
+              <h3 className="font-semibold text-gray-800 mb-1">
+                No purchases found
+              </h3>
+              <p className="text-sm text-gray-600 mb-4">
+                {searchTerm
+                  ? 'Try different search terms'
+                  : 'No purchases this month'}
+              </p>
+              <Button onClick={() => router.push('/purchases/new')} size="sm">
+                Add Purchase
+              </Button>
+            </div>
+          )}
         </div>
       </div>
     </div>

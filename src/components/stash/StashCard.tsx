@@ -12,7 +12,7 @@ import { StashItem } from '@/lib/types/stash.types';
 const StashCard = ({ stashItem }: { stashItem: StashItem }) => {
   return (
     <Card className="bg-white shadow-xl border-0 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
-      <CardHeader className="pb-3">
+      <CardHeader className="">
         <div className="flex justify-between items-start">
           <div className="flex items-center space-x-3">
             <div
@@ -47,14 +47,14 @@ const StashCard = ({ stashItem }: { stashItem: StashItem }) => {
           </div>
         </div>
 
-        <div className="bg-gray-50 p-3 rounded-lg">
+        {/* <div className="bg-gray-50 p-3 rounded-lg">
           <p className="text-xs text-gray-600 mb-1">Notes:</p>
           <p className="text-sm text-gray-800">
             &ldquo;{stashItem.notes}&rdquo;
           </p>
-        </div>
+        </div> */}
 
-        <div className="flex space-x-2">
+        <div className="flex space-x-2 mt-2">
           <Button
             asChild
             size="sm"
