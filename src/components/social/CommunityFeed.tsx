@@ -3,7 +3,7 @@ import { Button } from '../ui/button';
 import {
   Card,
   CardContent,
-  CardDescription,
+
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
@@ -18,12 +18,10 @@ const CommunityFeed = () => {
             variant="outline"
             size="sm"
             // onClick={() => router.push('/social')}
-            className="text-orange-500 border-orange-200 hover:bg-orange-50"
           >
             View Feed
           </Button>
         </CardTitle>
-        <CardDescription>See what your friends are up to</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">

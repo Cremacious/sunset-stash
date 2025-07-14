@@ -11,8 +11,7 @@ import {
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import PurchaseListCard from '@/components/purchases/PurchaseListCard';
-// import ConnectWithFriends from '@/components/social/ConnectWithFriends';
+import PurchaseCard from '@/components/purchases/PurchaseCard';
 
 const PurchasesPage = () => {
   const router = useRouter();
@@ -161,7 +160,8 @@ const PurchasesPage = () => {
           {purchases.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3 p-2 md:p-6">
               {purchases.map((purchase) => (
-                <PurchaseListCard key={purchase.id} purchase={purchase} />
+                // <PurchaseListCard key={purchase.id} purchase={purchase} />
+                <PurchaseCard key={purchase.id} purchase={purchase} />
               ))}
             </div>
           ) : (
