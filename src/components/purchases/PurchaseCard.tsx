@@ -1,16 +1,11 @@
 import { Purchase } from '@/lib/types';
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '../ui/button';
 import Link from 'next/link';
 
 const PurchaseCard = ({ purchase }: { purchase: Purchase }) => {
   return (
-    <Card className="bg-white shadow-xl border-0 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+    <Card className="bg-white shadow-xl border-none hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 ">
       <CardHeader className="">
         <div className="flex justify-between items-start">
           <div className="flex items-center space-x-3">
@@ -21,7 +16,6 @@ const PurchaseCard = ({ purchase }: { purchase: Purchase }) => {
               <CardTitle className="text-lg font-bold text-gray-800">
                 {purchase.dispensary}
               </CardTitle>
-       
             </div>
           </div>
           <div className="text-right">
@@ -35,18 +29,18 @@ const PurchaseCard = ({ purchase }: { purchase: Purchase }) => {
       <CardContent className="space-y-4 text-center">
         <div className="grid grid-cols-2 gap-2 text-sm">
           <div className="bg-gray-50 p-2 rounded">
-            <p className="text-gray-600 mb-1">Items</p>
-            <p className="font-semibold text-gray-800">
-              {purchase.items.length}
-            </p>
-          </div>
-          <div className="bg-gray-50 p-2 rounded">
             <p className="text-gray-600 mb-1">Date</p>
             <p className="font-semibold text-gray-800">
               {new Date(purchase.date).toLocaleDateString('en-US', {
                 month: 'short',
                 day: 'numeric',
               })}
+            </p>
+          </div>
+          <div className="bg-gray-50 p-2 rounded">
+            <p className="text-gray-600 mb-1">Items</p>
+            <p className="font-semibold text-gray-800">
+              {purchase.items.length}
             </p>
           </div>
         </div>

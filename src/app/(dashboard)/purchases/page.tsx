@@ -21,7 +21,6 @@ const PurchasesPage = () => {
   const [selectedYear, setSelectedYear] = useState('2025');
   const [searchTerm] = useState('');
 
-  // Mock purchase data
   // const purchases = [
   //   {
   //     id: '1',
@@ -84,45 +83,7 @@ const PurchasesPage = () => {
 
   return (
     <div className="space-y-4">
-      <div className="bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl p-2 md:p-6 space-y-4">
-        <div className="flex flex-col md:flex-row gap-2 md:justify-between items-center ">
-          <Button className="w-full md:w-auto" asChild>
-            <Link href="/purchases/new">Add New Purchase</Link>
-          </Button>
-
-          <div className="flex space-x-2 items-center ">
-            <Select value={selectedMonth} onValueChange={setSelectedMonth}>
-              <SelectTrigger className="w-32 h-9 text-sm bg-white">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="01">Jan</SelectItem>
-                <SelectItem value="02">Feb</SelectItem>
-                <SelectItem value="03">Mar</SelectItem>
-                <SelectItem value="04">Apr</SelectItem>
-                <SelectItem value="05">May</SelectItem>
-                <SelectItem value="06">Jun</SelectItem>
-                <SelectItem value="07">Jul</SelectItem>
-                <SelectItem value="08">Aug</SelectItem>
-                <SelectItem value="09">Sep</SelectItem>
-                <SelectItem value="10">Oct</SelectItem>
-                <SelectItem value="11">Nov</SelectItem>
-                <SelectItem value="12">Dec</SelectItem>
-              </SelectContent>
-            </Select>
-            <Select value={selectedYear} onValueChange={setSelectedYear}>
-              <SelectTrigger className="w-25 h-9 text-sm bg-white">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="2025">2025</SelectItem>
-                <SelectItem value="2024">2024</SelectItem>
-              </SelectContent>
-            </Select>
-            {/* <Input className="bg-white" placeholder="Search strains..." /> */}
-          </div>
-        </div>
-
+      <div className="glassCard space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
           <div className="bg-white rounded-lg border border-gray-200 p-3 text-center">
             <p className="text-lg font-bold text-gray-900">
@@ -161,15 +122,53 @@ const PurchasesPage = () => {
         </div>
       </div>
 
-      <div className="lg:col-span-2 space-y-3 bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl min-h-screen">
-        <div className="flex items-center justify-between px-6 pt-6">
+      <div className="space-y-3 glassCard  min-h-screen">
+        {/* <div className="flex items-center justify-between px-6 pt-6">
           <h2 className="text-lg font-semibold text-gray-900">
             Your Purchases
           </h2>
+        </div> */}
+
+        <div className="flex flex-col md:flex-row gap-2 p-2 md:p-4 md:justify-between items-center bg-white rounded-lg ">
+          <Button className="w-full md:w-auto" asChild>
+            <Link href="/purchases/new">Add New Purchase</Link>
+          </Button>
+
+          <div className="flex space-x-2 items-center ">
+            <Select value={selectedMonth} onValueChange={setSelectedMonth}>
+              <SelectTrigger className="w-32 h-9 text-sm bg-white">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="01">Jan</SelectItem>
+                <SelectItem value="02">Feb</SelectItem>
+                <SelectItem value="03">Mar</SelectItem>
+                <SelectItem value="04">Apr</SelectItem>
+                <SelectItem value="05">May</SelectItem>
+                <SelectItem value="06">Jun</SelectItem>
+                <SelectItem value="07">Jul</SelectItem>
+                <SelectItem value="08">Aug</SelectItem>
+                <SelectItem value="09">Sep</SelectItem>
+                <SelectItem value="10">Oct</SelectItem>
+                <SelectItem value="11">Nov</SelectItem>
+                <SelectItem value="12">Dec</SelectItem>
+              </SelectContent>
+            </Select>
+            <Select value={selectedYear} onValueChange={setSelectedYear}>
+              <SelectTrigger className="w-25 h-9 text-sm bg-white">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="2025">2025</SelectItem>
+                <SelectItem value="2024">2024</SelectItem>
+              </SelectContent>
+            </Select>
+            {/* <Input className="bg-white" placeholder="Search strains..." /> */}
+          </div>
         </div>
         <div className="space-y-4">
           {purchases.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-2 md:p-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {purchases.map((purchase) => (
                 // <PurchaseListCard key={purchase.id} purchase={purchase} />
                 <PurchaseCard key={purchase.id} purchase={purchase} />

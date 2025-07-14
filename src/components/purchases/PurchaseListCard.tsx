@@ -2,10 +2,9 @@ import { Purchase } from '@/lib/types/purchase.types';
 
 const PurchaseListCard = ({ purchase }: { purchase: Purchase }) => {
   return (
-    <div className="bg-white rounded-lg border border-gray-200 p-4 hover:shadow-md transition-all">
+    <div className="bg-white rounded-lg border border-gray-200 p-4 hover:shadow-md ">
       <div className="flex justify-between items-start mb-2">
         <div className="flex items-center space-x-3">
-          <div className="w-8 h-8 bg-gradient-to-r from-gray-400 to-gray-500 rounded-lg flex items-center justify-center"></div>
           <div>
             <h3 className="font-semibold text-gray-900 text-sm">
               {purchase.dispensary.toUpperCase()}
