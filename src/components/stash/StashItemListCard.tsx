@@ -9,9 +9,9 @@ const StashItemListCard = ({ stashItem }: { stashItem: StashItem }) => {
     >
       <h4 className="font-semibold text-gray-800">{stashItem.name}</h4>
       <div className="space-x-2">
-        <Badge className="bg-purple-500">{stashItem.type}</Badge>
-        <Badge className="bg-blue-500">{stashItem.thc}</Badge>
         <Badge className="bg-green-600">{stashItem.category}</Badge>
+        <Badge className="bg-purple-500">{stashItem.type}</Badge>
+        <Badge className="bg-blue-500">THC: {stashItem.thc}%</Badge>
       </div>
     </div>
   );

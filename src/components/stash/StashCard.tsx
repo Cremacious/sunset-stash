@@ -1,13 +1,9 @@
 import Link from 'next/link';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '../ui/button';
 import { StashItem } from '@/lib/types/stash.types';
+import { getCategoryIcon } from '@/lib/utils';
+import Image from 'next/image';
 
 const StashCard = ({ stashItem }: { stashItem: StashItem }) => {
   return (
@@ -18,32 +14,36 @@ const StashCard = ({ stashItem }: { stashItem: StashItem }) => {
             <div
               className={`w-10 h-10 bg-gradient-to-r rounded-full flex items-center justify-center`}
             >
-              <span className="text-xl">icon</span>
+              <span className="text-xl">
+                <Image
+                  width={75}
+                  height={75}
+                  src={getCategoryIcon(stashItem.category)}
+                  alt={stashItem.category}
+                />
+              </span>
             </div>
             <div>
               <CardTitle className="text-lg font-bold text-gray-800">
                 {stashItem.name}
               </CardTitle>
-              <CardDescription className="text-sm">
-                {stashItem.type} • {stashItem.amount}
-              </CardDescription>
             </div>
           </div>
         </div>
       </CardHeader>
       <CardContent className="space-y-4 text-center">
         <div className="grid grid-cols-3 gap-2 text-sm">
-          <div className="bg-gray-50 p-2 rounded">
+          <div className="bg-green-100 p-2 rounded-lg">
             <p className="text-gray-600 mb-1">Category</p>
             <p className="font-semibold text-gray-800">{stashItem.category}</p>
           </div>
-          <div className="bg-gray-50 p-2 rounded">
+          <div className="bg-purple-100 p-2 rounded-lg">
+            <p className="text-gray-600 mb-1">Type</p>
+            <p className="font-semibold text-gray-800">{stashItem.type}</p>
+          </div>
+          <div className="bg-blue-100 p-2 rounded-lg">
             <p className="text-gray-600 mb-1">THC</p>
             <p className="font-semibold text-gray-800">{stashItem.thc}%</p>
-          </div>
-          <div className="bg-gray-50 p-2 rounded">
-            <p className="text-gray-600 mb-1">CBD</p>
-            <p className="font-semibold text-gray-800">{stashItem.cbd}%</p>
           </div>
         </div>
 
