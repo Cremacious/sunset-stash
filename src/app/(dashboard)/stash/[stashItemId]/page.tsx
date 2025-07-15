@@ -20,7 +20,6 @@ const StashItemPage = async ({
 }) => {
   const { stashItemId } = await params;
 
-  // Mock data - replace this with actual data fetching later
   const stashItem = {
     id: stashItemId,
     name: 'Blue Dream',
