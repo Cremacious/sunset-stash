@@ -17,17 +17,10 @@ const FindFriendDialog = ({ children }: { children: ReactNode }) => {
       <DialogContent>
         <DialogTitle>Find Friends</DialogTitle>
         <FindFriends />
-        {/* <DialogHeader>
-          <DialogTitle>Are you absolutely sure?</DialogTitle>
-          <DialogDescription>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
-          </DialogDescription>
-        </DialogHeader> */}
         <DialogFooter>
           {' '}
           <DialogClose asChild>
-            <Button type="button" className="w-1/2 mx-auto">
+            <Button variant={'outline'} type="button" className="w-1/2 mx-auto">
               Close
             </Button>
           </DialogClose>

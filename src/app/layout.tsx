@@ -35,7 +35,7 @@ export default function RootLayout({
             <div className="absolute top-10 left-10 w-20 h-20 bg-yellow-300 rounded-full blur-sm opacity-80 animate-pulse"></div>
           </div>
           <Navbar />
-          <main className="flex-1 mb-4">{children}</main>
+          <main className="mt-4">{children}</main>
           <Toaster />
           <Footer />
         </div>

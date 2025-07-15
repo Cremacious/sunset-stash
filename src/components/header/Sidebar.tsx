@@ -54,7 +54,7 @@ const Sidebar = ({ routes }: { routes: Routes[] }) => {
                 width={50}
               />
               <div>
-                <SheetTitle className="text-2xl font-bold text-white drop-shadow-md">
+                <SheetTitle className="text-2xl fugaz-font text-white drop-shadow-md">
                   Sunset Stash
                 </SheetTitle>
               </div>

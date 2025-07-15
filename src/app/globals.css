@@ -1,5 +1,7 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
+@import '@fontsource/fugaz-one';
+@import '@fontsource-variable/comfortaa';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -112,6 +114,11 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+body {
+  font-family: 'Comfortaa Variable', system-ui;
+  font-weight: 600;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -124,5 +131,8 @@
 @layer components {
   .glassCard {
     @apply bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl p-2 md:p-6;
+  }
+  .fugaz-font {
+    font-family: 'Fugaz One', system-ui;
   }
 }

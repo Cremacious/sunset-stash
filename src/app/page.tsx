@@ -47,7 +47,7 @@ const Home = () => {
                 className=""
               />
             </div>
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 drop-shadow-lg">
+            <h1 className="text-5xl fugaz-font md:text-7xl font-bold text-white mb-6 drop-shadow-lg">
               Sunset Stash
             </h1>
             <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto">

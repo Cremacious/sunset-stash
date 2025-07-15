@@ -5,13 +5,13 @@ import { StashItem } from '@/lib/types';
 import StashItemListCard from './StashItemListCard';
 
 const RecentStashItems = ({ stashItems }: { stashItems: StashItem[] }) => {
-  const latestStashItems = stashItems.slice(0, 5);
+  const latestStashItems = stashItems.slice(0, 3);
 
   return (
     <Card className="bg-white shadow-xl border-0 h-full">
       <CardHeader>
         <CardTitle className="text-xl font-bold text-gray-800 flex items-center justify-between">
-          <div className="flex items-center">Your Stash</div>
+          <div className="flex items-center">Latest Stash Items</div>
           <Button
             variant="outline"
             size="sm"

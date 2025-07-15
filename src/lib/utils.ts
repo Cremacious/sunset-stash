@@ -13,15 +13,15 @@ export function cn(...inputs: ClassValue[]) {
 
 export function getCategoryIcon(category: string | null | undefined): string {
   switch (category) {
-    case 'flower':
+    case 'Flower':
       return flowerIcon.src || flowerIcon.toString();
-    case 'vape':
+    case 'Vape':
       return vapeIcon.src || vapeIcon.toString();
-    case 'concentrate':
+    case 'Concentrate':
       return concentrateIcon.src || concentrateIcon.toString();
-    case 'edible':
+    case 'Edible':
       return edibleIcon.src || edibleIcon.toString();
-    case 'topical':
+    case 'Topical':
       return topicalIcon.src || topicalIcon.toString();
     default:
       return defaultIcon.src || defaultIcon.toString();
