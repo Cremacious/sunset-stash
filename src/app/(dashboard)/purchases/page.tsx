@@ -134,7 +134,8 @@ const PurchasesPage = () => {
             <Link href="/purchases/new">Add New Purchase</Link>
           </Button>
 
-          <div className="flex space-x-2 items-center ">
+          <div className="flex space-x-4 items-center ">
+            <div>Search:</div>
             <Select value={selectedMonth} onValueChange={setSelectedMonth}>
               <SelectTrigger className="w-32 h-9 text-sm bg-white">
                 <SelectValue />
@@ -163,7 +164,6 @@ const PurchasesPage = () => {
                 <SelectItem value="2024">2024</SelectItem>
               </SelectContent>
             </Select>
-            {/* <Input className="bg-white" placeholder="Search strains..." /> */}
           </div>
         </div>
         <div className="space-y-4">

@@ -10,6 +10,9 @@ import {
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import SignInForm from '@/components/auth/SignInForm';
+import Link from 'next/link';
+import Image from 'next/image';
+import logo from '../../../../public/sunset-stash-logo.png';
 
 export default function SignInPage() {
   const router = useRouter();
@@ -18,15 +21,15 @@ export default function SignInPage() {
     <div className="min-h-screen flex items-center justify-center px-4 py-12">
       <div className="w-full max-w-md relative z-10">
         <Card className="bg-white shadow-2xl border-0 overflow-hidden">
-          <CardHeader className="text-center pb-6 bg-gradient-to-r from-orange-50 to-pink-50">
-            <div className="w-16 h-16 bg-gradient-to-r from-orange-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
-              <span className="text-3xl">🌺</span>
-            </div>
-            <CardTitle className="text-2xl md:text-3xl font-bold text-gray-800 mb-2">
-              Join Paradise
-            </CardTitle>
+          <CardHeader className="text-center">
+            <Image
+              src={logo}
+              alt="Sunset Stash Logo"
+              className="w-50 h-50 mx-auto"
+            />
+            <CardTitle className="text-4xl fugaz-font">Sunset Stash</CardTitle>
             <CardDescription className="text-gray-600 text-base">
-              Welcome to Florida&apos;s cannabis community 🌴
+              Welcome to Florida&apos;s cannabis community
             </CardDescription>
           </CardHeader>
 
@@ -88,24 +91,21 @@ export default function SignInPage() {
 
             <div className="text-center mt-6 pt-6 border-t border-gray-200">
               <p className="text-gray-600">
-                Already have an account?{' '}
-                <button
-                  onClick={() => router.push('/sign-in')}
-                  className="text-orange-600 hover:text-orange-700 font-semibold hover:underline transition-colors duration-200"
-                >
-                  Sign in here
-                </button>
+                Don&apos;t have an account?{' '}
+                <Link className="text-purple-600" href={'/sign-up'}>
+                  Sign up here
+                </Link>
               </p>
             </div>
 
             <div className="text-center mt-4">
               <p className="text-xs text-gray-500 leading-relaxed">
                 By creating an account, you agree to our{' '}
-                <span className="text-orange-600 hover:underline cursor-pointer">
+                <span className="text-purple-600 hover:underline cursor-pointer">
                   Terms of Service
                 </span>{' '}
                 and{' '}
-                <span className="text-orange-600 hover:underline cursor-pointer">
+                <span className="text-purple-600 hover:underline cursor-pointer">
                   Privacy Policy
                 </span>
               </p>

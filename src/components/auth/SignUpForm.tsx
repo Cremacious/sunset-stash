@@ -47,7 +47,7 @@ const SignUpForm = () => {
         );
       } else {
         toast.success('Sign up successful!');
-        router.push('/dashboard'); 
+        router.push('/dashboard');
       }
     } catch (error) {
       console.error('Form submission error', error);
@@ -82,7 +82,7 @@ const SignUpForm = () => {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input placeholder="" type="email" {...field} />
+                <Input placeholder="Enter your email" type="email" {...field} />
               </FormControl>
 
               <FormMessage />
@@ -103,7 +103,7 @@ const SignUpForm = () => {
                   {...field}
                 />
               </FormControl>
-              <FormDescription>Enter your password.</FormDescription>
+
               <FormMessage />
             </FormItem>
           )}

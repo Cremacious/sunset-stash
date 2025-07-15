@@ -7,7 +7,6 @@ import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -62,7 +61,7 @@ const SignInForm = () => {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input placeholder="" type="email" {...field} />
+                <Input placeholder="Enter your email" type="email" {...field} />
               </FormControl>
 
               <FormMessage />
@@ -83,7 +82,6 @@ const SignInForm = () => {
                   {...field}
                 />
               </FormControl>
-              <FormDescription>Enter your password.</FormDescription>
               <FormMessage />
             </FormItem>
           )}
