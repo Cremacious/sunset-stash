@@ -34,11 +34,11 @@ const Home = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative py-20 px-4">
-        <div className="max-w-6xl mx-auto text-center">
-          <div className="mb-8">
+      <section className="relative pb-20 px-4 ">
+        <div className="max-w-6xl mx-auto text-center ">
+          <div className="">
             {/* Logo */}
-            <div className="flex justify-center mb-8">
+            <div className="flex justify-center mb-8 ">
               <Image
                 src={Logo}
                 alt="Sunset Stash Logo"
