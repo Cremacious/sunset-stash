@@ -19,7 +19,7 @@ export function getCategoryIcon(category: string | null | undefined): string {
       return vapeIcon.src || vapeIcon.toString();
     case 'Concentrate':
       return concentrateIcon.src || concentrateIcon.toString();
-    case 'Edible':
+    case 'Edibles':
       return edibleIcon.src || edibleIcon.toString();
     case 'Topical':
       return topicalIcon.src || topicalIcon.toString();

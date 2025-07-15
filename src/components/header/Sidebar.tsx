@@ -10,8 +10,7 @@ import { Menu } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Button } from '../ui/button';
-import Logo from '../../../public/sunset-stash-logo.png';
-import Image from 'next/image';
+import { CircleX } from 'lucide-react';
 import { useSession } from '@/lib/auth-client';
 
 interface Routes {
@@ -45,19 +44,13 @@ const Sidebar = ({ routes }: { routes: Routes[] }) => {
         <div className="absolute inset-0 bg-white/10 backdrop-blur-md z-10"></div>
         <div className="relative z-20 p-4 h-full">
           <SheetHeader className="mb-8">
-            <div className="flex items-center space-x-3 mb-4">
-              <Image
-                className="rounded-full"
-                src={Logo}
-                alt="Logo"
-                height={50}
-                width={50}
-              />
-              <div>
-                <SheetTitle className="text-2xl fugaz-font text-white drop-shadow-md">
-                  Sunset Stash
-                </SheetTitle>
-              </div>
+            <div className="mb-4 flex items-center justify-between">
+              <SheetTitle className="text-2xl fugaz-font text-white drop-shadow-md">
+                Sunset Stash
+              </SheetTitle>
+              <button onClick={() => setIsOpen(false)}>
+                <CircleX size={30} className="text-orange-300" />
+              </button>
             </div>
           </SheetHeader>
 
