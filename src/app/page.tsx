@@ -1,3 +1,4 @@
+'use client';
 import {
   Card,
   CardContent,
@@ -17,8 +18,19 @@ import {
 } from 'lucide-react';
 import Logo from '../../public/sunset-stash-logo.png';
 import Image from 'next/image';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { useEffect } from 'react';
 
 const Home = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 600,
+      once: true,
+      easing: 'ease-out-cubic',
+    });
+  }, []);
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -40,8 +52,7 @@ const Home = () => {
             </h1>
             <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto">
               Your ultimate companion for tracking Florida medical marijuana
-              purchases, discovering favorites, and connecting with the
-              friends.
+              purchases, discovering favorites, and connecting with the friends.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
@@ -65,7 +76,8 @@ const Home = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-16 px-4">
+
+      <section data-aos="fade-up" data-aos-delay="100" className="py-16 px-4">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold text-white text-center mb-12 drop-shadow-lg">
             Everything You Need to Track Your Journey
@@ -145,7 +157,7 @@ const Home = () => {
       </section>
 
       {/* Purchase Tracking Examples */}
-      <section className="py-16 px-4">
+      <section data-aos="fade-up" data-aos-delay="100" className="py-16 px-4">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold text-white text-center mb-12 drop-shadow-lg">
             Track Your Purchases Like a Pro
@@ -288,7 +300,7 @@ const Home = () => {
       </section>
 
       {/* Call to Action */}
-      <section className="py-16 px-4">
+      <section data-aos="fade-up" data-aos-delay="100" className="py-16 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <Card className="bg-white shadow-xl border-0">
             <CardContent className="p-8">
