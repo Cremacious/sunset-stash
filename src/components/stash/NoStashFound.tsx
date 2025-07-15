@@ -1,11 +1,9 @@
-'use client';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '../ui/button';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { Container } from 'lucide-react';
 
 const NoStashFound = () => {
-  const router = useRouter();
   return (
     <Card className="bg-white border-none shadow-none">
       <CardContent className="text-center py-12">
@@ -18,8 +16,8 @@ const NoStashFound = () => {
         <p className="text-gray-600 mb-6">
           Start building your cannabis collection by adding your first strain!
         </p>
-        <Button onClick={() => router.push('/stash/new')}>
-          Add Your First Strain
+        <Button asChild>
+          <Link href="/stash/new">Add Your First Strain</Link>
         </Button>
       </CardContent>
     </Card>

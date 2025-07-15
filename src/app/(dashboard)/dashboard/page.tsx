@@ -29,7 +29,6 @@ const DashboardPage = () => {
         : item.dateAdded,
   }));
 
-  // Adapt samplePosts to match the expected Post[] type for CommunityFeed
   const posts = samplePosts.map((post) => ({
     ...post,
     createdAt:

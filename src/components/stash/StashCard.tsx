@@ -47,16 +47,8 @@ const StashCard = ({ stashItem }: { stashItem: StashItem }) => {
           </div>
         </div>
 
-        <div className="flex space-x-2 mt-2">
-          <Button
-            asChild
-            size="sm"
-            variant="outline"
-            className="flex-1 text-xs"
-          >
-            <Link href={`/stash/${stashItem.id}/edit`}>Edit</Link>
-          </Button>
-          <Button asChild size="sm" className="flex-1 text-xs">
+        <div className="mt-2">
+          <Button asChild size="sm" className=" w-1/2">
             <Link href={`/stash/${stashItem.id}`}>View</Link>
           </Button>
         </div>

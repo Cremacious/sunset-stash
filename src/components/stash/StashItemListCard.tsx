@@ -29,7 +29,7 @@ const StashItemListCard = ({ stashItem }: { stashItem: StashItem }) => {
           </div>
         </div>
       </CardHeader>
-      <CardContent className="space-y-4 text-center">
+      <CardContent className="text-center">
         <div className="grid grid-cols-3 gap-2 text-sm">
           <div className="bg-green-100 p-2 rounded-lg">
             <p className=" mb-1 text-gray-600 text-center">Category</p>

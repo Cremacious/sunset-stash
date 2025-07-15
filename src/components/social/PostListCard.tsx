@@ -17,7 +17,7 @@ const PostListCard = ({ post }: { post: Post }) => {
       <div className="mt-2 flex space-x-2">
         <Badge
           variant="outline"
-          className="text-xs bg-purple-50 text-purple-700 border-purple-200"
+          className="text-xs font-bold bg-purple-50 text-purple-700 border-purple-200"
         >
           {post.activity}
         </Badge>
