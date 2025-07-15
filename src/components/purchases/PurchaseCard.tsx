@@ -9,9 +9,6 @@ const PurchaseCard = ({ purchase }: { purchase: Purchase }) => {
       <CardHeader className="">
         <div className="flex justify-between items-start">
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex items-center justify-center">
-              <span className="text-xl">🏪</span>
-            </div>
             <div>
               <CardTitle className="text-lg font-bold text-gray-800">
                 {purchase.dispensary}

@@ -1,6 +1,3 @@
-'use client';
-
-import { useRouter } from 'next/navigation';
 import {
   Card,
   CardContent,
@@ -15,10 +12,8 @@ import Image from 'next/image';
 import logo from '../../../../public/sunset-stash-logo.png';
 
 export default function SignInPage() {
-  const router = useRouter();
-
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-12">
+    <div className=" flex justify-center px-4 mt-4">
       <div className="w-full max-w-md relative z-10">
         <Card className="bg-white shadow-2xl border-0 overflow-hidden">
           <CardHeader className="text-center">
@@ -112,16 +107,6 @@ export default function SignInPage() {
             </div>
           </CardContent>
         </Card>
-
-        <div className="text-center mt-6">
-          <button
-            onClick={() => router.push('/')}
-            className="text-white/90 hover:text-white font-medium hover:underline transition-colors duration-200 flex items-center justify-center space-x-2 mx-auto"
-          >
-            <span>←</span>
-            <span>Back to Paradise</span>
-          </button>
-        </div>
       </div>
     </div>
   );

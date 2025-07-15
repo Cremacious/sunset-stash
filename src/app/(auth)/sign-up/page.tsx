@@ -13,8 +13,8 @@ import Link from 'next/link';
 
 export default function SignUpPage() {
   return (
-    <div className="min-h-screen flex items-center justify-center px-4">
-      <div className="w-full max-w-md relative z-10">
+    <div className="flex justify-center px-4 mt-4">
+      <div className="w-full max-w-md relative z-1">
         <Card className="bg-white shadow-2xl border-0 overflow-hidden">
           <CardHeader className="text-center">
             <Image
@@ -107,16 +107,6 @@ export default function SignUpPage() {
             </div>
           </CardContent>
         </Card>
-
-        <div className="text-center mt-6">
-          <button
-            // onClick={() => router.push('/')}
-            className="text-white/90 hover:text-white font-medium hover:underline transition-colors duration-200 flex items-center justify-center space-x-2 mx-auto"
-          >
-            <span>←</span>
-            <span>Back to Paradise</span>
-          </button>
-        </div>
       </div>
     </div>
   );
