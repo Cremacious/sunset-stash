@@ -63,7 +63,7 @@ const SocialPage = async () => {
     <div className="">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         {/* left Column - Timeline */}
-        <div className="lg:col-span-2 space-y-6 md:p-6 p-2 bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl ">
+        <div className="md:col-span-2 space-y-6 md:p-6 p-2 bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl ">
           {/* Timeline Filters */}
           <div className="bg-white rounded-lg border border-gray-200 p-4">
             <div className="flex items-center justify-between">

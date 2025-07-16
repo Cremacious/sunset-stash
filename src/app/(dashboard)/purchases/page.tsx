@@ -13,6 +13,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import PurchaseCard from '@/components/purchases/PurchaseCard';
 import { samplePurchases } from '@/lib/sampleData';
+import PurchaseStats from '@/components/purchases/PurchaseStats';
 
 const PurchasesPage = () => {
   const router = useRouter();
@@ -81,116 +82,81 @@ const PurchasesPage = () => {
       typeof p.createdAt === 'string' ? p.createdAt : p.createdAt.toISOString(),
   }));
 
+  // const purchases = [];
+
   return (
     <div className="space-y-4">
-      <div className="glassCard space-y-4">
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-          <div className="bg-white rounded-lg border border-gray-200 p-3 text-center">
-            <p className="text-lg font-bold text-gray-900">
-              {purchases.length}
-            </p>
-            <p className="text-xs text-gray-500">Total Purchases</p>
-          </div>
-          <div className="bg-white rounded-lg border border-gray-200 p-3 text-center">
-            <p className="text-lg font-bold text-gray-900">
-              ${purchases.length}
-            </p>
-            <p className="text-xs text-gray-500">Total This Month</p>
-          </div>
-          <div className="bg-white rounded-lg border border-gray-200 p-3 text-center">
-            <p className="text-lg font-bold text-gray-900">
-              ${purchases.reduce((sum, p) => sum + p.total, 0).toFixed(0)}
-            </p>
-            <p className="text-xs text-gray-500">All Time Spent</p>
-          </div>
-          <div className="bg-white rounded-lg border border-gray-200 p-3 text-center">
-            <p className="text-lg font-bold text-gray-900">
-              {[...new Set(purchases.map((p) => p.dispensary))].length}
-            </p>
-            <p className="text-xs text-gray-500">Dispensaries</p>
-          </div>
-          <div className="bg-white rounded-lg border border-gray-200 p-3 text-center">
-            <p className="text-lg font-bold text-gray-900">
-              $
-              {(
-                purchases.reduce((sum, p) => sum + p.total, 0) /
-                purchases.length
-              ).toFixed(0)}
-            </p>
-            <p className="text-xs text-gray-500">Avg Purchase</p>
-          </div>
-        </div>
-      </div>
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="space-y-3 glassCard md:col-span-3">
+          <div className="flex flex-col md:flex-row gap-2 p-2 md:p-4 md:justify-between items-center bg-white rounded-lg ">
+            <Button className="w-full md:w-auto" asChild>
+              <Link href="/purchases/new">Add New Purchase</Link>
+            </Button>
 
-      <div className="space-y-3 glassCard  min-h-screen">
-        {/* <div className="flex items-center justify-between px-6 pt-6">
-          <h2 className="text-lg font-semibold text-gray-900">
-            Your Purchases
-          </h2>
-        </div> */}
-
-        <div className="flex flex-col md:flex-row gap-2 p-2 md:p-4 md:justify-between items-center bg-white rounded-lg ">
-          <Button className="w-full md:w-auto" asChild>
-            <Link href="/purchases/new">Add New Purchase</Link>
-          </Button>
-
-          <div className="flex space-x-4 items-center ">
-            <div>Search:</div>
-            <Select value={selectedMonth} onValueChange={setSelectedMonth}>
-              <SelectTrigger className="w-32 h-9 text-sm bg-white">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="01">Jan</SelectItem>
-                <SelectItem value="02">Feb</SelectItem>
-                <SelectItem value="03">Mar</SelectItem>
-                <SelectItem value="04">Apr</SelectItem>
-                <SelectItem value="05">May</SelectItem>
-                <SelectItem value="06">Jun</SelectItem>
-                <SelectItem value="07">Jul</SelectItem>
-                <SelectItem value="08">Aug</SelectItem>
-                <SelectItem value="09">Sep</SelectItem>
-                <SelectItem value="10">Oct</SelectItem>
-                <SelectItem value="11">Nov</SelectItem>
-                <SelectItem value="12">Dec</SelectItem>
-              </SelectContent>
-            </Select>
-            <Select value={selectedYear} onValueChange={setSelectedYear}>
-              <SelectTrigger className="w-25 h-9 text-sm bg-white">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="2025">2025</SelectItem>
-                <SelectItem value="2024">2024</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-        </div>
-        <div className="space-y-4">
-          {purchases.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {purchases.map((purchase) => (
-                // <PurchaseListCard key={purchase.id} purchase={purchase} />
-                <PurchaseCard key={purchase.id} purchase={purchase} />
-              ))}
+            <div className="flex space-x-4 items-center ">
+              <div>Search:</div>
+              <Select value={selectedMonth} onValueChange={setSelectedMonth}>
+                <SelectTrigger className="w-32 h-9 text-sm bg-white">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="01">Jan</SelectItem>
+                  <SelectItem value="02">Feb</SelectItem>
+                  <SelectItem value="03">Mar</SelectItem>
+                  <SelectItem value="04">Apr</SelectItem>
+                  <SelectItem value="05">May</SelectItem>
+                  <SelectItem value="06">Jun</SelectItem>
+                  <SelectItem value="07">Jul</SelectItem>
+                  <SelectItem value="08">Aug</SelectItem>
+                  <SelectItem value="09">Sep</SelectItem>
+                  <SelectItem value="10">Oct</SelectItem>
+                  <SelectItem value="11">Nov</SelectItem>
+                  <SelectItem value="12">Dec</SelectItem>
+                </SelectContent>
+              </Select>
+              <Select value={selectedYear} onValueChange={setSelectedYear}>
+                <SelectTrigger className="w-25 h-9 text-sm bg-white">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="2025">2025</SelectItem>
+                  <SelectItem value="2024">2024</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
-          ) : (
-            <div className="bg-white rounded-lg border border-gray-200 p-8 text-center">
-              <div className="text-4xl mb-2">📋</div>
-              <h3 className="font-semibold text-gray-800 mb-1">
-                No purchases found
-              </h3>
-              <p className="text-sm text-gray-600 mb-4">
-                {searchTerm
-                  ? 'Try different search terms'
-                  : 'No purchases this month'}
-              </p>
-              <Button onClick={() => router.push('/purchases/new')} size="sm">
-                Add Purchase
-              </Button>
-            </div>
-          )}
+          </div>
+          <div className="space-y-4">
+            {purchases.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {purchases.slice(0, 9).map((purchase) => (
+                  // <PurchaseListCard key={purchase.id} purchase={purchase} />
+                  <PurchaseCard key={purchase.id} purchase={purchase} />
+                ))}
+              </div>
+            ) : (
+              <div className="bg-white min-h-[600px] rounded-lg border border-gray-200 p-8 text-center">
+                <div className="flex flex-col justify-center items-center">
+                  <div className="text-4xl mb-2">📋</div>
+                  <h3 className="font-semibold text-gray-800 mb-1">
+                    No purchases found
+                  </h3>
+                  <p className="text-sm text-gray-600 mb-4">
+                    {searchTerm
+                      ? 'Try different search terms'
+                      : 'No purchases this month'}
+                  </p>
+                  <Button
+                    onClick={() => router.push('/purchases/new')}
+                    size="sm"
+                  >
+                    Add Purchase
+                  </Button>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
+        <PurchaseStats purchases={purchases} />
       </div>
     </div>
   );
