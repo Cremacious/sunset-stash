@@ -80,7 +80,8 @@ const PurchasesPage = () => {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-1 xl:grid-cols-4 gap-4">
+
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div className="md:col-span-3 glassCard ">
           <div className="flex items-center justify-between bg-white p-6 rounded-md shadow-md">
             <div className="flex items-center ">

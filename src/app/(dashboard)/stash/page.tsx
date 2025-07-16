@@ -12,8 +12,8 @@ const StashPage = async () => {
 
   return (
     <div className="space-y-4 ">
-      <div className="space-y-4 glassCard">
-        <div className="flex flex-col md:flex-row gap-2 md:justify-between items-center bg-white rounded-lg  p-4">
+      <div className="smallGlassCard">
+        <div className="flex flex-col md:flex-row gap-2 md:justify-between items-center bg-white rounded-lg p-4">
           <Button className="w-full md:w-auto" asChild>
             <Link href="/stash/new">Add New Stash Item</Link>
           </Button>
@@ -28,26 +28,31 @@ const StashPage = async () => {
             <Input className="bg-white" placeholder="Search strains..." />
           </div>
         </div>
-        {stashItems.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {stashItems.map((item) => (
-              <StashCard
-                key={item.id}
-                stashItem={{
-                  ...item,
-                  dateAdded:
-                    typeof item.dateAdded === 'string'
-                      ? item.dateAdded
-                      : item.dateAdded.toISOString(),
-                }}
-              />
-            ))}
-          </div>
-        ) : (
-          <NoStashFound />
-        )}
       </div>
-      <StashAnalytics />
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        {/* Purchase Grid */}
+        <div className="glassCard md:col-span-3">
+          {stashItems.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {stashItems.map((item) => (
+                <StashCard
+                  key={item.id}
+                  stashItem={{
+                    ...item,
+                    dateAdded:
+                      typeof item.dateAdded === 'string'
+                        ? item.dateAdded
+                        : item.dateAdded.toISOString(),
+                  }}
+                />
+              ))}
+            </div>
+          ) : (
+            <NoStashFound />
+          )}
+        </div>
+        <StashAnalytics />
+      </div>
     </div>
   );
 };
