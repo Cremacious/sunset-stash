@@ -2,7 +2,7 @@ import { Purchase } from '@/lib/types';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '../ui/button';
 import Link from 'next/link';
-import { Calendar, Package, Edit, Eye } from 'lucide-react';
+import { Calendar, Edit, Eye, Container } from 'lucide-react';
 
 const PurchaseCard = ({ purchase }: { purchase: Purchase }) => {
   return (
@@ -28,35 +28,38 @@ const PurchaseCard = ({ purchase }: { purchase: Purchase }) => {
       <CardContent className="space-y-4">
         {/* Info Grid */}
         <div className="grid grid-cols-2 gap-2 text-sm">
-          <div className="bg-white/70 backdrop-blur-sm p-3 rounded-lg border border-white/30">
-            <div className="flex items-center gap-2 mb-2">
-              <Calendar className="w-4 h-4 text-purple-500" />
-              <p className="text-gray-600 text-lg font-medium">Date</p>
+          <div className="bg-purple-100 p-3 rounded-lg border-purple-300">
+            <div className="flex justify-center mb-1">
+              <Calendar className="w-7 h-7 text-purple-500" />
             </div>
-            <p className="font-semibold text-gray-800 ml-2 text-lg">
+            <p className=" text font-medium text-center">Date</p>
+            <p className="font-semibold text-gray-800 text-lg text-center">
               {new Date(purchase.date).toLocaleDateString('en-US', {
                 month: 'short',
                 day: 'numeric',
               })}
             </p>
           </div>
-          <div className="bg-white/70 backdrop-blur-sm p-3 rounded-lg border border-white/30">
-            <div className="flex items-center gap-2 mb-2">
-              <Package className="w-4 h-4 text-blue-500" />
-              <p className="text-gray-600 font-medium text-lg">Items</p>
+          <div className="bg-blue-100 p-3 rounded-lg border-blue-300">
+            <div className="flex justify-center mb-1">
+              <Container className="w-7 h-7 text-blue-800" />
             </div>
-            <p className="font-semibold text-gray-800 text-lg ml-8">
-              {purchase.items.length}
+            <p className=" text font-medium text-center">Items</p>
+            <p className="font-semibold text-gray-800 text-lg text-center">
+              {new Date(purchase.date).toLocaleDateString('en-US', {
+                month: 'short',
+                day: 'numeric',
+              })}
             </p>
           </div>
         </div>
 
         {/* Notes Section */}
         {purchase.notes && (
-          <div className="bg-white/70 backdrop-blur-sm p-3 rounded-lg border border-white/30">
+          <div className="bg-white/70 backdrop-blur-sm rounded-lg border border-white/30">
             <div className="flex items-center gap-2 mb-2">
               {/* <DollarSign className="w-4 h-4 text-green-500" /> */}
-              <p className="text-xs text-gray-600 font-medium text-center">
+              <p className="text-xs text-center">
                 Notes
               </p>
             </div>

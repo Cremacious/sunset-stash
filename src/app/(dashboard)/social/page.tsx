@@ -14,6 +14,8 @@ import { Post } from '@/lib/types/social.types';
 import { MessageSquare } from 'lucide-react';
 import RecentFriends from '@/components/social/RecentFriends';
 import { samplePosts } from '@/lib/sampleData';
+import UserImage from '@/components/social/UserImage';
+
 const SocialPage = async () => {
   // const socialPosts = await getUserPosts();
   const socialPosts = samplePosts;
@@ -61,9 +63,65 @@ const SocialPage = async () => {
 
   return (
     <div className="">
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
+        {/* Profile */}
+        <div>
+          <div className="glassCard">
+            <div className="bg-white rounded-lg shadow-lg p-6">
+              {/* Profile Header */}
+              <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center space-x-4">
+                  <UserImage />
+                  <div>
+                    <p className="text-2xl font-bold text-gray-800">
+                      User Name
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Profile Stats */}
+              <div className="grid grid-cols-3 gap-4 mb-6">
+                <div className="text-center p-3 bg-purple-50 rounded-lg">
+                  <p className="text-2xl font-bold text-purple-600">
+                    {socialPosts.length}
+                  </p>
+                  <p className="text-xs text-gray-600">Posts</p>
+                </div>
+                <div className="text-center p-3 bg-blue-50 rounded-lg">
+                  <p className="text-2xl font-bold text-blue-600">5</p>
+                  <p className="text-xs text-gray-600">Friends</p>
+                </div>
+                <div className="text-center p-3 bg-green-50 rounded-lg">
+                  <p className="text-2xl font-bold text-green-600">12</p>
+                  <p className="text-xs text-gray-600">Requests</p>
+                </div>
+              </div>
+
+              {/* Quick Actions */}
+              <div className="mt-6 pt-4 border-t border-gray-200">
+                <div className="flex space-x-2">
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="flex-1 text-xs"
+                  >
+                    Edit Profile
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="flex-1 text-xs"
+                  >
+                    Settings
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         {/* left Column - Timeline */}
-        <div className="md:col-span-2 space-y-6 md:p-6 p-2 bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl ">
+        <div className="md:col-span-2 space-y-6 glassCard">
           {/* Timeline Filters */}
           <div className="bg-white rounded-lg border border-gray-200 p-4">
             <div className="flex items-center justify-between">
@@ -124,11 +182,11 @@ const SocialPage = async () => {
             </div>
           )}
         </div>
-
+        {/* Friends */}
         <div className="space-y-4 ">
           <RecentFriends friends={friends} />
 
-          <div className="md:p-6 p-2 bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl">
+          <div className="glassCard">
             <FindFriends />
           </div>
         </div>
