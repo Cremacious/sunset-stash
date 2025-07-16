@@ -12,7 +12,7 @@ const PurchaseStats = ({ purchases }: { purchases: Purchase[] }) => {
     <div className="">
       <div className="flex flex-col gap-4 glassCard">
         {/* Total Purchases */}
-        <div className="relative overflow-hidden bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-4 border border-blue-200 hover:shadow-lg transition-all duration-300">
+        <div className="relative overflow-hidden bg-blue-100 rounded-xl p-4 border border-blue-200 hover:shadow-md transition-all duration-300">
           <div className="absolute top-0 right-0 w-16 h-16 bg-blue-200 rounded-full -translate-y-8 translate-x-8 opacity-20"></div>
           <div className="relative z-10">
             <div className="flex items-center justify-between">

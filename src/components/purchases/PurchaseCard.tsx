@@ -2,7 +2,7 @@ import { Purchase } from '@/lib/types';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '../ui/button';
 import Link from 'next/link';
-import { Calendar, Package, DollarSign, Edit, Eye } from 'lucide-react';
+import { Calendar, Package, Edit, Eye } from 'lucide-react';
 
 const PurchaseCard = ({ purchase }: { purchase: Purchase }) => {
   return (
@@ -11,7 +11,7 @@ const PurchaseCard = ({ purchase }: { purchase: Purchase }) => {
         <div className="flex justify-between items-start">
           <div className="flex items-center space-x-3">
             <div>
-              <CardTitle className="text-lg font-bold text-gray-800">
+              <CardTitle className="text-lg font-bold line-clamp-1 text-gray-800">
                 {purchase.dispensary}
               </CardTitle>
             </div>
@@ -20,7 +20,7 @@ const PurchaseCard = ({ purchase }: { purchase: Purchase }) => {
             <p className="text-xl font-bold text-green-600">
               ${purchase.total.toFixed(2)}
             </p>
-            <p className="text-xs text-gray-500">Total</p>
+            <p className=" text-gray-500">Total</p>
           </div>
         </div>
       </CardHeader>
@@ -31,9 +31,9 @@ const PurchaseCard = ({ purchase }: { purchase: Purchase }) => {
           <div className="bg-white/70 backdrop-blur-sm p-3 rounded-lg border border-white/30">
             <div className="flex items-center gap-2 mb-2">
               <Calendar className="w-4 h-4 text-purple-500" />
-              <p className="text-gray-600 font-medium">Date</p>
+              <p className="text-gray-600 text-lg font-medium">Date</p>
             </div>
-            <p className="font-semibold text-gray-800">
+            <p className="font-semibold text-gray-800 ml-2 text-lg">
               {new Date(purchase.date).toLocaleDateString('en-US', {
                 month: 'short',
                 day: 'numeric',
@@ -43,9 +43,9 @@ const PurchaseCard = ({ purchase }: { purchase: Purchase }) => {
           <div className="bg-white/70 backdrop-blur-sm p-3 rounded-lg border border-white/30">
             <div className="flex items-center gap-2 mb-2">
               <Package className="w-4 h-4 text-blue-500" />
-              <p className="text-gray-600 font-medium">Items</p>
+              <p className="text-gray-600 font-medium text-lg">Items</p>
             </div>
-            <p className="font-semibold text-gray-800">
+            <p className="font-semibold text-gray-800 text-lg ml-8">
               {purchase.items.length}
             </p>
           </div>
@@ -55,10 +55,12 @@ const PurchaseCard = ({ purchase }: { purchase: Purchase }) => {
         {purchase.notes && (
           <div className="bg-white/70 backdrop-blur-sm p-3 rounded-lg border border-white/30">
             <div className="flex items-center gap-2 mb-2">
-              <DollarSign className="w-4 h-4 text-green-500" />
-              <p className="text-xs text-gray-600 font-medium">Notes</p>
+              {/* <DollarSign className="w-4 h-4 text-green-500" /> */}
+              <p className="text-xs text-gray-600 font-medium text-center">
+                Notes
+              </p>
             </div>
-            <p className="text-sm text-gray-800 italic">
+            <p className="text-sm text-gray-800 italic line-clamp-2">
               &ldquo;{purchase.notes}&rdquo;
             </p>
           </div>
