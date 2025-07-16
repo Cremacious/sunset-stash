@@ -7,7 +7,7 @@ import { Calendar, Package, Edit, Eye } from 'lucide-react';
 const PurchaseCard = ({ purchase }: { purchase: Purchase }) => {
   return (
     <Card className="border-none relative overflow-hidden bg-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
-      <CardHeader className="relative z-10">
+      <CardHeader>
         <div className="flex justify-between items-start">
           <div className="flex items-center space-x-3">
             <div>
@@ -25,9 +25,9 @@ const PurchaseCard = ({ purchase }: { purchase: Purchase }) => {
         </div>
       </CardHeader>
 
-      <CardContent className="space-y-4 relative z-10">
+      <CardContent className="space-y-4">
         {/* Info Grid */}
-        <div className="grid grid-cols-2 gap-3 text-sm">
+        <div className="grid grid-cols-2 gap-2 text-sm">
           <div className="bg-white/70 backdrop-blur-sm p-3 rounded-lg border border-white/30">
             <div className="flex items-center gap-2 mb-2">
               <Calendar className="w-4 h-4 text-purple-500" />

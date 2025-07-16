@@ -4,6 +4,7 @@ import { Button } from '../ui/button';
 import { StashItem } from '@/lib/types/stash.types';
 import { getCategoryIcon } from '@/lib/utils';
 import Image from 'next/image';
+import { Edit, Eye } from 'lucide-react';
 
 const StashCard = ({ stashItem }: { stashItem: StashItem }) => {
   return (
@@ -32,11 +33,11 @@ const StashCard = ({ stashItem }: { stashItem: StashItem }) => {
         </div>
       </CardHeader>
       <CardContent className="space-y-4 text-center">
-        <div className="grid grid-cols-3 gap-2 text-sm">
-          <div className="bg-green-100 p-2 rounded-lg">
-            <p className=" mb-1 text-gray-600 text-center">Category</p>
-            <p className=" text-center font-bold">{stashItem.category}</p>
-          </div>
+        <div className="bg-green-100 p-1 rounded-lg">
+          <p className=" mb-1 text-gray-600 text-center">Category</p>
+          <p className=" text-center font-bold">Concentrate</p>
+        </div>
+        <div className="grid grid-cols-2 gap-4 text-sm">
           <div className="bg-purple-100 p-2 rounded-lg">
             <p className="text-gray-600 mb-1 text-center">Type</p>
             <p className="font-bold text-center">{stashItem.type}</p>
@@ -47,9 +48,21 @@ const StashCard = ({ stashItem }: { stashItem: StashItem }) => {
           </div>
         </div>
 
-        <div className="mt-2">
-          <Button asChild size="sm" className=" w-1/2">
-            <Link href={`/stash/${stashItem.id}`}>View</Link>
+        <div className="flex space-x-2 mt-6">
+          <Button asChild size="sm" variant="outline" className="flex-1 ">
+            <Link className="flex items-center gap-2" href={''}>
+              <Edit className="w-3 h-3" />
+              Edit
+            </Link>
+          </Button>
+          <Button asChild size="sm" className="flex-1 ">
+            <Link
+              href={`/stash/${stashItem.id}`}
+              className="flex items-center gap-2"
+            >
+              <Eye className="w-3 h-3" />
+              View
+            </Link>
           </Button>
         </div>
       </CardContent>

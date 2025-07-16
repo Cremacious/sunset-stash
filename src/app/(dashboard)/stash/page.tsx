@@ -33,7 +33,7 @@ const StashPage = async () => {
         {/* Purchase Grid */}
         <div className="glassCard md:col-span-3">
           {stashItems.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {stashItems.map((item) => (
                 <StashCard
                   key={item.id}
