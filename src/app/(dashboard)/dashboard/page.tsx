@@ -62,6 +62,8 @@ const DashboardPage = () => {
     ),
   }));
 
+  // const stashItems = []
+  // const purchases = []
   return (
     <div className="space-y-4">
       <div className="glassCard">

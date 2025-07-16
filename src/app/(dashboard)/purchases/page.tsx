@@ -1,5 +1,3 @@
-'use client';
-
 import { Button } from '@/components/ui/button';
 import {
   Select,
@@ -9,19 +7,12 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 import PurchaseCard from '@/components/purchases/PurchaseCard';
 import { samplePurchases } from '@/lib/sampleData';
 import PurchaseStats from '@/components/purchases/PurchaseStats';
+import NoPurchasesFound from '@/components/purchases/NoPurchasesFound';
 
 const PurchasesPage = () => {
-  const router = useRouter();
-
-  const [selectedMonth, setSelectedMonth] = useState('01');
-  const [selectedYear, setSelectedYear] = useState('2025');
-  const [searchTerm] = useState('');
-
   const purchases = samplePurchases.map((p) => ({
     ...p,
     date:
@@ -31,6 +22,9 @@ const PurchasesPage = () => {
   }));
 
   // const purchases = [];
+
+  const selectedMonth = 'Jan';
+  const selectedYear = '2025';
 
   return (
     <div className="space-y-4">
@@ -48,7 +42,7 @@ const PurchasesPage = () => {
                   <div className="text-xs  mb-1">Month</div>
                   <Select
                     value={selectedMonth}
-                    onValueChange={setSelectedMonth}
+                    // onValueChange={setSelectedMonth}
                   >
                     <SelectTrigger className="w-20 h-10">
                       <SelectValue />
@@ -71,7 +65,7 @@ const PurchasesPage = () => {
                 </div>
                 <div className="text-center">
                   <div className="text-xs  mb-1">Year</div>
-                  <Select value={selectedYear} onValueChange={setSelectedYear}>
+                  <Select value={selectedYear}>
                     <SelectTrigger className="w-25 h-10 ">
                       <SelectValue />
                     </SelectTrigger>
@@ -102,7 +96,7 @@ const PurchasesPage = () => {
             <div className="text-right">
               <div className="text-sm text-gray-500">Viewing</div>
               <div className="text-2xl font-bold text-coral-600">
-                {selectedMonth}/{selectedYear}
+                {/* {selectedMonth}/{selectedYear} */}
               </div>
             </div>
           </div>
@@ -135,25 +129,7 @@ const PurchasesPage = () => {
                 )}
               </div>
             ) : (
-              <div className="text-center py-16">
-                <div className="inline-flex items-center justify-center w-24 h-24 bg-yellow-100 rounded-full mb-6">
-                  <span className="text-4xl">🏖️</span>
-                </div>
-                <h3 className="text-2xl font-bold text-gray-800 mb-3">
-                  No purchases yet this month
-                </h3>
-                <p className="text-gray-600 mb-8 max-w-md mx-auto">
-                  {searchTerm
-                    ? 'Try adjusting your search filters'
-                    : `Ready to start your ${selectedMonth}/${selectedYear} dispensary journey? Add your first purchase!`}
-                </p>
-                <Button
-                  onClick={() => router.push('/purchases/new')}
-                  className="bg-yellow-500 hover:bg-yellow-600 text-white px-8 py-3 text-lg rounded-xl shadow-lg"
-                >
-                  🌟 Start Shopping
-                </Button>
-              </div>
+              <NoPurchasesFound />
             )}
           </div>
         </div>
