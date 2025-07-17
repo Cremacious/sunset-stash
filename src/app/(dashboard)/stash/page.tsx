@@ -6,7 +6,6 @@ import StashAnalytics from '@/components/stash/StashAnalytics';
 import NoStashFound from '@/components/stash/NoStashFound';
 import { getUserStashItems } from '@/lib/actions/stash.actions';
 
-
 const StashPage = async () => {
   const { stashItems = [] } = await getUserStashItems();
 
@@ -35,18 +34,7 @@ const StashPage = async () => {
           {stashItems.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {stashItems.map((item) => (
-                <StashCard
-                  key={item.id}
-                  stashItem={{
-                    ...item,
-                    dateAdded:
-                      typeof item.dateAdded === 'string'
-                        ? item.dateAdded
-                        : item.dateAdded instanceof Date
-                          ? item.dateAdded.toISOString()
-                          : String(item.dateAdded),
-                  }}
-                />
+                <StashCard key={item.id} stashItem={item} />
               ))}
             </div>
           ) : (

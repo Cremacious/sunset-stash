@@ -66,7 +66,10 @@ export async function getUserStashItems() {
     });
     return {
       success: true,
-      stashItems,
+      stashItems: stashItems.map((item) => ({
+        ...item,
+        dateAdded: item.dateAdded.toISOString(),
+      })),
     };
   } catch (error) {
     console.error('Error fetching stash items:', error);

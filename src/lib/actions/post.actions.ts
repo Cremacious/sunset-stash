@@ -6,7 +6,6 @@ import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
 import { revalidatePath } from 'next/cache';
 
-
 export async function createPost(data: z.infer<typeof postFormSchema>) {
   try {
     const session = await auth.api.getSession({
@@ -77,14 +76,14 @@ export async function getAllUserPosts() {
     });
     if (!session?.user.id) {
       console.log('No session found');
-      return [];
+      return { socialPosts: [] };
     }
     const existingUser = await prisma.user.findUnique({
       where: { id: session.user.id },
     });
     if (!existingUser) {
       console.log('User not found');
-      return [];
+      return { socialPosts: [] };
     }
     const posts = await prisma.post.findMany({
       where: { userId: existingUser.id },
@@ -97,10 +96,10 @@ export async function getAllUserPosts() {
       },
     });
     console.log('Posts found:', posts);
-    return { success: true, posts };
+    return { success: true, socialPosts: posts };
   } catch (error) {
     console.log('Error in getUserPosts:', error);
-    return [];
+    return { socialPosts: [] };
   }
 }
 

@@ -10,10 +10,6 @@ import { getUserStashItems } from '@/lib/actions/stash.actions';
 
 const NewPostPage = async () => {
   const { stashItems = [] } = await getUserStashItems();
-  const stashItemsWithStringDate = stashItems.map(item => ({
-    ...item,
-    dateAdded: typeof item.dateAdded === 'string' ? item.dateAdded : item.dateAdded.toISOString(),
-  }));
 
   return (
     <div className="relative w-full flex justify-center py-6 px-1">
@@ -27,7 +23,7 @@ const NewPostPage = async () => {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
-          <PostForm stashItems={stashItemsWithStringDate} />
+          <PostForm stashItems={stashItems} />
         </CardContent>
       </Card>
     </div>

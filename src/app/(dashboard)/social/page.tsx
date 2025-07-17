@@ -14,40 +14,10 @@ import { Post } from '@/lib/types/social.types';
 import { MessageSquare } from 'lucide-react';
 import RecentFriends from '@/components/social/RecentFriends';
 import UserImage from '@/components/social/UserImage';
+import { PostWithStashItems } from '@/lib/types/social.types';
 
 const SocialPage = async () => {
-  const response = await getAllUserPosts();
-  const socialPosts =
-    Array.isArray(response)
-      ? response
-      : response.posts ?? [];
-
-      
-  type PostWithStashItems = {
-    id: string;
-    author: string;
-    activity: string;
-    content: string;
-    createdAt: Date;
-    userId: string;
-    stashItems: Array<{
-      postId: string;
-      stashItemId: string;
-      stashItem: {
-        id: string;
-        name: string;
-        category: string;
-        type: string;
-        amount: string;
-        thc: number;
-        cbd: number;
-        lineage: string;
-        notes: string;
-        dateAdded: Date;
-        userId: string;
-      };
-    }>;
-  };
+  const { socialPosts = [] } = await getAllUserPosts();
 
   const friends = [
     {

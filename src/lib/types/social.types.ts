@@ -8,8 +8,34 @@ export type Post = {
   content: string;
   stashItems: StashItem[];
   comments: Comment[];
-  createdAt: string; // Will be converted from DateTime for display
+  createdAt: string;
   userId: string;
+};
+
+export type PostWithStashItems = {
+  id: string;
+  author: string;
+  activity: string;
+  content: string;
+  createdAt: Date;
+  userId: string;
+  stashItems: Array<{
+    postId: string;
+    stashItemId: string;
+    stashItem: {
+      id: string;
+      name: string;
+      category: string;
+      type: string;
+      amount: string;
+      thc: number;
+      cbd: number;
+      lineage: string;
+      notes: string;
+      dateAdded: Date;
+      userId: string;
+    };
+  }>;
 };
 
 export type Comment = {
@@ -17,9 +43,9 @@ export type Comment = {
   author: string;
   content: string;
   postId: string;
-  parentId?: string; // For nested comments/replies
+  parentId?: string;
   replies: Comment[];
-  createdAt: string; // Will be converted from DateTime for display
+  createdAt: string;
   userId: string;
 };
 
@@ -28,8 +54,8 @@ export type FriendRequest = {
   senderId: string;
   receiverId: string;
   status: 'pending' | 'accepted' | 'rejected';
-  createdAt: string; // Will be converted from DateTime for display
-  updatedAt: string; // Will be converted from DateTime for display
+  createdAt: string;
+  updatedAt: string;
   sender: {
     id: string;
     name: string;
@@ -46,7 +72,7 @@ export type Friendship = {
   id: string;
   userId: string;
   friendId: string;
-  createdAt: string; // Will be converted from DateTime for display
+  createdAt: string;
   friend: {
     id: string;
     name: string;

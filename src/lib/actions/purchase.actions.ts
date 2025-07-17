@@ -86,7 +86,18 @@ export async function getAllUserPurchases() {
         items: true,
       },
     });
-    return { success: true, purchases };
+    return {
+      success: true,
+      purchases: purchases.map((purchase) => ({
+        ...purchase,
+        date: purchase.date.toISOString(),
+        createdAt: purchase.createdAt.toISOString(),
+        items: purchase.items.map((item) => ({
+          ...item,
+          purchaseId: purchase.id,
+        })),
+      })),
+    };
   } catch (error) {
     console.error('Error fetching user purchases:', error);
     return { success: false, error: 'Failed to fetch user purchases' };

@@ -111,22 +111,7 @@ const PurchasesPage = async () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                   {purchases.slice(0, 9).map((purchase) => (
-                    <PurchaseCard
-                      key={purchase.id}
-                      purchase={{
-                        ...purchase,
-                        date:
-                          typeof purchase.date === 'object' &&
-                          purchase.date instanceof Date
-                            ? purchase.date.toISOString()
-                            : purchase.date,
-                        createdAt:
-                          typeof purchase.createdAt === 'object' &&
-                          purchase.createdAt instanceof Date
-                            ? purchase.createdAt.toISOString()
-                            : purchase.createdAt,
-                      }}
-                    />
+                    <PurchaseCard key={purchase.id} purchase={purchase} />
                   ))}
                 </div>
 
@@ -144,21 +129,7 @@ const PurchasesPage = async () => {
           </div>
         </div>
         <div className="md:col-span-1">
-          <PurchaseStats
-            purchases={purchases.map((purchase) => ({
-              ...purchase,
-              date:
-                typeof purchase.date === 'object' &&
-                purchase.date instanceof Date
-                  ? purchase.date.toISOString()
-                  : purchase.date,
-              createdAt:
-                typeof purchase.createdAt === 'object' &&
-                purchase.createdAt instanceof Date
-                  ? purchase.createdAt.toISOString()
-                  : purchase.createdAt,
-            }))}
-          />
+          <PurchaseStats purchases={purchases} />
         </div>
       </div>
     </div>
