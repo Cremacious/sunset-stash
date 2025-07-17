@@ -15,6 +15,10 @@ const ExamplePurchases = () => {
       <h2 className="text-4xl font-bold text-white text-center drop-shadow-lg">
         Log Purchases and Save Favorites
       </h2>
+      <p className="text-xl md:text-2xl text-center text-white/90 mb-8 max-w-3xl mx-auto">
+        Keep your favorite strains stashed away, and see which are your
+        favorites
+      </p>
 
       {/* Main Feature Cards */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">

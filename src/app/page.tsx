@@ -16,6 +16,7 @@ import 'aos/dist/aos.css';
 import { useEffect } from 'react';
 
 import ExamplePurchases from '@/components/homepage/ExamplePurchases';
+import SocialPostExample from '@/components/homepage/SocialPostExample';
 
 const Home = () => {
   useEffect(() => {
@@ -74,7 +75,7 @@ const Home = () => {
 
       <section data-aos="fade-up" data-aos-delay="100" className="py-16 px-4">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-white text-center mb-12 drop-shadow-lg">
+          <h2 className="text-3xl font-bold text-white text-center mb-12 drop-shadow-lg">
             Everything You Need to Track Your Journey
           </h2>
 
@@ -169,6 +170,10 @@ const Home = () => {
       {/* Purchase Tracking Examples */}
       <section data-aos="fade-up" data-aos-delay="100" className="py-16 px-4">
         <ExamplePurchases />
+      </section>
+
+      <section data-aos="fade-up" data-aos-delay="100" className="py-16 px-4">
+        <SocialPostExample />
       </section>
 
       {/* Call to Action */}
