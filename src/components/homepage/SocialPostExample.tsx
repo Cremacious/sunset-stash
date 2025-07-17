@@ -31,7 +31,7 @@ const examplePost = {
 const SocialPostExample = () => {
   return (
     <div className="grid md:grid-cols-2 items-center gap-8 max-w-5xl max-md:max-w-md mx-auto">
-      <div className="max-md:order-1 max-md:text-center">
+      <div className="md:order-1 max-md:text-center">
         <h2 className="text-3xl font-bold text-white text-center mb-12 drop-shadow-lg">
           Create Posts To Show Your Friends What You&apos;re Up To
         </h2>
@@ -40,9 +40,8 @@ const SocialPostExample = () => {
           strains you&apos;re enjoying at the time.
         </p>
       </div>
-      <div className="">
-        <TimelinePost post={examplePost} />
-      </div>
+
+      <TimelinePost post={examplePost} />
     </div>
   );
 };
