@@ -69,3 +69,26 @@ export async function createPurchase(data: z.infer<typeof purchaseFormSchema>) {
     return { success: false, error: 'Failed to save purchase' };
   }
 }
+
+export async function getAllUserPurchases() {
+  try {
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
+
+    if (!session?.user.id) {
+      return { success: false, error: 'Please sign in again.' };
+    }
+    const purchases = await prisma.purchase.findMany({
+      where: { userId: session.user.id },
+      orderBy: { date: 'desc' },
+      include: {
+        items: true,
+      },
+    });
+    return { success: true, purchases };
+  } catch (error) {
+    console.error('Error fetching user purchases:', error);
+    return { success: false, error: 'Failed to fetch user purchases' };
+  }
+}

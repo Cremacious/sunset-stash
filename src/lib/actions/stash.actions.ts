@@ -66,7 +66,7 @@ export async function getUserStashItems() {
     });
     return {
       success: true,
-      data: stashItems,
+      stashItems,
     };
   } catch (error) {
     console.error('Error fetching stash items:', error);

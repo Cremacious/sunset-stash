@@ -6,6 +6,7 @@ import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
 import { revalidatePath } from 'next/cache';
 
+
 export async function createPost(data: z.infer<typeof postFormSchema>) {
   try {
     const session = await auth.api.getSession({
@@ -69,7 +70,7 @@ export async function createPost(data: z.infer<typeof postFormSchema>) {
   }
 }
 
-export async function getUserPosts() {
+export async function getAllUserPosts() {
   try {
     const session = await auth.api.getSession({
       headers: await headers(),
@@ -96,7 +97,7 @@ export async function getUserPosts() {
       },
     });
     console.log('Posts found:', posts);
-    return posts || [];
+    return { success: true, posts };
   } catch (error) {
     console.log('Error in getUserPosts:', error);
     return [];

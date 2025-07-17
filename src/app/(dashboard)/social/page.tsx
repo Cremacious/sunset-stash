@@ -9,17 +9,20 @@ import {
 import TimelinePost from '@/components/social/TimelinePost';
 import FindFriends from '@/components/social/FindFriends';
 import Link from 'next/link';
-// import { getUserPosts } from '@/lib/actions/post.actions';
+import { getAllUserPosts } from '@/lib/actions/post.actions';
 import { Post } from '@/lib/types/social.types';
 import { MessageSquare } from 'lucide-react';
 import RecentFriends from '@/components/social/RecentFriends';
-import { samplePosts } from '@/lib/sampleData';
 import UserImage from '@/components/social/UserImage';
 
 const SocialPage = async () => {
-  // const socialPosts = await getUserPosts();
-  const socialPosts = samplePosts;
+  const response = await getAllUserPosts();
+  const socialPosts =
+    Array.isArray(response)
+      ? response
+      : response.posts ?? [];
 
+      
   type PostWithStashItems = {
     id: string;
     author: string;

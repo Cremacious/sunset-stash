@@ -4,11 +4,11 @@ import Link from 'next/link';
 import StashCard from '@/components/stash/StashCard';
 import StashAnalytics from '@/components/stash/StashAnalytics';
 import NoStashFound from '@/components/stash/NoStashFound';
-// import { getUserStashItems } from '@/lib/actions/stash.actions';
-import { sampleStashItems } from '@/lib/sampleData';
+import { getUserStashItems } from '@/lib/actions/stash.actions';
+
 
 const StashPage = async () => {
-  const stashItems = sampleStashItems;
+  const { stashItems = [] } = await getUserStashItems();
 
   return (
     <div className="space-y-4 max-w-7xl mx-auto">
@@ -42,7 +42,9 @@ const StashPage = async () => {
                     dateAdded:
                       typeof item.dateAdded === 'string'
                         ? item.dateAdded
-                        : item.dateAdded.toISOString(),
+                        : item.dateAdded instanceof Date
+                          ? item.dateAdded.toISOString()
+                          : String(item.dateAdded),
                   }}
                 />
               ))}

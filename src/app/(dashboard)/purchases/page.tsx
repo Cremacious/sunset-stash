@@ -8,18 +8,12 @@ import {
 } from '@/components/ui/select';
 import Link from 'next/link';
 import PurchaseCard from '@/components/purchases/PurchaseCard';
-import { samplePurchases } from '@/lib/sampleData';
 import PurchaseStats from '@/components/purchases/PurchaseStats';
 import NoPurchasesFound from '@/components/purchases/NoPurchasesFound';
+import { getAllUserPurchases } from '@/lib/actions/purchase.actions';
 
-const PurchasesPage = () => {
-  const purchases = samplePurchases.map((p) => ({
-    ...p,
-    date:
-      typeof p.date === 'string' ? p.date : p.date.toISOString().split('T')[0],
-    createdAt:
-      typeof p.createdAt === 'string' ? p.createdAt : p.createdAt.toISOString(),
-  }));
+const PurchasesPage = async () => {
+  const { purchases = [] } = await getAllUserPurchases();
 
   // const purchases = [];
 
@@ -117,7 +111,22 @@ const PurchasesPage = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                   {purchases.slice(0, 9).map((purchase) => (
-                    <PurchaseCard key={purchase.id} purchase={purchase} />
+                    <PurchaseCard
+                      key={purchase.id}
+                      purchase={{
+                        ...purchase,
+                        date:
+                          typeof purchase.date === 'object' &&
+                          purchase.date instanceof Date
+                            ? purchase.date.toISOString()
+                            : purchase.date,
+                        createdAt:
+                          typeof purchase.createdAt === 'object' &&
+                          purchase.createdAt instanceof Date
+                            ? purchase.createdAt.toISOString()
+                            : purchase.createdAt,
+                      }}
+                    />
                   ))}
                 </div>
 
@@ -135,7 +144,21 @@ const PurchasesPage = () => {
           </div>
         </div>
         <div className="md:col-span-1">
-          <PurchaseStats purchases={purchases} />
+          <PurchaseStats
+            purchases={purchases.map((purchase) => ({
+              ...purchase,
+              date:
+                typeof purchase.date === 'object' &&
+                purchase.date instanceof Date
+                  ? purchase.date.toISOString()
+                  : purchase.date,
+              createdAt:
+                typeof purchase.createdAt === 'object' &&
+                purchase.createdAt instanceof Date
+                  ? purchase.createdAt.toISOString()
+                  : purchase.createdAt,
+            }))}
+          />
         </div>
       </div>
     </div>
