@@ -26,6 +26,7 @@ model User {
   stashItems             StashItem[]
   accounts               Account[]
   sessions               Session[]
+  likedPosts             PostLike[]      @relation("UserLikes")
 
   @@map("user")
 }
@@ -127,6 +128,7 @@ model Post {
   comments   Comment[]
   user       User            @relation(fields: [userId], references: [id], onDelete: Cascade)
   stashItems PostStashItem[]
+  likes      PostLike[]      @relation("PostLikes")
 }
 
 model Comment {
@@ -174,4 +176,15 @@ model Friendship {
   user      User     @relation("UserFriends", fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, friendId])
+}
+
+model PostLike {
+  id        String   @id @default(cuid())
+  userId    String
+  postId    String
+  createdAt DateTime @default(now())
+  user      User     @relation("UserLikes", fields: [userId], references: [id], onDelete: Cascade)
+  post      Post     @relation("PostLikes", fields: [postId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, postId])
 }
