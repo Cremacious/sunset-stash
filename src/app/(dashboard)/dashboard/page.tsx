@@ -4,30 +4,14 @@ import CommunityFeed from '@/components/social/CommunityFeed';
 import RecentStashItems from '@/components/stash/RecentStashItems';
 import {
   samplePosts,
-  samplePurchases,
-  sampleStashItems,
 } from '@/lib/sampleData';
+import { getAllUserPurchases } from '@/lib/actions/purchase.actions';
+import { getUserStashItems } from '@/lib/actions/stash.actions';
 
-const DashboardPage = () => {
-  const purchases = samplePurchases.map((purchase) => ({
-    ...purchase,
-    date:
-      purchase.date instanceof Date
-        ? purchase.date.toISOString()
-        : purchase.date,
-    createdAt:
-      purchase.createdAt instanceof Date
-        ? purchase.createdAt.toISOString()
-        : purchase.createdAt,
-  }));
+const DashboardPage = async () => {
+  const { purchases = [] } = await getAllUserPurchases();
 
-  const stashItems = sampleStashItems.map((item) => ({
-    ...item,
-    dateAdded:
-      item.dateAdded instanceof Date
-        ? item.dateAdded.toISOString()
-        : item.dateAdded,
-  }));
+  const { stashItems = [] } = await getUserStashItems();
 
   const posts = samplePosts.map((post) => ({
     ...post,
