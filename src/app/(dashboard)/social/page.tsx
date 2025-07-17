@@ -62,10 +62,9 @@ const SocialPage = async () => {
   ];
 
   return (
-    <div className="">
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
-        {/* Profile */}
-        <div>
+    <div className="max-w-7xl mx-auto">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <div className="space-y-4">
           <div className="glassCard">
             <div className="bg-white rounded-lg shadow-lg p-6">
               {/* Profile Header */}
@@ -119,8 +118,13 @@ const SocialPage = async () => {
               </div>
             </div>
           </div>
+          <RecentFriends friends={friends} />
+
+          <div className="glassCard">
+            <FindFriends />
+          </div>
         </div>
-        {/* left Column - Timeline */}
+
         <div className="md:col-span-2 space-y-6 glassCard">
           {/* Timeline Filters */}
           <div className="bg-white rounded-lg border border-gray-200 p-4">
@@ -181,14 +185,6 @@ const SocialPage = async () => {
               <Button className="px-8">Load More Posts</Button>
             </div>
           )}
-        </div>
-        {/* Friends */}
-        <div className="space-y-4 ">
-          <RecentFriends friends={friends} />
-
-          <div className="glassCard">
-            <FindFriends />
-          </div>
         </div>
       </div>
     </div>

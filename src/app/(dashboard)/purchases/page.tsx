@@ -27,7 +27,7 @@ const PurchasesPage = () => {
   const selectedYear = '2025';
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 max-w-7xl mx-auto">
       <div className="smallGlassCard">
         <div className="bg-white rounded-lg shadow-lg p-4">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">

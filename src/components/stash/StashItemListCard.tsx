@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 const StashItemListCard = ({ stashItem }: { stashItem: StashItem }) => {
   return (
-    <Card className="bg-white border border-gray-200 hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+    <Card className="bg-white border border-l-purple-600 border-l-6 hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
       <CardHeader className="">
         <div className="flex justify-between items-start">
           <div className="flex items-center space-x-3">

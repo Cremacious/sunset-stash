@@ -6,7 +6,7 @@ import { Calendar, Edit, Eye, Container } from 'lucide-react';
 
 const PurchaseCard = ({ purchase }: { purchase: Purchase }) => {
   return (
-    <Card className="border-none relative overflow-hidden bg-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+    <Card className="border border-b-green-500 border-b-6 relative overflow-hidden bg-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
       <CardHeader>
         <div className="flex justify-between items-start">
           <div className="flex items-center space-x-3">
@@ -28,9 +28,9 @@ const PurchaseCard = ({ purchase }: { purchase: Purchase }) => {
       <CardContent className="space-y-4">
         {/* Info Grid */}
         <div className="grid grid-cols-2 gap-2 text-sm">
-          <div className="bg-purple-100 p-3 rounded-lg border-purple-300">
+          <div className="bg-green-100 p-3 rounded-lg border-green-300">
             <div className="flex justify-center mb-1">
-              <Calendar className="w-7 h-7 text-purple-500" />
+              <Calendar className="w-7 h-7 text-green-700" />
             </div>
             <p className=" text font-medium text-center">Date</p>
             <p className="font-semibold text-gray-800 text-lg text-center">
@@ -59,9 +59,7 @@ const PurchaseCard = ({ purchase }: { purchase: Purchase }) => {
           <div className="bg-white/70 backdrop-blur-sm rounded-lg border border-white/30">
             <div className="flex items-center gap-2 mb-2">
               {/* <DollarSign className="w-4 h-4 text-green-500" /> */}
-              <p className="text-xs text-center">
-                Notes
-              </p>
+              <p className="text-xs text-center">Notes</p>
             </div>
             <p className="text-sm text-gray-800 italic line-clamp-2">
               &ldquo;{purchase.notes}&rdquo;

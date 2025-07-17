@@ -2,7 +2,7 @@ import { Purchase } from '@/lib/types/purchase.types';
 
 const PurchaseListCard = ({ purchase }: { purchase: Purchase }) => {
   return (
-    <div className="bg-white rounded-lg border border-gray-200 p-4 hover:shadow-md ">
+    <div className="bg-white rounded-lg border-l-6 border-l-green-600 border p-4 hover:shadow-md ">
       <div className="flex justify-between items-start mb-2">
         <div className="flex items-center space-x-3">
           <div>

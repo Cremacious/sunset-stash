@@ -2,6 +2,7 @@ import { Button } from '../ui/button';
 import { Post } from '@/lib/types/social.types';
 import { Badge } from '../ui/badge';
 import Link from 'next/link';
+import { MessageCircle, Heart } from 'lucide-react';
 
 const TimelinePost = ({ post }: { post: Post }) => {
   // Generate initials from author name
@@ -13,12 +14,12 @@ const TimelinePost = ({ post }: { post: Post }) => {
   };
 
   return (
-    <div className="bg-white rounded-xl border-l-4 border-l-orange-500 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden">
+    <div className="bg-white rounded-xl border-b-6 border-b-blue-500 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden">
       {/* Header Section */}
-      <div className="bg-orange-50 p-4 border-b border-orange-100">
+      <div className="bg-blue-50 p-4 border-b border-blue-100">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <div className="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center shadow-md">
+            <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center shadow-md">
               <span className="text-white font-bold text-lg">
                 {getInitials(post.author)}
               </span>
@@ -30,7 +31,7 @@ const TimelinePost = ({ post }: { post: Post }) => {
           </div>
           <Badge
             variant="outline"
-            className="bg-orange-100 text-orange-700 border-orange-300 font-medium"
+            className="bg-blue-100 text-blue-700 border-blue-300 font-medium"
           >
             {post.activity}
           </Badge>
@@ -48,14 +49,14 @@ const TimelinePost = ({ post }: { post: Post }) => {
           <div className="mb-4">
             <div className="flex items-center mb-2">
               <span className="text-sm font-medium text-gray-700">
-                🌿 Stash Items:
+                Strains:
               </span>
             </div>
             <div className="flex flex-wrap gap-2">
               {post.stashItems.map((item, index) => (
                 <Badge
                   key={index}
-                  className="bg-green-500 hover:bg-green-600 text-white shadow-sm"
+                  className="bg-blue-500 hover:bg-blue-600 text-white font-bold shadow-sm"
                 >
                   {item.name}
                 </Badge>
@@ -67,25 +68,15 @@ const TimelinePost = ({ post }: { post: Post }) => {
         {/* Action Bar */}
         <div className="flex items-center justify-between bg-gray-50 rounded-lg p-3">
           <div className="flex items-center space-x-4">
-            <Button
-              variant="ghost"
-              size="sm"
-              className="flex items-center space-x-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg px-3 py-2"
-            >
-              <span className="text-lg">💬</span>
-              <span className="text-sm font-medium">Comments</span>
-              <span className="text-xs bg-gray-200 text-gray-600 rounded-full px-2 py-1">
-                12
+            <div className="relative">
+              <MessageCircle className="text-purple-600" size={30} />
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
+                3
               </span>
-            </Button>
-            <Button
-              variant="ghost"
-              size="sm"
-              className="flex items-center space-x-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg px-3 py-2"
-            >
-              <span className="text-lg">❤️</span>
-              <span className="text-sm font-medium">Like</span>
-            </Button>
+            </div>
+            <button className="flex items-center space-x-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg px-3 py-2">
+              <Heart fill="red" size={30} className="text-red-500" />
+            </button>
           </div>
           <Button
             asChild

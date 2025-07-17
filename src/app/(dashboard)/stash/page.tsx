@@ -11,7 +11,7 @@ const StashPage = async () => {
   const stashItems = sampleStashItems;
 
   return (
-    <div className="space-y-4 ">
+    <div className="space-y-4 max-w-7xl mx-auto">
       <div className="smallGlassCard">
         <div className="flex flex-col md:flex-row gap-2 md:justify-between items-center bg-white rounded-lg p-4">
           <Button className="w-full md:w-auto" asChild>
