@@ -8,19 +8,14 @@ import {
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import {
-  ShoppingCart,
-  Heart,
-  Users,
-  TrendingUp,
-  Star,
-  DollarSign,
-} from 'lucide-react';
+import { ShoppingCart, Heart, Users } from 'lucide-react';
 import Logo from '../../public/sunset-stash-logo.png';
 import Image from 'next/image';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useEffect } from 'react';
+
+import ExamplePurchases from '@/components/homepage/ExamplePurchases';
 
 const Home = () => {
   useEffect(() => {
@@ -98,11 +93,16 @@ const Home = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent className="text-gray-700">
-                <ul className="space-y-2">
-                  <li>• Track spending per dispensary visit</li>
-                  <li>• Log product details (THC%, CBD%, lineage)</li>
-                  <li>• Monitor your monthly spending</li>
-                  <li>• See which dispensaries you visit most</li>
+                <ul className="space-y-2 text-center text-sm">
+                  <li className="bg-green-100 p-2 rounded-lg">
+                    Track spending per dispensary visit
+                  </li>
+                  <li className="bg-green-100 p-2 rounded-lg">
+                    Monitor your monthly spending
+                  </li>
+                  <li className="bg-green-100 p-2 rounded-lg">
+                    See which dispensaries you visit most
+                  </li>
                 </ul>
               </CardContent>
             </Card>
@@ -121,11 +121,16 @@ const Home = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent className="text-gray-700">
-                <ul className="space-y-2">
-                  <li>• Create entries for favorite strains</li>
-                  <li>• Rate and review products</li>
-                  <li>• Add from recent purchases easily</li>
-                  <li>• Organize by categories and effects</li>
+                <ul className="space-y-2 text-center text-sm">
+                  <li className="bg-purple-100 p-2 rounded-lg">
+                    Create entries for favorite strains
+                  </li>
+                  <li className="bg-purple-100 p-2 rounded-lg">
+                    Add from recent purchases easily
+                  </li>
+                  <li className="bg-purple-100 p-2 rounded-lg">
+                    Create custom strain notes
+                  </li>
                 </ul>
               </CardContent>
             </Card>
@@ -144,11 +149,16 @@ const Home = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent className="text-gray-700">
-                <ul className="space-y-2">
-                  <li>• Share posts about your experiences</li>
-                  <li>• Connect with friends and see their activities</li>
-                  <li>• Comment and interact with the community</li>
-                  <li>• Discover new products through friends</li>
+                <ul className="space-y-2 text-center text-sm">
+                  <li className="bg-blue-100 p-2 rounded-lg">
+                    Share posts about your experiences
+                  </li>
+                  <li className="bg-blue-100 p-2 rounded-lg">
+                    Connect with friends and see their activities
+                  </li>
+                  <li className="bg-blue-100 p-2 rounded-lg">
+                    Discover new products through friends
+                  </li>
                 </ul>
               </CardContent>
             </Card>
@@ -158,145 +168,7 @@ const Home = () => {
 
       {/* Purchase Tracking Examples */}
       <section data-aos="fade-up" data-aos-delay="100" className="py-16 px-4">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-white text-center mb-12 drop-shadow-lg">
-            Track Your Purchases Like a Pro
-          </h2>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-            {/* Purchase Form Preview */}
-            <Card className="bg-white shadow-xl border-0">
-              <CardHeader>
-                <CardTitle className="text-gray-800 text-xl">
-                  Easy Purchase Logging
-                </CardTitle>
-                <CardDescription className="text-gray-600">
-                  Log every detail of your dispensary visits
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="bg-gray-50 rounded-lg p-4 space-y-3">
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-600">Dispensary:</span>
-                    <span className="text-gray-800 font-semibold">
-                      Trulieve
-                    </span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-600">Date:</span>
-                    <span className="text-gray-800 font-semibold">
-                      Jan 15, 2025
-                    </span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-600">Total:</span>
-                    <span className="text-green-600 font-bold">$89.50</span>
-                  </div>
-                  <div className="border-t border-gray-200 pt-3">
-                    <p className="text-gray-600 text-sm">Items:</p>
-                    <div className="ml-4 space-y-1">
-                      <p className="text-gray-800 text-sm">
-                        • Blue Dream (3.5g) - $45.00
-                      </p>
-                      <p className="text-gray-800 text-sm">
-                        • CBD Tincture (30ml) - $44.50
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Analytics Preview */}
-            <Card className="bg-white shadow-xl border-0">
-              <CardHeader>
-                <CardTitle className="text-gray-800 text-xl">
-                  Spending Analytics
-                </CardTitle>
-                <CardDescription className="text-gray-600">
-                  See where your money goes and track your habits
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-gray-50 rounded-lg p-3 text-center">
-                    <DollarSign className="w-8 h-8 text-green-600 mx-auto mb-2" />
-                    <p className="text-gray-600 text-sm">Monthly Spending</p>
-                    <p className="text-gray-800 font-bold text-lg">$340.25</p>
-                  </div>
-                  <div className="bg-gray-50 rounded-lg p-3 text-center">
-                    <TrendingUp className="w-8 h-8 text-blue-600 mx-auto mb-2" />
-                    <p className="text-gray-600 text-sm">Total Purchases</p>
-                    <p className="text-gray-800 font-bold text-lg">12</p>
-                  </div>
-                  <div className="bg-gray-50 rounded-lg p-3 text-center">
-                    <Star className="w-8 h-8 text-yellow-600 mx-auto mb-2" />
-                    <p className="text-gray-600 text-sm">Favorite Category</p>
-                    <p className="text-gray-800 font-bold text-sm">Flower</p>
-                  </div>
-                  <div className="bg-gray-50 rounded-lg p-3 text-center">
-                    <ShoppingCart className="w-8 h-8 text-purple-600 mx-auto mb-2" />
-                    <p className="text-gray-600 text-sm">Top Dispensary</p>
-                    <p className="text-gray-800 font-bold text-sm">Trulieve</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Example Purchase Items */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Card className="bg-white shadow-xl border-0">
-              <CardContent className="p-4">
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-gray-800 font-semibold">Blue Dream</h3>
-                  <span className="text-green-600 font-bold">$45.00</span>
-                </div>
-                <div className="space-y-2 text-sm text-gray-600">
-                  <p>Category: Flower</p>
-                  <p>Type: Sativa</p>
-                  <p>Amount: 3.5g</p>
-                  <p>THC: 22.5% | CBD: 0.5%</p>
-                  <p>Lineage: Blueberry x Haze</p>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-white shadow-xl border-0">
-              <CardContent className="p-4">
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-gray-800 font-semibold">OG Kush</h3>
-                  <span className="text-green-600 font-bold">$85.00</span>
-                </div>
-                <div className="space-y-2 text-sm text-gray-600">
-                  <p>Category: Flower</p>
-                  <p>Type: Indica</p>
-                  <p>Amount: 7g</p>
-                  <p>THC: 25.0% | CBD: 0.1%</p>
-                  <p>Lineage: Chemdawg x Lemon Thai</p>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-white shadow-xl border-0">
-              <CardContent className="p-4">
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-gray-800 font-semibold">
-                    Vape Cartridge
-                  </h3>
-                  <span className="text-green-600 font-bold">$50.75</span>
-                </div>
-                <div className="space-y-2 text-sm text-gray-600">
-                  <p>Category: Vape</p>
-                  <p>Type: Hybrid</p>
-                  <p>Amount: 1g</p>
-                  <p>THC: 78.5% | CBD: 0.8%</p>
-                  <p>Lineage: Gelato x Sunset Sherbet</p>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
+        <ExamplePurchases />
       </section>
 
       {/* Call to Action */}
