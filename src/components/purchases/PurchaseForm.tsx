@@ -21,7 +21,13 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import { Calendar } from '@/components/ui/calendar';
-import { Calendar as CalendarIcon, Container, Plus, X } from 'lucide-react';
+import {
+  Calendar as CalendarIcon,
+  Container,
+  Plus,
+  Sun,
+  X,
+} from 'lucide-react';
 import { Textarea } from '@/components/ui/textarea';
 import {
   Select,
@@ -107,6 +113,8 @@ export default function PurchaseForm() {
     }
   }
 
+  const isSubmitting = form.formState.isSubmitting;
+
   const categories = [
     'Flower',
     'Concentrate',
@@ -147,9 +155,7 @@ export default function PurchaseForm() {
                     name="dispensary"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>
-                          Dispensary Name
-                        </FormLabel>
+                        <FormLabel>Dispensary Name</FormLabel>
                         <FormControl>
                           <Input
                             placeholder="Enter dispensary name"
@@ -167,9 +173,7 @@ export default function PurchaseForm() {
                     name="date"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel >
-                          Purchase Date
-                        </FormLabel>
+                        <FormLabel>Purchase Date</FormLabel>
                         <Popover>
                           <PopoverTrigger asChild>
                             <FormControl>
@@ -211,7 +215,7 @@ export default function PurchaseForm() {
                   name="notes"
                   render={({ field }) => (
                     <FormItem className="mt-4">
-                      <FormLabel >Notes</FormLabel>
+                      <FormLabel>Notes</FormLabel>
                       <FormControl>
                         <Textarea
                           placeholder="Any notes about this purchase"
@@ -269,9 +273,7 @@ export default function PurchaseForm() {
                           name={`items.${index}.name`}
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>
-                                Strain Name
-                              </FormLabel>
+                              <FormLabel>Strain Name</FormLabel>
                               <FormControl>
                                 <Input
                                   placeholder="Enter strain name"
@@ -289,9 +291,7 @@ export default function PurchaseForm() {
                           name={`items.${index}.category`}
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel >
-                                Category
-                              </FormLabel>
+                              <FormLabel>Category</FormLabel>
                               <Select
                                 onValueChange={field.onChange}
                                 value={field.value}
@@ -319,9 +319,7 @@ export default function PurchaseForm() {
                           name={`items.${index}.type`}
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>
-                                Type
-                              </FormLabel>
+                              <FormLabel>Type</FormLabel>
                               <Select
                                 onValueChange={field.onChange}
                                 value={field.value}
@@ -351,9 +349,7 @@ export default function PurchaseForm() {
                           name={`items.${index}.amount`}
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel >
-                                Amount
-                              </FormLabel>
+                              <FormLabel>Amount</FormLabel>
                               <FormControl>
                                 <Input
                                   placeholder="e.g., 3.5g"
@@ -370,9 +366,7 @@ export default function PurchaseForm() {
                           name={`items.${index}.price`}
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel >
-                                Price ($)
-                              </FormLabel>
+                              <FormLabel>Price ($)</FormLabel>
                               <FormControl>
                                 <Input
                                   type="number"
@@ -397,9 +391,7 @@ export default function PurchaseForm() {
                           name={`items.${index}.thc`}
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>
-                                THC %
-                              </FormLabel>
+                              <FormLabel>THC %</FormLabel>
                               <FormControl>
                                 <Input
                                   type="number"
@@ -419,9 +411,7 @@ export default function PurchaseForm() {
                           name={`items.${index}.cbd`}
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>
-                                CBD %
-                              </FormLabel>
+                              <FormLabel>CBD %</FormLabel>
                               <FormControl>
                                 <Input
                                   type="number"
@@ -443,9 +433,7 @@ export default function PurchaseForm() {
                           name={`items.${index}.lineage`}
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>
-                                Lineage
-                              </FormLabel>
+                              <FormLabel>Lineage</FormLabel>
                               <FormControl>
                                 <Input
                                   placeholder="Parent strains"
@@ -494,9 +482,7 @@ export default function PurchaseForm() {
                         name={`items.${index}.notes`}
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel >
-                              Notes
-                            </FormLabel>
+                            <FormLabel>Notes</FormLabel>
                             <FormControl>
                               <Textarea
                                 placeholder="Your thoughts on this strain..."
@@ -528,10 +514,25 @@ export default function PurchaseForm() {
                   </div>
                 </div>
               </div>
-
-              <div className="flex justify-center mb-4">
-                <Button type="submit" className="">
-                  Save Purchase
+              <div className="flex flex-col sm:flex-row gap-3 py-4 border-t border-gray-200">
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => router.push('/purchases')}
+                  className="flex-1"
+                >
+                  Cancel
+                </Button>
+                <Button
+                  disabled={!form.formState.isDirty || isSubmitting}
+                  type="submit"
+                  className="flex-1 "
+                >
+                  {isSubmitting ? (
+                    <Sun className="animate-spin text-yellow-300" />
+                  ) : (
+                    'Submit Purchase'
+                  )}
                 </Button>
               </div>
             </form>

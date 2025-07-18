@@ -26,6 +26,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { stashFormSchema } from '@/lib/validators/stash.validator';
 import { createStashItem } from '@/lib/actions/stash.actions';
 import { useRouter } from 'next/navigation';
+import { Sun } from 'lucide-react';
 
 const StashForm = () => {
   const router = useRouter();
@@ -45,6 +46,8 @@ const StashForm = () => {
       );
     }
   }
+
+  const isSubmitting = form.formState.isSubmitting;
 
   return (
     <Form {...form}>
@@ -221,8 +224,26 @@ const StashForm = () => {
             </FormItem>
           )}
         />
-        <div className="flex justify-center">
-          <Button type="submit">Submit</Button>
+        <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-gray-200">
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => router.push('/stash')}
+            className="flex-1"
+          >
+            Cancel
+          </Button>
+          <Button
+            disabled={!form.formState.isDirty || isSubmitting}
+            type="submit"
+            className="flex-1 "
+          >
+            {isSubmitting ? (
+              <Sun className="animate-spin text-yellow-300" />
+            ) : (
+              'Submit'
+            )}
+          </Button>
         </div>
       </form>
     </Form>
