@@ -21,7 +21,7 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import { Calendar } from '@/components/ui/calendar';
-import { Calendar as CalendarIcon, Plus, X } from 'lucide-react';
+import { Calendar as CalendarIcon, Container, Plus, X } from 'lucide-react';
 import { Textarea } from '@/components/ui/textarea';
 import {
   Select,
@@ -119,10 +119,12 @@ export default function PurchaseForm() {
 
   const types = ['Indica', 'Sativa', 'Hybrid', 'CBD', 'THC', 'Other'];
 
-  // const totalPrice = fields.reduce((sum, _, index) => {
-  //   const price = form.watch(`items.${index}.price`);
-  //   return sum + (price || 0);
-  // }, 0);
+  const totalPrice = fields.reduce((sum, _, index) => {
+    const price = form.watch(`items.${index}.price`);
+    const numericPrice =
+      typeof price === 'number' ? price : parseFloat(price) || 0;
+    return sum + numericPrice;
+  }, 0);
 
   return (
     <div className="min-h-screen">
@@ -145,7 +147,7 @@ export default function PurchaseForm() {
                     name="dispensary"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-gray-700">
+                        <FormLabel>
                           Dispensary Name
                         </FormLabel>
                         <FormControl>
@@ -165,7 +167,7 @@ export default function PurchaseForm() {
                     name="date"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-gray-700 ">
+                        <FormLabel >
                           Purchase Date
                         </FormLabel>
                         <Popover>
@@ -175,7 +177,10 @@ export default function PurchaseForm() {
                                 variant="outline"
                                 className={cn(
                                   'w-full pl-3 text-left font-normal',
-                                  !field.value && 'text-muted-foreground'
+                                  'bg-white border-gray-300 text-gray-900', // Override colors
+                                  'hover:bg-gray-50 hover:text-gray-900', // Override hover
+                                  'focus:ring-gray-500 focus:border-gray-500', // Override focus
+                                  !field.value && 'text-gray-500' // Muted text color
                                 )}
                               >
                                 {field.value ? (
@@ -192,7 +197,6 @@ export default function PurchaseForm() {
                               mode="single"
                               selected={field.value}
                               onSelect={field.onChange}
-                              initialFocus
                             />
                           </PopoverContent>
                         </Popover>
@@ -207,7 +211,7 @@ export default function PurchaseForm() {
                   name="notes"
                   render={({ field }) => (
                     <FormItem className="mt-4">
-                      <FormLabel className="text-gray-700">Notes</FormLabel>
+                      <FormLabel >Notes</FormLabel>
                       <FormControl>
                         <Textarea
                           placeholder="Any notes about this purchase"
@@ -224,7 +228,6 @@ export default function PurchaseForm() {
                 />
               </div>
 
-              {/* Items Section */}
               <div className="bg-gray-50/80 backdrop-blur-sm border border-gray-200 rounded-xl  p-2 md:p-6">
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="text-xl font-semibold text-gray-800">
@@ -266,7 +269,7 @@ export default function PurchaseForm() {
                           name={`items.${index}.name`}
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-gray-700">
+                              <FormLabel>
                                 Strain Name
                               </FormLabel>
                               <FormControl>
@@ -286,7 +289,7 @@ export default function PurchaseForm() {
                           name={`items.${index}.category`}
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-gray-700">
+                              <FormLabel >
                                 Category
                               </FormLabel>
                               <Select
@@ -316,7 +319,7 @@ export default function PurchaseForm() {
                           name={`items.${index}.type`}
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-gray-700">
+                              <FormLabel>
                                 Type
                               </FormLabel>
                               <Select
@@ -348,7 +351,7 @@ export default function PurchaseForm() {
                           name={`items.${index}.amount`}
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-gray-700">
+                              <FormLabel >
                                 Amount
                               </FormLabel>
                               <FormControl>
@@ -362,13 +365,12 @@ export default function PurchaseForm() {
                             </FormItem>
                           )}
                         />
-
                         <FormField
                           control={form.control}
                           name={`items.${index}.price`}
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-gray-700">
+                              <FormLabel >
                                 Price ($)
                               </FormLabel>
                               <FormControl>
@@ -378,6 +380,11 @@ export default function PurchaseForm() {
                                   placeholder="0.00"
                                   className=""
                                   {...field}
+                                  onChange={(e) =>
+                                    field.onChange(
+                                      parseFloat(e.target.value) || 0
+                                    )
+                                  }
                                 />
                               </FormControl>
                               <FormMessage />
@@ -390,7 +397,7 @@ export default function PurchaseForm() {
                           name={`items.${index}.thc`}
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-gray-700">
+                              <FormLabel>
                                 THC %
                               </FormLabel>
                               <FormControl>
@@ -412,7 +419,7 @@ export default function PurchaseForm() {
                           name={`items.${index}.cbd`}
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-gray-700">
+                              <FormLabel>
                                 CBD %
                               </FormLabel>
                               <FormControl>
@@ -436,7 +443,7 @@ export default function PurchaseForm() {
                           name={`items.${index}.lineage`}
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-gray-700">
+                              <FormLabel>
                                 Lineage
                               </FormLabel>
                               <FormControl>
@@ -459,19 +466,22 @@ export default function PurchaseForm() {
                           control={form.control}
                           name={`items.${index}.addToStash`}
                           render={({ field }) => (
-                            <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border  p-4">
-                              <FormControl>
+                            <FormItem className="flex flex-row items-center space-x-4 space-y-0 rounded-md border p-4">
+                              <FormControl className="flex items-center justify-center">
                                 <Checkbox
                                   checked={field.value}
                                   onCheckedChange={field.onChange}
+                                  className="w-6 h-6"
                                 />
                               </FormControl>
-                              <div className="space-y-1 leading-none">
-                                <FormLabel className="text-gray-700">
+                              <div className="space-y-1 leading-none flex flex-col items-center">
+                                <Container className="w-8 h-8 text-purple-600" />
+                                <FormLabel className="font-bold">
                                   Add to Stash
                                 </FormLabel>
-                                <FormDescription>
-                                  Add this item to your stash inventory
+                                <FormDescription className="text-center">
+                                  Check the box to add this item to your stash
+                                  inventory
                                 </FormDescription>
                               </div>
                             </FormItem>
@@ -484,7 +494,7 @@ export default function PurchaseForm() {
                         name={`items.${index}.notes`}
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-gray-700">
+                            <FormLabel >
                               Notes
                             </FormLabel>
                             <FormControl>
@@ -506,14 +516,15 @@ export default function PurchaseForm() {
                   ))}
                 </div>
 
-                {/* Total Price */}
                 <div className="mt-6 p-4 bg-green-50 rounded-lg border ">
                   <div className="flex justify-between items-center">
                     <span className="text-lg font-semibold text-gray-800">
                       Total:
                     </span>
-                    $100
-                    {/* <span className="text-2xl font-bold text-orange-600">${totalPrice.toFixed(2)}</span> */}
+
+                    <span className="text-2xl font-bold text-orange-600">
+                      ${totalPrice.toFixed(2)}
+                    </span>
                   </div>
                 </div>
               </div>
