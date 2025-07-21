@@ -182,3 +182,65 @@ export async function getAvailablePurchaseDates() {
     return { success: false, dates: { months: [], years: [] } };
   }
 }
+
+export async function getPurchaseById(purchaseId: string) {
+  try {
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
+
+    if (!session?.user.id) {
+      return { success: false, error: 'Please sign in again.' };
+    }
+    const purchase = await prisma.purchase.findUnique({
+      where: { id: purchaseId, userId: session.user.id },
+      include: { items: true },
+    });
+
+    if (!purchase) {
+      return { success: false, error: 'Purchase not found' };
+    }
+
+    return {
+      success: true,
+      purchase: {
+        ...purchase,
+        date: purchase.date.toISOString(),
+        createdAt: purchase.createdAt.toISOString(),
+        items: purchase.items.map((item) => ({
+          ...item,
+          purchaseId: purchase.id,
+        })),
+      },
+    };
+  } catch (error) {
+    console.error('Error fetching purchase:', error);
+    return { success: false, error: 'Failed to fetch purchase' };
+  }
+}
+
+export async function deletePurchase(purchaseId: string) {
+  try {
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
+
+    if (!session?.user.id) {
+      return { success: false, error: 'Please sign in again.' };
+    }
+    const purchase = await prisma.purchase.findUnique({
+      where: { id: purchaseId, userId: session.user.id },
+    });
+
+    if (!purchase) {
+      return { success: false, error: 'Purchase not found' };
+    }
+
+    await prisma.purchase.delete({ where: { id: purchaseId } });
+    revalidatePath('/purchases');
+    return { success: true, message: 'Purchase deleted successfully' };
+  } catch (error) {
+    console.error('Error deleting purchase:', error);
+    return { success: false, error: 'Failed to delete purchase' };
+  }
+}

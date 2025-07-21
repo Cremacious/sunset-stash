@@ -3,8 +3,8 @@ import { z } from 'zod';
 
 export const purchaseItemSchema = z.object({
   name: z.string().min(1, 'Strain name is required'),
-  category: z.string().min(1, 'Category is required'),
-  type: z.string().min(1, 'Type is required'),
+  category: z.string().optional(),
+  type: z.string().optional(),
   amount: z.string().optional(),
   price: z.coerce.number().min(0, 'Price must be positive'),
   thc: z.coerce.number().min(0).max(100).optional(),

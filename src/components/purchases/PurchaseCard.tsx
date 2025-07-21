@@ -27,9 +27,9 @@ const PurchaseCard = ({ purchase }: { purchase: Purchase }) => {
 
       <CardContent className="space-y-4 flex flex-col justify-between h-full">
         <div className="grid grid-cols-2 gap-2 text-sm">
-          <div className="bg-green-100 p-3 rounded-lg border-green-300">
+          <div className="bg-orange-100 p-3 rounded-lg border-orange-300">
             <div className="flex justify-center mb-1">
-              <Calendar className="w-7 h-7 text-green-700" />
+              <Calendar className="w-7 h-7 text-orange-700" />
             </div>
             <p className=" text font-medium text-center">Date</p>
             <p className="font-semibold text-gray-800 text-lg text-center">
@@ -45,10 +45,7 @@ const PurchaseCard = ({ purchase }: { purchase: Purchase }) => {
             </div>
             <p className=" text font-medium text-center">Items</p>
             <p className="font-semibold text-gray-800 text-lg text-center">
-              {new Date(purchase.date).toLocaleDateString('en-US', {
-                month: 'short',
-                day: 'numeric',
-              })}
+              {purchase.items.length}
             </p>
           </div>
         </div>

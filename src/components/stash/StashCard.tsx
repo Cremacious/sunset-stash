@@ -24,10 +24,10 @@ const StashCard = ({ stashItem }: { stashItem: StashItem }) => {
       </div>
 
       <CardContent className="p-4 space-y-4">
-        <div className="bg-gradient-to-r from-purple-50 to-indigo-50 rounded-lg p-3 border border-purple-200 space-y-2">
+        <div className="bg-blue-100 rounded-lg p-3 border border-blue-200 space-y-2">
           <div className="text-center">Category</div>
-          <p className="font-bold text-purple-600 text-center">
-            {stashItem.category}
+          <p className="font-bold text-blue-600 text-center">
+            {stashItem.category.length > 0 ? stashItem.category : 'N/A'}
           </p>
         </div>
 
@@ -35,7 +35,7 @@ const StashCard = ({ stashItem }: { stashItem: StashItem }) => {
           <div className="bg-orange-100 rounded-lg p-3 border border-orange-200 space-y-2">
             <div className="text-center">Type</div>
             <p className="font-bold text-orange-600 text-center text-sm">
-              {stashItem.type}
+              {stashItem.type.length > 0 ? stashItem.type : 'N/A'}
             </p>
           </div>
           <div className="bg-red-100 rounded-lg p-3 border border-red-200 space-y-2">
@@ -45,7 +45,7 @@ const StashCard = ({ stashItem }: { stashItem: StashItem }) => {
             </p>
           </div>
         </div>
-        <div className="flex items-center justify-between bg-gray-50 rounded-lg p-3 mt-4">
+        <div className="flex items-center justify-between mt-4">
           <div className="flex space-x-2 w-full">
             <Button
               asChild

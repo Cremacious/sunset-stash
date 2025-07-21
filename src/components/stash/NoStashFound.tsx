@@ -5,7 +5,7 @@ import { Container } from 'lucide-react';
 
 const NoStashFound = () => {
   return (
-    <Card className="bg-white border-none shadow-none">
+    <Card className="bg-white border-none shadow-none h-full">
       <CardContent className="text-center py-12">
         <div className="flex justify-center">
           <Container className="text-purple-600" size={100} />

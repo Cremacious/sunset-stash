@@ -52,12 +52,10 @@ const StashItemPage = async ({
         </Button>
       </div>
 
-      {/* Main Stash Item Card - Matching Post Design with Purple Theme */}
       <div className="bg-white rounded-xl border-b-6 border-b-purple-500 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
-        {/* Header Section - Purple Theme */}
         <div className="bg-purple-50 p-4 border-b border-purple-100">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-3 ml-4">
               <Image
                 width={50}
                 height={50}
@@ -72,19 +70,17 @@ const StashItemPage = async ({
           </div>
         </div>
 
-        {/* Content Section */}
         <div className="p-4">
-          {/* Basic Info Grid - Category and Type */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-            <div className="bg-purple-100 rounded-lg p-4 border border-purple-300">
+            <div className="bg-blue-100 rounded-lg p-4 border border-blue-300">
               <div className="space-y-4">
                 <h4 className="font-bold text-gray-800 text-center">
                   Category
                 </h4>
 
                 <div className="bg-white p-3 rounded-lg border">
-                  <p className="text-xl font-bold text-purple-600 text-center">
-                    {stashItem.category}
+                  <p className="text-xl font-bold text-blue-600 text-center">
+                    {stashItem.category.length > 0 ? stashItem.category : 'N/A'}
                   </p>
                 </div>
               </div>
@@ -96,7 +92,7 @@ const StashItemPage = async ({
 
                 <div className="bg-white p-3 rounded-lg border">
                   <p className="text-xl font-bold text-orange-600 text-center">
-                    {stashItem.type}
+                    {stashItem.type.length > 0 ? stashItem.type : 'N/A'}
                   </p>
                 </div>
               </div>
@@ -108,7 +104,7 @@ const StashItemPage = async ({
 
                 <div className="bg-white p-3 rounded-lg border">
                   <p className="text-xl font-bold text-red-600 text-center">
-                    {stashItem.thc}%
+                    {stashItem.thc}
                   </p>
                 </div>
               </div>
