@@ -8,7 +8,7 @@ import { Edit, Eye } from 'lucide-react';
 
 const StashCard = ({ stashItem }: { stashItem: StashItem }) => {
   return (
-    <Card className="bg-white shadow-xl border border-b-purple-600 border-b-6 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden">
+    <Card className="bg-white shadow-xl border-0 border-b-purple-600 border-b-6 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-3 ml-4">
           <Image

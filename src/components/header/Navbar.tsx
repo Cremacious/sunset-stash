@@ -25,10 +25,8 @@ const Navbar = () => {
     <nav className="relative z-20 px-4 md:px-8 bg-white/10 backdrop-blur-md p-4 border border-white/20">
       <div className="flex justify-between items-center max-w-7xl mx-auto">
         <div className="flex items-center space-x-3">
-    
-
           <button onClick={() => router.push('/')}>
-            <h1 className="text-xl md:text-2xl mt-1 fugaz-font text-white drop-shadow-md">
+            <h1 className="text-xl md:text-2xl ml-4 mt-1 fugaz-font text-white drop-shadow-md">
               Sunset Stash
             </h1>
           </button>
@@ -48,7 +46,7 @@ const Navbar = () => {
           ))}
         </div>
 
-        <div className="hidden md:flex gap-2 md:gap-3">
+        <div className="hidden md:flex gap-2 md:gap-3 mr-2">
           {session.data?.user ? (
             <Button onClick={handleSignOut}>Sign Out</Button>
           ) : (

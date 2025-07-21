@@ -6,7 +6,7 @@ import { Calendar, Edit, Eye, Container } from 'lucide-react';
 
 const PurchaseCard = ({ purchase }: { purchase: Purchase }) => {
   return (
-    <Card className="border border-b-purple-500 border-b-6 relative overflow-hidden bg-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+    <Card className="border-0 border-b-purple-500 border-b-6 relative overflow-hidden bg-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
       <CardHeader>
         <div className="flex justify-between items-start">
           <div className="flex items-center space-x-3">
