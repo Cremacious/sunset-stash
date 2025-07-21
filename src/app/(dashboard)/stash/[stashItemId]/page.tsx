@@ -128,46 +128,32 @@ const StashItemPage = async ({
           </div>
 
           {stashItem.lineage && (
-            <div className="mb-6">
-              <h3 className="text-lg font-semibold text-gray-800 mb-4">
-                Lineage Details
-              </h3>
-              <div className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg p-4 border border-gray-200">
-                <div className="flex items-center space-x-3 mb-3">
-                  <div className="ml-2">
-                    <h4 className="text-lg font-bold text-gray-800">
-                      Genetics
-                    </h4>
-                    <p className="text-gray-600 text-sm">
-                      Parent strains or genetic background
-                    </p>
-                  </div>
-                </div>
-                <div className="bg-white p-3 rounded border">
-                  <p className="text-gray-800 font-medium">
-                    {stashItem.lineage}
+            <div className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg p-4 border border-gray-200 mb-6">
+              <div className="flex items-center space-x-3 mb-3">
+                <div className="ml-2">
+                  <h4 className="text-lg font-bold text-gray-800">Genetics</h4>
+                  <p className="text-gray-600 text-sm">
+                    Parent strains or genetic background
                   </p>
                 </div>
+              </div>
+              <div className="bg-white p-3 rounded border">
+                <p className="text-gray-800 font-medium">{stashItem.lineage}</p>
               </div>
             </div>
           )}
 
           {stashItem.notes && (
-            <div className="mb-6">
-              <h3 className="text-lg font-semibold text-gray-800 mb-4">
-                Your Overall Thoughts
-              </h3>
-              <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
-                <div className="flex items-start space-x-3">
-                  <div className="flex-1 ml-2">
-                    <h4 className="text-lg font-bold text-gray-800 mb-2">
-                      Your Experience
-                    </h4>
-                    <div className="bg-white p-3 rounded border">
-                      <p className="text-gray-800 font-medium">
-                        {stashItem.notes}
-                      </p>
-                    </div>
+            <div className="bg-gray-50 rounded-lg p-4 border border-gray-200 mb-6">
+              <div className="flex items-start space-x-3">
+                <div className="flex-1 ml-2">
+                  <h4 className="text-lg font-bold text-gray-800 mb-2">
+                    Your Experience
+                  </h4>
+                  <div className="bg-white p-3 rounded border">
+                    <p className="text-gray-800 font-medium">
+                      {stashItem.notes}
+                    </p>
                   </div>
                 </div>
               </div>

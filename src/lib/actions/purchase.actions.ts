@@ -103,3 +103,82 @@ export async function getAllUserPurchases() {
     return { success: false, error: 'Failed to fetch user purchases' };
   }
 }
+
+export async function getFilteredPurchases(month?: string, year?: string) {
+  const currentDate = new Date();
+  const filterMonth =
+    month || (currentDate.getMonth() + 1).toString().padStart(2, '0');
+  const filterYear = year || currentDate.getFullYear().toString();
+
+  try {
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
+
+    if (!session?.user.id) {
+      return { success: false, error: 'Please sign in again.' };
+    }
+    const purchases = await prisma.purchase.findMany({
+      where: {
+        userId: session.user.id,
+        date: {
+          gte: new Date(`${filterYear}-${filterMonth}-01`),
+          lt: new Date(`${filterYear}-${parseInt(filterMonth) + 1}-01`),
+        },
+      },
+      include: { items: true },
+      orderBy: { date: 'desc' },
+    });
+
+    return {
+      success: true,
+      purchases: purchases.map((purchase) => ({
+        ...purchase,
+        date: purchase.date.toISOString(),
+        createdAt: purchase.createdAt.toISOString(),
+        items: purchase.items.map((item) => ({
+          ...item,
+          purchaseId: purchase.id,
+        })),
+      })),
+    };
+  } catch (error) {
+    console.log(error);
+    return { success: false, purchases: [] };
+  }
+}
+
+export async function getAvailablePurchaseDates() {
+  try {
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
+
+    if (!session?.user.id) {
+      return { success: false, error: 'Please sign in again.' };
+    }
+    const dates = await prisma.purchase.findMany({
+      where: { userId: session.user.id },
+      select: { date: true },
+      distinct: ['date'],
+    });
+
+    const months = [
+      ...new Set(
+        dates.map((d) => (d.date.getMonth() + 1).toString().padStart(2, '0'))
+      ),
+    ];
+
+    const years = [
+      ...new Set(dates.map((d) => d.date.getFullYear().toString())),
+    ];
+
+    return {
+      success: true,
+      dates: { months: months.sort(), years: years.sort().reverse() },
+    };
+  } catch (error) {
+    console.log(error);
+    return { success: false, dates: { months: [], years: [] } };
+  }
+}

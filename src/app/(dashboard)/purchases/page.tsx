@@ -1,78 +1,45 @@
 import { Button } from '@/components/ui/button';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-import Link from 'next/link';
 import PurchaseCard from '@/components/purchases/PurchaseCard';
 import PurchaseStats from '@/components/purchases/PurchaseStats';
 import NoPurchasesFound from '@/components/purchases/NoPurchasesFound';
-import { getAllUserPurchases } from '@/lib/actions/purchase.actions';
+import {
+  getAvailablePurchaseDates,
+  getFilteredPurchases,
+} from '@/lib/actions/purchase.actions';
+import PurchaseSearchBar from '@/components/purchases/PurchaseSearchBar';
 
-const PurchasesPage = async () => {
-  const { purchases = [] } = await getAllUserPurchases();
+const PurchasesPage = async ({
+  searchParams,
+}: {
+  searchParams: Promise<{ month?: string; year?: string }>;
+}) => {
+  const { month, year } = await searchParams;
+  const currentDate = new Date();
+  const defaultMonth = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+  const defaultYear = currentDate.getFullYear().toString();
 
-  // const purchases = [];
+  const selectedMonth = month || defaultMonth;
+  const selectedYear = year || defaultYear;
 
-  const selectedMonth = 'Jan';
-  const selectedYear = '2025';
+  const [purchasesResult, availableDatesResult] = await Promise.all([
+    getFilteredPurchases(selectedMonth, selectedYear),
+    getAvailablePurchaseDates(),
+  ]);
+
+  const purchases = purchasesResult.purchases || [];
+  const availableDates =
+    availableDatesResult.dates && typeof availableDatesResult.dates === 'object'
+      ? availableDatesResult.dates
+      : { months: [], years: [] };
 
   return (
     <div className="space-y-4 max-w-7xl mx-auto">
       <div className="smallGlassCard">
-        <div className="bg-white rounded-lg shadow-lg p-4">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <Button className="w-full md:w-auto" asChild>
-              <Link href="/purchases/new">Add New Purchase</Link>
-            </Button>
-
-            <div className="flex items-center space-x-2">
-              <div className="mt-4">Filter by:</div>
-              <div className="flex items-center space-x-3">
-                <div className="text-center">
-                  <div className="text-xs  mb-1">Month</div>
-                  <Select
-                    value={selectedMonth}
-                    // onValueChange={setSelectedMonth}
-                  >
-                    <SelectTrigger className="w-20 h-10">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="01">Jan</SelectItem>
-                      <SelectItem value="02">Feb</SelectItem>
-                      <SelectItem value="03">Mar</SelectItem>
-                      <SelectItem value="04">Apr</SelectItem>
-                      <SelectItem value="05">May</SelectItem>
-                      <SelectItem value="06">Jun</SelectItem>
-                      <SelectItem value="07">Jul</SelectItem>
-                      <SelectItem value="08">Aug</SelectItem>
-                      <SelectItem value="09">Sep</SelectItem>
-                      <SelectItem value="10">Oct</SelectItem>
-                      <SelectItem value="11">Nov</SelectItem>
-                      <SelectItem value="12">Dec</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div className="text-center">
-                  <div className="text-xs  mb-1">Year</div>
-                  <Select value={selectedYear}>
-                    <SelectTrigger className="w-25 h-10 ">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="2025">2025</SelectItem>
-                      <SelectItem value="2024">2024</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <PurchaseSearchBar
+          availableDates={availableDates}
+          selectedMonth={selectedMonth}
+          selectedYear={selectedYear}
+        />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -91,7 +58,13 @@ const PurchasesPage = async () => {
             <div className="text-right">
               <div className="text-sm text-gray-500">Viewing</div>
               <div className="text-2xl font-bold text-coral-600">
-                {/* {selectedMonth}/{selectedYear} */}
+                {new Date(
+                  parseInt(selectedYear),
+                  parseInt(selectedMonth) - 1
+                ).toLocaleString('default', {
+                  month: 'long',
+                  year: 'numeric',
+                })}
               </div>
             </div>
           </div>
@@ -129,7 +102,11 @@ const PurchasesPage = async () => {
           </div>
         </div>
         <div className="md:col-span-1">
-          <PurchaseStats purchases={purchases} />
+          <PurchaseStats
+            purchases={purchases}
+            selectedMonth={selectedMonth}
+            selectedYear={selectedYear}
+          />
         </div>
       </div>
     </div>

@@ -2,13 +2,28 @@ import { Purchase } from '@/lib/types';
 import { ShoppingCart, DollarSign, Calculator } from 'lucide-react';
 import { calculateAveragePurchase, calculateMonthlyTotal } from '@/lib/utils';
 
-const PurchaseStats = ({ purchases }: { purchases: Purchase[] }) => {
-  const monthlyTotal = calculateMonthlyTotal(purchases);
+const PurchaseStats = ({ 
+  purchases, 
+  selectedMonth, 
+  selectedYear 
+}: { 
+  purchases: Purchase[];
+  selectedMonth: string;
+  selectedYear: string;
+}) => {
+
+
+  const monthlyTotal = calculateMonthlyTotal(
+    purchases, 
+    parseInt(selectedYear), 
+    parseInt(selectedMonth)
+  );
   const averagePurchase = calculateAveragePurchase(purchases);
+  
+
   return (
     <div className="">
       <div className="flex flex-col gap-4 glassCard">
-        {/* Total Purchases */}
         <div className=" bg-orange-100 rounded-xl p-4 border border-orange-200 ">
           <div className="relative z-10">
             <div className="flex items-center justify-between">
@@ -26,8 +41,6 @@ const PurchaseStats = ({ purchases }: { purchases: Purchase[] }) => {
             </div>
           </div>
         </div>
-
-        {/* Total This Month */}
         <div className="bg-green-100 rounded-xl p-4 border border-green-200 ">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
@@ -41,8 +54,6 @@ const PurchaseStats = ({ purchases }: { purchases: Purchase[] }) => {
             <p className="text-xl font-bold text-gray-800">${monthlyTotal}</p>
           </div>
         </div>
-
-        {/* Average Purchase */}
         <div className="bg-purple-100 rounded-xl p-4 border border-indigo-200 ">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
