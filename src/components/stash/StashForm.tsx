@@ -27,6 +27,7 @@ import { stashFormSchema } from '@/lib/validators/stash.validator';
 import { createStashItem } from '@/lib/actions/stash.actions';
 import { useRouter } from 'next/navigation';
 import { Sun } from 'lucide-react';
+import { TYPES, CATEGORIES } from '@/lib/constants';
 
 const StashForm = () => {
   const router = useRouter();
@@ -94,13 +95,11 @@ const StashForm = () => {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="m@example.com">
-                        m@example.com
-                      </SelectItem>
-                      <SelectItem value="m@google.com">m@google.com</SelectItem>
-                      <SelectItem value="m@support.com">
-                        m@support.com
-                      </SelectItem>
+                      {CATEGORIES.map((category) => (
+                        <SelectItem key={category} value={category}>
+                          {category}
+                        </SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
 
@@ -129,13 +128,11 @@ const StashForm = () => {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="m@example.com">
-                        m@example.com
-                      </SelectItem>
-                      <SelectItem value="m@google.com">m@google.com</SelectItem>
-                      <SelectItem value="m@support.com">
-                        m@support.com
-                      </SelectItem>
+                      {TYPES.map((type) => (
+                        <SelectItem key={type} value={type}>
+                          {type}
+                        </SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
 

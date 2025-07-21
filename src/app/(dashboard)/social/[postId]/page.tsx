@@ -1,25 +1,9 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { getPostById } from '@/lib/actions/post.actions';
 import Link from 'next/link';
-// import { useRouter } from 'next/navigation';
-// import { useState, use } from 'react';
-
-// interface PostPageProps {
-//   params: Promise<{
-//     postId: string;
-//   }>;
-// }
-
-// interface Comment {
-//   id: number;
-//   user: string;
-//   avatar: string;
-//   text: string;
-//   timestamp: string;
-//   likes: number;
-// }
+import { ArrowLeft, Edit3, Heart, MessageCircle } from 'lucide-react';
 
 const PostPage = async ({
   params,
@@ -29,7 +13,6 @@ const PostPage = async ({
   const { postId } = await params;
   const result = await getPostById(postId);
 
-  // Handle error cases
   if (!result.success || !result.data) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -52,360 +35,235 @@ const PostPage = async ({
 
   const post = result.data;
 
-  // const router = useRouter();
-  // const { postId } = use(params);
-  // const [newComment, setNewComment] = useState('');
-  // const [comments, setComments] = useState<Comment[]>([
-  //   {
-  //     id: 1,
-  //     user: 'Mike D.',
-  //     avatar: '👨‍🦲',
-  //     text: 'Looks amazing! I love Blue Dream for creative sessions too. Perfect choice for a Marvel marathon! 🎬',
-  //     timestamp: '1 hour ago',
-  //     likes: 4,
-  //   },
-  //   {
-  //     id: 2,
-  //     user: 'Alex K.',
-  //     avatar: '🧑‍🦱',
-  //     text: 'Trulieve has been killing it with their Blue Dream lately. What was the THC on this batch?',
-  //     timestamp: '45 minutes ago',
-  //     likes: 2,
-  //   },
-  //   {
-  //     id: 3,
-  //     user: 'Emma R.',
-  //     avatar: '👩‍🦳',
-  //     text: 'This strain is perfect for movie nights! Have you tried their Gorilla Glue? Similar vibes 🌿',
-  //     timestamp: '30 minutes ago',
-  //     likes: 1,
-  //   },
-  // ]);
-
-  // Mock post data - in real app, this would come from API based on postId
-  // const post = {
-  //   id: postId,
-  //   user: 'Sarah M.',
-  //   avatar: '👩‍🦰',
-  //   activity: 'Movie Night',
-  //   date: '2 hours ago',
-  //   text: 'Just picked up some Blue Dream from Trulieve! Perfect for tonight&apos;s Marvel marathon 🎬✨ This strain always puts me in the perfect headspace for long movie sessions. The creativity boost is amazing and it doesn&apos;t make me too sleepy. Definitely one of my go-to strains for entertainment!',
-  //   strains: [
-  //     {
-  //       id: 1,
-  //       name: 'Blue Dream',
-  //       type: 'Flower',
-  //       thc: '22%',
-  //       cbd: '0.5%',
-  //       category: 'Hybrid',
-  //       dispensary: 'Trulieve',
-  //       size: '3.5g',
-  //       lineage: 'Blueberry x Haze',
-  //     },
-  //   ],
-  //   likes: 15,
-  //   totalComments: comments.length,
-  // };
-
-  // const getActivityIcon = (activity: string) => {
-  //   switch (activity.toLowerCase()) {
-  //     case 'movie night':
-  //       return '🎬';
-  //     case 'workout':
-  //       return '💪';
-  //     case 'chill time':
-  //       return '😌';
-  //     case 'munchies':
-  //       return '🍿';
-  //     default:
-  //       return '🌿';
-  //   }
-  // };
-
-  // const getTypeColor = (type: string) => {
-  //   switch (type.toLowerCase()) {
-  //     case 'flower':
-  //       return 'from-green-500 to-emerald-600';
-  //     case 'vape cart':
-  //       return 'from-blue-500 to-cyan-600';
-  //     case 'concentrate':
-  //       return 'from-purple-500 to-pink-600';
-  //     default:
-  //       return 'from-gray-500 to-gray-600';
-  //   }
-  // };
-
-  // const getTypeIcon = (type: string) => {
-  //   switch (type.toLowerCase()) {
-  //     case 'flower':
-  //       return '🌸';
-  //     case 'vape cart':
-  //       return '💨';
-  //     case 'concentrate':
-  //       return '🧪';
-  //     default:
-  //       return '🌿';
-  //   }
-  // };
-
-  // const handleAddComment = () => {
-  //   if (newComment.trim()) {
-  //     const comment: Comment = {
-  //       id: comments.length + 1,
-  //       user: 'You',
-  //       avatar: '😊',
-  //       text: newComment,
-  //       timestamp: 'Just now',
-  //       likes: 0,
-  //     };
-  //     setComments([...comments, comment]);
-  //     setNewComment('');
-  //   }
-  // };
-
-  // const handleLikeComment = (commentId: number) => {
-  //   setComments(
-  //     comments.map((comment) =>
-  //       comment.id === commentId
-  //         ? { ...comment, likes: comment.likes + 1 }
-  //         : comment
-  //     )
-  //   );
-  // };
+  const getInitials = (name: string) => {
+    return name
+      .split(' ')
+      .map((n) => n[0])
+      .join('');
+  };
 
   return (
-    <div className="space-y-8 bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl md:p-6 px-1 py-6">
-      {/* Header */}
-      <div className="flex items-center space-x-4">
+    <div className="max-w-3xl mx-auto space-y-6">
+      <div className="">
         <Button
-          variant="outline"
-          // onClick={() => router.push('/social')}
-          className="bg-white/50 backdrop-blur-sm"
+          className="glassCard text-white font-bold"
+          variant="ghost"
+          size="sm"
+          asChild
         >
-          ← Back to Feed
+          <Link href="/social">
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Back to Posts
+          </Link>
         </Button>
-        <h1 className="text-2xl font-bold text-gray-800">Post Details</h1>
       </div>
 
-      {/* Main Post */}
-      <Card className="bg-white shadow-xl border-0 max-w-4xl mx-auto">
-        {' '}
-        {/* <div className="flex items-center space-x-1 text-xs bg-purple-50 text-purple-700 border border-purple-200 rounded-full px-2 py-1">
-                    <span>{getActivityIcon(post.activity)}</span>
-                    <span>{post.activity}</span>
-                  </div> */}
-        <div className="bg-white p-2 md:px-6">
-          {/* Header matching TimelinePost */}
-          <div className="flex items-start justify-between mb-4">
-            <div className="flex items-center space-x-3 flex-1 min-w-0">
-              <div className="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center flex-shrink-0">
-                <span className="text-white font-semibold text-sm">
-                  {/* {post.user
-                    .split(' ')
-                    .map((n) => n[0])
-                    .join('')} */}
+      {/* Main Post Card - Matching TimelinePost Design */}
+      <div className="bg-white rounded-xl border-b-6 border-b-blue-500 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
+        {/* Header Section - Matching TimelinePost */}
+        <div className="bg-blue-50 p-4 border-b border-blue-100">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center shadow-md">
+                <span className="text-white font-bold text-lg">
+                  {getInitials(post.author)}
                 </span>
               </div>
-              <div className="min-w-0 flex-1">
-                <div className="flex items-center space-x-2 flex-wrap">
-                  <p className="text-sm sm:text-base font-semibold text-gray-900">
-                    {post.author}
-                  </p>
-                </div>
+              <div>
+                <p className="font-bold text-gray-800">{post.author}</p>
+                <p className="text-xs text-gray-600">
+                  {post.createdAt instanceof Date
+                    ? post.createdAt.toLocaleDateString()
+                    : new Date(post.createdAt).toLocaleDateString()}
+                </p>
               </div>
             </div>
+            <Badge
+              variant="outline"
+              className="bg-blue-100 text-blue-700 border-blue-300 font-medium"
+            >
+              {post.activity}
+            </Badge>
+          </div>
+        </div>
 
-            <div className="flex-shrink-0 ml-4 mt-2">
-              <p className="text-xs text-gray-500 whitespace-nowrap">
-                {post.createdAt instanceof Date
-                  ? post.createdAt.toLocaleString()
-                  : post.createdAt}
-              </p>
-            </div>
+        {/* Content Section - Matching TimelinePost */}
+        <div className="p-4">
+          <div className="bg-gray-50 rounded-lg p-4 mb-4 border border-gray-200">
+            <p className="text-gray-800 leading-relaxed">{post.content}</p>
           </div>
-          <Badge className="flex items-center space-x-1 text-xs mb-2 bg-purple-50 text-purple-700 border border-purple-200 rounded-full px-2 py-1">
-            {/* <span>{getActivityIcon(post.activity)}</span> */}
-            <span>{post.activity}</span>
-          </Badge>
-          <div className="mb-4">
-            <p className="text-gray-800 text-sm sm:text-base leading-relaxed">
-              {post.content}
-            </p>
-          </div>
-          {/* Bottom section matching TimelinePost */}
-          <div className="border-t border-gray-100 pt-3">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-4">
-                <button className="flex items-center space-x-1 text-xs text-gray-500 hover:text-blue-600 px-2 py-1">
-                  <span>💬</span>
-                  <span className="hidden sm:inline">
-                    {/* {post.totalComments} Comments */}
-                  </span>
-                  {/* <span className="sm:hidden">{post.totalComments}</span> */}
-                </button>
+
+          {/* Stash Items Section - Matching TimelinePost */}
+          {post.stashItems && post.stashItems.length > 0 && (
+            <div className="mb-4">
+              <div className="flex items-center mb-2">
+                <span className="text-sm font-medium text-gray-700">
+                  Strains:
+                </span>
               </div>
+              <div className="flex flex-wrap gap-2">
+                {post.stashItems.map((item, index) => (
+                  <Badge
+                    key={index}
+                    className="bg-blue-500 hover:bg-blue-600 text-white font-bold shadow-sm"
+                  >
+                    {item.stashItem.name}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Detailed Strain Information (Expanded for Detail Page) */}
+          {post.stashItems && post.stashItems.length > 0 && (
+            <div className="mb-6">
+              <h3 className="text-lg font-semibold text-gray-800 mb-4">
+                Strain Details
+              </h3>
+              <div className="space-y-4">
+                {post.stashItems.map((item, index) => (
+                  <div
+                    key={index}
+                    className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg p-4 border border-gray-200"
+                  >
+                    <div className="flex items-center space-x-3 mb-3">
+                      <div className="w-10 h-10 bg-gradient-to-r from-green-500 to-emerald-600 rounded-full flex items-center justify-center">
+                        <span className="text-white text-lg">🌸</span>
+                      </div>
+                      <div>
+                        <h4 className="text-lg font-bold text-gray-800">
+                          {item.stashItem.name}
+                        </h4>
+                        <p className="text-gray-600 text-sm">
+                          {item.stashItem.category} • {item.stashItem.amount}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                      <div className="bg-white p-3 rounded border">
+                        <p className="text-gray-600 text-xs mb-1">THC</p>
+                        <p className="font-bold text-gray-800">
+                          {item.stashItem.thc}%
+                        </p>
+                      </div>
+                      <div className="bg-white p-3 rounded border">
+                        <p className="text-gray-600 text-xs mb-1">CBD</p>
+                        <p className="font-bold text-gray-800">
+                          {item.stashItem.cbd}%
+                        </p>
+                      </div>
+                      <div className="bg-white p-3 rounded border">
+                        <p className="text-gray-600 text-xs mb-1">Type</p>
+                        <p className="font-bold text-gray-800">
+                          {item.stashItem.type}
+                        </p>
+                      </div>
+                      <div className="bg-white p-3 rounded border">
+                        <p className="text-gray-600 text-xs mb-1">Lineage</p>
+                        <p className="font-bold text-gray-800 text-xs">
+                          {item.stashItem.lineage}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Action Bar - Matching TimelinePost */}
+          <div className="flex items-center justify-between bg-gray-50 rounded-lg p-3">
+            <div className="flex items-center space-x-4">
+              <div className="relative">
+                <MessageCircle className="text-purple-600" size={30} />
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
+                  0
+                </span>
+              </div>
+              <button className="flex items-center space-x-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg px-3 py-2">
+                <Heart fill="red" size={30} className="text-red-500" />
+              </button>
+            </div>
+            <div className="flex space-x-2">
               <Button
-                // onClick={() => router.push(`/social/${post.id}/edit`)}
-                className="text-xs sm:text-sm hover:bg-purple-50 hover:border-purple-300 hover:text-purple-700"
+                variant="outline"
+                size="sm"
+                className="text-purple-600 border-purple-300 hover:bg-purple-50"
+                asChild
               >
-                Edit Post
+                <Link href={`/social/${post.id}/edit`}>
+                  <Edit3 className="w-4 h-4 mr-1" />
+                  Edit
+                </Link>
               </Button>
             </div>
           </div>
         </div>
-        {/* Detailed Strain Information (expanded section) */}
-        <CardContent className="pt-2">
-          <h3 className="text-lg font-semibold text-gray-800 mb-4">
-            Strain Details
-          </h3>
-          <div className="space-y-4">
-            {/* {post.strains.map((strain) => (
-              <div
-                key={strain.id}
-                className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg p-6 border border-gray-200"
-              >
-                <div className="flex items-center space-x-4 mb-4">
-                  <div
-                    className={`w-12 h-12 bg-gradient-to-r ${getTypeColor(
-                      strain.type
-                    )} rounded-full flex items-center justify-center`}
-                  >
-                    <span className="text-white text-xl">
-                      {getTypeIcon(strain.type)}
-                    </span>
-                  </div>
-                  <div>
-                    <h4 className="text-xl font-bold text-gray-800">
-                      {strain.name}
-                    </h4>
-                    <p className="text-gray-600">
-                      {strain.type} • {strain.dispensary} • {strain.size}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  <div className="bg-white p-3 rounded border">
-                    <p className="text-gray-600 text-sm mb-1">THC</p>
-                    <p className="font-bold text-gray-800">{strain.thc}</p>
-                  </div>
-                  <div className="bg-white p-3 rounded border">
-                    <p className="text-gray-600 text-sm mb-1">CBD</p>
-                    <p className="font-bold text-gray-800">{strain.cbd}</p>
-                  </div>
-                  <div className="bg-white p-3 rounded border">
-                    <p className="text-gray-600 text-sm mb-1">Category</p>
-                    <p className="font-bold text-gray-800">{strain.category}</p>
-                  </div>
-                  <div className="bg-white p-3 rounded border">
-                    <p className="text-gray-600 text-sm mb-1">Lineage</p>
-                    <p className="font-bold text-gray-800 text-xs">
-                      {strain.lineage}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))} */}
-          </div>
-        </CardContent>
-      </Card>
+      </div>
 
       {/* Comments Section */}
-      <Card className="bg-white shadow-xl border-0 max-w-4xl mx-auto">
-        <CardHeader>
-          <CardTitle className="text-xl font-bold text-gray-800 flex items-center">
-            <span className="text-2xl mr-3">💬</span>
-            {/* Comments ({comments.length}) */}
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-6">
-          {/* Add Comment */}
+      <div className="bg-white rounded-xl border-b-6 border-b-purple-500 shadow-lg overflow-hidden">
+        <div className="p-4 space-y-4">
+          {/* Add Comment Form */}
           <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
             <div className="flex space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-r from-orange-500 to-amber-600 rounded-full flex items-center justify-center text-lg">
-                😊
+              <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center">
+                <span className="text-white font-bold text-sm">You</span>
               </div>
               <div className="flex-1 space-y-3">
-                {/* <textarea
-                  value={newComment}
-                  onChange={(e) => setNewComment(e.target.value)}
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent resize-none"
+                <textarea
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none"
                   placeholder="Add a comment..."
                   rows={3}
-                /> */}
+                />
                 <div className="flex justify-end">
-                  {/* <Button
-                    onClick={handleAddComment}
-                    disabled={!newComment.trim()}
-                    className="bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white"
-                  >
+                  <Button className="bg-purple-500 hover:bg-purple-600 text-white">
                     Post Comment
-                  </Button> */}
+                  </Button>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Comments List */}
-          <div className="space-y-4">
-            {/* {comments.map((comment) => (
-              <div
-                key={comment.id}
-                className="bg-gray-50 rounded-lg p-4 border border-gray-200"
-              >
-                <div className="flex space-x-3">
-                  <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-lg">
-                    {comment.avatar}
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-center space-x-2 mb-1">
-                      <h4 className="font-semibold text-gray-800">
-                        {comment.user}
-                      </h4>
-                      <span className="text-sm text-gray-500">
-                        {comment.timestamp}
-                      </span>
-                    </div>
-                    <p className="text-gray-700 mb-3 leading-relaxed">
-                      {comment.text}
-                    </p>
-                    <div className="flex items-center space-x-4">
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => handleLikeComment(comment.id)}
-                        className="text-gray-600 hover:text-orange-600 p-0 h-auto"
-                      >
-                        <span className="mr-1">👍</span>
-                        {comment.likes > 0 && comment.likes}
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="text-gray-600 hover:text-orange-600 p-0 h-auto"
-                      >
-                        Reply
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))} */}
+          {/* No Comments Message */}
+          <div className="text-center py-8">
+            <MessageCircle className="w-12 h-12 text-gray-400 mx-auto mb-3" />
+            <p className="text-gray-500">
+              No comments yet. Be the first to comment!
+            </p>
           </div>
 
-          {/* Load More Comments */}
-          {/* {comments.length > 0 && (
-            <div className="text-center pt-4">
-              <Button
-                variant="outline"
-                className="text-gray-600 border-gray-300"
-              >
-                Load More Comments
-              </Button>
+          {/* Future Comments Would Go Here */}
+          {/* Example comment structure:
+          <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
+            <div className="flex space-x-3">
+              <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
+                <span className="text-white font-bold text-sm">JD</span>
+              </div>
+              <div className="flex-1">
+                <div className="flex items-center space-x-2 mb-1">
+                  <h4 className="font-semibold text-gray-800">John Doe</h4>
+                  <span className="text-sm text-gray-500">2 hours ago</span>
+                </div>
+                <p className="text-gray-700 mb-3 leading-relaxed">
+                  Great strain choice! I love Blue Dream for movie nights too.
+                </p>
+                <div className="flex items-center space-x-4">
+                  <button className="text-gray-600 hover:text-purple-600 text-sm flex items-center space-x-1">
+                    <Heart className="w-4 h-4" />
+                    <span>Like</span>
+                  </button>
+                  <button className="text-gray-600 hover:text-purple-600 text-sm">
+                    Reply
+                  </button>
+                </div>
+              </div>
             </div>
-          )} */}
-        </CardContent>
-      </Card>
+          </div>
+          */}
+        </div>
+      </div>
     </div>
   );
 };
