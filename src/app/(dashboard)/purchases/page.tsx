@@ -9,16 +9,18 @@ import {
   getAllUserPurchases,
 } from '@/lib/actions/purchase.actions';
 import PurchaseSearchBar from '@/components/purchases/PurchaseSearchBar';
-import { Purchase } from '@/lib/types/purchase.types'; 
+import { Purchase } from '@/lib/types/purchase.types';
 
 const PurchasesPage = () => {
   const [allPurchases, setAllPurchases] = useState<Purchase[]>([]);
-  const [availableDates, setAvailableDates] = useState<{ months: string[]; years: string[] }>({
+  const [availableDates, setAvailableDates] = useState<{
+    months: string[];
+    years: string[];
+  }>({
     months: [],
     years: [],
   });
   const [loading, setLoading] = useState(true);
-
 
   const [selectedMonth, setSelectedMonth] = useState<string | undefined>();
   const [selectedYear, setSelectedYear] = useState<string | undefined>();
@@ -26,27 +28,56 @@ const PurchasesPage = () => {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const currentDate = new Date();
-        const defaultMonth = (currentDate.getMonth() + 1)
-          .toString()
-          .padStart(2, '0');
-        const defaultYear = currentDate.getFullYear().toString();
-
-        setSelectedMonth(defaultMonth);
-        setSelectedYear(defaultYear);
-
         const [purchasesResult, availableDatesResult] = await Promise.all([
-          getAllUserPurchases(), 
+          getAllUserPurchases(),
           getAvailablePurchaseDates(),
         ]);
 
-        setAllPurchases(purchasesResult.purchases || []);
-        setAvailableDates(
+        const purchases = purchasesResult.purchases || [];
+        const dates =
           availableDatesResult.dates &&
-            typeof availableDatesResult.dates === 'object'
+          typeof availableDatesResult.dates === 'object'
             ? availableDatesResult.dates
-            : { months: [], years: [] }
-        );
+            : { months: [], years: [] };
+
+        setAllPurchases(purchases);
+        setAvailableDates(dates);
+
+        if (
+          purchases.length > 0 &&
+          dates.months.length > 0 &&
+          dates.years.length > 0
+        ) {
+          const currentDate = new Date();
+          const currentMonth = (currentDate.getMonth() + 1)
+            .toString()
+            .padStart(2, '0');
+          const currentYear = currentDate.getFullYear().toString();
+
+          const hasCurrentMonthPurchases =
+            dates.months.includes(currentMonth) &&
+            dates.years.includes(currentYear);
+
+          if (hasCurrentMonthPurchases) {
+            setSelectedMonth(currentMonth);
+            setSelectedYear(currentYear);
+          } else {
+            const latestPurchase = purchases.reduce((latest, purchase) => {
+              const purchaseDate = new Date(purchase.date);
+              const latestDate = new Date(latest.date);
+              return purchaseDate > latestDate ? purchase : latest;
+            });
+
+            const latestDate = new Date(latestPurchase.date);
+            const latestMonth = (latestDate.getMonth() + 1)
+              .toString()
+              .padStart(2, '0');
+            const latestYear = latestDate.getFullYear().toString();
+
+            setSelectedMonth(latestMonth);
+            setSelectedYear(latestYear);
+          }
+        }
       } catch (error) {
         console.error('Failed to load purchases:', error);
       } finally {
@@ -80,7 +111,9 @@ const PurchasesPage = () => {
           <div className="glassCard md:col-span-3">
             <div className="animate-pulse h-64 bg-gray-200 rounded"></div>
           </div>
-          <div className="animate-pulse h-64 bg-gray-200 rounded"></div>
+          <div className="glassCard">
+            <div className="animate-pulse h-64 bg-gray-200 rounded"></div>
+          </div>
         </div>
       </div>
     );
@@ -95,14 +128,53 @@ const PurchasesPage = () => {
           selectedYear={selectedYear}
           onMonthChange={setSelectedMonth}
           onYearChange={setSelectedYear}
+          purchases={allPurchases}
           onClearFilters={() => {
-            const currentDate = new Date();
-            const defaultMonth = (currentDate.getMonth() + 1)
-              .toString()
-              .padStart(2, '0');
-            const defaultYear = currentDate.getFullYear().toString();
-            setSelectedMonth(defaultMonth);
-            setSelectedYear(defaultYear);
+            if (
+              allPurchases.length > 0 &&
+              availableDates.months.length > 0 &&
+              availableDates.years.length > 0
+            ) {
+              const currentDate = new Date();
+              const currentMonth = (currentDate.getMonth() + 1)
+                .toString()
+                .padStart(2, '0');
+              const currentYear = currentDate.getFullYear().toString();
+
+              const hasCurrentMonthPurchases =
+                availableDates.months.includes(currentMonth) &&
+                availableDates.years.includes(currentYear);
+
+              if (hasCurrentMonthPurchases) {
+                setSelectedMonth(currentMonth);
+                setSelectedYear(currentYear);
+              } else {
+                const latestPurchase = allPurchases.reduce(
+                  (latest, purchase) => {
+                    const purchaseDate = new Date(purchase.date);
+                    const latestDate = new Date(latest.date);
+                    return purchaseDate > latestDate ? purchase : latest;
+                  }
+                );
+
+                const latestDate = new Date(latestPurchase.date);
+                const latestMonth = (latestDate.getMonth() + 1)
+                  .toString()
+                  .padStart(2, '0');
+                const latestYear = latestDate.getFullYear().toString();
+
+                setSelectedMonth(latestMonth);
+                setSelectedYear(latestYear);
+              }
+            } else {
+              const currentDate = new Date();
+              const defaultMonth = (currentDate.getMonth() + 1)
+                .toString()
+                .padStart(2, '0');
+              const defaultYear = currentDate.getFullYear().toString();
+              setSelectedMonth(defaultMonth);
+              setSelectedYear(defaultYear);
+            }
           }}
         />
       </div>
@@ -140,10 +212,10 @@ const PurchasesPage = () => {
             {filteredPurchases.length > 0 ? (
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <div className="bg-purple-100 rounded-xl py-2 px-4 border border-purple-300">
+                  <div className="bg-purple-100 rounded-xl py-2 px-4 border border-purple-300 text-sm">
                     Latest Purchases
                   </div>
-                  <div className="bg-blue-100 rounded-xl py-2 px-4 border border-blue-300">
+                  <div className="bg-blue-100 text-sm rounded-xl py-2 px-4 border border-blue-300">
                     Showing {Math.min(filteredPurchases.length, 9)} of{' '}
                     {filteredPurchases.length}
                   </div>

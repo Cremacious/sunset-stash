@@ -9,8 +9,6 @@ import { StashItem } from '@/lib/types/stash.types';
 const StashPage = () => {
   const [stashItems, setStashItems] = useState<StashItem[]>([]);
   const [loading, setLoading] = useState(true);
-  
-  // Client-side filter states
   const [search, setSearch] = useState('');
   const [category, setCategory] = useState<string | undefined>();
   const [type, setType] = useState<string | undefined>();
@@ -46,7 +44,9 @@ const StashPage = () => {
           <div className="glassCard md:col-span-3">
             <div className="animate-pulse h-64 bg-gray-200 rounded"></div>
           </div>
-          <div className="animate-pulse h-64 bg-gray-200 rounded"></div>
+          <div className="glassCard">
+            <div className="animate-pulse h-64 bg-gray-200 rounded"></div>
+          </div>
         </div>
       </div>
     );

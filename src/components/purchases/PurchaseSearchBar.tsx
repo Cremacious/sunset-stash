@@ -17,6 +17,7 @@ interface PurchaseSearchBarProps {
   onMonthChange: (month: string | undefined) => void;
   onYearChange: (year: string | undefined) => void;
   onClearFilters: () => void;
+  purchases?: Array<{ date: string | Date }>; // Add purchases prop to find latest date
 }
 
 const PurchaseSearchBar = ({
@@ -31,7 +32,6 @@ const PurchaseSearchBar = ({
 
   const hasActiveFilters = selectedMonth || selectedYear;
 
-
   const currentDate = new Date();
   const currentMonth = (currentDate.getMonth() + 1).toString().padStart(2, '0');
   const currentYear = currentDate.getFullYear().toString();
@@ -40,26 +40,26 @@ const PurchaseSearchBar = ({
 
   return (
     <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-200 relative">
-      <div className="flex flex-col lg:flex-row gap-6 items-stretch lg:items-center">
+      <div className="flex flex-col md:flex-row gap-6 items-stretch md:items-center justify-between">
         <div className="flex-shrink-0">
           <Button
             size="sm"
             onClick={() => router.push('/purchases/new')}
-            className="h-9 px-4 bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium"
+            className="h-9 px-4 w-full md:w-auto bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium"
           >
             <Plus className="w-4 h-4 mr-2" />
             Add Purchase
           </Button>
         </div>
 
-        <div className="flex flex-col sm:flex-row gap-2 lg:gap-3 flex-1">
+        <div className="flex flex-col sm:flex-row gap-2 lg:gap-3 md:flex-shrink-0">
           <Select
             value={selectedMonth || 'all'}
             onValueChange={(value) =>
               onMonthChange(value === 'all' ? undefined : value)
             }
           >
-            <SelectTrigger className="h-9 w-full sm:w-32 bg-white border-gray-300 rounded-md text-sm hover:border-purple-400 focus:ring-1 focus:ring-purple-500">
+            <SelectTrigger className="h-18 w-full sm:w-40 bg-white border-gray-300 rounded-md text-sm hover:border-purple-400 focus:ring-1 focus:ring-purple-500">
               <div className="flex items-center">
                 <Calendar className="w-3 h-3 mr-1 text-gray-500" />
                 <SelectValue placeholder="Month" />
@@ -84,7 +84,7 @@ const PurchaseSearchBar = ({
               onYearChange(value === 'all' ? undefined : value)
             }
           >
-            <SelectTrigger className="h-9 w-full sm:w-24 bg-white border-gray-300 rounded-md text-sm hover:border-purple-400 focus:ring-1 focus:ring-purple-500">
+            <SelectTrigger className="h-9 w-full sm:w-40 bg-white border-gray-300 rounded-md text-sm hover:border-purple-400 focus:ring-1 focus:ring-purple-500">
               <div className="flex items-center">
                 <Filter className="w-3 h-3 mr-1 text-gray-500" />
                 <SelectValue placeholder="Year" />

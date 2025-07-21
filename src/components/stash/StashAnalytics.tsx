@@ -54,7 +54,7 @@ const StashAnalytics = ({ stashItems }: StashAnalyticsProps) => {
                 {topType ? topType[0] : 'None'}
               </p>
               <p className="text-sm text-gray-500">
-                {topType ? 'dominant' : 'no data'}
+                {topType ? 'dominant' : 'Add more items'}
               </p>
             </div>
           </div>
@@ -83,7 +83,7 @@ const StashAnalytics = ({ stashItems }: StashAnalyticsProps) => {
                 {topCategory ? topCategory[0] : 'None'}
               </p>
               <p className="text-sm text-gray-500">
-                {topCategory ? 'preferred' : 'no data'}
+                {topCategory ? 'preferred' : 'Add more items'}
               </p>
             </div>
           </div>
