@@ -68,7 +68,7 @@ const StashGrid = ({
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <p className="text-sm text-gray-600">
+        <p className="text-sm  bg-purple-100 border border-purple-300 rounded-md px-3 py-1">
           Showing {filteredAndSortedItems.length} of {stashItems.length} items
         </p>
       </div>
