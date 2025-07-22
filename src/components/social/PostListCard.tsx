@@ -3,7 +3,7 @@ import { Badge } from '../ui/badge';
 
 const PostListCard = ({ post }: { post: Post }) => {
   return (
-    <div className="p-4 rounded-lg border border-l-blue-600 border-l-6 hover:shadow-md">
+    <div className="p-4 bg-white rounded-lg border border-l-blue-600 border-l-6 hover:shadow-md">
       <div className="flex items-center space-x-3 mb-2">
         <div className="w-8 h-8 bg-gradient-to-r from-blue-400 to-blue-500 rounded-full flex items-center justify-center">
           <span className="text-white text-sm">JS</span>
