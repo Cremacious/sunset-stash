@@ -57,16 +57,13 @@ const SocialPage = () => {
     loadPosts();
   }, []);
 
-  // Client-side filtering with actual user ID
   const filteredPosts = allPosts.filter((post) => {
-    if (!currentUserId) return true; // Show all if no user ID
+    if (!currentUserId) return true;
 
     switch (postFilter) {
       case 'user':
         return post.userId === currentUserId;
       case 'friends':
-        // For now, show posts that aren't from current user
-        // Later you can implement actual friend relationships
         return post.userId !== currentUserId;
       case 'all':
       default:
@@ -74,7 +71,6 @@ const SocialPage = () => {
     }
   });
 
-  // Posts to display (with pagination)
   const displayedPosts = filteredPosts.slice(0, postsToShow);
   const hasMorePosts = postsToShow < filteredPosts.length;
 
@@ -91,7 +87,6 @@ const SocialPage = () => {
     setPostsToShow(5);
   };
 
-  // Count posts by type for stats
   const userPostsCount = allPosts.filter(
     (post) => post.userId === currentUserId
   ).length;
@@ -122,16 +117,24 @@ const SocialPage = () => {
             <div className="glassCard">
               <div className="animate-pulse h-64 bg-gray-200 rounded-lg"></div>
             </div>
+            <div className="glassCard">
+              <div className="animate-pulse h-64 bg-gray-200 rounded-lg"></div>
+            </div>
+            <div className="glassCard">
+              <div className="animate-pulse h-64 bg-gray-200 rounded-lg"></div>
+            </div>
           </div>
           <div className="md:col-span-2 space-y-6">
-            <div className="animate-pulse h-20 bg-gray-200 rounded-lg"></div>
-            <div className="space-y-4">
-              {[1, 2, 3, 4, 5].map((i) => (
-                <div
-                  key={i}
-                  className="animate-pulse h-48 bg-gray-200 rounded-lg"
-                ></div>
-              ))}
+            <div className="glassCard ">
+              <div className="animate-pulse h-20 bg-gray-200 rounded-lg mb-4"></div>
+              <div className="space-y-4">
+                {[1, 2, 3, 4, 5].map((i) => (
+                  <div
+                    key={i}
+                    className="animate-pulse h-48 bg-gray-200 rounded-lg"
+                  ></div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -157,7 +160,6 @@ const SocialPage = () => {
                 </div>
               </div>
 
-              {/* Profile Stats */}
               <div className="grid grid-cols-3 gap-4 mb-6">
                 <div className="text-center p-3 bg-purple-50 rounded-lg">
                   <p className="text-2xl font-bold text-purple-600">
@@ -177,7 +179,6 @@ const SocialPage = () => {
                 </div>
               </div>
 
-              {/* Quick Actions */}
               <div className="mt-6 pt-4 border-t border-gray-200">
                 <div className="flex space-x-2">
                   <Button
@@ -206,7 +207,6 @@ const SocialPage = () => {
         </div>
 
         <div className="md:col-span-2 space-y-6 glassCard">
-          {/* Timeline Filters */}
           <div className="bg-white rounded-lg border border-gray-200 p-4">
             <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between">
               <Button asChild className="bg-purple-600 hover:bg-purple-700">
@@ -236,7 +236,6 @@ const SocialPage = () => {
               </div>
             </div>
 
-            {/* Filter Stats */}
             <div className="flex items-center justify-between mt-3 pt-3 border-t border-gray-100">
               <div className="text-sm text-gray-600">
                 Showing {displayedPosts.length} of {filteredPosts.length} posts
@@ -252,15 +251,11 @@ const SocialPage = () => {
             </div>
           </div>
 
-          {/* Timeline Posts */}
           <div className="space-y-4">
             {displayedPosts.length > 0 ? (
               <>
                 {displayedPosts.map((post: PostWithStashItems) => (
-                  <TimelinePost
-                    key={post.id}
-                    post={post} 
-                  />
+                  <TimelinePost key={post.id} post={post} />
                 ))}
 
                 {/* Load More Button */}
