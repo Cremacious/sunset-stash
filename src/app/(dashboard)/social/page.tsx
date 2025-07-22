@@ -207,7 +207,7 @@ const SocialPage = () => {
                     onRequestUpdate={async () => {
                       await loadFriendRequests();
                       await loadFriends();
-                      await loadPosts(); 
+                      await loadPosts();
                     }}
                   />
                 </div>
@@ -255,14 +255,6 @@ const SocialPage = () => {
               <div className="text-sm text-gray-600">
                 Showing {displayedPosts.length} of {filteredPosts.length} posts
               </div>
-              {postFilter !== 'all' && (
-                <button
-                  onClick={() => handleFilterChange('all')}
-                  className="text-xs text-purple-600 hover:text-purple-800 underline"
-                >
-                  Clear filter
-                </button>
-              )}
             </div>
           </div>
 
