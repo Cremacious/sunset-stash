@@ -24,7 +24,13 @@ const TimelinePost = ({ post }: { post: PostWithStashItems }) => {
               </span>
             </div>
             <div>
-              <p className="font-bold text-gray-800">{post.author}</p>
+              <Link
+                href={`/profile/${post.userId}`}
+                className="font-bold text-gray-800 hover:underline"
+              >
+                {post.author}
+              </Link>
+
               <p className="text-xs text-gray-600">
                 {new Date(post.createdAt).toLocaleDateString()}
               </p>

@@ -40,6 +40,24 @@ const SocialPage = () => {
 
   const { user: currentUser } = useCurrentUser();
 
+  const loadPosts = async () => {
+    const { posts = [], currentUserId } = await getAllTimelinePosts();
+    setAllPosts(
+      posts.map((post) => ({
+        ...post,
+        createdAt: new Date(post.createdAt),
+        stashItems: post.stashItems?.map((item) => ({
+          ...item,
+          stashItem: {
+            ...item.stashItem,
+            dateAdded: new Date(item.stashItem.dateAdded),
+          },
+        })),
+      }))
+    );
+    setCurrentUserId(currentUserId);
+  };
+
   const loadFriendRequests = async () => {
     const friendRequestsResult = await getUserFriendRequests();
     if (friendRequestsResult.success && friendRequestsResult.data) {
@@ -57,21 +75,7 @@ const SocialPage = () => {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const { posts = [], currentUserId } = await getAllTimelinePosts();
-        setAllPosts(
-          posts.map((post) => ({
-            ...post,
-            createdAt: new Date(post.createdAt),
-            stashItems: post.stashItems?.map((item) => ({
-              ...item,
-              stashItem: {
-                ...item.stashItem,
-                dateAdded: new Date(item.stashItem.dateAdded),
-              },
-            })),
-          }))
-        );
-        setCurrentUserId(currentUserId);
+        await loadPosts();
         await loadFriendRequests();
         await loadFriends();
       } catch (error) {
@@ -117,6 +121,7 @@ const SocialPage = () => {
   const userPostsCount = allPosts.filter(
     (post) => post.userId === currentUserId
   ).length;
+
   const friendsPostsCount = allPosts.filter(
     (post) => post.userId !== currentUserId
   ).length;
@@ -201,7 +206,8 @@ const SocialPage = () => {
                     friendRequests={friendRequests}
                     onRequestUpdate={async () => {
                       await loadFriendRequests();
-                      await loadFriends(); 
+                      await loadFriends();
+                      await loadPosts(); 
                     }}
                   />
                 </div>
@@ -227,7 +233,7 @@ const SocialPage = () => {
                   Filter:
                 </span>
                 <Select value={postFilter} onValueChange={handleFilterChange}>
-                  <SelectTrigger className="w-full sm:w-32 h-9 text-sm">
+                  <SelectTrigger className="w-full sm:w-45 h-9 text-sm">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -238,7 +244,7 @@ const SocialPage = () => {
                       Your Posts ({userPostsCount})
                     </SelectItem>
                     <SelectItem value="friends">
-                      Friends ({friendsPostsCount})
+                      Friends Only ({friendsPostsCount})
                     </SelectItem>
                   </SelectContent>
                 </Select>

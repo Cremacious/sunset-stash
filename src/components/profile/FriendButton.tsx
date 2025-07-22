@@ -3,8 +3,7 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { sendFriendRequest, removeFriend } from '@/lib/actions/friend.actions';
-import { UserPlus, Users, Clock } from 'lucide-react';
-
+import { UserPlus, Users, Clock, Sun } from 'lucide-react';
 
 interface FriendButtonProps {
   profileUserId: string;
@@ -21,7 +20,6 @@ const FriendButton = ({
 }: FriendButtonProps) => {
   const [status, setStatus] = useState(friendshipStatus);
   const [loading, setLoading] = useState(false);
- 
 
   if (isOwnProfile || !currentUserId) {
     return null;
@@ -91,7 +89,7 @@ const FriendButton = ({
     >
       {loading ? (
         <>
-          <div className="w-4 h-4 mr-2 border-2 border-white border-t-transparent rounded-full animate-spin" />
+          <Sun className="w-4 h-4 mr-2 text-orange-400 animate-spin" />
           Loading...
         </>
       ) : (
