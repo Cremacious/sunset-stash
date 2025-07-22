@@ -153,9 +153,12 @@ const SocialPage = () => {
                 <div className="flex items-center space-x-4">
                   <UserImage />
                   <div>
-                    <p className="text-2xl font-bold text-gray-800">
-                      {currentUser?.name || 'Loading...'}
-                    </p>
+                    <Link
+                      className="text-2xl"
+                      href={`/profile/${currentUser?.id}`}
+                    >
+                      {currentUser?.name}
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -175,7 +178,7 @@ const SocialPage = () => {
                   <p className="text-2xl font-bold text-green-600">
                     {friendsPostsCount}
                   </p>
-                  <p className="text-xs text-gray-600">Friend Posts</p>
+                  <p className="text-xs text-gray-600">Friend Requests</p>
                 </div>
               </div>
 

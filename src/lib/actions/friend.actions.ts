@@ -16,7 +16,6 @@ export async function sendFriendRequest(friendId: string) {
 
     const currentUserId = session.user.id;
 
-    // Can't send friend request to yourself
     if (currentUserId === friendId) {
       return {
         success: false,
@@ -24,7 +23,6 @@ export async function sendFriendRequest(friendId: string) {
       };
     }
 
-    // Check if friendship already exists
     const existingFriendship = await prisma.friendship.findFirst({
       where: {
         OR: [
@@ -44,7 +42,6 @@ export async function sendFriendRequest(friendId: string) {
       };
     }
 
-    // Create friend request
     await prisma.friendship.create({
       data: {
         userId: currentUserId,
@@ -87,3 +84,17 @@ export async function removeFriend(friendId: string) {
     return { success: false, error: 'Failed to remove friend' };
   }
 }
+
+// export async function getUserFriendRequests() {
+//   try {
+//     const session = await auth.api.getSession({
+//       headers: await headers(),
+//     });
+
+//     if (!session?.user?.id) {
+//       return { success: false, error: 'Not authenticated' };
+//     }
+
+//     const userFriendRequests = await prisma.friendRequest
+//   } catch (error) {}
+// }
