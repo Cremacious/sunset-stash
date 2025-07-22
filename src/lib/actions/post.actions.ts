@@ -69,6 +69,7 @@ export async function createPost(data: z.infer<typeof postFormSchema>) {
   }
 }
 
+
 export async function getAllUserPosts() {
   try {
     const session = await auth.api.getSession({
@@ -76,14 +77,14 @@ export async function getAllUserPosts() {
     });
     if (!session?.user.id) {
       console.log('No session found');
-      return { socialPosts: [] };
+      return { socialPosts: [], currentUserId: null };
     }
     const existingUser = await prisma.user.findUnique({
       where: { id: session.user.id },
     });
     if (!existingUser) {
       console.log('User not found');
-      return { socialPosts: [] };
+      return { socialPosts: [], currentUserId: null };
     }
     const posts = await prisma.post.findMany({
       where: { userId: existingUser.id },
@@ -94,12 +95,85 @@ export async function getAllUserPosts() {
           },
         },
       },
+      orderBy: {
+        createdAt: 'desc',
+      },
     });
-    console.log('Posts found:', posts);
-    return { success: true, socialPosts: posts };
+    
+    return { 
+      success: true, 
+      socialPosts: posts.map((post) => ({
+        ...post,
+        createdAt: post.createdAt.toISOString(),
+        stashItems: post.stashItems.map((item) => ({
+          ...item,
+          stashItem: {
+            ...item.stashItem,
+            dateAdded: item.stashItem.dateAdded.toISOString(), 
+          },
+        })),
+      })),
+      currentUserId: existingUser.id, 
+    };
   } catch (error) {
     console.log('Error in getUserPosts:', error);
-    return { socialPosts: [] };
+    return { socialPosts: [], currentUserId: null };
+  }
+}
+
+export async function getAllTimelinePosts() {
+  try {
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
+    if (!session?.user.id) {
+      return { posts: [], currentUserId: null };
+    }
+
+    const currentUser = await prisma.user.findUnique({
+      where: { id: session.user.id },
+    });
+    if (!currentUser) {
+      return { posts: [], currentUserId: null };
+    }
+
+    const posts = await prisma.post.findMany({
+      include: {
+        stashItems: {
+          include: {
+            stashItem: true,
+          },
+        },
+        user: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
+
+    return {
+      success: true,
+      posts: posts.map((post) => ({
+        ...post,
+        createdAt: post.createdAt.toISOString(),
+        stashItems: post.stashItems.map((item) => ({
+          ...item,
+          stashItem: {
+            ...item.stashItem,
+            dateAdded: item.stashItem.dateAdded.toISOString(),
+          },
+        })),
+      })),
+      currentUserId: currentUser.id,
+    };
+  } catch (error) {
+    console.error('Error fetching timeline posts:', error);
+    return { posts: [], currentUserId: null };
   }
 }
 
