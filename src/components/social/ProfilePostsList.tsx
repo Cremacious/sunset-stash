@@ -1,16 +1,16 @@
 'use client';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import PostListCard from '@/components/social/PostListCard';
 import { MessageSquare } from 'lucide-react';
-import { Post } from '@/lib/types/social.types';
+import TimelinePost from './TimelinePost';
+import { ProfilePost } from '@/lib/types/profile.types';
 
 interface ProfilePostsListProps {
-  posts: Post[];
+  posts: ProfilePost[];
 }
 
 const ProfilePostsList = ({ posts }: ProfilePostsListProps) => {
-  const [displayedPosts, setDisplayedPosts] = useState(posts.slice(0, 5));
+  const [displayedPosts, setDisplayedPosts] = useState<ProfilePost[]>(posts.slice(0, 5));
   const [currentIndex, setCurrentIndex] = useState(5);
   const [loading, setLoading] = useState(false);
 
@@ -18,7 +18,7 @@ const ProfilePostsList = ({ posts }: ProfilePostsListProps) => {
 
   const loadMorePosts = () => {
     setLoading(true);
-
+    
     setTimeout(() => {
       const nextPosts = posts.slice(0, currentIndex + 5);
       setDisplayedPosts(nextPosts);
@@ -32,12 +32,27 @@ const ProfilePostsList = ({ posts }: ProfilePostsListProps) => {
       {displayedPosts.length > 0 ? (
         <>
           {displayedPosts.map((post) => (
-            <PostListCard key={post.id} post={post} />
+            <TimelinePost
+              key={post.id}
+              post={{
+                ...post,
+                createdAt: new Date(post.createdAt),
+                stashItems: post.stashItems
+                  ?.filter(item => item.stashItem)
+                  .map(item => ({
+                    ...item,
+                    stashItem: {
+                      ...item.stashItem,
+                      dateAdded: new Date(item.stashItem.dateAdded),
+                    },
+                  })) || []
+              }}
+            />
           ))}
-
+          
           {hasMorePosts && (
             <div className="text-center pt-4">
-              <Button
+              <Button 
                 onClick={loadMorePosts}
                 disabled={loading}
                 className="px-8 bg-purple-600 hover:bg-purple-700 text-white"

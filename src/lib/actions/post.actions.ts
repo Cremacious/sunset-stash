@@ -69,7 +69,6 @@ export async function createPost(data: z.infer<typeof postFormSchema>) {
   }
 }
 
-
 export async function getAllUserPosts() {
   try {
     const session = await auth.api.getSession({
@@ -219,3 +218,53 @@ export async function getPostById(postId: string) {
     };
   }
 }
+
+export async function deletePost(postId: string) {
+  try {
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
+    if (!session?.user.id) {
+      return {
+        success: false,
+        error: 'User session not found. Please sign in again.',
+      };
+    }
+
+    const post = await prisma.post.findUnique({
+      where: { id: postId },
+    });
+
+    if (!post) {
+      return {
+        success: false,
+        error: 'Post not found',
+      };
+    }
+
+    if (post.userId !== session.user.id) {
+      return {
+        success: false,
+        error: 'You do not have permission to delete this post',
+      };
+    }
+
+    await prisma.post.delete({
+      where: { id: postId },
+    });
+
+    revalidatePath('/social');
+    
+    return {
+      success: true,
+      message: 'Post deleted successfully',
+    };
+  } catch (error) {
+    console.error('Error deleting post:', error);
+    return {
+      success: false,
+      error: 'Failed to delete post',
+    };
+  }
+}
+

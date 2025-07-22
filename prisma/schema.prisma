@@ -19,14 +19,15 @@ model User {
   comments               Comment[]
   receivedFriendRequests FriendRequest[] @relation("ReceivedRequests")
   sentFriendRequests     FriendRequest[] @relation("SentRequests")
-  friendOf               Friendship[]    @relation("FriendOfUser")
-  friends                Friendship[]    @relation("UserFriends")
+
   posts                  Post[]
   purchases              Purchase[]
   stashItems             StashItem[]
   accounts               Account[]
   sessions               Session[]
   likedPosts             PostLike[]      @relation("UserLikes")
+  friendships            Friendship[]    @relation("UserFriendships")
+  friendFriendships      Friendship[]    @relation("FriendFriendships")
 
   @@map("user")
 }
@@ -171,11 +172,16 @@ model Friendship {
   id        String   @id @default(cuid())
   userId    String
   friendId  String
+  status    String   @default("pending") // 'pending', 'friends', 'blocked'
   createdAt DateTime @default(now())
-  friend    User     @relation("FriendOfUser", fields: [friendId], references: [id], onDelete: Cascade)
-  user      User     @relation("UserFriends", fields: [userId], references: [id], onDelete: Cascade)
+  updatedAt DateTime @updatedAt
+   user   User @relation("UserFriendships", fields: [userId], references: [id], onDelete: Cascade)
+  friend User @relation("FriendFriendships", fields: [friendId], references: [id], onDelete: Cascade)
+
 
   @@unique([userId, friendId])
+  @@index([userId])
+  @@index([friendId])
 }
 
 model PostLike {
