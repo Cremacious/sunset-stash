@@ -1,5 +1,6 @@
 import { Button } from '../ui/button';
-import { Friend } from '@/lib/types';
+import { Friend } from '@/lib/types/social.types';
+import Link from 'next/link';
 
 const RecentFriendCard = ({ friend }: { friend: Friend }) => {
   return (
@@ -15,9 +16,11 @@ const RecentFriendCard = ({ friend }: { friend: Friend }) => {
           <div className="w-2 h-2 rounded-full " />
         </div>
       </div>
-      <Button size="sm" className="text-xs">
-        View
-      </Button>
+      <Link href={`/profile/${friend.id}`}>
+        <Button size="sm" className="text-xs">
+          View
+        </Button>
+      </Link>
     </div>
   );
 };

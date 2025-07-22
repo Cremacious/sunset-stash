@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { sendFriendRequest, removeFriend } from '@/lib/actions/friend.actions';
 import { UserPlus, Users, Clock } from 'lucide-react';
-// import { useRouter } from 'next/navigation';
+
 
 interface FriendButtonProps {
   profileUserId: string;
@@ -21,7 +21,7 @@ const FriendButton = ({
 }: FriendButtonProps) => {
   const [status, setStatus] = useState(friendshipStatus);
   const [loading, setLoading] = useState(false);
-  //   const router = useRouter();
+ 
 
   if (isOwnProfile || !currentUserId) {
     return null;
@@ -61,14 +61,14 @@ const FriendButton = ({
           text: 'Friends',
           icon: <Users className="w-4 h-4 mr-2" />,
           variant: 'default' as const,
-          className: 'bg-green-600 hover:bg-green-700',
+          className: 'bg-green-600 hover:bg-green-700 font-bold',
         };
       case 'pending':
         return {
           text: 'Request Sent',
           icon: <Clock className="w-4 h-4 mr-2" />,
           variant: 'outline' as const,
-          className: 'border-orange-300 text-orange-600 hover:bg-orange-50',
+          className: 'border-purple-300 text-purple-600 hover:bg-purple-50',
         };
       default:
         return {

@@ -68,6 +68,20 @@ export type FriendRequest = {
   };
 };
 
+export type PendingFriendship = {
+  id: string;
+  userId: string;
+  friendId: string;
+  status: string;
+  createdAt: Date;
+  updatedAt: Date;
+  user: {
+    id: string;
+    name: string;
+    email: string;
+  };
+};
+
 export type Friendship = {
   id: string;
   userId: string;
@@ -81,6 +95,9 @@ export type Friendship = {
 };
 
 export type Friend = {
-  name: string;
   id: string;
+  name: string;
+  email: string;
+  friendshipId: string;
+  createdAt: string;
 };

@@ -12,25 +12,50 @@ import TimelinePost from '@/components/social/TimelinePost';
 import FindFriends from '@/components/social/FindFriends';
 import Link from 'next/link';
 import { getAllTimelinePosts } from '@/lib/actions/post.actions';
+import {
+  getUserFriendRequests,
+  getAllUserFriends,
+} from '@/lib/actions/friend.actions';
 import { MessageSquare } from 'lucide-react';
 import RecentFriends from '@/components/social/RecentFriends';
 import UserImage from '@/components/social/UserImage';
-import { PostWithStashItems } from '@/lib/types/social.types';
+import {
+  PostWithStashItems,
+  PendingFriendship,
+  Friend,
+} from '@/lib/types/social.types';
 import { useCurrentUser } from '@/lib/hooks/useCurrentUser';
+import FriendRequestDialog from '@/components/social/FriendRequestDialog';
 
 const SocialPage = () => {
   const [allPosts, setAllPosts] = useState<PostWithStashItems[]>([]);
   const [loading, setLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
   const [currentUserId, setCurrentUserId] = useState<string | null>(null);
+  const [friendRequests, setFriendRequests] = useState<PendingFriendship[]>([]);
+  const [friends, setFriends] = useState<Friend[]>([]);
 
   const [postFilter, setPostFilter] = useState('all');
   const [postsToShow, setPostsToShow] = useState(5);
 
   const { user: currentUser } = useCurrentUser();
 
+  const loadFriendRequests = async () => {
+    const friendRequestsResult = await getUserFriendRequests();
+    if (friendRequestsResult.success && friendRequestsResult.data) {
+      setFriendRequests(friendRequestsResult.data);
+    }
+  };
+
+  const loadFriends = async () => {
+    const friendsResult = await getAllUserFriends();
+    if (friendsResult.success && friendsResult.data) {
+      setFriends(friendsResult.data);
+    }
+  };
+
   useEffect(() => {
-    const loadPosts = async () => {
+    const loadData = async () => {
       try {
         const { posts = [], currentUserId } = await getAllTimelinePosts();
         setAllPosts(
@@ -47,14 +72,16 @@ const SocialPage = () => {
           }))
         );
         setCurrentUserId(currentUserId);
+        await loadFriendRequests();
+        await loadFriends();
       } catch (error) {
-        console.error('Failed to load posts:', error);
+        console.error('Failed to load data:', error);
       } finally {
         setLoading(false);
       }
     };
 
-    loadPosts();
+    loadData();
   }, []);
 
   const filteredPosts = allPosts.filter((post) => {
@@ -93,21 +120,6 @@ const SocialPage = () => {
   const friendsPostsCount = allPosts.filter(
     (post) => post.userId !== currentUserId
   ).length;
-
-  const friends = [
-    {
-      id: '1',
-      name: 'Jake Rodriguez',
-      email: 'jake.r@email.com',
-      createdAt: '2025-01-13',
-    },
-    {
-      id: '2',
-      name: 'Jake Rodriguez',
-      email: 'jake.r@email.com',
-      createdAt: '2025-01-13',
-    },
-  ];
 
   if (loading) {
     return (
@@ -148,7 +160,6 @@ const SocialPage = () => {
         <div className="space-y-4">
           <div className="glassCard">
             <div className="bg-white rounded-lg shadow-lg p-6">
-              {/* Profile Header */}
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center space-x-4">
                   <UserImage />
@@ -171,33 +182,28 @@ const SocialPage = () => {
                   <p className="text-xs text-gray-600">Your Posts</p>
                 </div>
                 <div className="text-center p-3 bg-blue-50 rounded-lg">
-                  <p className="text-2xl font-bold text-blue-600">5</p>
+                  <p className="text-2xl font-bold text-blue-600">
+                    {friends.length}
+                  </p>
                   <p className="text-xs text-gray-600">Friends</p>
                 </div>
                 <div className="text-center p-3 bg-green-50 rounded-lg">
                   <p className="text-2xl font-bold text-green-600">
-                    {friendsPostsCount}
+                    {friendRequests.length}
                   </p>
                   <p className="text-xs text-gray-600">Friend Requests</p>
                 </div>
               </div>
 
               <div className="mt-6 pt-4 border-t border-gray-200">
-                <div className="flex space-x-2">
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    className="flex-1 text-xs"
-                  >
-                    Edit Profile
-                  </Button>
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    className="flex-1 text-xs"
-                  >
-                    Settings
-                  </Button>
+                <div className="flex justify-center">
+                  <FriendRequestDialog
+                    friendRequests={friendRequests}
+                    onRequestUpdate={async () => {
+                      await loadFriendRequests();
+                      await loadFriends(); 
+                    }}
+                  />
                 </div>
               </div>
             </div>
@@ -261,7 +267,6 @@ const SocialPage = () => {
                   <TimelinePost key={post.id} post={post} />
                 ))}
 
-                {/* Load More Button */}
                 {hasMorePosts && (
                   <div className="text-center pt-6">
                     <Button

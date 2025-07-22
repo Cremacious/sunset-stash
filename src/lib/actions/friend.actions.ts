@@ -4,6 +4,66 @@ import prisma from '@/lib/prisma';
 import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
 
+export async function getAllUserFriends() {
+  try {
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
+
+    if (!session?.user?.id) {
+      return { success: false, error: 'Not authenticated' };
+    }
+
+    const currentUserId = session.user.id;
+
+    const friendships = await prisma.friendship.findMany({
+      where: {
+        OR: [
+          { userId: currentUserId, status: 'friends' },
+          { friendId: currentUserId, status: 'friends' },
+        ],
+      },
+      include: {
+        user: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+          },
+        },
+        friend: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+          },
+        },
+      },
+    });
+
+    // Transform the data to return the actual friend (not the current user)
+    const friends = friendships.map((friendship) => {
+      const friend =
+        friendship.userId === currentUserId
+          ? friendship.friend
+          : friendship.user;
+
+      return {
+        id: friend.id,
+        name: friend.name,
+        email: friend.email,
+        friendshipId: friendship.id,
+        createdAt: friendship.createdAt.toISOString(),
+      };
+    });
+
+    return { success: true, data: friends };
+  } catch (error) {
+    console.error('Error fetching friends:', error);
+    return { success: false, error: 'Failed to fetch friends' };
+  }
+}
+
 export async function sendFriendRequest(friendId: string) {
   try {
     const session = await auth.api.getSession({
@@ -85,16 +145,89 @@ export async function removeFriend(friendId: string) {
   }
 }
 
-// export async function getUserFriendRequests() {
-//   try {
-//     const session = await auth.api.getSession({
-//       headers: await headers(),
-//     });
+export async function getUserFriendRequests() {
+  try {
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
 
-//     if (!session?.user?.id) {
-//       return { success: false, error: 'Not authenticated' };
-//     }
+    if (!session?.user?.id) {
+      return { success: false, error: 'Not authenticated' };
+    }
+    const currentUserId = session.user.id;
+    const friendRequests = await prisma.friendship.findMany({
+      where: {
+        friendId: currentUserId,
+        status: 'pending',
+      },
+      include: {
+        user: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+          },
+        },
+      },
+    });
 
-//     const userFriendRequests = await prisma.friendRequest
-//   } catch (error) {}
-// }
+    return { success: true, data: friendRequests };
+  } catch (error) {
+    console.error('Error fetching friend requests:', error);
+    return { success: false, error: 'Failed to fetch friend requests' };
+  }
+}
+
+export async function acceptFriendRequest(friendshipId: string) {
+  try {
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
+
+    if (!session?.user?.id) {
+      return { success: false, error: 'Not authenticated' };
+    }
+
+    const currentUserId = session.user.id;
+
+    const friendship = await prisma.friendship.update({
+      where: {
+        id: friendshipId,
+        friendId: currentUserId,
+      },
+      data: {
+        status: 'friends',
+      },
+    });
+
+    return { success: true, data: friendship };
+  } catch (error) {
+    console.error('Error accepting friend request:', error);
+    return { success: false, error: 'Failed to accept friend request' };
+  }
+}
+
+export async function declineFriendRequest(friendshipId: string) {
+  try {
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
+
+    if (!session?.user?.id) {
+      return { success: false, error: 'Not authenticated' };
+    }
+
+    const currentUserId = session.user.id;
+
+    await prisma.friendship.delete({
+      where: {
+        id: friendshipId,
+        friendId: currentUserId,
+      },
+    });
+    return { success: true };
+  } catch (error) {
+    console.error('Error declining friend request:', error);
+    return { success: false, error: 'Failed to decline friend request' };
+  }
+}
