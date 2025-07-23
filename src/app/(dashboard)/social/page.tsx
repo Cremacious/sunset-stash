@@ -180,19 +180,19 @@ const SocialPage = () => {
               </div>
 
               <div className="grid grid-cols-3 gap-4 mb-6">
-                <div className="text-center p-3 bg-purple-50 rounded-lg">
-                  <p className="text-2xl font-bold text-purple-600">
+                <div className="text-center p-3 bg-purple-50 rounded-lg border-b-2 border-b-purple-500">
+                  <p className="text-2xl font-bold text-purple-600 ">
                     {userPostsCount}
                   </p>
                   <p className="text-xs text-gray-600">Your Posts</p>
                 </div>
-                <div className="text-center p-3 bg-blue-50 rounded-lg">
+                <div className="text-center p-3 bg-blue-50 rounded-lg border-b-2 border-b-blue-500">
                   <p className="text-2xl font-bold text-blue-600">
                     {friends.length}
                   </p>
                   <p className="text-xs text-gray-600">Friends</p>
                 </div>
-                <div className="text-center p-3 bg-green-50 rounded-lg">
+                <div className="text-center p-3 bg-green-50 rounded-lg border-b-2 border-b-green-500">
                   <p className="text-2xl font-bold text-green-600">
                     {friendRequests.length}
                   </p>
@@ -222,7 +222,7 @@ const SocialPage = () => {
         </div>
 
         <div className="md:col-span-2 space-y-6 glassCard">
-          <div className="bg-white rounded-lg border border-gray-200 p-4">
+          <div className="bg-white rounded-lg p-4 border-b-4 border-b-purple-500">
             <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between">
               <Button asChild className="bg-purple-600 hover:bg-purple-700">
                 <Link href="/social/new-post">Create New Post</Link>
@@ -287,7 +287,7 @@ const SocialPage = () => {
                 )}
               </>
             ) : (
-              <div className="bg-white p-12 flex flex-col justify-center items-center rounded-lg shadow-md">
+              <div className="bg-white/70 backdrop-blur-sm rounded-lg border border-white/30 p-12 flex flex-col justify-center items-center shadow-md">
                 <MessageSquare className="text-purple-500 w-16 h-16 mb-4" />
                 <h3 className="text-lg font-semibold text-gray-800 mb-2">
                   {postFilter === 'all'

@@ -185,7 +185,7 @@ const PurchasesPage = () => {
           <div className="flex items-center justify-between bg-white p-6 rounded-md shadow-md border-b-purple-500 border-b-4">
             <div className="flex items-center">
               <div className="md:ml-4">
-                <h2 className="text-lg md:text-2xl font-bold text-gray-800 fugaz-font">
+                <h2 className="text-lg md:text-2xl font-bold 0 fugaz-font text-purple-700">
                   Purchase History
                 </h2>
                 <p className="text-gray-600 text-sm md:text-lg">

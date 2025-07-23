@@ -36,7 +36,7 @@ const EditPostPage = () => {
   const [activity, setActivity] = useState('');
   const [showStashSelector, setShowStashSelector] = useState(false);
 
-  // Mock stash data
+
   const stashItems = [
     {
       id: 1,

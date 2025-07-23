@@ -12,13 +12,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
+import { Input } from '../ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { postFormSchema } from '@/lib/validators/post.validator';
 import { useState } from 'react';
@@ -90,19 +84,10 @@ const PostForm = ({ stashItems }: { stashItems: StashItem[] }) => {
           name="activity"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>What are you doing?</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select Activity" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value="m@example.com">m@example.com</SelectItem>
-                  <SelectItem value="m@google.com">m@google.com</SelectItem>
-                  <SelectItem value="m@support.com">m@support.com</SelectItem>
-                </SelectContent>
-              </Select>
+              <FormLabel>Activity</FormLabel>
+              <FormControl>
+                <Input placeholder="" type="text" {...field} />
+              </FormControl>
 
               <FormMessage />
             </FormItem>

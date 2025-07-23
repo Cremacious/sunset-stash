@@ -11,7 +11,7 @@ const CommunityFeed = ({ posts }: { posts: PostWithStashItems[] }) => {
     <div>
       <div className=" h-full space-y-4">
         <div className="text-xl font-bold text-gray-800 flex items-center justify-between bg-white p-4 rounded-lg shadow-md border-b-4 border-b-blue-500">
-          <div className="flex items-center fugaz-font text-2xl">
+          <div className="flex items-center fugaz-font text-2xl text-blue-700">
             Community Feed
           </div>
           <Button variant="outline" size="sm">

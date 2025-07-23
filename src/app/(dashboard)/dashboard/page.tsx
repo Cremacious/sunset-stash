@@ -29,7 +29,7 @@ const DashboardPage = async () => {
   }));
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 h-full">
       <div className="glassCard">
         <QuickActions />
       </div>

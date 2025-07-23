@@ -31,7 +31,7 @@ const StashAnalytics = ({ stashItems }: StashAnalyticsProps) => {
   return (
     <div className="">
       <div className="flex flex-col gap-4 glassCard">
-        <div className="bg-purple-100 rounded-xl p-4 border border-purple-200 hover:shadow-md transition-all duration-300">
+        <div className="bg-purple-100 rounded-xl p-4 border-purple-200 hover:shadow-md transition-all duration-300 border-b-purple-500 border-b-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="p-2 bg-purple-500 rounded-full">
@@ -44,7 +44,7 @@ const StashAnalytics = ({ stashItems }: StashAnalyticsProps) => {
             <p className="text-xl font-bold text-gray-800">{totalItems}</p>
           </div>
         </div>
-        <div className="bg-orange-100 rounded-xl p-6 border border-orange-200 hover:shadow-lg transition-all duration-300">
+        <div className="bg-orange-100 rounded-xl p-6 border-b-orange-500 border-b-4 border-orange-200 hover:shadow-lg transition-all duration-300">
           <div className="flex items-center justify-between mb-4">
             <div className="p-3 bg-orange-500 rounded-full">
               <TrendingUp className="w-6 h-6 text-white" />
@@ -73,7 +73,7 @@ const StashAnalytics = ({ stashItems }: StashAnalyticsProps) => {
             </p>
           )}
         </div>
-        <div className="bg-blue-100 rounded-xl p-6 border border-blue-200 hover:shadow-lg transition-all duration-300">
+        <div className="bg-blue-100 rounded-xl p-6 border-b-4 border-b-blue-500 border-blue-200 hover:shadow-lg transition-all duration-300">
           <div className="flex items-center justify-between mb-4">
             <div className="p-3 bg-blue-500 rounded-full">
               <Star className="w-6 h-6 text-white" />

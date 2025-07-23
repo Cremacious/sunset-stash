@@ -44,7 +44,7 @@ const StashSearchBar = ({
     searchTerm || selectedCategory || selectedType || selectedSort !== 'newest';
 
   return (
-    <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-200 relative">
+    <div className="bg-white rounded-lg p-4 shadow-sm border-b-4 border-b-purple-500 border-gray-200 relative">
       <div className="flex flex-col lg:flex-row gap-3 items-stretch lg:items-center">
         <div className="flex-shrink-0">
           <Button

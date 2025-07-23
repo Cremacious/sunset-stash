@@ -2,7 +2,7 @@
 import { z } from 'zod';
 
 export const postFormSchema = z.object({
-  activity: z.string().min(1, 'Please select an activity'),
+  activity: z.string().optional(),
   content: z
     .string()
     .min(1, 'Please write some content')

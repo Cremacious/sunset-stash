@@ -17,7 +17,6 @@ const NewStashItemPage = () => {
         <Card className="bg-white shadow-xl border-0">
           <CardHeader>
             <CardTitle className="text-xl font-bold text-gray-800 flex items-center">
-              <span className="text-2xl mr-3">📝</span>
               Strain Details
             </CardTitle>
             <CardDescription>

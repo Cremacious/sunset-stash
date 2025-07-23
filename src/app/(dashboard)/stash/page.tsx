@@ -5,6 +5,7 @@ import { getUserStashItems } from '@/lib/actions/stash.actions';
 import StashSearchBar from '@/components/stash/StashSearchBar';
 import StashGrid from '@/components/stash/StashGrid';
 import { StashItem } from '@/lib/types/stash.types';
+import { Container } from 'lucide-react';
 
 const StashPage = () => {
   const [stashItems, setStashItems] = useState<StashItem[]>([]);
@@ -76,13 +77,20 @@ const StashPage = () => {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div className="glassCard md:col-span-3">
-          <StashGrid
-            stashItems={stashItems}
-            searchTerm={search}
-            categoryFilter={category}
-            typeFilter={type}
-            sortBy={sort}
-          />
+          {stashItems.length > 0 ? (
+            <StashGrid
+              stashItems={stashItems}
+              searchTerm={search}
+              categoryFilter={category}
+              typeFilter={type}
+              sortBy={sort}
+            />
+          ) : (
+            <div className="bg-white/70 backdrop-blur-sm rounded-lg border border-white/30 p-6 h-full flex flex-col items-center justify-center">
+              <Container className="w-10 h-10 text-purple-500 mb-2" />
+              <span className="text-gray-500">You have an empty stash.</span>
+            </div>
+          )}
         </div>
         <StashAnalytics stashItems={stashItems} />
       </div>

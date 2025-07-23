@@ -136,9 +136,7 @@ export default function PurchaseForm() {
               >
                 <div className="bg-gradient-to-r from-purple-50/50 to-indigo-50/50 backdrop-blur-sm border border-purple-200/50 rounded-2xl p-6 md:p-8">
                   <div className="flex items-center space-x-3 mb-6">
-                    <div className="p-2 bg-purple-100 rounded-xl">
-                      <CalendarIcon className="w-5 h-5 text-purple-600" />
-                    </div>
+                
                     <h2 className="text-2xl font-bold text-gray-800">
                       Purchase Information
                     </h2>

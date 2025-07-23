@@ -16,10 +16,18 @@ const RecentFriends = ({ friends }: { friends: Friend[] }) => {
           </Button>
         </div>
 
-        <div className="space-y-3">
-          {friends.slice(0, 3).map((friend) => (
-            <RecentFriendCard key={friend.id} friend={friend} />
-          ))}
+        <div className="space-y-2">
+          {friends.length > 0 ? (
+            friends
+              .slice(0, 3)
+              .map((friend: Friend) => (
+                <RecentFriendCard key={friend.id} friend={friend} />
+              ))
+          ) : (
+            <div className="flex justify-center items-center text-center">
+              No friends yet
+            </div>
+          )}
         </div>
       </div>
     </div>

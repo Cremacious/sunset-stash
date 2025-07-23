@@ -23,7 +23,7 @@ const EditPurchasePage = ({ params }: EditPurchasePageProps) => {
   const router = useRouter();
   const { purchaseId } = use(params);
 
-  // Mock existing purchase data - in real app, this would come from API/database
+
   const existingPurchase = {
     id: purchaseId,
     dispensary: 'trulieve',

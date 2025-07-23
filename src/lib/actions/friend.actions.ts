@@ -40,8 +40,6 @@ export async function getAllUserFriends() {
         },
       },
     });
-
-    // Transform the data to return the actual friend (not the current user)
     const friends = friendships.map((friendship) => {
       const friend =
         friendship.userId === currentUserId

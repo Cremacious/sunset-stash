@@ -10,7 +10,7 @@ const RecentStashItems = ({ stashItems }: { stashItems: StashItem[] }) => {
   return (
     <div className="h-full space-y-4">
       <div className="text-xl font-bold text-gray-800 flex items-center justify-between bg-white p-4 rounded-lg shadow-md border-b-4 border-b-purple-500">
-        <div className="flex items-center fugaz-font text-2xl">
+        <div className="flex items-center fugaz-font text-2xl text-purple-700">
           Latest Stash Items
         </div>
         <Button
