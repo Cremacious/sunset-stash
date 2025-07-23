@@ -120,6 +120,13 @@ export async function getAllTimelinePosts() {
             name: true,
           },
         },
+        comments: {
+          include: {
+            user: { select: { id: true, name: true } },
+            replies: true,
+          },
+          orderBy: { createdAt: 'desc' },
+        },
       },
       orderBy: {
         createdAt: 'desc',
@@ -130,14 +137,31 @@ export async function getAllTimelinePosts() {
       success: true,
       posts: posts.map((post) => ({
         ...post,
-        createdAt: post.createdAt.toISOString(),
-        stashItems: post.stashItems.map((item) => ({
-          ...item,
-          stashItem: {
-            ...item.stashItem,
-            dateAdded: item.stashItem.dateAdded.toISOString(),
-          },
-        })),
+        createdAt:
+          post.createdAt instanceof Date
+            ? post.createdAt.toISOString()
+            : post.createdAt,
+        stashItems: Array.isArray(post.stashItems)
+          ? post.stashItems.map((item) => ({
+              ...item,
+              stashItem: {
+                ...item.stashItem,
+                dateAdded:
+                  item.stashItem.dateAdded instanceof Date
+                    ? item.stashItem.dateAdded.toISOString()
+                    : item.stashItem.dateAdded,
+              },
+            }))
+          : [],
+        comments: Array.isArray(post.comments)
+          ? post.comments.map((comment) => ({
+              ...comment,
+              createdAt:
+                comment.createdAt instanceof Date
+                  ? comment.createdAt.toISOString()
+                  : comment.createdAt,
+            }))
+          : [],
       })),
       currentUserId: currentUser.id,
     };
@@ -158,7 +182,7 @@ export async function getPostById(postId: string) {
             user: { select: { id: true, name: true } },
             replies: true,
           },
-          orderBy: { createdAt: 'asc' },
+          orderBy: { createdAt: 'desc' },
         },
       },
     });
@@ -319,39 +343,45 @@ export async function getAllFriendsPosts() {
 }
 
 export async function createComment(postId: string, content: string) {
-  const session = await auth.api.getSession({ headers: await headers() });
-  if (!session?.user?.id) {
-    return { success: false, error: 'Not authenticated' };
-  }
-  const currentUserId = session.user.id;
+  try {
+    const session = await auth.api.getSession({ headers: await headers() });
+    if (!session?.user?.id) {
+      return { success: false, error: 'Not authenticated' };
+    }
+    const currentUserId = session.user.id;
 
-  const post = await prisma.post.findUnique({
-    where: { id: postId },
-    select: { userId: true },
-  });
-  if (!post) {
-    return { success: false, error: 'Post not found' };
-  }
+    const post = await prisma.post.findUnique({
+      where: { id: postId },
+      select: { userId: true },
+    });
+    if (!post) {
+      return { success: false, error: 'Post not found' };
+    }
 
-  const isFriend = await prisma.friendship.findFirst({
-    where: {
-      OR: [
-        { userId: currentUserId, friendId: post.userId, status: 'friends' },
-        { userId: post.userId, friendId: currentUserId, status: 'friends' },
-      ],
-    },
-  });
-  if (!isFriend) {
-    return { success: false, error: 'You must be friends to comment.' };
-  }
+    const isFriend = await prisma.friendship.findFirst({
+      where: {
+        OR: [
+          { userId: currentUserId, friendId: post.userId, status: 'friends' },
+          { userId: post.userId, friendId: currentUserId, status: 'friends' },
+        ],
+      },
+    });
+    if (!isFriend) {
+      return { success: false, error: 'You must be friends to comment.' };
+    }
 
-  await prisma.comment.create({
-    data: {
-      author: session.user.name,
-      content,
-      postId,
-      userId: currentUserId,
-    },
-  });
-  return { success: true };
+    await prisma.comment.create({
+      data: {
+        author: session.user.name,
+        content,
+        postId,
+        userId: currentUserId,
+      },
+    });
+    revalidatePath(`/social/${postId}`);
+    return { success: true };
+  } catch (error) {
+    console.error('Error creating comment:', error);
+    return { success: false, error: 'Failed to create comment' };
+  }
 }

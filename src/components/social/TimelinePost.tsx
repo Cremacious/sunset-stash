@@ -1,9 +1,8 @@
-// components/social/TimelinePost.tsx
 import { Button } from '../ui/button';
 import { PostWithStashItems } from '@/lib/types/social.types';
 import { Badge } from '../ui/badge';
 import Link from 'next/link';
-import { MessageCircle, Heart } from 'lucide-react';
+import { MessageCircle } from 'lucide-react';
 
 const TimelinePost = ({ post }: { post: PostWithStashItems }) => {
   const getInitials = (name: string) => {
@@ -13,6 +12,8 @@ const TimelinePost = ({ post }: { post: PostWithStashItems }) => {
       .join('');
   };
 
+ 
+
   return (
     <div className="bg-white rounded-xl border-b-6 border-b-blue-500 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden">
       <div className="bg-blue-50 p-4 border-b border-blue-100">
@@ -21,7 +22,7 @@ const TimelinePost = ({ post }: { post: PostWithStashItems }) => {
             <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center shadow-md">
               <span className="text-white font-bold text-lg">
                 {getInitials(post.author)}
-              </span>
+              </span> 
             </div>
             <div>
               <Link
@@ -40,7 +41,7 @@ const TimelinePost = ({ post }: { post: PostWithStashItems }) => {
             variant="outline"
             className="bg-blue-100 text-blue-700 border-blue-300 font-medium"
           >
-            {post.activity}
+            {post.activity} 
           </Badge>
         </div>
       </div>
@@ -59,7 +60,7 @@ const TimelinePost = ({ post }: { post: PostWithStashItems }) => {
             </div>
             <div className="flex flex-wrap gap-2">
               {post.stashItems
-                .filter((item) => item.stashItem && item.stashItem.name) // Add this filter
+                .filter((item) => item.stashItem && item.stashItem.name) 
                 .map((item) => (
                   <Badge
                     key={item.stashItemId}
@@ -76,13 +77,13 @@ const TimelinePost = ({ post }: { post: PostWithStashItems }) => {
           <div className="flex items-center space-x-4">
             <div className="relative">
               <MessageCircle className="text-purple-600" size={30} />
-              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
-                0
+              <span className="absolute -top-2 -right-2 bg-blue-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
+                {(post.comments?.length ?? 0)}
               </span>
             </div>
-            <button className="flex items-center space-x-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg px-3 py-2">
+            {/* <button className="flex items-center space-x-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg px-3 py-2">
               <Heart size={30} className="text-red-500" />
-            </button>
+            </button> */}
           </div>
           <Button
             asChild

@@ -17,9 +17,9 @@ export type PostWithStashItems = {
   author: string;
   activity: string;
   content: string;
-  createdAt: Date;
+  createdAt: string | Date;
   userId: string;
-  stashItems: Array<{
+  stashItems?: Array<{
     postId: string;
     stashItemId: string;
     stashItem: {
@@ -32,9 +32,16 @@ export type PostWithStashItems = {
       cbd: number;
       lineage: string;
       notes: string;
-      dateAdded: Date;
+      dateAdded: string | Date;
       userId: string;
     };
+  }>;
+  comments?: Array<{
+    id: string;
+    author: string;
+    content: string;
+    createdAt: string | Date;
+    // ...other fields
   }>;
 };
 

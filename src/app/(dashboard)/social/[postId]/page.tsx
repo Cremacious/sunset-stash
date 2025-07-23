@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { getPostById } from '@/lib/actions/post.actions';
 import Link from 'next/link';
-import { ArrowLeft, Edit3, Heart, MessageCircle } from 'lucide-react';
+import { ArrowLeft, Edit3, MessageCircle } from 'lucide-react';
 import { areUsersFriends } from '@/lib/actions/friend.actions';
 import CommentForm from '@/components/social/CommentForm';
 import CommentCard from '@/components/social/CommentCard';
@@ -172,17 +172,17 @@ const PostPage = async ({
             </div>
           )}
 
-          <div className="flex items-center justify-between bg-gray-50 rounded-lg p-3">
+          <div className="flex items-center justify-between  rounded-lg p-3">
             <div className="flex items-center space-x-4">
               <div className="relative">
                 <MessageCircle className="text-purple-600" size={30} />
-                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
-                  0
+                <span className="absolute -top-2 -right-2 bg-blue-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
+                  {comments.length}
                 </span>
               </div>
-              <button className="flex items-center space-x-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg px-3 py-2">
+              {/* <button className="flex items-center space-x-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg px-3 py-2">
                 <Heart fill="red" size={30} className="text-red-500" />
-              </button>
+              </button> */}
             </div>
             <div className="flex space-x-2">
               <Button
@@ -203,10 +203,7 @@ const PostPage = async ({
 
       <div className="bg-white rounded-xl border-b-6 border-b-purple-500 shadow-lg overflow-hidden">
         <div className="p-4 space-y-4">
-     
           {isFriend && <CommentForm postId={post.id} />}
-
-
 
           {comments.length === 0 ? (
             <div className="text-center py-8">
@@ -218,8 +215,6 @@ const PostPage = async ({
               <CommentCard key={comment.id} comment={comment} />
             ))
           )}
-
-        
         </div>
       </div>
     </div>
