@@ -11,15 +11,30 @@ export type Post = {
   stashItems: PostStashItem[];
 };
 
+// export type Comment = {
+//   id: string;
+//   author: string;
+//   content: string;
+//   postId: string;
+//   parentId: string | null;
+//   createdAt: Date;
+//   userId: string;
+
+// };
+
 export type Comment = {
   id: string;
+  createdAt: string | Date;
   author: string;
   content: string;
   postId: string;
   parentId: string | null;
-  createdAt: Date;
   userId: string;
-  // Add other Comment fields as needed
+  replies?: Comment[];
+  user?: {
+    name: string;
+    id: string;
+  };
 };
 
 export type PostStashItem = {

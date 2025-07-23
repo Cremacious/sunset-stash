@@ -146,47 +146,56 @@ export async function getAllTimelinePosts() {
     return { posts: [], currentUserId: null };
   }
 }
-
 export async function getPostById(postId: string) {
   try {
     const post = await prisma.post.findUnique({
-      where: {
-        id: postId,
-      },
+      where: { id: postId },
       include: {
-        stashItems: {
+        stashItems: { include: { stashItem: true } },
+        user: { select: { name: true, id: true } },
+        comments: {
           include: {
-            stashItem: true,
+            user: { select: { id: true, name: true } },
+            replies: true,
           },
-        },
-        user: {
-          select: {
-            name: true,
-            id: true,
-          },
+          orderBy: { createdAt: 'asc' },
         },
       },
     });
 
     if (!post) {
-      return {
-        success: false,
-        error: 'Post not found',
-        data: null,
-      };
+      return { success: false, error: 'Post not found', data: null };
     }
+
+    const mappedComments = post.comments.map((comment) => ({
+      id: comment.id,
+      createdAt:
+        comment.createdAt instanceof Date
+          ? comment.createdAt.toISOString()
+          : comment.createdAt,
+      author: comment.author,
+      content: comment.content,
+      postId: comment.postId,
+      parentId: comment.parentId,
+      userId: comment.userId,
+      replies: comment.replies,
+      user: comment.user,
+    }));
 
     return {
       success: true,
-      data: post,
+      data: {
+        ...post,
+        createdAt:
+          post.createdAt instanceof Date
+            ? post.createdAt.toISOString()
+            : post.createdAt,
+        comments: mappedComments,
+      },
     };
   } catch (error) {
     console.error('Error fetching post:', error);
-    return {
-      success: false,
-      error: 'Failed to fetch post',
-      data: null,
-    };
+    return { success: false, error: 'Failed to fetch post', data: null };
   }
 }
 

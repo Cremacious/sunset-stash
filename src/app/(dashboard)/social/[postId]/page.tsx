@@ -7,6 +7,7 @@ import { ArrowLeft, Edit3, Heart, MessageCircle } from 'lucide-react';
 import { areUsersFriends } from '@/lib/actions/friend.actions';
 import CommentForm from '@/components/social/CommentForm';
 import CommentCard from '@/components/social/CommentCard';
+import { Comment } from '@/lib/types/post.types';
 
 const PostPage = async ({
   params,
@@ -37,6 +38,7 @@ const PostPage = async ({
   }
 
   const post = result.data;
+  const comments: Comment[] = post.comments;
 
   const getInitials = (name: string) => {
     return name
@@ -75,9 +77,7 @@ const PostPage = async ({
               <div>
                 <p className="font-bold text-gray-800">{post.author}</p>
                 <p className="text-xs text-gray-600">
-                  {post.createdAt instanceof Date
-                    ? post.createdAt.toLocaleDateString()
-                    : new Date(post.createdAt).toLocaleDateString()}
+                  {new Date(post.createdAt).toLocaleDateString()}
                 </p>
               </div>
             </div>
@@ -201,23 +201,25 @@ const PostPage = async ({
         </div>
       </div>
 
-      {/* Comments Section */}
       <div className="bg-white rounded-xl border-b-6 border-b-purple-500 shadow-lg overflow-hidden">
         <div className="p-4 space-y-4">
-          {/* Add Comment Form */}
+     
           {isFriend && <CommentForm postId={post.id} />}
 
-          {/* No Comments Message */}
 
-          {post}
-          <div className="text-center py-8">
-            <MessageCircle className="w-12 h-12 text-gray-400 mx-auto mb-3" />
-            <p className="text-gray-500">No comments yet.</p>
-          </div>
 
-          {/* Future Comments Would Go Here */}
+          {comments.length === 0 ? (
+            <div className="text-center py-8">
+              <MessageCircle className="w-12 h-12 text-gray-400 mx-auto mb-3" />
+              <p className="text-gray-500">No comments yet.</p>
+            </div>
+          ) : (
+            comments.map((comment: Comment) => (
+              <CommentCard key={comment.id} comment={comment} />
+            ))
+          )}
 
-          <CommentCard />
+        
         </div>
       </div>
     </div>
