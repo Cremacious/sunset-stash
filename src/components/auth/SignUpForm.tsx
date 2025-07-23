@@ -55,6 +55,8 @@ const SignUpForm = () => {
     }
   }
 
+  const isSubmitting = form.formState.isSubmitting;
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -128,8 +130,12 @@ const SignUpForm = () => {
           )}
         />
 
-        <Button className="w-full mt-4" type="submit">
-          Submit
+        <Button
+          disabled={isSubmitting}
+          className="w-full mt-4"
+          type="submit"
+        >
+          {isSubmitting ? 'Creating Account...' : 'Create Account'}
         </Button>
       </form>
     </Form>

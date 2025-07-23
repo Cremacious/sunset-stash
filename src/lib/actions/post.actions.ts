@@ -40,7 +40,7 @@ export async function createPost(data: z.infer<typeof postFormSchema>) {
     }
     const post = await prisma.post.create({
       data: {
-        activity: parsedData.activity,
+        activity: parsedData.activity ?? '',
         content: parsedData.content,
         userId: existingUser.id,
         author: existingUser.name,
