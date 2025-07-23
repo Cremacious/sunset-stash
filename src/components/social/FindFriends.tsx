@@ -33,7 +33,7 @@ const FindFriends = () => {
           Send Friend Request
         </Button>
         {status && (
-          <div className="text-sm py-2 bg-purple-100 border-purple-300 text-center mt-2">
+          <div className="text-sm py-2 bg-purple-100 border-purple-300 rounded-lg text-center mt-2">
             {status}
           </div>
         )}

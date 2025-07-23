@@ -51,6 +51,8 @@ const SignInForm = () => {
     }
   }
 
+  const isSubmitting = form.formState.isSubmitting;
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -87,8 +89,8 @@ const SignInForm = () => {
           )}
         />
 
-        <Button className="w-full mt-4" type="submit">
-          Submit
+        <Button disabled={isSubmitting} className="w-full mt-4" type="submit">
+          {isSubmitting ? 'Logging In...' : 'Log In'}
         </Button>
       </form>
     </Form>

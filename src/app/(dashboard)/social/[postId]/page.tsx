@@ -4,6 +4,9 @@ import { Card, CardContent } from '@/components/ui/card';
 import { getPostById } from '@/lib/actions/post.actions';
 import Link from 'next/link';
 import { ArrowLeft, Edit3, Heart, MessageCircle } from 'lucide-react';
+import { areUsersFriends } from '@/lib/actions/friend.actions';
+import CommentForm from '@/components/social/CommentForm';
+import CommentCard from '@/components/social/CommentCard';
 
 const PostPage = async ({
   params,
@@ -42,6 +45,8 @@ const PostPage = async ({
       .join('');
   };
 
+  const isFriend = await areUsersFriends(post.userId);
+
   return (
     <div className="max-w-3xl mx-auto space-y-6">
       <div className="">
@@ -58,9 +63,7 @@ const PostPage = async ({
         </Button>
       </div>
 
-      {/* Main Post Card - Matching TimelinePost Design */}
       <div className="bg-white rounded-xl border-b-6 border-b-blue-500 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
-        {/* Header Section - Matching TimelinePost */}
         <div className="bg-blue-50 p-4 border-b border-blue-100">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
@@ -87,13 +90,11 @@ const PostPage = async ({
           </div>
         </div>
 
-        {/* Content Section - Matching TimelinePost */}
         <div className="p-4">
           <div className="bg-gray-50 rounded-lg p-4 mb-4 border border-gray-200">
             <p className="text-gray-800 leading-relaxed">{post.content}</p>
           </div>
 
-          {/* Stash Items Section - Matching TimelinePost */}
           {post.stashItems && post.stashItems.length > 0 && (
             <div className="mb-4">
               <div className="flex items-center mb-2">
@@ -114,7 +115,6 @@ const PostPage = async ({
             </div>
           )}
 
-          {/* Detailed Strain Information (Expanded for Detail Page) */}
           {post.stashItems && post.stashItems.length > 0 && (
             <div className="mb-6">
               <h3 className="text-lg font-semibold text-gray-800 mb-4">
@@ -172,7 +172,6 @@ const PostPage = async ({
             </div>
           )}
 
-          {/* Action Bar - Matching TimelinePost */}
           <div className="flex items-center justify-between bg-gray-50 rounded-lg p-3">
             <div className="flex items-center space-x-4">
               <div className="relative">
@@ -206,62 +205,19 @@ const PostPage = async ({
       <div className="bg-white rounded-xl border-b-6 border-b-purple-500 shadow-lg overflow-hidden">
         <div className="p-4 space-y-4">
           {/* Add Comment Form */}
-          <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
-            <div className="flex space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-sm">You</span>
-              </div>
-              <div className="flex-1 space-y-3">
-                <textarea
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none"
-                  placeholder="Add a comment..."
-                  rows={3}
-                />
-                <div className="flex justify-end">
-                  <Button className="bg-purple-500 hover:bg-purple-600 text-white">
-                    Post Comment
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </div>
+          {isFriend && <CommentForm postId={post.id} />}
 
           {/* No Comments Message */}
+
+          {post}
           <div className="text-center py-8">
             <MessageCircle className="w-12 h-12 text-gray-400 mx-auto mb-3" />
-            <p className="text-gray-500">
-              No comments yet. Be the first to comment!
-            </p>
+            <p className="text-gray-500">No comments yet.</p>
           </div>
 
           {/* Future Comments Would Go Here */}
-          {/* Example comment structure:
-          <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
-            <div className="flex space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-sm">JD</span>
-              </div>
-              <div className="flex-1">
-                <div className="flex items-center space-x-2 mb-1">
-                  <h4 className="font-semibold text-gray-800">John Doe</h4>
-                  <span className="text-sm text-gray-500">2 hours ago</span>
-                </div>
-                <p className="text-gray-700 mb-3 leading-relaxed">
-                  Great strain choice! I love Blue Dream for movie nights too.
-                </p>
-                <div className="flex items-center space-x-4">
-                  <button className="text-gray-600 hover:text-purple-600 text-sm flex items-center space-x-1">
-                    <Heart className="w-4 h-4" />
-                    <span>Like</span>
-                  </button>
-                  <button className="text-gray-600 hover:text-purple-600 text-sm">
-                    Reply
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          */}
+
+          <CommentCard />
         </div>
       </div>
     </div>

@@ -292,3 +292,24 @@ export async function declineFriendRequest(friendshipId: string) {
     return { success: false, error: 'Failed to decline friend request' };
   }
 }
+
+export async function areUsersFriends(userIdA: string) {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (!session?.user?.id) {
+    return { success: false, error: 'Not authenticated' };
+  }
+
+  const currentUserId = session.user.id;
+  const friendship = await prisma.friendship.findFirst({
+    where: {
+      OR: [
+        { userId: userIdA, friendId: currentUserId, status: 'friends' },
+        { userId: currentUserId, friendId: userIdA, status: 'friends' },
+      ],
+    },
+  });
+  return !!friendship;
+}

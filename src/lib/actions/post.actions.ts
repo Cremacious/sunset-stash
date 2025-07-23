@@ -308,3 +308,41 @@ export async function getAllFriendsPosts() {
     return { posts: [] };
   }
 }
+
+export async function createComment(postId: string, content: string) {
+  const session = await auth.api.getSession({ headers: await headers() });
+  if (!session?.user?.id) {
+    return { success: false, error: 'Not authenticated' };
+  }
+  const currentUserId = session.user.id;
+
+  const post = await prisma.post.findUnique({
+    where: { id: postId },
+    select: { userId: true },
+  });
+  if (!post) {
+    return { success: false, error: 'Post not found' };
+  }
+
+  const isFriend = await prisma.friendship.findFirst({
+    where: {
+      OR: [
+        { userId: currentUserId, friendId: post.userId, status: 'friends' },
+        { userId: post.userId, friendId: currentUserId, status: 'friends' },
+      ],
+    },
+  });
+  if (!isFriend) {
+    return { success: false, error: 'You must be friends to comment.' };
+  }
+
+  await prisma.comment.create({
+    data: {
+      author: session.user.name,
+      content,
+      postId,
+      userId: currentUserId,
+    },
+  });
+  return { success: true };
+}
