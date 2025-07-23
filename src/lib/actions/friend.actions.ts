@@ -115,6 +115,69 @@ export async function sendFriendRequest(friendId: string) {
   }
 }
 
+export async function sendFriendRequestByEmail(userEmail: string) {
+  try {
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
+
+    if (!session?.user?.id) {
+      return { success: false, error: 'Not authenticated' };
+    }
+
+    const currentUserId = session.user.id;
+
+    const friend = await prisma.user.findUnique({
+      where: {
+        email: userEmail,
+      },
+    });
+    if (!friend) {
+      return { success: false, error: 'User not found' };
+    }
+    const friendId = friend.id;
+
+    if (currentUserId === friendId) {
+      return {
+        success: false,
+        error: 'Cannot send friend request to yourself',
+      };
+    }
+
+    const existingFriendship = await prisma.friendship.findFirst({
+      where: {
+        OR: [
+          { userId: currentUserId, friendId: friendId },
+          { userId: friendId, friendId: currentUserId },
+        ],
+      },
+    });
+
+    if (existingFriendship) {
+      return {
+        success: false,
+        error:
+          existingFriendship.status === 'friends'
+            ? 'Already friends'
+            : 'Friend request already sent',
+      };
+    }
+
+    await prisma.friendship.create({
+      data: {
+        userId: currentUserId,
+        friendId: friendId,
+        status: 'pending',
+      },
+    });
+
+    return { success: true };
+  } catch (error) {
+    console.error('Error sending friend request:', error);
+    return { success: false, error: 'Failed to send friend request' };
+  }
+}
+
 export async function removeFriend(friendId: string) {
   try {
     const session = await auth.api.getSession({

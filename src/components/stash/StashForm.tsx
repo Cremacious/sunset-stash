@@ -236,7 +236,7 @@ const StashForm = () => {
             className="flex-1 "
           >
             {isSubmitting ? (
-              <Sun className="animate-spin text-yellow-300" />
+              <Sun className="animate-spin text-yellow-600" />
             ) : (
               'Submit'
             )}

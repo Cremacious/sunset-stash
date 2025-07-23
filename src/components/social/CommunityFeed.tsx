@@ -26,7 +26,7 @@ const CommunityFeed = ({ posts }: { posts: PostWithStashItems[] }) => {
               <div className="flex flex-col items-center justify-center">
                 <SmilePlus className="w-10 h-10 text-blue-500 mb-2" />
                 <span className="text-gray-500 text-center">
-                  Your friends haven&apos;t made any posts.
+                  Your friends have no posts.
                 </span>
               </div>
             </CardContent>
