@@ -1,7 +1,7 @@
-import { Post } from '@/lib/types';
+import { PostWithStashItems } from '@/lib/types/social.types';
 import { Badge } from '../ui/badge';
 
-const PostListCard = ({ post }: { post: Post }) => {
+const PostListCard = ({ post }: { post: PostWithStashItems }) => {
   return (
     <div className="p-4 bg-white rounded-lg border border-l-blue-600 border-l-6 hover:shadow-md">
       <div className="flex items-center space-x-3 mb-2">
@@ -10,7 +10,9 @@ const PostListCard = ({ post }: { post: Post }) => {
         </div>
         <div>
           <p className="font-semibold text-gray-800">{post.author}</p>
-          <p className="text-xs text-gray-600">{post.createdAt}</p>
+          <p className="text-xs text-gray-600">
+            {post.createdAt.toLocaleDateString()}
+          </p>
         </div>
       </div>
       <p className="text-sm text-gray-700 line-clamp-2">{post.content}</p>

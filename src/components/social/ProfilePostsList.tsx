@@ -70,11 +70,9 @@ const ProfilePostsList = ({ posts }: ProfilePostsListProps) => {
           )}
         </>
       ) : (
-        <div className="bg-white p-12 flex flex-col justify-center items-center rounded-lg shadow-md">
-          <MessageSquare className="text-purple-500 w-16 h-16 mb-4" />
-          <h3 className="text-lg font-semibold text-gray-800 mb-2">
-            No posts yet
-          </h3>
+        <div className="p-12 flex flex-col justify-center items-center ">
+          <MessageSquare className="text-blue-500 w-16 h-16 mb-4" />
+         
           <p className="text-center text-gray-600 mb-4">
             This user hasn&apos;t shared any posts yet.
           </p>

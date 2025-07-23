@@ -3,13 +3,14 @@ import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import PurchaseCard from '@/components/purchases/PurchaseCard';
 import PurchaseStats from '@/components/purchases/PurchaseStats';
-import NoPurchasesFound from '@/components/purchases/NoPurchasesFound';
 import {
   getAvailablePurchaseDates,
   getAllUserPurchases,
 } from '@/lib/actions/purchase.actions';
 import PurchaseSearchBar from '@/components/purchases/PurchaseSearchBar';
 import { Purchase } from '@/lib/types/purchase.types';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import {  DollarSign } from 'lucide-react';
 
 const PurchasesPage = () => {
   const [allPurchases, setAllPurchases] = useState<Purchase[]>([]);
@@ -181,20 +182,20 @@ const PurchasesPage = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div className="md:col-span-3 glassCard">
-          <div className="flex items-center justify-between bg-white p-6 rounded-md shadow-md">
+          <div className="flex items-center justify-between bg-white p-6 rounded-md shadow-md border-b-purple-500 border-b-4">
             <div className="flex items-center">
-              <div className="ml-4">
-                <h2 className="text-xl md:text-2xl font-bold text-gray-800">
+              <div className="md:ml-4">
+                <h2 className="text-lg md:text-2xl font-bold text-gray-800 fugaz-font">
                   Purchase History
                 </h2>
-                <p className="text-gray-600">
+                <p className="text-gray-600 text-sm md:text-lg">
                   {filteredPurchases.length} total purchases
                 </p>
               </div>
             </div>
             <div className="text-right">
-              <div className="text-sm text-gray-500">Viewing</div>
-              <div className="text-2xl font-bold text-coral-600">
+              <div className="text-xs md:text-md text-gray-500">Viewing</div>
+              <div className="md:text-2xl font-bold text-coral-600">
                 {selectedMonth && selectedYear
                   ? new Date(
                       parseInt(selectedYear),
@@ -212,10 +213,10 @@ const PurchasesPage = () => {
             {filteredPurchases.length > 0 ? (
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <div className="bg-purple-100 rounded-xl py-2 px-4 border border-purple-300 text-sm">
+                  <div className="bg-orange-100 rounded-xl py-2 px-4  border-orange-300 text-sm border-b-4 border-b-orange-500">
                     Latest Purchases
                   </div>
-                  <div className="bg-blue-100 text-sm rounded-xl py-2 px-4 border border-blue-300">
+                  <div className="bg-blue-100 text-sm rounded-xl py-2 px-4 border-blue-300 border-b-4 border-b-blue-500">
                     Showing {Math.min(filteredPurchases.length, 9)} of{' '}
                     {filteredPurchases.length}
                   </div>
@@ -236,7 +237,17 @@ const PurchasesPage = () => {
                 )}
               </div>
             ) : (
-              <NoPurchasesFound />
+              <Card className="bg-white/70 backdrop-blur-sm rounded-lg border border-white/30 p-6">
+            <CardHeader />
+            <CardContent>
+              <div className="flex flex-col items-center justify-center">
+                <DollarSign className="w-10 h-10 text-purple-500 mb-2" />
+                <span className="text-gray-500">
+                  No recent purchases found.
+                </span>
+              </div>
+            </CardContent>
+          </Card>
             )}
           </div>
         </div>

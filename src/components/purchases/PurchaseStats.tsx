@@ -2,29 +2,26 @@ import { Purchase } from '@/lib/types';
 import { ShoppingCart, DollarSign, Calculator } from 'lucide-react';
 import { calculateAveragePurchase, calculateMonthlyTotal } from '@/lib/utils';
 
-const PurchaseStats = ({ 
-  purchases, 
-  selectedMonth, 
-  selectedYear 
-}: { 
+const PurchaseStats = ({
+  purchases,
+  selectedMonth,
+  selectedYear,
+}: {
   purchases: Purchase[];
   selectedMonth: string;
   selectedYear: string;
 }) => {
-
-
   const monthlyTotal = calculateMonthlyTotal(
-    purchases, 
-    parseInt(selectedYear), 
+    purchases,
+    parseInt(selectedYear),
     parseInt(selectedMonth)
   );
   const averagePurchase = calculateAveragePurchase(purchases);
-  
 
   return (
     <div className="">
       <div className="flex flex-col gap-4 glassCard">
-        <div className=" bg-orange-100 rounded-xl p-4 border border-orange-200 ">
+        <div className=" border-b-4 border-b-orange-500 bg-orange-100 rounded-xl p-4">
           <div className="relative z-10">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
@@ -41,7 +38,7 @@ const PurchaseStats = ({
             </div>
           </div>
         </div>
-        <div className="bg-green-100 rounded-xl p-4 border border-green-200 ">
+        <div className="border-b-4 border-b-green-500 bg-green-100 rounded-xl p-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="p-2 bg-green-500 rounded-full">
@@ -54,7 +51,7 @@ const PurchaseStats = ({
             <p className="text-xl font-bold text-gray-800">${monthlyTotal}</p>
           </div>
         </div>
-        <div className="bg-purple-100 rounded-xl p-4 border border-indigo-200 ">
+        <div className="border-b-4 border-b-purple-500 bg-purple-100 rounded-xl p-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="p-2 bg-indigo-500 rounded-full">

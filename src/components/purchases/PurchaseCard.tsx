@@ -11,7 +11,7 @@ const PurchaseCard = ({ purchase }: { purchase: Purchase }) => {
         <div className="flex justify-between items-start">
           <div className="flex items-center space-x-3">
             <div>
-              <CardTitle className="text-lg font-bold line-clamp-1 text-gray-800">
+              <CardTitle className="text-lg font-bold line-clamp-1 text-gray-800 fugaz-font">
                 {purchase.dispensary}
               </CardTitle>
             </div>
@@ -27,7 +27,7 @@ const PurchaseCard = ({ purchase }: { purchase: Purchase }) => {
 
       <CardContent className="space-y-4 flex flex-col justify-between h-full">
         <div className="grid grid-cols-2 gap-2 text-sm">
-          <div className="bg-orange-100 p-3 rounded-lg border-orange-300">
+          <div className="bg-orange-100 p-3 rounded-lg border-orange-300 border-b-4 border-b-orange-500">
             <div className="flex justify-center mb-1">
               <Calendar className="w-7 h-7 text-orange-700" />
             </div>
@@ -39,7 +39,7 @@ const PurchaseCard = ({ purchase }: { purchase: Purchase }) => {
               })}
             </p>
           </div>
-          <div className="bg-blue-100 p-3 rounded-lg border-blue-300">
+          <div className="bg-blue-100 p-3 rounded-lg border-blue-300 border-b-4 border-b-blue-500">
             <div className="flex justify-center mb-1">
               <Container className="w-7 h-7 text-blue-800" />
             </div>

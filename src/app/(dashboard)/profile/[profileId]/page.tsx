@@ -7,7 +7,6 @@ import {
   ArrowLeft,
   Star,
   ShoppingCart,
-  Calendar,
 } from 'lucide-react';
 import StashItemListCard from '@/components/stash/StashItemListCard';
 import ProfilePostsList from '@/components/social/ProfilePostsList';
@@ -120,7 +119,7 @@ const ProfilePage = async ({
         </div>
 
         <div className="p-6 space-y-8">
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="bg-purple-50 rounded-lg p-4 text-center border border-purple-200">
               <Leaf className="w-6 h-6 text-purple-600 mx-auto mb-2" />
               <p className="text-2xl font-bold text-purple-600">
@@ -149,22 +148,19 @@ const ProfilePage = async ({
               </p>
               <p className="text-sm text-gray-600">Favorite Type</p>
             </div>
-            <div className="bg-yellow-50 rounded-lg p-4 text-center border border-yellow-200">
-              <Calendar className="w-6 h-6 text-yellow-600 mx-auto mb-2" />
-              <p className="text-2xl font-bold text-yellow-600">
-                {userStats.recentActivity}
-              </p>
-              <p className="text-sm text-gray-600">Recent Posts</p>
-            </div>
           </div>
 
           <div className="space-y-4">
             <div className="bg-purple-100 rounded-lg p-4 border border-purple-300">
-              <h3 className="text-xl font-bold text-gray-800 flex items-center mb-4">
-                <Leaf className="w-5 h-5 mr-2 text-purple-600" />
-                Latest Stash Items
-              </h3>
-
+              <div className="flex items-center justify-between">
+                <h3 className="text-xl font-bold text-gray-800 flex items-center mb-4">
+                  <Leaf className="w-5 h-5 mr-2 text-purple-600" />
+                  Latest Stash Items
+                </h3>
+                <Button variant={'outline'}>
+                  <Link href={`/profile/${profileId}/stash`}>View All</Link>
+                </Button>
+              </div>
               {latestStashItems.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {latestStashItems.map((item) => (
@@ -173,7 +169,7 @@ const ProfilePage = async ({
                 </div>
               ) : (
                 <div className="text-center py-8 text-gray-500">
-                  <Leaf className="w-12 h-12 mx-auto mb-2 opacity-50" />
+                  <Leaf className="w-12 h-12 mx-auto mb-2 text-purple-500" />
                   <p>No stash items yet</p>
                 </div>
               )}
@@ -182,11 +178,19 @@ const ProfilePage = async ({
 
           <div className="space-y-4">
             <div className="bg-blue-100 rounded-lg p-4 border border-blue-300">
-              <h3 className="text-xl font-bold text-gray-800 flex items-center mb-4">
-                <MessageSquare className="w-5 h-5 mr-2 text-blue-600" />
-                Recent Posts ({userStats.totalPosts} total)
-              </h3>
-
+              <div className="flex items-center justify-between">
+                <h3 className="text-xl font-bold text-gray-800 flex items-center mb-4">
+                  <MessageSquare className="w-5 h-5 mr-2 text-blue-600" />
+                  Recent Posts ({userStats.totalPosts} total)
+                </h3>
+                <Button
+                  asChild
+                  variant={'outline'}
+                  className="mb-4 text-blue-600 border-blue-600 hover:text-blue-600"
+                >
+                  <Link href={`/profile/${profileId}/posts`}>View All</Link>
+                </Button>
+              </div>
               <ProfilePostsList posts={userPosts} />
             </div>
           </div>

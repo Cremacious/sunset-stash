@@ -1,22 +1,38 @@
 import { Purchase } from '@/lib/types/purchase.types';
 
 const PurchaseListCard = ({ purchase }: { purchase: Purchase }) => {
+  // Format the date as MM/DD/YYYY
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', {
+      month: 'numeric',
+      day: 'numeric',
+      year: 'numeric',
+    });
+  };
+
   return (
-    <div className="bg-white rounded-lg border-l-6 border-l-green-600 border p-4 hover:shadow-md ">
-      <div className="flex justify-between items-start mb-2">
-        <div className="flex items-center space-x-3">
-          <div>
+    <div className="bg-white rounded-lg border-b-4 border-b-purple-500  p-3 hover:shadow-md transition-shadow duration-200">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center space-x-4 flex-1">
+          <div className="flex-1">
             <h3 className="font-semibold text-gray-900 text-sm">
-              {purchase.dispensary.toUpperCase()}
+              {purchase.dispensary}
             </h3>
-            <p className="text-xs text-gray-500">{purchase.createdAt}</p>
           </div>
-        </div>
-        <div className="text-right">
-          <p className="font-bold text-green-600">
-            ${purchase.total.toFixed(2)}
-          </p>
-          <p className="text-xs text-gray-500">{purchase.items.length} items</p>
+          <div className="text-center">
+            <p className="font-bold text-green-600 text-sm">
+              ${purchase.total.toFixed(2)}
+            </p>
+          </div>
+          <div className="text-center">
+            <p className="text-sm text-gray-700">
+              {purchase.items.length} items
+            </p>
+          </div>
+          <div className="text-right">
+            <p className="text-sm text-gray-500">{formatDate(purchase.date)}</p>
+          </div>
         </div>
       </div>
     </div>

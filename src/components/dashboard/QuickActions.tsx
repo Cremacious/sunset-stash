@@ -4,7 +4,7 @@ import FindFriendDialog from '../social/FindFriendDialog';
 
 const QuickActions = () => {
   return (
-    <div className="bg-white rounded-lg p-3 hover:shadow-md transition-all">
+    <div className="bg-white rounded-lg p-3 border-b-purple-500 border-b-4 shadow-lg hover:shadow-xl transition-all duration-300">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
         <Link href={'/purchases/new'}>
           <div className="h-auto p-4 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white flex flex-col items-center space-y-2 rounded-xl font-bold ">

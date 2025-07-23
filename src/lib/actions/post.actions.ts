@@ -69,57 +69,6 @@ export async function createPost(data: z.infer<typeof postFormSchema>) {
   }
 }
 
-// export async function getAllUserPosts() {
-//   try {
-//     const session = await auth.api.getSession({
-//       headers: await headers(),
-//     });
-//     if (!session?.user.id) {
-//       console.log('No session found');
-//       return { socialPosts: [], currentUserId: null };
-//     }
-//     const existingUser = await prisma.user.findUnique({
-//       where: { id: session.user.id },
-//     });
-//     if (!existingUser) {
-//       console.log('User not found');
-//       return { socialPosts: [], currentUserId: null };
-//     }
-//     const posts = await prisma.post.findMany({
-//       where: { userId: existingUser.id },
-//       include: {
-//         stashItems: {
-//           include: {
-//             stashItem: true,
-//           },
-//         },
-//       },
-//       orderBy: {
-//         createdAt: 'desc',
-//       },
-//     });
-
-//     return {
-//       success: true,
-//       socialPosts: posts.map((post) => ({
-//         ...post,
-//         createdAt: post.createdAt.toISOString(),
-//         stashItems: post.stashItems.map((item) => ({
-//           ...item,
-//           stashItem: {
-//             ...item.stashItem,
-//             dateAdded: item.stashItem.dateAdded.toISOString(),
-//           },
-//         })),
-//       })),
-//       currentUserId: existingUser.id,
-//     };
-//   } catch (error) {
-//     console.log('Error in getUserPosts:', error);
-//     return { socialPosts: [], currentUserId: null };
-//   }
-// }
-
 export async function getAllTimelinePosts() {
   try {
     const session = await auth.api.getSession({
@@ -136,7 +85,6 @@ export async function getAllTimelinePosts() {
       return { posts: [], currentUserId: null };
     }
 
-    // Get all friends (accepted friendships) for the current user
     const friendships = await prisma.friendship.findMany({
       where: {
         OR: [
@@ -146,20 +94,18 @@ export async function getAllTimelinePosts() {
       },
     });
 
-    // Extract friend IDs
     const friendIds = friendships.map((friendship) =>
       friendship.userId === currentUser.id
         ? friendship.friendId
         : friendship.userId
     );
 
-    // Include current user's ID in the list
     const userAndFriendIds = [currentUser.id, ...friendIds];
 
     const posts = await prisma.post.findMany({
       where: {
         userId: {
-          in: userAndFriendIds, // Only get posts from user and their friends
+          in: userAndFriendIds,
         },
       },
       include: {
@@ -290,5 +236,75 @@ export async function deletePost(postId: string) {
       success: false,
       error: 'Failed to delete post',
     };
+  }
+}
+
+export async function getAllFriendsPosts() {
+  try {
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
+    if (!session?.user.id) {
+      return { posts: [], currentUserId: null };
+    }
+    const friendships = await prisma.friendship.findMany({
+      where: {
+        OR: [
+          { userId: session.user.id, status: 'friends' },
+          { friendId: session.user.id, status: 'friends' },
+        ],
+      },
+    });
+
+    const friendIds = friendships.map((friendship) =>
+      friendship.userId === session.user.id
+        ? friendship.friendId
+        : friendship.userId
+    );
+
+    const userAndFriendIds = [session.user.id, ...friendIds];
+
+    const posts = await prisma.post.findMany({
+      where: {
+        userId: {
+          in: userAndFriendIds,
+        },
+      },
+      include: {
+        stashItems: {
+          include: {
+            stashItem: true,
+          },
+        },
+        user: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
+
+    return {
+      success: true,
+      posts: posts.map((post) => ({
+        ...post,
+        createdAt: post.createdAt.toISOString(),
+        stashItems: post.stashItems.map((item) => ({
+          ...item,
+          stashItem: {
+            ...item.stashItem,
+            dateAdded: item.stashItem.dateAdded.toISOString(),
+          },
+        })),
+      })),
+      currentUserId: session.user.id,
+    };
+  } catch (error) {
+    console.log(error);
+    return { posts: [] };
   }
 }

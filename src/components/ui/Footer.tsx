@@ -27,7 +27,7 @@ const Footer = () => {
 
             <div className="text-center md:text-right">
               <p className="text-white/80 text-sm mb-2">
-                © 2025 Sunset Stash. Created by Code://Mack
+                © 2025 Sunset Stash
               </p>
             </div>
           </div>

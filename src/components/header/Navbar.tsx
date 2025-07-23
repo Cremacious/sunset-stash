@@ -27,7 +27,7 @@ const Navbar = () => {
         <div className="flex items-center space-x-3">
           <button onClick={() => router.push('/')}>
             <h1 className="text-xl md:text-2xl ml-4 mt-1 fugaz-font text-white drop-shadow-md">
-              Sunset Stash
+              Sunset Stash <span className="text-purple-600">{' '} Beta</span>
             </h1>
           </button>
         </div>

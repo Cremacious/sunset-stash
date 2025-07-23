@@ -2,9 +2,7 @@ import QuickActions from '@/components/dashboard/QuickActions';
 import RecentPurchases from '@/components/purchases/RecentPurchases';
 import CommunityFeed from '@/components/social/CommunityFeed';
 import RecentStashItems from '@/components/stash/RecentStashItems';
-import {
-  samplePosts,
-} from '@/lib/sampleData';
+import { getAllTimelinePosts } from '@/lib/actions/post.actions';
 import { getAllUserPurchases } from '@/lib/actions/purchase.actions';
 import { getUserStashItems } from '@/lib/actions/stash.actions';
 
@@ -13,37 +11,21 @@ const DashboardPage = async () => {
 
   const { stashItems = [] } = await getUserStashItems();
 
-  const posts = samplePosts.map((post) => ({
+  const { posts = [], currentUserId } = await getAllTimelinePosts();
+
+  const friendsPosts = posts.filter((post) => post.userId !== currentUserId);
+
+  const postsWithDates = friendsPosts.map((post) => ({
     ...post,
-    createdAt:
-      post.createdAt instanceof Date
-        ? post.createdAt.toISOString()
-        : post.createdAt,
-    stashItems: post.stashItems.map(
-      (item: {
-        postId: string;
-        stashItemId: string;
+    createdAt: new Date(post.createdAt),
+    stashItems:
+      post.stashItems?.map((item) => ({
+        ...item,
         stashItem: {
-          id: string;
-          name: string;
-          category: string;
-          type: string;
-          amount: string;
-          thc: number;
-          cbd: number;
-          lineage: string;
-          notes: string;
-          dateAdded: Date;
-          userId: string;
-        };
-      }) => ({
-        ...item.stashItem,
-        dateAdded:
-          item.stashItem.dateAdded instanceof Date
-            ? item.stashItem.dateAdded.toISOString()
-            : item.stashItem.dateAdded,
-      })
-    ),
+          ...item.stashItem,
+          dateAdded: new Date(item.stashItem.dateAdded),
+        },
+      })) || [],
   }));
 
   return (
@@ -59,7 +41,7 @@ const DashboardPage = async () => {
           <RecentStashItems stashItems={stashItems} />
         </div>
         <div className="glassCard">
-          <CommunityFeed posts={posts} />
+          <CommunityFeed posts={postsWithDates} />
         </div>
       </div>
     </div>

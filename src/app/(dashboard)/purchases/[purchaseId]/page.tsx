@@ -53,10 +53,12 @@ const PurchaseDetailsPage = async ({
       <div className="bg-white rounded-xl border-b-6 border-b-purple-500 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
         <div className="bg-purple-100 p-4 border-b border-purple-300">
           <div className="flex items-center justify-between">
-            <p className="font-bold text-xl md:ml-4">{purchase.dispensary}</p>
+            <p className="font-bold text-2xl md:ml-4 fugaz-font">
+              {purchase.dispensary}
+            </p>
 
             <p className="text-sm ">
-              {new Date(purchase.date).toLocaleDateString()}
+              Added: {new Date(purchase.date).toLocaleDateString()}
             </p>
           </div>
         </div>
@@ -101,7 +103,6 @@ const PurchaseDetailsPage = async ({
                   <h4 className="text-lg font-bold text-gray-800">
                     Purchase Notes
                   </h4>
-                 
                 </div>
               </div>
               <div className="bg-white p-3 rounded-lg border">

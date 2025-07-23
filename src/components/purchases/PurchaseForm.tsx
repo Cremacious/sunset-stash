@@ -43,6 +43,7 @@ import {
 } from '@/lib/validators/purchase.validator';
 import { createPurchase } from '@/lib/actions/purchase.actions';
 import { useRouter } from 'next/navigation';
+import { CATEGORIES, TYPES } from '@/lib/constants';
 
 export default function PurchaseForm() {
   const router = useRouter();
@@ -115,17 +116,6 @@ export default function PurchaseForm() {
 
   const isSubmitting = form.formState.isSubmitting;
 
-  const categories = [
-    'Flower',
-    'Concentrate',
-    'Edibles',
-    'Vape',
-    'Tincture',
-    'Topical',
-    'Other',
-  ];
-
-  const types = ['Indica', 'Sativa', 'Hybrid', 'CBD', 'THC', 'Other'];
 
   const totalPrice = fields.reduce((sum, _, index) => {
     const price = form.watch(`items.${index}.price`);
@@ -137,406 +127,448 @@ export default function PurchaseForm() {
   return (
     <div className="min-h-screen">
       <div className="max-w-4xl mx-auto">
-        <div className="bg-white rounded-2xl shadow-xl pt-4 p-2 md:p-6">
-          <h1 className="text-3xl font-bold text-gray-800 ml-2 mt-2 mb-8">
-            Add Purchase
-          </h1>
+        <div className="bg-white backdrop-blur-md rounded-3xl shadow-2xl overflow-hidden ">
+          <div className="p-6 md:p-8">
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-8"
+              >
+                <div className="bg-gradient-to-r from-purple-50/50 to-indigo-50/50 backdrop-blur-sm border border-purple-200/50 rounded-2xl p-6 md:p-8">
+                  <div className="flex items-center space-x-3 mb-6">
+                    <div className="p-2 bg-purple-100 rounded-xl">
+                      <CalendarIcon className="w-5 h-5 text-purple-600" />
+                    </div>
+                    <h2 className="text-2xl font-bold text-gray-800">
+                      Purchase Information
+                    </h2>
+                  </div>
 
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-              <div className="bg-gray-50/80 backdrop-blur-sm border border-gray-200 rounded-xl p-2 md:p-6">
-                <h2 className="text-xl font-semibold text-gray-800 mb-4">
-                  Purchase Information
-                </h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <FormField
+                      control={form.control}
+                      name="dispensary"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-gray-700 font-semibold">
+                            Dispensary Name
+                          </FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder="Enter dispensary name"
+                              className="bg-white/80 backdrop-blur-sm border-purple-200/50 focus:border-purple-400 focus:ring-purple-400/20 rounded-xl"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <FormField
+                      control={form.control}
+                      name="date"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-gray-700 font-semibold">
+                            Purchase Date
+                          </FormLabel>
+                          <Popover>
+                            <PopoverTrigger asChild>
+                              <FormControl>
+                                <Button
+                                  variant="outline"
+                                  className={cn(
+                                    'w-full pl-3 text-left font-normal',
+                                    'bg-white/80 backdrop-blur-sm border-purple-200/50 text-gray-900 rounded-xl',
+                                    'hover:bg-purple-50 hover:text-gray-900 hover:border-purple-300',
+                                    'focus:ring-purple-400/20 focus:border-purple-400',
+                                    !field.value && 'text-gray-500'
+                                  )}
+                                >
+                                  {field.value ? (
+                                    format(field.value, 'PPP')
+                                  ) : (
+                                    <span>Pick a date</span>
+                                  )}
+                                  <CalendarIcon className="ml-auto h-4 w-4 text-purple-600" />
+                                </Button>
+                              </FormControl>
+                            </PopoverTrigger>
+                            <PopoverContent
+                              className="w-auto p-0"
+                              align="start"
+                            >
+                              <Calendar
+                                mode="single"
+                                selected={field.value}
+                                onSelect={field.onChange}
+                              />
+                            </PopoverContent>
+                          </Popover>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
                   <FormField
                     control={form.control}
-                    name="dispensary"
+                    name="notes"
                     render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Dispensary Name</FormLabel>
+                      <FormItem className="mt-6">
+                        <FormLabel className="text-gray-700 font-semibold">
+                          Notes
+                        </FormLabel>
                         <FormControl>
-                          <Input
-                            placeholder="Enter dispensary name"
-                            className="bg-white"
+                          <Textarea
+                            placeholder="Any notes about this purchase"
+                            className="bg-white/80 backdrop-blur-sm border-purple-200/50 focus:border-purple-400 focus:ring-purple-400/20 rounded-xl resize-none"
+                            rows={3}
                             {...field}
                           />
                         </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={form.control}
-                    name="date"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Purchase Date</FormLabel>
-                        <Popover>
-                          <PopoverTrigger asChild>
-                            <FormControl>
-                              <Button
-                                variant="outline"
-                                className={cn(
-                                  'w-full pl-3 text-left font-normal',
-                                  'bg-white border-gray-300 text-gray-900', // Override colors
-                                  'hover:bg-gray-50 hover:text-gray-900', // Override hover
-                                  'focus:ring-gray-500 focus:border-gray-500', // Override focus
-                                  !field.value && 'text-gray-500' // Muted text color
-                                )}
-                              >
-                                {field.value ? (
-                                  format(field.value, 'PPP')
-                                ) : (
-                                  <span>Pick a date</span>
-                                )}
-                                <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                              </Button>
-                            </FormControl>
-                          </PopoverTrigger>
-                          <PopoverContent className="w-auto p-0" align="start">
-                            <Calendar
-                              mode="single"
-                              selected={field.value}
-                              onSelect={field.onChange}
-                            />
-                          </PopoverContent>
-                        </Popover>
+                        <FormDescription className="text-gray-600">
+                          Any additional notes about this purchase
+                        </FormDescription>
                         <FormMessage />
                       </FormItem>
                     )}
                   />
                 </div>
 
-                <FormField
-                  control={form.control}
-                  name="notes"
-                  render={({ field }) => (
-                    <FormItem className="mt-4">
-                      <FormLabel>Notes</FormLabel>
-                      <FormControl>
-                        <Textarea
-                          placeholder="Any notes about this purchase"
-                          className="bg-white"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormDescription>
-                        Any additional notes about this purchase
-                      </FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-
-              <div className="bg-gray-50/80 backdrop-blur-sm border border-gray-200 rounded-xl  p-2 md:p-6">
-                <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-xl font-semibold text-gray-800">
-                    Items Purchased
-                  </h2>
-                  <Button
-                    type="button"
-                    variant="outline"
-                    size="sm"
-                    onClick={addItem}
-                    className=""
-                  >
-                    <Plus className="h-4 w-4 mr-2" />
-                    Add Item
-                  </Button>
-                </div>
-
-                <div className="space-y-6">
-                  {fields.map((field, index) => (
-                    <div
-                      key={field.id}
-                      className="bg-white/80 backdrop-blur-sm border border-gray-200 rounded-lg p-6 relative"
+                <div className="bg-blue-50 border-1 border-blue-200 rounded-2xl p-6 md:p-8">
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="flex items-center space-x-3">
+                      <h2 className="text-2xl font-bold text-gray-800 ">
+                        Items Purchased
+                      </h2>
+                    </div>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={addItem}
                     >
-                      {fields.length > 1 && (
-                        <Button
-                          type="button"
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => removeItem(index)}
-                          className="absolute top-2 right-2"
-                        >
-                          <X className="h-4 w-4" />
-                        </Button>
-                      )}
+                      <Plus className="h-4 w-4 mr-2" />
+                      Add Item
+                    </Button>
+                  </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-                        <FormField
-                          control={form.control}
-                          name={`items.${index}.name`}
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Strain Name</FormLabel>
-                              <FormControl>
-                                <Input
-                                  placeholder="Enter strain name"
-                                  className=""
-                                  {...field}
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
+                  <div className="space-y-6">
+                    {fields.map((field, index) => (
+                      <div
+                        key={field.id}
+                        className="bg-white/90 backdrop-blur-md border border-white/50 rounded-2xl p-6 md:p-8 relative shadow-lg"
+                      >
+                        {fields.length > 1 && (
+                          <Button
+                            type="button"
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => removeItem(index)}
+                            className="absolute top-4 right-4 text-red-500 hover:text-red-700 hover:bg-red-50 rounded-xl"
+                          >
+                            <X className="h-4 w-4" />
+                          </Button>
+                        )}
 
-                        <FormField
-                          control={form.control}
-                          name={`items.${index}.category`}
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Category</FormLabel>
-                              <Select
-                                onValueChange={field.onChange}
-                                value={field.value}
-                              >
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                          <FormField
+                            control={form.control}
+                            name={`items.${index}.name`}
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel className="text-gray-700 font-semibold">
+                                  Strain Name
+                                </FormLabel>
                                 <FormControl>
-                                  <SelectTrigger className="">
-                                    <SelectValue placeholder="Select category" />
-                                  </SelectTrigger>
+                                  <Input
+                                    placeholder="Enter strain name"
+                                    className="bg-gray-50/50 border-gray-200 focus:border-purple-400 focus:ring-purple-400/20 rounded-xl"
+                                    {...field}
+                                  />
                                 </FormControl>
-                                <SelectContent>
-                                  {categories.map((category) => (
-                                    <SelectItem key={category} value={category}>
-                                      {category}
-                                    </SelectItem>
-                                  ))}
-                                </SelectContent>
-                              </Select>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
 
-                        <FormField
-                          control={form.control}
-                          name={`items.${index}.type`}
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Type</FormLabel>
-                              <Select
-                                onValueChange={field.onChange}
-                                value={field.value}
-                              >
+                          <FormField
+                            control={form.control}
+                            name={`items.${index}.category`}
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel className="text-gray-700 font-semibold">
+                                  Category
+                                </FormLabel>
+                                <Select
+                                  onValueChange={field.onChange}
+                                  value={field.value}
+                                >
+                                  <FormControl>
+                                    <SelectTrigger className="bg-gray-50/50 border-gray-200 focus:border-purple-400 focus:ring-purple-400/20 rounded-xl">
+                                      <SelectValue placeholder="Select category" />
+                                    </SelectTrigger>
+                                  </FormControl>
+                                  <SelectContent>
+                                    {CATEGORIES.map((category) => (
+                                      <SelectItem
+                                        key={category}
+                                        value={category}
+                                      >
+                                        {category}
+                                      </SelectItem>
+                                    ))}
+                                  </SelectContent>
+                                </Select>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+
+                          <FormField
+                            control={form.control}
+                            name={`items.${index}.type`}
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel className="text-gray-700 font-semibold">
+                                  Type
+                                </FormLabel>
+                                <Select
+                                  onValueChange={field.onChange}
+                                  value={field.value}
+                                >
+                                  <FormControl>
+                                    <SelectTrigger className="bg-gray-50/50 border-gray-200 focus:border-purple-400 focus:ring-purple-400/20 rounded-xl">
+                                      <SelectValue placeholder="Select type" />
+                                    </SelectTrigger>
+                                  </FormControl>
+                                  <SelectContent>
+                                    {TYPES.map((type) => (
+                                      <SelectItem key={type} value={type}>
+                                        {type}
+                                      </SelectItem>
+                                    ))}
+                                  </SelectContent>
+                                </Select>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+                          <FormField
+                            control={form.control}
+                            name={`items.${index}.amount`}
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel className="text-gray-700 font-semibold">
+                                  Amount
+                                </FormLabel>
                                 <FormControl>
-                                  <SelectTrigger className="">
-                                    <SelectValue placeholder="Select type" />
-                                  </SelectTrigger>
+                                  <Input
+                                    placeholder="e.g., 3.5g"
+                                    className="bg-gray-50/50 border-gray-200 focus:border-blue-400 focus:ring-blue-400/20 rounded-xl"
+                                    {...field}
+                                  />
                                 </FormControl>
-                                <SelectContent>
-                                  {types.map((type) => (
-                                    <SelectItem key={type} value={type}>
-                                      {type}
-                                    </SelectItem>
-                                  ))}
-                                </SelectContent>
-                              </Select>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                      </div>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+                          <FormField
+                            control={form.control}
+                            name={`items.${index}.price`}
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel className="text-gray-700 font-semibold">
+                                  Price ($)
+                                </FormLabel>
+                                <FormControl>
+                                  <Input
+                                    type="number"
+                                    step="0.01"
+                                    placeholder="0.00"
+                                    className="bg-gray-50/50 border-gray-200 focus:border-orange-400 focus:ring-orange-400/20 rounded-xl"
+                                    {...field}
+                                    onChange={(e) =>
+                                      field.onChange(
+                                        parseFloat(e.target.value) || 0
+                                      )
+                                    }
+                                  />
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
 
-                      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
-                        <FormField
-                          control={form.control}
-                          name={`items.${index}.amount`}
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Amount</FormLabel>
-                              <FormControl>
-                                <Input
-                                  placeholder="e.g., 3.5g"
-                                  className=""
-                                  {...field}
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                        <FormField
-                          control={form.control}
-                          name={`items.${index}.price`}
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Price ($)</FormLabel>
-                              <FormControl>
-                                <Input
-                                  type="number"
-                                  step="0.01"
-                                  placeholder="0.00"
-                                  className=""
-                                  {...field}
-                                  onChange={(e) =>
-                                    field.onChange(
-                                      parseFloat(e.target.value) || 0
-                                    )
-                                  }
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
+                          <FormField
+                            control={form.control}
+                            name={`items.${index}.thc`}
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel className="text-gray-700 font-semibold">
+                                  THC %
+                                </FormLabel>
+                                <FormControl>
+                                  <Input
+                                    type="number"
+                                    step="0.1"
+                                    placeholder="0.0"
+                                    className="bg-gray-50/50 border-gray-200 focus:border-red-400 focus:ring-red-400/20 rounded-xl"
+                                    {...field}
+                                  />
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+
+                          <FormField
+                            control={form.control}
+                            name={`items.${index}.cbd`}
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel className="text-gray-700 font-semibold">
+                                  CBD %
+                                </FormLabel>
+                                <FormControl>
+                                  <Input
+                                    type="number"
+                                    step="0.1"
+                                    placeholder="0.0"
+                                    className="bg-gray-50/50 border-gray-200 focus:border-green-400 focus:ring-green-400/20 rounded-xl"
+                                    {...field}
+                                  />
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                          <FormField
+                            control={form.control}
+                            name={`items.${index}.lineage`}
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel className="text-gray-700 font-semibold">
+                                  Lineage
+                                </FormLabel>
+                                <FormControl>
+                                  <Input
+                                    placeholder="Parent strains"
+                                    className="bg-gray-50/50 border-gray-200 focus:border-purple-400 focus:ring-purple-400/20 rounded-xl"
+                                    {...field}
+                                  />
+                                </FormControl>
+                                <FormDescription className="text-gray-600">
+                                  Enter the parent strains or genetic background
+                                  if known
+                                </FormDescription>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+
+                          <FormField
+                            control={form.control}
+                            name={`items.${index}.addToStash`}
+                            render={({ field }) => (
+                              <FormItem className="flex flex-row items-center space-x-4 space-y-0 bg-gradient-to-r from-purple-50 to-indigo-50 rounded-2xl border border-purple-200/50 p-6">
+                                <FormControl className="flex items-center justify-center">
+                                  <Checkbox
+                                    checked={field.value}
+                                    onCheckedChange={field.onChange}
+                                    className="w-6 h-6 border-purple-500  focus:ring-purple-900"
+                                  />
+                                </FormControl>
+                                <div className="space-y-1 leading-none flex flex-col items-center">
+                                  <Container className="w-8 h-8 text-purple-600" />
+                                  <FormLabel className="font-bold text-gray-800">
+                                    Add to Stash
+                                  </FormLabel>
+                                  <FormDescription className="text-center text-gray-600">
+                                    Check the box to add this item to your stash
+                                    inventory
+                                  </FormDescription>
+                                </div>
+                              </FormItem>
+                            )}
+                          />
+                        </div>
 
                         <FormField
                           control={form.control}
-                          name={`items.${index}.thc`}
+                          name={`items.${index}.notes`}
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>THC %</FormLabel>
+                              <FormLabel className="text-gray-700 font-semibold">
+                                Notes
+                              </FormLabel>
                               <FormControl>
-                                <Input
-                                  type="number"
-                                  step="0.1"
-                                  placeholder="0.0"
-                                  className=""
+                                <Textarea
+                                  placeholder="Your thoughts on this strain..."
+                                  className="bg-gray-50/50 border-gray-200 focus:border-blue-400 focus:ring-blue-400/20 rounded-xl resize-none"
+                                  rows={3}
                                   {...field}
                                 />
                               </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-
-                        <FormField
-                          control={form.control}
-                          name={`items.${index}.cbd`}
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>CBD %</FormLabel>
-                              <FormControl>
-                                <Input
-                                  type="number"
-                                  step="0.1"
-                                  placeholder="0.0"
-                                  className=""
-                                  {...field}
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                      </div>
-
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                        <FormField
-                          control={form.control}
-                          name={`items.${index}.lineage`}
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Lineage</FormLabel>
-                              <FormControl>
-                                <Input
-                                  placeholder="Parent strains"
-                                  className=""
-                                  {...field}
-                                />
-                              </FormControl>
-                              <FormDescription>
-                                Enter the parent strains or genetic background
-                                if known
+                              <FormDescription className="text-gray-600">
+                                Share your experiences, effects, taste, aroma,
+                                or any other notes
                               </FormDescription>
                               <FormMessage />
                             </FormItem>
                           )}
                         />
-
-                        <FormField
-                          control={form.control}
-                          name={`items.${index}.addToStash`}
-                          render={({ field }) => (
-                            <FormItem className="flex flex-row items-center space-x-4 space-y-0 rounded-md border p-4">
-                              <FormControl className="flex items-center justify-center">
-                                <Checkbox
-                                  checked={field.value}
-                                  onCheckedChange={field.onChange}
-                                  className="w-6 h-6"
-                                />
-                              </FormControl>
-                              <div className="space-y-1 leading-none flex flex-col items-center">
-                                <Container className="w-8 h-8 text-purple-600" />
-                                <FormLabel className="font-bold">
-                                  Add to Stash
-                                </FormLabel>
-                                <FormDescription className="text-center">
-                                  Check the box to add this item to your stash
-                                  inventory
-                                </FormDescription>
-                              </div>
-                            </FormItem>
-                          )}
-                        />
                       </div>
+                    ))}
+                  </div>
 
-                      <FormField
-                        control={form.control}
-                        name={`items.${index}.notes`}
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Notes</FormLabel>
-                            <FormControl>
-                              <Textarea
-                                placeholder="Your thoughts on this strain..."
-                                className="resize-none"
-                                {...field}
-                              />
-                            </FormControl>
-                            <FormDescription>
-                              Share your experiences, effects, taste, aroma, or
-                              any other notes
-                            </FormDescription>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
+                  <div className="mt-8 p-6 bg-green-100 rounded-2xl border border-green-300">
+                    <div className="flex justify-between items-center">
+                      <span className="text-xl font-bold text-gray-800">
+                        Total Purchase:
+                      </span>
+                      <span className="text-3xl font-bold text-green-900">
+                        ${totalPrice.toFixed(2)}
+                      </span>
                     </div>
-                  ))}
-                </div>
-
-                <div className="mt-6 p-4 bg-green-50 rounded-lg border ">
-                  <div className="flex justify-between items-center">
-                    <span className="text-lg font-semibold text-gray-800">
-                      Total:
-                    </span>
-
-                    <span className="text-2xl font-bold text-orange-600">
-                      ${totalPrice.toFixed(2)}
-                    </span>
                   </div>
                 </div>
-              </div>
-              <div className="flex flex-col sm:flex-row gap-3 py-4 border-t border-gray-200">
-                <Button
-                  type="button"
-                  variant="outline"
-                  onClick={() => router.push('/purchases')}
-                  className="flex-1"
-                >
-                  Cancel
-                </Button>
-                <Button
-                  disabled={!form.formState.isDirty || isSubmitting}
-                  type="submit"
-                  className="flex-1 "
-                >
-                  {isSubmitting ? (
-                    <Sun className="animate-spin text-yellow-300" />
-                  ) : (
-                    'Submit Purchase'
-                  )}
-                </Button>
-              </div>
-            </form>
-          </Form>
+
+                <div className="flex flex-col sm:flex-row gap-4 py-6 border-t border-gray-200/50">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => router.push('/purchases')}
+                    className="flex-1 bg-white/80 backdrop-blur-sm border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400 rounded-xl py-3"
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    disabled={!form.formState.isDirty || isSubmitting}
+                    type="submit"
+                    className="flex-1 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold rounded-xl py-3 shadow-lg"
+                  >
+                    {isSubmitting ? (
+                      <div className="flex items-center space-x-2">
+                        <Sun className="w-4 h-4 animate-spin text-yellow-300" />
+                        <span>Saving...</span>
+                      </div>
+                    ) : (
+                      'Submit Purchase'
+                    )}
+                  </Button>
+                </div>
+              </form>
+            </Form>
+          </div>
         </div>
       </div>
     </div>

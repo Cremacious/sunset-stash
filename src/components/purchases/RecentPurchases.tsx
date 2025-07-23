@@ -1,60 +1,43 @@
-import Link from 'next/link';
 import { Button } from '../ui/button';
 import PurchaseListCard from './PurchaseListCard';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Purchase } from '@/lib/types';
 import { CircleDollarSign } from 'lucide-react';
 
 const RecentPurchases = ({ purchases }: { purchases: Purchase[] }) => {
   const recentPurchases = purchases.slice(0, 5);
 
-  if (recentPurchases.length === 0) {
-    return (
-      <Card className="bg-white shadow-xl border-0 h-full">
-        <CardHeader>
-          <CardTitle className="text-xl font-bold text-gray-800 flex items-center justify-between">
-            <div className="flex items-center">Community Feed</div>
-            <Button variant="outline" size="sm">
-              View Feed
-            </Button>
-          </CardTitle>
-        </CardHeader>
-
-        <CardContent className="text-center py-12">
-          <div className="flex justify-center items-center mt-6">
-            <CircleDollarSign className="text-purple-600" size={100} />
-          </div>
-          <h3 className="text-xl font-semibold text-gray-800 my-2">
-            You have no recent purchases
-          </h3>
-          <p className="text-gray-600 mb-12">
-            Start logging your purchases to see them here!
-          </p>
-          <Button asChild>
-            <Link href="/purchases/new">Make a Purchase</Link>
-          </Button>
-        </CardContent>
-      </Card>
-    );
-  }
   return (
-    <Card className="bg-white shadow-xl border-0 h-full">
-      <CardHeader>
-        <CardTitle className="text-xl font-bold text-gray-800 flex items-center justify-between">
-          <div className="flex items-center">Recent Purchases</div>
+    <div>
+      <div className=" h-full space-y-4">
+        <div className="text-xl font-bold text-gray-800 flex items-center justify-between bg-white p-4 rounded-lg shadow-md border-b-4 border-b-orange-500">
+          <div className="flex items-center fugaz-font text-2xl">Recent Purchases</div>
           <Button variant="outline" size="sm">
             View All
           </Button>
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className="space-y-4">
-          {recentPurchases.map((purchase) => (
-            <PurchaseListCard key={purchase.id} purchase={purchase} />
-          ))}
         </div>
-      </CardContent>
-    </Card>
+
+        {recentPurchases.length === 0 ? (
+          <Card className="bg-white/70 backdrop-blur-sm rounded-lg border border-white/30 p-6">
+            <CardHeader />
+            <CardContent>
+              <div className="flex flex-col items-center justify-center">
+                <CircleDollarSign className="w-10 h-10 text-orange-500 mb-2" />
+                <span className="text-gray-500">
+                  No recent purchases found.
+                </span>
+              </div>
+            </CardContent>
+          </Card>
+        ) : (
+          <div className="space-y-4">
+            {recentPurchases.map((purchase) => (
+              <PurchaseListCard key={purchase.id} purchase={purchase} />
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
   );
 };
 
