@@ -39,7 +39,7 @@ const PurchaseSearchBar = ({
     selectedMonth === currentMonth && selectedYear === currentYear;
 
   return (
-    <div className="bg-white rounded-lg p-4 shadow-sm relative border-b-4 border-b-purple-500">
+    <div className="rounded-lg p-4 shadow-sm relative bg-gradient-to-br from-orange-50 via-green-50 to-green-100 border-b-4 border-b-orange-200">
       <div className="flex flex-col md:flex-row gap-6 items-stretch md:items-center justify-between">
         <div className="flex-shrink-0">
           <Button

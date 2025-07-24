@@ -31,7 +31,7 @@ const SocialPage = async () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         <div className="space-y-4">
           <div className="glassCard">
-            <div className="bg-white rounded-lg shadow-lg p-6">
+            <div className="bg-gradient-to-br from-pink-50 via-blue-50 to-pink-100 rounded-lg shadow-lg p-6">
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center space-x-4">
                   <UserImage />
@@ -47,22 +47,22 @@ const SocialPage = async () => {
               </div>
 
               <div className="grid grid-cols-3 gap-4 mb-6">
-                <div className="text-center p-3 bg-orange-50 rounded-lg border-b-2 border-b-orange-500">
-                  <p className="text-2xl font-bold text-orange-600">
+                <div className="text-center p-3 bg-yellow-50 rounded-lg border-b-2 border-b-yellow-500">
+                  <p className="text-2xl font-bold text-yellow-600">
                     {userPostsCount}
                   </p>
                   <p className="text-xs text-gray-600">Total</p>
                   <p className="text-xs text-gray-600">Posts</p>
                 </div>
-                <div className="text-center p-3 bg-red-50 rounded-lg border-b-2 border-b-red-500">
-                  <p className="text-2xl font-bold text-red-600">
+                <div className="text-center p-3 bg-orange-50 rounded-lg border-b-2 border-b-orange-500">
+                  <p className="text-2xl font-bold text-orange-600">
                     {friends.length}
                   </p>
                   <p className="text-xs text-gray-600">Total</p>
                   <p className="text-xs text-gray-600">Friends</p>
                 </div>
-                <div className="text-center p-3 bg-blue-50 rounded-lg border-b-2 border-b-blue-500">
-                  <p className="text-2xl font-bold text-blue-600">
+                <div className="text-center p-3 bg-red-50 rounded-lg border-b-2 border-b-red-500">
+                  <p className="text-2xl font-bold text-red-600">
                     {friendRequests.length}
                   </p>
                   <p className="text-xs text-gray-600">Friend Requests</p>

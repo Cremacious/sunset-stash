@@ -124,18 +124,20 @@ const PostPage = async ({
                 Strain Details
               </h3>
               <div className="space-y-4">
-                {post.stashItems.map((item, index) => (
-                  <StashItemListCard
-                    key={index}
-                    stashItem={{
-                      ...item.stashItem,
-                      dateAdded:
-                        item.stashItem.dateAdded instanceof Date
-                          ? item.stashItem.dateAdded.toISOString()
-                          : item.stashItem.dateAdded,
-                    }}
-                  />
-                ))}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {post.stashItems.map((item, index) => (
+                    <StashItemListCard
+                      key={index}
+                      stashItem={{
+                        ...item.stashItem,
+                        dateAdded:
+                          item.stashItem.dateAdded instanceof Date
+                            ? item.stashItem.dateAdded.toISOString()
+                            : item.stashItem.dateAdded,
+                      }}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
           )}

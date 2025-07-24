@@ -2,20 +2,16 @@ import { Purchase } from '@/lib/types';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '../ui/button';
 import Link from 'next/link';
-import { Calendar, Edit, Eye, Container } from 'lucide-react';
+import { Edit, Eye } from 'lucide-react';
 
 const PurchaseCard = ({ purchase }: { purchase: Purchase }) => {
   return (
-    <Card className="border-0 border-b-purple-500 border-b-6 relative overflow-hidden bg-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
-      <CardHeader>
-        <div className="flex justify-between items-start">
-          <div className="flex items-center space-x-3">
-            <div>
-              <CardTitle className=" font-bold line-clamp-1 text-purple-800 permanent-marker-font text-2xl md:text-xl">
-                {purchase.dispensary}
-              </CardTitle>
-            </div>
-          </div>
+    <Card className="bg-gradient-to-br from-orange-50 via-green-50 to-green-100 border-0 border-b-4 border-b-purple-300 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden rounded-xl min-h-[110px] w-full relative">
+      <CardHeader className="p-3 pb-2 relative">
+        <div className="flex items-center justify-between">
+          <CardTitle className="text-xl permanent-marker-font truncate max-w-[280px] text-left ">
+            {purchase.dispensary}
+          </CardTitle>
           <div className="text-right">
             <p className="text-md font-bold text-green-600">
               ${purchase.total.toFixed(2)}
@@ -24,62 +20,64 @@ const PurchaseCard = ({ purchase }: { purchase: Purchase }) => {
           </div>
         </div>
       </CardHeader>
+      <CardContent className="px-3 pb-3 pt-0">
 
-      <CardContent className="space-y-4 flex flex-col justify-between h-full">
-        <div className="grid grid-cols-2 gap-2 text-sm">
-          <div className="bg-orange-100 p-3 rounded-lg border-orange-300 border-b-4 border-b-orange-500">
-            <div className="flex justify-center mb-1">
-              <Calendar className="w-7 h-7 text-orange-700" />
-            </div>
-            <p className=" text font-medium text-center">Date</p>
-            <p className="font-semibold text-gray-800 text-lg text-center">
+
+        <div className="grid grid-cols-2 gap-2">
+          <div className="bg-orange-100/80 rounded-lg p-2 border border-orange-200 flex flex-col items-center min-h-[48px]">
+            <div className="text-center text-xs text-gray-600">Date</div>
+            <p className="font-bold text-orange-600 text-center text-xs truncate w-full">
               {new Date(purchase.date).toLocaleDateString('en-US', {
                 month: 'short',
                 day: 'numeric',
               })}
             </p>
           </div>
-          <div className="bg-blue-100 p-3 rounded-lg border-blue-300 border-b-4 border-b-blue-500">
-            <div className="flex justify-center mb-1">
-              <Container className="w-7 h-7 text-blue-800" />
-            </div>
-            <p className=" text font-medium text-center">Items</p>
-            <p className="font-semibold text-gray-800 text-lg text-center">
+          <div className="bg-blue-100/80 rounded-lg p-2 border border-blue-200 flex flex-col items-center min-h-[48px]">
+            <div className="text-center text-xs text-gray-600">Items</div>
+            <p className="font-bold text-blue-600 text-center text-xs truncate w-full">
               {purchase.items.length}
+            </p>
+          </div>
+          <div className="bg-pink-100/80 rounded-lg p-2 border border-pink-200 flex flex-col items-center min-h-[48px] col-span-2">
+            <div className="text-center text-xs text-gray-600">Notes</div>
+            <p className="font-bold text-pink-600 text-center text-xs truncate w-full">
+              {purchase.notes ? purchase.notes.slice(0, 24) : '—'}
             </p>
           </div>
         </div>
 
-        {purchase.notes && (
-          <div className="bg-white/70 backdrop-blur-sm rounded-lg border border-white/30">
-            <div className="flex items-center gap-2 mb-2">
-              <p className="text-xs text-center">Notes</p>
-            </div>
-            <p className="text-sm text-gray-800 italic line-clamp-2">
-              &ldquo;{purchase.notes}&rdquo;
-            </p>
-          </div>
-        )}
 
-        <div className="flex space-x-2 mt-4">
-          <Button asChild size="sm" variant="outline" className="flex-1 ">
-            <Link
-              href={`/purchases/${purchase.id}/edit`}
-              className="flex items-center gap-2"
+        <div className="flex items-center justify-between mt-4">
+          <div className="flex space-x-2 w-full">
+            <Button
+              asChild
+              size="sm"
+              variant="outline"
+              className="flex-1 text-purple-600 border-purple-300 hover:bg-purple-50"
             >
-              <Edit className="w-3 h-3" />
-              Edit
-            </Link>
-          </Button>
-          <Button asChild size="sm" className="flex-1 ">
-            <Link
-              href={`/purchases/${purchase.id}`}
-              className="flex items-center gap-2"
+              <Link
+                className="flex items-center justify-center gap-1"
+                href={`/purchases/${purchase.id}/edit`}
+              >
+                <Edit className="w-3 h-3" />
+                Edit
+              </Link>
+            </Button>
+            <Button
+              asChild
+              size="sm"
+              className="flex-1 bg-purple-500 hover:bg-purple-600 text-white"
             >
-              <Eye className="w-3 h-3" />
-              View
-            </Link>
-          </Button>
+              <Link
+                href={`/purchases/${purchase.id}`}
+                className="flex items-center justify-center gap-1"
+              >
+                <Eye className="w-3 h-3" />
+                View
+              </Link>
+            </Button>
+          </div>
         </div>
       </CardContent>
     </Card>

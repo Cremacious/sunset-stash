@@ -36,7 +36,7 @@ const StashPage = () => {
   const availableTypes = [...new Set(stashItems.map((item) => item.type))];
 
   return (
-    <div className="space-y-4 max-w-7xl mx-auto">
+    <div className="space-y-4 max-w-8xl mx-auto">
       <div className="smallGlassCard">
         <StashSearchBar
           availableCategories={availableCategories}

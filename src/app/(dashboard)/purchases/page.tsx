@@ -104,24 +104,6 @@ const PurchasesPage = () => {
     return monthMatches && yearMatches;
   });
 
-  // if (loading) {
-  //   return (
-  //     <div className="space-y-4 max-w-7xl mx-auto">
-  //       <div className="smallGlassCard">
-  //         <div className="animate-pulse h-20 bg-gray-200 rounded"></div>
-  //       </div>
-  //       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-  //         <div className="glassCard md:col-span-3">
-  //           <div className="animate-pulse h-64 bg-gray-200 rounded"></div>
-  //         </div>
-  //         <div className="glassCard">
-  //           <div className="animate-pulse h-64 bg-gray-200 rounded"></div>
-  //         </div>
-  //       </div>
-  //     </div>
-  //   );
-  // }
-
   return (
     <div className="space-y-4 max-w-7xl mx-auto">
       <div className="smallGlassCard">
@@ -184,10 +166,10 @@ const PurchasesPage = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div className="md:col-span-3 glassCard">
-          <div className="flex items-center justify-between bg-white p-6 rounded-md shadow-md border-b-purple-500 border-b-4">
+          <div className="flex items-center justify-between bg-gradient-to-br from-orange-50 via-green-50 to-orange-50 p-6 rounded-md shadow-md border-b-orange-200 border-b-4">
             <div className="flex items-center">
               <div className="md:ml-4">
-                <h2 className=" font-bold 0 permanent-marker-font text-xl md:text-2xl text-purple-700">
+                <h2 className=" font-bold 0 permanent-marker-font text-xl md:text-2xl ">
                   Purchase History
                 </h2>
                 <p className="text-gray-600 text-sm md:text-md">
@@ -222,10 +204,10 @@ const PurchasesPage = () => {
               {filteredPurchases.length > 0 ? (
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <div className="bg-orange-100 rounded-xl py-2 px-4  border-orange-300 text-sm border-b-4 border-b-orange-500">
+                    <div className=" rounded-xl py-2 px-4  text-sm border-b-4 bg-gradient-to-br from-orange-50 via-green-50 to-green-100 border-b-orange-200">
                       Latest Purchases
                     </div>
-                    <div className="bg-blue-100 text-sm rounded-xl py-2 px-4 border-blue-300 border-b-4 border-b-blue-500">
+                    <div className="text-sm rounded-xl py-2 px-4 bg-gradient-to-br from-pink-50 via-orange-100 to-purple-100 border-b-4 border-b-orange-200">
                       Showing {Math.min(filteredPurchases.length, 9)} of{' '}
                       {filteredPurchases.length}
                     </div>

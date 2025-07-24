@@ -43,6 +43,7 @@ const EditPostForm = ({ post, stashItems }: EditPostFormProps) => {
   const [selectedStashItems, setSelectedStashItems] =
     useState<StashItem[]>(initialSelected);
   const [showStashSelector, setShowStashSelector] = useState(false);
+  const [stashSearch, setStashSearch] = useState('');
 
   const form = useForm<z.infer<typeof postFormSchema>>({
     resolver: zodResolver(postFormSchema),
@@ -91,9 +92,21 @@ const EditPostForm = ({ post, stashItems }: EditPostFormProps) => {
 
   const { isSubmitting } = form.formState;
 
-  const availableStashItems = stashItems.filter(
-    (item) => !selectedStashItems.some((selected) => selected.id === item.id)
+ 
+  const sortedStashItems = [...stashItems].sort((a, b) => {
+    const dateA = new Date(a.dateAdded).getTime();
+    const dateB = new Date(b.dateAdded).getTime();
+    return dateB - dateA;
+  });
+
+
+  const filteredStashItems = sortedStashItems.filter(
+    (item) =>
+      item.name.toLowerCase().includes(stashSearch.toLowerCase()) &&
+      !selectedStashItems.some((selected) => selected.id === item.id)
   );
+
+ 
 
   return (
     <Form {...form}>
@@ -187,24 +200,40 @@ const EditPostForm = ({ post, stashItems }: EditPostFormProps) => {
             <h4 className="text-sm font-medium text-gray-700 mb-3">
               Choose from your stash:
             </h4>
+            <div className="flex items-center gap-2 mb-4">
+              <input
+                type="text"
+                value={stashSearch}
+                onChange={(e) => setStashSearch(e.target.value)}
+                placeholder="Search by name..."
+                className="border border-gray-300 rounded-lg px-3 py-2 w-full max-w-xs text-sm"
+              />
+              <Button
+                type="button"
+                size="sm"
+                variant="outline"
+                className="text-gray-600 border-gray-300"
+                onClick={() => setStashSearch('')}
+              >
+                Clear
+              </Button>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-60 overflow-y-auto justify-items-center">
-              {availableStashItems.length > 0 ? (
-                availableStashItems.map((item) => (
+              {filteredStashItems.length > 0 ? (
+                filteredStashItems.map((item) => (
                   <div
                     key={item.id}
-                    className="bg-white rounded-lg p-3 border border-gray-200 hover:border-purple-300 hover:bg-purple-50 cursor-pointer transition-all duration-200"
+                    className="bg-white rounded-lg p-3 border border-gray-200 hover:border-purple-300 hover:bg-purple-50 cursor-pointer transition-all duration-200 w-full min-h-[80px] flex items-center"
                   >
-                    <div className="flex items-center space-x-3">
-                      <div
-                        className={`w-8 h-8 bg-gradient-to-r rounded-full flex items-center justify-center`}
-                      >
+                    <div className="flex items-center space-x-3 w-full">
+                      <div className="w-8 h-8 bg-gradient-to-r rounded-full flex items-center justify-center">
                         <span className="text-white text-sm"></span>
                       </div>
-                      <div className="flex-1">
-                        <h5 className="font-semibold text-gray-800">
+                      <div className="flex-1 min-w-0">
+                        <h5 className="font-semibold text-gray-800 truncate">
                           {item.name}
                         </h5>
-                        <p className="text-sm text-gray-600">
+                        <p className="text-sm text-gray-600 truncate">
                           {item.category} • THC: {item.thc}%
                         </p>
                       </div>
@@ -223,7 +252,7 @@ const EditPostForm = ({ post, stashItems }: EditPostFormProps) => {
               ) : (
                 <div className="col-span-full flex flex-col justify-center items-center py-8">
                   <Container className="text-purple-500 w-24 h-24 mb-4" />
-                  <p className="text-center">You have no stash items yet.</p>
+                  <p className="text-center">No stash items found.</p>
                 </div>
               )}
             </div>

@@ -10,7 +10,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import Link from 'next/link';
-import { MessageSquare,  } from 'lucide-react';
+import { MessageSquare } from 'lucide-react';
 import { PostWithStashItems } from '@/lib/types/social.types';
 
 type Props = {
@@ -51,26 +51,25 @@ const TimelineFeed = ({ posts, currentUserId }: Props) => {
     setPostsToShow(5);
   };
 
-  const userPostsCount = posts.filter((post) => post.userId === currentUserId).length;
-  const friendsPostsCount = posts.filter((post) => post.userId !== currentUserId).length;
-
   return (
-    <div className='space-y-4'>
-      <div className="bg-white rounded-lg border border-gray-200 p-4">
+    <div className="space-y-4">
+      <div className="rounded-lg bg-gradient-to-br from-pink-50 via-blue-50 to-pink-100 p-4">
         <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between">
           <Button asChild className="bg-purple-600 hover:bg-purple-700">
             <Link href="/social/new-post">Create New Post</Link>
           </Button>
           <div className="flex items-center gap-3">
-            <span className="text-sm text-gray-600 hidden sm:block">Filter:</span>
+            <span className="text-sm text-gray-600 hidden sm:block">
+              Filter:
+            </span>
             <Select value={postFilter} onValueChange={handleFilterChange}>
-              <SelectTrigger className="w-full sm:w-45 h-9 text-sm">
+              <SelectTrigger className="w-full sm:w-45 h-9 text-sm bg-white">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">All Posts ({posts.length})</SelectItem>
-                <SelectItem value="user">Your Posts ({userPostsCount})</SelectItem>
-                <SelectItem value="friends">Friends Only ({friendsPostsCount})</SelectItem>
+                <SelectItem value="all">All Posts </SelectItem>
+                <SelectItem value="user">Your Posts</SelectItem>
+                <SelectItem value="friends">Friends Only</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -100,7 +99,9 @@ const TimelineFeed = ({ posts, currentUserId }: Props) => {
                       Loading...
                     </div>
                   ) : (
-                    `Load More Posts (${filteredPosts.length - postsToShow} remaining)`
+                    `Load More Posts (${
+                      filteredPosts.length - postsToShow
+                    } remaining)`
                   )}
                 </Button>
               </div>
