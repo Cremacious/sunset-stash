@@ -12,6 +12,8 @@ import { Purchase } from '@/lib/types/purchase.types';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { DollarSign, Sun } from 'lucide-react';
 
+//test
+
 const PurchasesPage = () => {
   const [allPurchases, setAllPurchases] = useState<Purchase[]>([]);
   const [availableDates, setAvailableDates] = useState<{
