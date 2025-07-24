@@ -10,7 +10,7 @@ import {
 import PurchaseSearchBar from '@/components/purchases/PurchaseSearchBar';
 import { Purchase } from '@/lib/types/purchase.types';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import {  DollarSign } from 'lucide-react';
+import { DollarSign, Sun } from 'lucide-react';
 
 const PurchasesPage = () => {
   const [allPurchases, setAllPurchases] = useState<Purchase[]>([]);
@@ -102,23 +102,23 @@ const PurchasesPage = () => {
     return monthMatches && yearMatches;
   });
 
-  if (loading) {
-    return (
-      <div className="space-y-4 max-w-7xl mx-auto">
-        <div className="smallGlassCard">
-          <div className="animate-pulse h-20 bg-gray-200 rounded"></div>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          <div className="glassCard md:col-span-3">
-            <div className="animate-pulse h-64 bg-gray-200 rounded"></div>
-          </div>
-          <div className="glassCard">
-            <div className="animate-pulse h-64 bg-gray-200 rounded"></div>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <div className="space-y-4 max-w-7xl mx-auto">
+  //       <div className="smallGlassCard">
+  //         <div className="animate-pulse h-20 bg-gray-200 rounded"></div>
+  //       </div>
+  //       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+  //         <div className="glassCard md:col-span-3">
+  //           <div className="animate-pulse h-64 bg-gray-200 rounded"></div>
+  //         </div>
+  //         <div className="glassCard">
+  //           <div className="animate-pulse h-64 bg-gray-200 rounded"></div>
+  //         </div>
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="space-y-4 max-w-7xl mx-auto">
@@ -209,47 +209,55 @@ const PurchasesPage = () => {
             </div>
           </div>
 
-          <div className="mt-4">
-            {filteredPurchases.length > 0 ? (
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <div className="bg-orange-100 rounded-xl py-2 px-4  border-orange-300 text-sm border-b-4 border-b-orange-500">
-                    Latest Purchases
-                  </div>
-                  <div className="bg-blue-100 text-sm rounded-xl py-2 px-4 border-blue-300 border-b-4 border-b-blue-500">
-                    Showing {Math.min(filteredPurchases.length, 9)} of{' '}
-                    {filteredPurchases.length}
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                  {filteredPurchases.slice(0, 9).map((purchase) => (
-                    <PurchaseCard key={purchase.id} purchase={purchase} />
-                  ))}
-                </div>
-
-                {filteredPurchases.length > 9 && (
-                  <div className="text-center pt-6">
-                    <Button>
-                      View All {filteredPurchases.length} Purchases
-                    </Button>
-                  </div>
-                )}
+          {loading ? (
+            <div className="glassCard h-40 mt-4">
+              <div className="animate-pulse h-full flex items-center justify-center">
+                <Sun className="text-yellow-400 animate-spin" size={100} />
               </div>
-            ) : (
-              <Card className="bg-white/70 backdrop-blur-sm rounded-lg border border-white/30 p-6">
-            <CardHeader />
-            <CardContent>
-              <div className="flex flex-col items-center justify-center">
-                <DollarSign className="w-10 h-10 text-purple-500 mb-2" />
-                <span className="text-gray-500">
-                  No recent purchases found.
-                </span>
-              </div>
-            </CardContent>
-          </Card>
-            )}
-          </div>
+            </div>
+          ) : (
+            <div className="mt-4">
+              {filteredPurchases.length > 0 ? (
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <div className="bg-orange-100 rounded-xl py-2 px-4  border-orange-300 text-sm border-b-4 border-b-orange-500">
+                      Latest Purchases
+                    </div>
+                    <div className="bg-blue-100 text-sm rounded-xl py-2 px-4 border-blue-300 border-b-4 border-b-blue-500">
+                      Showing {Math.min(filteredPurchases.length, 9)} of{' '}
+                      {filteredPurchases.length}
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                    {filteredPurchases.slice(0, 9).map((purchase) => (
+                      <PurchaseCard key={purchase.id} purchase={purchase} />
+                    ))}
+                  </div>
+
+                  {filteredPurchases.length > 9 && (
+                    <div className="text-center pt-6">
+                      <Button>
+                        View All {filteredPurchases.length} Purchases
+                      </Button>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <Card className="bg-white/70 backdrop-blur-sm rounded-lg border border-white/30 p-6">
+                  <CardHeader />
+                  <CardContent>
+                    <div className="flex flex-col items-center justify-center">
+                      <DollarSign className="w-10 h-10 text-purple-500 mb-2" />
+                      <span className="text-gray-500">
+                        No recent purchases found.
+                      </span>
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
+            </div>
+          )}
         </div>
         <div className="md:col-span-1">
           <PurchaseStats
