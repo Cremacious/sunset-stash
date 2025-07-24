@@ -8,9 +8,12 @@ import topicalIcon from '@/assets/icons/topical.png';
 import defaultIcon from '@/assets/icons/default.png';
 import { Purchase } from '@/lib/types';
 
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
+
+
 
 export function getCategoryIcon(category: string | null | undefined): string {
   switch (category) {
@@ -51,7 +54,7 @@ export function calculateMonthlyTotal(
       );
     })
     .reduce((sum, purchase) => sum + purchase.total, 0);
-    
+
   return parseFloat(total.toFixed(2));
 }
 
