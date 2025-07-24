@@ -6,11 +6,7 @@ import Image from 'next/image';
 import { getStashItemById } from '@/lib/actions/stash.actions';
 import { getCategoryIcon } from '@/lib/utils';
 
-const StashItemPage = async ({
-  params,
-}: {
-  params: { stashItemId: string };
-}) => {
+const StashItemPage = async ({ params }: { params: { stashItemId: string } }) => {
   const result = await getStashItemById(params.stashItemId);
   const stashItem = result.data;
 
