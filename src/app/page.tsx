@@ -184,14 +184,14 @@ const Home = () => {
                 >
                   <Link href="/sign-up">Create Account</Link>
                 </Button>
-                <Button
+                {/* <Button
                   asChild
                   size="lg"
                   variant="outline"
                   className="border-purple-600 text-purple-600 hover:bg-purple-50"
                 >
                   <Link href="/dashboard">View Demo</Link>
-                </Button>
+                </Button> */}
               </div>
             </CardContent>
           </Card>

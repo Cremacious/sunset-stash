@@ -244,3 +244,66 @@ export async function deletePurchase(purchaseId: string) {
     return { success: false, error: 'Failed to delete purchase' };
   }
 }
+
+export async function editPurchase(
+  purchaseId: string,
+  data: z.infer<typeof purchaseFormSchema>
+) {
+  try {
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
+
+    if (!session?.user.id) {
+      return { success: false, error: 'Please sign in again.' };
+    }
+
+    const purchase = await prisma.purchase.findUnique({
+      where: { id: purchaseId, userId: session.user.id },
+      include: { items: true },
+    });
+
+    if (!purchase) {
+      return { success: false, error: 'Purchase not found' };
+    }
+
+    const parsedData = purchaseFormSchema.parse(data);
+
+
+    await prisma.purchaseItem.deleteMany({
+      where: { purchaseId: purchase.id },
+    });
+
+   
+    const total = parsedData.items.reduce((sum, item) => sum + item.price, 0);
+
+    await prisma.purchase.update({
+      where: { id: purchaseId, userId: session.user.id },
+      data: {
+        dispensary: parsedData.dispensary,
+        date: parsedData.date,
+        total: total,
+        notes: parsedData.notes || '',
+        items: {
+          create: parsedData.items.map((item) => ({
+            name: item.name,
+            category: item.category,
+            type: item.type || '',
+            amount: item.amount || '',
+            price: item.price,
+            thc: item.thc || 0,
+            cbd: item.cbd || 0,
+            lineage: item.lineage || '',
+            notes: item.notes || '',
+          })),
+        },
+      },
+    });
+
+    revalidatePath('/purchases');
+    return { success: true, message: 'Purchase updated successfully' };
+  } catch (error) {
+    console.error('Error editing purchase:', error);
+    return { success: false, error: 'Failed to edit purchase' };
+  }
+}
