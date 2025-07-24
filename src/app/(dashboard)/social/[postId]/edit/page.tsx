@@ -9,8 +9,8 @@ import EditPostForm from '@/components/social/EditPostForm';
 import { getPostById } from '@/lib/actions/post.actions';
 import { PostWithStashItems } from '@/lib/types/social.types';
 
-const EditPostPage = async ({ params }: { params: { postId: string } }) => {
-  const { postId } = params;
+const EditPostPage = async ({ params }: {params : Promise<{postId: string}>}) => {
+  const { postId } = await params;
   const result = await getPostById(postId);
 
   if (!result.success || !result.data) {
