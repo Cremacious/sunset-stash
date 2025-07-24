@@ -1,13 +1,18 @@
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { ArrowLeft, Edit, } from 'lucide-react';
+import { ArrowLeft, Edit } from 'lucide-react';
 import Image from 'next/image';
 import { getStashItemById } from '@/lib/actions/stash.actions';
 import { getCategoryIcon } from '@/lib/utils';
 
-const StashItemPage = async ({ params }: { params: { stashItemId: string } }) => {
-  const result = await getStashItemById(params.stashItemId);
+const StashItemPage = async ({
+  params,
+}: {
+  params: Promise<{ stashItemId: string }>;
+}) => {
+  const { stashItemId } = await params;
+  const result = await getStashItemById(stashItemId);
   const stashItem = result.data;
 
   if (!stashItem) {
