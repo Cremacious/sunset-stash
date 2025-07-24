@@ -385,3 +385,81 @@ export async function createComment(postId: string, content: string) {
     return { success: false, error: 'Failed to create comment' };
   }
 }
+export async function editPost(
+  postId: string,
+  data: z.infer<typeof postFormSchema>
+) {
+  try {
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
+    if (!session?.user.id) {
+      return {
+        success: false,
+        error: 'User session not found. Please sign in again.',
+      };
+    }
+    const existingUser = await prisma.user.findUnique({
+      where: { id: session.user.id },
+    });
+    if (!existingUser) {
+      throw new Error('User not found');
+    }
+
+    const parsedData = postFormSchema.parse(data);
+
+    if (parsedData.stashItemIds && parsedData.stashItemIds.length > 0) {
+      const existingStashItems = await prisma.stashItem.findMany({
+        where: {
+          id: { in: parsedData.stashItemIds },
+          userId: existingUser.id,
+        },
+      });
+      if (existingStashItems.length !== parsedData.stashItemIds.length) {
+        return {
+          success: false,
+          error: 'Some selected stash items are invalid or do not exist.',
+        };
+      }
+    }
+
+    const updatedPost = await prisma.post.update({
+      where: {
+        id: postId,
+        userId: existingUser.id,
+      },
+      data: {
+        activity: parsedData.activity ?? '',
+        content: parsedData.content,
+        author: existingUser.name,
+      },
+    });
+
+    await prisma.postStashItem.deleteMany({
+      where: { postId },
+    });
+
+    if (parsedData.stashItemIds && parsedData.stashItemIds.length > 0) {
+      await prisma.postStashItem.createMany({
+        data: parsedData.stashItemIds.map((stashItemId) => ({
+          postId: updatedPost.id,
+          stashItemId: stashItemId,
+        })),
+      });
+    }
+
+    revalidatePath('/social');
+    revalidatePath(`/social/${postId}`);
+
+    return {
+      success: true,
+      message: 'Post updated successfully',
+    };
+  } catch (error) {
+    console.error('Error editing post:', error);
+    return {
+      success: false,
+      error: 'Failed to edit post. Please try again.',
+    };
+  }
+}
