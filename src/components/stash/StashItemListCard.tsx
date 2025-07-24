@@ -14,15 +14,15 @@ const StashItemListCard = ({
   return (
     <Link href={`/stash/${stashItem.id}`} className="block">
       <Card className="bg-white shadow-xl border-0 border-b-purple-600 border-b-4 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden">
-        <div className="flex items-center justify-between p-3 pb-2">
+        <div className=" flex items-center justify-between p-3 pb-2">
           <div className="flex items-center space-x-3">
             <Image
-              width={24}
-              height={24}
+              width={30}
+              height={30}
               src={getCategoryIcon(stashItem.category)}
               alt={stashItem.category}
             />
-            <CardTitle className="text-base font-bold text-gray-800">
+            <CardTitle className=" text-xl font-bold permanent-marker-font text-purple-800">
               {stashItem.name}
             </CardTitle>
           </div>

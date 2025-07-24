@@ -1,4 +1,10 @@
-import { DollarSign, ShoppingCart, Star, TrendingUp } from 'lucide-react';
+import {
+  Container,
+  DollarSign,
+  ShoppingCart,
+  Star,
+  TrendingUp,
+} from 'lucide-react';
 import {
   Card,
   CardContent,
@@ -6,8 +12,68 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import Image from 'next/image';
-import { getCategoryIcon } from '@/lib/utils';
+
+import StashItemListCard from '../stash/StashItemListCard';
+
+const samplestash1 = {
+  id: 'stash-1',
+  name: 'Sour Diesel',
+  category: 'Flower',
+  type: 'Sativa',
+  amount: '3.5g',
+  thc: 19,
+  cbd: 0.5,
+  lineage: 'Blueberry x Haze',
+  notes:
+    'Perfect for creative sessions and relaxation. Great for movie nights and social activities. The flavor is sweet with berry undertones.',
+  dateAdded: '2025-01-15T00:00:00.000Z',
+  userId: 'user-1',
+};
+
+const samplestash2 = {
+  id: 'stash-1',
+  name: 'Gary Payton',
+  category: 'Vape',
+  type: 'Hybrid',
+  amount: '3.5g',
+  thc: 22.5,
+  cbd: 0.5,
+  lineage: 'Blueberry x Haze',
+  notes:
+    'Perfect for creative sessions and relaxation. Great for movie nights and social activities. The flavor is sweet with berry undertones.',
+  dateAdded: '2025-01-15T00:00:00.000Z',
+  userId: 'user-1',
+};
+
+const samplestash3 = {
+  id: 'stash-1',
+  name: "Mack's Chocolate",
+  category: 'Edibles',
+  type: 'Hybrid',
+  amount: '3.5g',
+  thc: 10,
+  cbd: 0.5,
+  lineage: 'Blueberry x Haze',
+  notes:
+    'Perfect for creative sessions and relaxation. Great for movie nights and social activities. The flavor is sweet with berry undertones.',
+  dateAdded: '2025-01-15T00:00:00.000Z',
+  userId: 'user-1',
+};
+
+const samplestash4 = {
+  id: 'stash-1',
+  name: 'Girl Scout Cookies',
+  category: 'Concentrate',
+  type: 'Indica',
+  amount: '3.5g',
+  thc: 24,
+  cbd: 0.5,
+  lineage: 'Blueberry x Haze',
+  notes:
+    'Perfect for creative sessions and relaxation. Great for movie nights and social activities. The flavor is sweet with berry undertones.',
+  dateAdded: '2025-01-15T00:00:00.000Z',
+  userId: 'user-1',
+};
 
 const ExamplePurchases = () => {
   return (
@@ -20,9 +86,7 @@ const ExamplePurchases = () => {
         favorites
       </p>
 
-      {/* Main Feature Cards */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Purchase Form Preview */}
         <Card className="bg-white shadow-xl border-0">
           <CardHeader>
             <CardTitle className="text-gray-800 text-xl">
@@ -63,7 +127,6 @@ const ExamplePurchases = () => {
           </CardContent>
         </Card>
 
-        {/* Analytics Preview */}
         <Card className="bg-white shadow-xl border-0">
           <CardHeader>
             <CardTitle className="text-gray-800 text-xl">
@@ -75,24 +138,24 @@ const ExamplePurchases = () => {
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-2 gap-4">
-              <div className="bg-gray-50 rounded-lg p-3 text-center">
+              <div className="bg-green-100 rounded-lg p-3 text-center">
                 <DollarSign className="w-8 h-8 text-green-600 mx-auto mb-2" />
-                <p className="text-gray-600 text-sm">Monthly Spending</p>
+                <p className="text-gray-800 text-sm">Monthly Spending</p>
                 <p className="text-gray-800 font-bold text-lg">$340.25</p>
               </div>
-              <div className="bg-gray-50 rounded-lg p-3 text-center">
+              <div className="bg-blue-100 rounded-lg p-3 text-center">
                 <TrendingUp className="w-8 h-8 text-blue-600 mx-auto mb-2" />
-                <p className="text-gray-600 text-sm">Total Purchases</p>
+                <p className="text-gray-800 text-sm">Total Purchases</p>
                 <p className="text-gray-800 font-bold text-lg">12</p>
               </div>
-              <div className="bg-gray-50 rounded-lg p-3 text-center">
+              <div className="bg-yellow-100 rounded-lg p-3 text-center">
                 <Star className="w-8 h-8 text-yellow-600 mx-auto mb-2" />
-                <p className="text-gray-600 text-sm">Favorite Category</p>
+                <p className="text-gray-800 text-sm">Favorite Category</p>
                 <p className="text-gray-800 font-bold text-sm">Flower</p>
               </div>
-              <div className="bg-gray-50 rounded-lg p-3 text-center">
+              <div className="bg-purple-100 rounded-lg p-3 text-center">
                 <ShoppingCart className="w-8 h-8 text-purple-600 mx-auto mb-2" />
-                <p className="text-gray-600 text-sm">Top Dispensary</p>
+                <p className="text-gray-800 text-sm">Top Dispensary</p>
                 <p className="text-gray-800 font-bold text-sm">Trulieve</p>
               </div>
             </div>
@@ -100,98 +163,33 @@ const ExamplePurchases = () => {
         </Card>
       </div>
 
-      {/* Example Stash Item and Analytics */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Example Stash Item */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 col-span-2">
+          <StashItemListCard stashItem={samplestash1} />
+          <StashItemListCard stashItem={samplestash2} />
+          <StashItemListCard stashItem={samplestash3} />
+          <StashItemListCard stashItem={samplestash4} />
+        </div>
 
-        <Card className="bg-white shadow-xl border border-b-purple-600 border-b-6 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
-          <CardHeader>
-            <div className="flex justify-between items-start">
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-gradient-to-r rounded-full flex items-center justify-center">
-                  <Image
-                    width={40}
-                    height={40}
-                    src={getCategoryIcon('Flower')}
-                    alt="Flower"
-                  />
-                </div>
-                <div>
-                  <CardTitle className="text-lg font-bold text-gray-800 mt-1">
-                    Sour Diesel
-                  </CardTitle>
-                </div>
-              </div>
-            </div>
-          </CardHeader>
-
-          <CardContent className="space-y-4 text-center">
-            <div className="bg-green-100 p-2 rounded-lg">
-              <p className="mb-1 text-gray-600 text-center">Category</p>
-              <p className="text-center font-bold">Flower</p>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4 text-sm">
-              <div className="bg-purple-100 p-2 rounded-lg">
-                <p className="text-gray-600 mb-1 text-center">Type</p>
-                <p className="font-bold text-center">Sativa</p>
-              </div>
-              <div className="bg-blue-100 p-2 rounded-lg">
-                <p className="text-gray-600 mb-1 text-center">THC</p>
-                <p className="font-bold text-center">22.3%</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="bg-white shadow-xl border border-b-purple-600 border-b-6 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
-          <CardHeader>
-            <div className="flex justify-between items-start">
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-gradient-to-r rounded-full flex items-center justify-center">
-                  <Image
-                    width={40}
-                    height={40}
-                    src={getCategoryIcon('Flower')}
-                    alt="Flower"
-                  />
-                </div>
-                <div>
-                  <CardTitle className="text-lg font-bold text-gray-800 mt-1">
-                    Sour Diesel
-                  </CardTitle>
-                </div>
-              </div>
-            </div>
-          </CardHeader>
-
-          <CardContent className="space-y-4 text-center">
-            <div className="bg-green-100 p-2 rounded-lg">
-              <p className="mb-1 text-gray-600 text-center">Category</p>
-              <p className="text-center font-bold">Flower</p>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4 text-sm">
-              <div className="bg-purple-100 p-2 rounded-lg">
-                <p className="text-gray-600 mb-1 text-center">Type</p>
-                <p className="font-bold text-center">Sativa</p>
-              </div>
-              <div className="bg-blue-100 p-2 rounded-lg">
-                <p className="text-gray-600 mb-1 text-center">THC</p>
-                <p className="font-bold text-center">22.3%</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        {/* Stash Analytics */}
-        <div className="space-y-4">
+        <div className="space-y-4 mt-4">
           <div className="space-y-4">
-            {/* Stash Count */}
+            <div className="bg-orange-100 rounded-xl p-4 border-orange-200 hover:shadow-md transition-all duration-300 border-b-orange-500 border-b-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-orange-500 rounded-full">
+                    <Container className="w-5 h-5 text-white" />
+                  </div>
+                  <h4 className="font-semibold text-gray-800 text-sm">
+                    Stash Count
+                  </h4>
+                </div>
+                <p className="text-xl font-bold text-gray-800">27</p>
+              </div>
+            </div>
 
-            {/* Most Common Type */}
-            <div className="bg-orange-100 rounded-xl p-4 border border-orange-200 hover:shadow-lg transition-all duration-300">
+            <div className="bg-red-100 rounded-xl p-4 border-b-4 border-b-red-500 border-red-200 hover:shadow-lg transition-all duration-300">
               <div className="flex items-center justify-between mb-3">
-                <div className="p-2 bg-orange-500 rounded-full">
+                <div className="p-2 bg-red-500 rounded-full">
                   <TrendingUp className="w-5 h-5 text-white" />
                 </div>
                 <div className="text-right">
@@ -202,16 +200,15 @@ const ExamplePurchases = () => {
               <h4 className="font-semibold text-gray-800 text-sm mb-2">
                 Most Common Type
               </h4>
-              <div className="h-2 bg-orange-200 rounded-full overflow-hidden">
+              <div className="h-2 bg-red-200 rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-orange-500 rounded-full"
+                  className="h-full bg-red-500 rounded-full"
                   style={{ width: '60%' }}
                 ></div>
               </div>
             </div>
 
-            {/* Most Common Category */}
-            <div className="bg-blue-100 rounded-xl p-4 border border-blue-200 hover:shadow-lg transition-all duration-300">
+            <div className="bg-blue-100 rounded-xl p-4 border-b-4 border-b-blue-500 hover:shadow-lg transition-all duration-300">
               <div className="flex items-center justify-between mb-3">
                 <div className="p-2 bg-blue-500 rounded-full">
                   <Star className="w-5 h-5 text-white" />

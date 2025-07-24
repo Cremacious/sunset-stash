@@ -35,24 +35,6 @@ const StashPage = () => {
   ];
   const availableTypes = [...new Set(stashItems.map((item) => item.type))];
 
-  // if (loading) {
-  //   return (
-  //     <div className="space-y-4 max-w-7xl mx-auto">
-  //       <div className="smallGlassCard">
-  //         <div className="animate-pulse h-20 bg-gray-200 rounded"></div>
-  //       </div>
-  //       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-  //         <div className="glassCard md:col-span-3">
-  //           <div className="animate-pulse h-64 bg-gray-200 rounded"></div>
-  //         </div>
-  //         <div className="glassCard">
-  //           <div className="animate-pulse h-64 bg-gray-200 rounded"></div>
-  //         </div>
-  //       </div>
-  //     </div>
-  //   );
-  // }
-
   return (
     <div className="space-y-4 max-w-7xl mx-auto">
       <div className="smallGlassCard">
@@ -78,7 +60,7 @@ const StashPage = () => {
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         {loading ? (
           <div className="glassCard md:col-span-3">
-            <div className="animate-pulse h-full bg-gray-200 rounded flex items-center justify-center">
+            <div className="animate-pulse h-full py-6 bg-gray-200 rounded flex items-center justify-center">
               <Sun className="text-yellow-400 animate-spin" size={100} />
             </div>
           </div>

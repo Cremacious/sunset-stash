@@ -29,11 +29,9 @@ const Home = () => {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
       <section className="relative pb-20 px-4 ">
         <div className="max-w-6xl mx-auto text-center ">
           <div className="">
-            {/* Logo */}
             <div className="flex justify-center mb-8 ">
               <Image
                 src={Logo}
@@ -71,8 +69,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Features Section */}
-
       <section data-aos="fade-up" data-aos-delay="100" className="py-16 px-4">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold text-white text-center mb-12 drop-shadow-lg">
@@ -80,7 +76,6 @@ const Home = () => {
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Purchase Tracking */}
             <Card className="bg-white shadow-xl border-0">
               <CardHeader className="text-center">
                 <div className="mx-auto mb-4 p-3 bg-green-500 rounded-full w-16 h-16 flex items-center justify-center">
@@ -108,7 +103,6 @@ const Home = () => {
               </CardContent>
             </Card>
 
-            {/* Stash Management */}
             <Card className="bg-white shadow-xl border-0">
               <CardHeader className="text-center">
                 <div className="mx-auto mb-4 p-3 bg-purple-500 rounded-full w-16 h-16 flex items-center justify-center">
@@ -136,7 +130,6 @@ const Home = () => {
               </CardContent>
             </Card>
 
-            {/* Social Features */}
             <Card className="bg-white shadow-xl border-0">
               <CardHeader className="text-center">
                 <div className="mx-auto mb-4 p-3 bg-blue-500 rounded-full w-16 h-16 flex items-center justify-center">
@@ -167,7 +160,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Purchase Tracking Examples */}
       <section data-aos="fade-up" data-aos-delay="100" className="py-16 px-4">
         <ExamplePurchases />
       </section>
@@ -176,19 +168,14 @@ const Home = () => {
         <SocialPostExample />
       </section>
 
-      {/* Call to Action */}
       <section data-aos="fade-up" data-aos-delay="100" className="py-16 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <Card className="bg-white shadow-xl border-0">
             <CardContent className="p-8">
-              <h2 className="text-3xl font-bold text-gray-800 mb-4">
+              <h2 className="text-3xl fugaz-font font-bold text-gray-800 mb-8">
                 Ready to Start Your Journey?
               </h2>
-              <p className="text-gray-600 text-lg mb-8">
-                Join thousands of Florida medical marijuana users who trust
-                Sunset Stash to track their purchases, manage their favorites,
-                and connect with the community.
-              </p>
+              {/* <p className="text-gray-600 text-lg mb-8">Join today!</p> */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button
                   asChild

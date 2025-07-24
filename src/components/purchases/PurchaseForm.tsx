@@ -116,7 +116,6 @@ export default function PurchaseForm() {
 
   const isSubmitting = form.formState.isSubmitting;
 
-
   const totalPrice = fields.reduce((sum, _, index) => {
     const price = form.watch(`items.${index}.price`);
     const numericPrice =
@@ -128,15 +127,14 @@ export default function PurchaseForm() {
     <div className="min-h-screen">
       <div className="max-w-4xl mx-auto">
         <div className="bg-white backdrop-blur-md rounded-3xl shadow-2xl overflow-hidden ">
-          <div className="p-6 md:p-8">
+          <div className="p-2 md:p-4">
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
                 className="space-y-8"
               >
-                <div className="bg-gradient-to-r from-purple-50/50 to-indigo-50/50 backdrop-blur-sm border border-purple-200/50 rounded-2xl p-6 md:p-8">
+                <div className="bg-gradient-to-r from-purple-50/50 to-indigo-50/50 backdrop-blur-sm border border-purple-200/50 rounded-2xl pl-2 pt-4 p-2 md:p-4">
                   <div className="flex items-center space-x-3 mb-6">
-                
                     <h2 className="text-2xl font-bold text-gray-800">
                       Purchase Information
                     </h2>
@@ -235,7 +233,7 @@ export default function PurchaseForm() {
                   />
                 </div>
 
-                <div className="bg-blue-50 border-1 border-blue-200 rounded-2xl p-6 md:p-8">
+                <div className="bg-blue-50 border-1 border-blue-200 rounded-2xl pl-2 pt-4 p-2 md:p-4">
                   <div className="flex items-center justify-between mb-6">
                     <div className="flex items-center space-x-3">
                       <h2 className="text-2xl font-bold text-gray-800 ">
@@ -257,7 +255,7 @@ export default function PurchaseForm() {
                     {fields.map((field, index) => (
                       <div
                         key={field.id}
-                        className="bg-white/90 backdrop-blur-md border border-white/50 rounded-2xl p-6 md:p-8 relative shadow-lg"
+                        className="bg-white/90 backdrop-blur-md border border-white/50 rounded-2xl p-2 md:p-4 pt-4 relative shadow-lg"
                       >
                         {fields.length > 1 && (
                           <Button
