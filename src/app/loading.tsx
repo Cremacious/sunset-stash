@@ -2,9 +2,9 @@ import { Sun } from 'lucide-react';
 
 const LoadingPage = () => {
   return (
-    <div className="flex justify-center items-center min-h-screen w-screen">
-      <Sun className="animate-spin text-yellow-300" size={200} />
-    </div>
+   <div className="fixed inset-0 flex items-center justify-center w-full h-full">
+  <Sun className="animate-spin text-yellow-300" size={200} />
+</div>
   );
 };
 

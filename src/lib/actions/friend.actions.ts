@@ -235,7 +235,7 @@ export async function getUserFriendRequests() {
     return { success: true, data: friendRequests };
   } catch (error) {
     console.error('Error fetching friend requests:', error);
-    return { success: false, error: 'Failed to fetch friend requests' };
+    return { success: false, data: [] };
   }
 }
 
