@@ -13,7 +13,6 @@ const NewStashItemPage = () => {
   return (
     <div className="relative w-full flex justify-center py-6 px-1">
       <div className="max-w-4xl mx-auto space-y-8">
-        {/* Form Card */}
         <Card className="bg-white shadow-xl border-0">
           <CardHeader>
             <CardTitle className="text-xl font-bold text-gray-800 flex items-center">

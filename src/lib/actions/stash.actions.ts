@@ -32,6 +32,46 @@ export async function createStashItem(data: z.infer<typeof stashFormSchema>) {
   }
 }
 
+export async function editStashItem(
+  stashItemId: string,
+  data: z.infer<typeof stashFormSchema>
+) {
+  try {
+    const { user, error } = await getAuthenticatedUser();
+    if (!user) {
+      return { success: false, error };
+    }
+
+    const parsedData = stashFormSchema.parse(data);
+
+    const updated = await prisma.stashItem.update({
+      where: {
+        id: stashItemId,
+        userId: user.id,
+      },
+      data: {
+        ...parsedData,
+      },
+    });
+
+    revalidatePath('/stash');
+    return {
+      success: true,
+      message: 'Stash item updated successfully',
+      data: {
+        ...updated,
+        dateAdded: updated.dateAdded.toISOString(),
+      },
+    };
+  } catch (error) {
+    console.error('Error editing stash item:', error);
+    return {
+      success: false,
+      error: 'Failed to edit stash item. Please try again.',
+    };
+  }
+}
+
 export async function getUserStashItems() {
   try {
     const { user, error } = await getAuthenticatedUser();
