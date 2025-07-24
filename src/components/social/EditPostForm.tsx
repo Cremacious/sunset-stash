@@ -25,13 +25,13 @@ import { Label } from '../ui/label';
 
 type EditPostFormProps = {
   post: PostWithStashItems;
+  stashItems: StashItem[];
 };
 
-const EditPostForm = ({ post }: EditPostFormProps) => {
+const EditPostForm = ({ post, stashItems }: EditPostFormProps) => {
   const router = useRouter();
 
-  // Extract stash items from post.stashItems (array of {stashItem: StashItem})
-  const stashItems: StashItem[] =
+  const initialSelected: StashItem[] =
     post.stashItems?.map((item) => ({
       ...item.stashItem,
       dateAdded:
@@ -40,22 +40,19 @@ const EditPostForm = ({ post }: EditPostFormProps) => {
           : item.stashItem.dateAdded.toISOString(),
     })) ?? [];
 
-  // Default selected stash items are those already on the post
   const [selectedStashItems, setSelectedStashItems] =
-    useState<StashItem[]>(stashItems);
+    useState<StashItem[]>(initialSelected);
   const [showStashSelector, setShowStashSelector] = useState(false);
 
-  // Set up form with default values from the post
   const form = useForm<z.infer<typeof postFormSchema>>({
     resolver: zodResolver(postFormSchema),
     defaultValues: {
       activity: post.activity || '',
       content: post.content || '',
-      stashItemIds: stashItems.map((item) => item.id),
+      stashItemIds: initialSelected.map((item) => item.id),
     },
   });
 
-  // Keep form stashItemIds in sync with selectedStashItems
   useEffect(() => {
     form.setValue(
       'stashItemIds',
@@ -82,18 +79,21 @@ const EditPostForm = ({ post }: EditPostFormProps) => {
     }
   }
 
-  const toggleStashItem = (item: StashItem) => {
-    setSelectedStashItems((prev) => {
-      const isSelected = prev.some((selected) => selected.id === item.id);
-      if (isSelected) {
-        return prev.filter((selected) => selected.id !== item.id);
-      } else {
-        return [...prev, item];
-      }
-    });
+  const handleRemoveStashItem = (item: StashItem) => {
+    setSelectedStashItems((prev) =>
+      prev.filter((selected) => selected.id !== item.id)
+    );
+  };
+
+  const handleAddStashItem = (item: StashItem) => {
+    setSelectedStashItems((prev) => [...prev, item]);
   };
 
   const { isSubmitting } = form.formState;
+
+  const availableStashItems = stashItems.filter(
+    (item) => !selectedStashItems.some((selected) => selected.id === item.id)
+  );
 
   return (
     <Form {...form}>
@@ -170,7 +170,7 @@ const EditPostForm = ({ post }: EditPostFormProps) => {
                       type="button"
                       variant="ghost"
                       size="sm"
-                      onClick={() => toggleStashItem(item)}
+                      onClick={() => handleRemoveStashItem(item)}
                       className="text-purple-500 hover:text-purple-700 hover:bg-purple-50"
                     >
                       Remove
@@ -188,38 +188,38 @@ const EditPostForm = ({ post }: EditPostFormProps) => {
               Choose from your stash:
             </h4>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-60 overflow-y-auto justify-items-center">
-              {stashItems && stashItems.length > 0 ? (
-                stashItems
-                  .filter(
-                    (item) =>
-                      !selectedStashItems.find(
-                        (selected) => selected.id === item.id
-                      )
-                  )
-                  .map((item) => (
-                    <div
-                      key={item.id}
-                      onClick={() => toggleStashItem(item)}
-                      className="bg-white rounded-lg p-3 border border-gray-200 hover:border-purple-300 hover:bg-purple-50 cursor-pointer transition-all duration-200"
-                    >
-                      <div className="flex items-center space-x-3">
-                        <div
-                          className={`w-8 h-8 bg-gradient-to-r rounded-full flex items-center justify-center`}
-                        >
-                          <span className="text-white text-sm"></span>
-                        </div>
-                        <div className="flex-1">
-                          <h5 className="font-semibold text-gray-800">
-                            {item.name}
-                          </h5>
-                          <p className="text-sm text-gray-600">
-                            {item.category} • THC: {item.thc}%
-                          </p>
-                        </div>
-                        <div className="text-purple-500">+</div>
+              {availableStashItems.length > 0 ? (
+                availableStashItems.map((item) => (
+                  <div
+                    key={item.id}
+                    className="bg-white rounded-lg p-3 border border-gray-200 hover:border-purple-300 hover:bg-purple-50 cursor-pointer transition-all duration-200"
+                  >
+                    <div className="flex items-center space-x-3">
+                      <div
+                        className={`w-8 h-8 bg-gradient-to-r rounded-full flex items-center justify-center`}
+                      >
+                        <span className="text-white text-sm"></span>
                       </div>
+                      <div className="flex-1">
+                        <h5 className="font-semibold text-gray-800">
+                          {item.name}
+                        </h5>
+                        <p className="text-sm text-gray-600">
+                          {item.category} • THC: {item.thc}%
+                        </p>
+                      </div>
+                      <Button
+                        type="button"
+                        size="sm"
+                        variant="outline"
+                        className="text-purple-500 border-purple-300 hover:bg-purple-50"
+                        onClick={() => handleAddStashItem(item)}
+                      >
+                        Add
+                      </Button>
                     </div>
-                  ))
+                  </div>
+                ))
               ) : (
                 <div className="col-span-full flex flex-col justify-center items-center py-8">
                   <Container className="text-purple-500 w-24 h-24 mb-4" />
@@ -239,11 +239,7 @@ const EditPostForm = ({ post }: EditPostFormProps) => {
           >
             Cancel
           </Button>
-          <Button
-            disabled={!form.formState.isDirty || isSubmitting}
-            type="submit"
-            className="flex-1 "
-          >
+          <Button disabled={isSubmitting} type="submit" className="flex-1 ">
             {isSubmitting ? (
               <Sun className="animate-spin text-yellow-300" />
             ) : (

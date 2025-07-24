@@ -13,6 +13,7 @@ const FindFriends = () => {
     const response = await sendFriendRequestByEmail(email);
     if (response.success) {
       setStatus('Friend request sent!');
+      setEmail(''); 
     } else {
       setStatus(response.error || 'Error sending request');
     }
@@ -33,7 +34,7 @@ const FindFriends = () => {
           Send Friend Request
         </Button>
         {status && (
-          <div className="text-sm py-2 bg-purple-100 border-purple-300 rounded-lg text-center mt-2">
+          <div className="text-sm py-2 bg-purple-50 border-purple-500 rounded-lg text-center mt-2">
             {status}
           </div>
         )}
