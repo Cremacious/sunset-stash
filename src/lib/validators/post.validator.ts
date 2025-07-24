@@ -2,7 +2,7 @@
 import { z } from 'zod';
 
 export const postFormSchema = z.object({
-  activity: z.string().optional(),
+  activity: z.string().max(40, '40 characters max').optional(),
   content: z
     .string()
     .min(1, 'Please write some content')

@@ -11,16 +11,16 @@ const PurchaseCard = ({ purchase }: { purchase: Purchase }) => {
         <div className="flex justify-between items-start">
           <div className="flex items-center space-x-3">
             <div>
-              <CardTitle className="text-lg font-bold line-clamp-1 text-gray-800 fugaz-font">
+              <CardTitle className=" font-bold line-clamp-1 text-purple-800 permanent-marker-font text-2xl md:text-xl">
                 {purchase.dispensary}
               </CardTitle>
             </div>
           </div>
           <div className="text-right">
-            <p className="text-lg font-bold text-green-600">
+            <p className="text-md font-bold text-green-600">
               ${purchase.total.toFixed(2)}
             </p>
-            <p className="text-md text-gray-500">Total</p>
+            <p className="text-sm text-gray-500">Total</p>
           </div>
         </div>
       </CardHeader>

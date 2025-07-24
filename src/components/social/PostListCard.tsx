@@ -11,7 +11,9 @@ const PostListCard = ({ post }: { post: PostWithStashItems }) => {
         <div>
           <p className="font-semibold text-gray-800">{post.author}</p>
           <p className="text-xs text-gray-600">
-            {post.createdAt.toLocaleDateString()}
+            {typeof post.createdAt === 'string'
+              ? post.createdAt
+              : post.createdAt.toLocaleString()}
           </p>
         </div>
       </div>
@@ -23,9 +25,12 @@ const PostListCard = ({ post }: { post: PostWithStashItems }) => {
         >
           {post.activity}
         </Badge>
-        <Badge className="text-xs bg-blue-500">
-          {post.stashItems.length} Stash Items
-        </Badge>
+
+        {post.stashItems && post.stashItems.length > 0 && (
+          <Badge className="text-xs bg-blue-500">
+            {(post.stashItems?.length ?? 0)} Stash Items
+          </Badge>
+        )}
       </div>
     </div>
   );

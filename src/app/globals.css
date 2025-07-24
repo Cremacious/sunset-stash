@@ -2,6 +2,7 @@
 @import 'tw-animate-css';
 @import '@fontsource/fugaz-one';
 @import '@fontsource-variable/comfortaa';
+@import '@fontsource/permanent-marker';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -134,6 +135,9 @@ body {
   }
   .fugaz-font {
     font-family: 'Fugaz One', system-ui;
+  }
+  .permanent-marker-font {
+    font-family: 'Permanent Marker', system-ui;
   }
   .smallGlassCard {
     @apply bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl p-2;

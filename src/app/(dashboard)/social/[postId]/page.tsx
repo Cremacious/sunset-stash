@@ -3,11 +3,12 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { getPostById } from '@/lib/actions/post.actions';
 import Link from 'next/link';
-import { ArrowLeft, Edit3, MessageCircle } from 'lucide-react';
+import { ArrowLeft, Edit, MessageCircle } from 'lucide-react';
 import { areUsersFriends } from '@/lib/actions/friend.actions';
 import CommentForm from '@/components/social/CommentForm';
 import CommentCard from '@/components/social/CommentCard';
 import { Comment } from '@/lib/types/post.types';
+import StashItemListCard from '@/components/stash/StashItemListCard';
 
 const PostPage = async ({
   params,
@@ -81,16 +82,18 @@ const PostPage = async ({
                 </p>
               </div>
             </div>
-            <Badge
-              variant="outline"
-              className="bg-blue-100 text-blue-700 border-blue-300 font-medium"
-            >
-              {post.activity}
-            </Badge>
           </div>
         </div>
-
-        <div className="p-4">
+        <div className="flex justify-center my-4">
+          {' '}
+          <Badge
+            variant="outline"
+            className="bg-blue-100 text-blue-700 border-blue-300 font-medium"
+          >
+            {post.activity}
+          </Badge>
+        </div>
+        <div className="pb-4 px-4">
           <div className="bg-gray-50 rounded-lg p-4 mb-4 border border-gray-200">
             <p className="text-gray-800 leading-relaxed">{post.content}</p>
           </div>
@@ -122,51 +125,16 @@ const PostPage = async ({
               </h3>
               <div className="space-y-4">
                 {post.stashItems.map((item, index) => (
-                  <div
+                  <StashItemListCard
                     key={index}
-                    className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg p-4 border border-gray-200"
-                  >
-                    <div className="flex items-center space-x-3 mb-3">
-                      <div className="w-10 h-10 bg-gradient-to-r from-green-500 to-emerald-600 rounded-full flex items-center justify-center">
-                        <span className="text-white text-lg">🌸</span>
-                      </div>
-                      <div>
-                        <h4 className="text-lg font-bold text-gray-800">
-                          {item.stashItem.name}
-                        </h4>
-                        <p className="text-gray-600 text-sm">
-                          {item.stashItem.category} • {item.stashItem.amount}
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                      <div className="bg-white p-3 rounded border">
-                        <p className="text-gray-600 text-xs mb-1">THC</p>
-                        <p className="font-bold text-gray-800">
-                          {item.stashItem.thc}%
-                        </p>
-                      </div>
-                      <div className="bg-white p-3 rounded border">
-                        <p className="text-gray-600 text-xs mb-1">CBD</p>
-                        <p className="font-bold text-gray-800">
-                          {item.stashItem.cbd}%
-                        </p>
-                      </div>
-                      <div className="bg-white p-3 rounded border">
-                        <p className="text-gray-600 text-xs mb-1">Type</p>
-                        <p className="font-bold text-gray-800">
-                          {item.stashItem.type}
-                        </p>
-                      </div>
-                      <div className="bg-white p-3 rounded border">
-                        <p className="text-gray-600 text-xs mb-1">Lineage</p>
-                        <p className="font-bold text-gray-800 text-xs">
-                          {item.stashItem.lineage}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
+                    stashItem={{
+                      ...item.stashItem,
+                      dateAdded:
+                        item.stashItem.dateAdded instanceof Date
+                          ? item.stashItem.dateAdded.toISOString()
+                          : item.stashItem.dateAdded,
+                    }}
+                  />
                 ))}
               </div>
             </div>
@@ -192,7 +160,7 @@ const PostPage = async ({
                 asChild
               >
                 <Link href={`/social/${post.id}/edit`}>
-                  <Edit3 className="w-4 h-4 mr-1" />
+                  <Edit className="w-4 h-4 mr-1" />
                   Edit
                 </Link>
               </Button>

@@ -99,10 +99,10 @@ const ProfilePage = async ({
                 <User className="w-8 h-8 text-white" />
               </div>
               <div>
-                <h1 className="text-3xl font-bold text-gray-800">
+                <h1 className=" text-2xl md:text-3xl permanent-marker-font text-purple-800">
                   {profileUser.name}
                 </h1>
-                <p className="text-gray-600">
+                <p className="text-gray-600 md:text-md text-sm">
                   Member since{' '}
                   {new Date(profileUser.createdAt).toLocaleDateString()}
                 </p>

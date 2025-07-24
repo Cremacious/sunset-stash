@@ -185,17 +185,17 @@ const PurchasesPage = () => {
           <div className="flex items-center justify-between bg-white p-6 rounded-md shadow-md border-b-purple-500 border-b-4">
             <div className="flex items-center">
               <div className="md:ml-4">
-                <h2 className="text-lg md:text-2xl font-bold 0 fugaz-font text-purple-700">
+                <h2 className=" font-bold 0 permanent-marker-font text-xl md:text-2xl text-purple-700">
                   Purchase History
                 </h2>
-                <p className="text-gray-600 text-sm md:text-lg">
+                <p className="text-gray-600 text-sm md:text-md">
                   {filteredPurchases.length} total purchases
                 </p>
               </div>
             </div>
-            <div className="text-right">
+            <div className="text-right ">
               <div className="text-xs md:text-md text-gray-500">Viewing</div>
-              <div className="md:text-2xl font-bold text-coral-600">
+              <div className="md:text-1xl font-bold text-coral-600 ">
                 {selectedMonth && selectedYear
                   ? new Date(
                       parseInt(selectedYear),

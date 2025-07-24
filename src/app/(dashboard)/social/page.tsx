@@ -43,26 +43,26 @@ const SocialPage = () => {
   const loadPosts = async () => {
     const { posts = [], currentUserId } = await getAllTimelinePosts();
     setAllPosts(
-  posts.map((post) => ({
-    ...post,
-    createdAt: new Date(post.createdAt),
-    stashItems: Array.isArray(post.stashItems)
-      ? post.stashItems.map((item) => ({
-          ...item,
-          stashItem: {
-            ...item.stashItem,
-            dateAdded: new Date(item.stashItem.dateAdded),
-          },
-        }))
-      : [],
-    comments: Array.isArray(post.comments)
-      ? post.comments.map((comment) => ({
-          ...comment,
-          createdAt: new Date(comment.createdAt),
-        }))
-      : [],
-  }))
-);
+      posts.map((post) => ({
+        ...post,
+        createdAt: new Date(post.createdAt),
+        stashItems: Array.isArray(post.stashItems)
+          ? post.stashItems.map((item) => ({
+              ...item,
+              stashItem: {
+                ...item.stashItem,
+                dateAdded: new Date(item.stashItem.dateAdded),
+              },
+            }))
+          : [],
+        comments: Array.isArray(post.comments)
+          ? post.comments.map((comment) => ({
+              ...comment,
+              createdAt: new Date(comment.createdAt),
+            }))
+          : [],
+      }))
+    );
     setCurrentUserId(currentUserId);
   };
 
@@ -178,7 +178,7 @@ const SocialPage = () => {
                   <UserImage />
                   <div>
                     <Link
-                      className="text-2xl"
+                      className="text-3xl permanent-marker-font text-purple-800"
                       href={`/profile/${currentUser?.id}`}
                     >
                       {currentUser?.name}
@@ -188,20 +188,22 @@ const SocialPage = () => {
               </div>
 
               <div className="grid grid-cols-3 gap-4 mb-6">
-                <div className="text-center p-3 bg-purple-50 rounded-lg">
-                  <p className="text-2xl font-bold text-purple-600">
+                <div className="text-center p-3 bg-orange-50 rounded-lg border-b-2 border-b-orange-500">
+                  <p className="text-2xl font-bold text-orange-600">
                     {userPostsCount}
                   </p>
-                  <p className="text-xs text-gray-600">Your Posts</p>
+                  <p className="text-xs text-gray-600">Total</p>
+                  <p className="text-xs text-gray-600">Posts</p>
                 </div>
-                <div className="text-center p-3 bg-blue-50 rounded-lg">
-                  <p className="text-2xl font-bold text-blue-600">
+                <div className="text-center p-3 bg-red-50 rounded-lg border-b-2 border-b-red-500">
+                  <p className="text-2xl font-bold text-red-600">
                     {friends.length}
                   </p>
+                  <p className="text-xs text-gray-600">Total</p>
                   <p className="text-xs text-gray-600">Friends</p>
                 </div>
-                <div className="text-center p-3 bg-green-50 rounded-lg">
-                  <p className="text-2xl font-bold text-green-600">
+                <div className="text-center p-3 bg-blue-50 rounded-lg border-b-2 border-b-blue-500">
+                  <p className="text-2xl font-bold text-blue-600">
                     {friendRequests.length}
                   </p>
                   <p className="text-xs text-gray-600">Friend Requests</p>

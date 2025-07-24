@@ -8,11 +8,10 @@ const RecentFriends = ({ friends }: { friends: Friend[] }) => {
       <div className="bg-white rounded-lg border border-gray-200 px-2 py-4 md:p-6 ">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-semibold text-gray-900 flex items-center">
-            <span className="text-xl mr-2">🤝</span>
             Recent Friends
           </h2>
           <Button variant="outline" size="sm" className="text-xs">
-            View All ({friends.length})
+            View All
           </Button>
         </div>
 

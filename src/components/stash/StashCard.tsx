@@ -17,7 +17,7 @@ const StashCard = ({ stashItem }: { stashItem: StashItem }) => {
             src={getCategoryIcon(stashItem.category)}
             alt={stashItem.category}
           />
-          <CardTitle className="text-lg font-bold text-gray-800">
+          <CardTitle className="permanent-marker-font md:text-2xl font-bold text-purple-800">
             {stashItem.name}
           </CardTitle>
         </div>

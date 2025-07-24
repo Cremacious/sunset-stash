@@ -11,7 +11,7 @@ const RecentPurchases = ({ purchases }: { purchases: Purchase[] }) => {
     <div>
       <div className=" h-full space-y-4">
         <div className="text-xl font-bold text-gray-800 flex items-center justify-between bg-white p-4 rounded-lg shadow-md border-b-4 border-b-orange-500">
-          <div className="flex items-center fugaz-font text-2xl text-orange-600">Recent Purchases</div>
+          <div className="flex items-center permanent-marker-font text-2xl md:text-3xl text-orange-700">Recent Purchases</div>
           <Button variant="outline" size="sm">
             View All
           </Button>
@@ -30,7 +30,7 @@ const RecentPurchases = ({ purchases }: { purchases: Purchase[] }) => {
             </CardContent>
           </Card>
         ) : (
-          <div className="space-y-4">
+          <div className="space-y-2">
             {recentPurchases.map((purchase) => (
               <PurchaseListCard key={purchase.id} purchase={purchase} />
             ))}

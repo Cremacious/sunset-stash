@@ -12,8 +12,6 @@ const TimelinePost = ({ post }: { post: PostWithStashItems }) => {
       .join('');
   };
 
- 
-
   return (
     <div className="bg-white rounded-xl border-b-6 border-b-blue-500 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden">
       <div className="bg-blue-50 p-4 border-b border-blue-100">
@@ -22,7 +20,7 @@ const TimelinePost = ({ post }: { post: PostWithStashItems }) => {
             <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center shadow-md">
               <span className="text-white font-bold text-lg">
                 {getInitials(post.author)}
-              </span> 
+              </span>
             </div>
             <div>
               <Link
@@ -37,16 +35,17 @@ const TimelinePost = ({ post }: { post: PostWithStashItems }) => {
               </p>
             </div>
           </div>
-          <Badge
-            variant="outline"
-            className="bg-blue-100 text-blue-700 border-blue-300 font-medium"
-          >
-            {post.activity} 
-          </Badge>
         </div>
       </div>
-
-      <div className="p-4">
+      <div className="flex justify-center my-4">
+        <Badge
+          variant="outline"
+          className="bg-blue-100 text-blue-700 border-blue-300 font-medium"
+        >
+          {post.activity}
+        </Badge>
+      </div>
+      <div className="pb-4 px-4">
         <div className="bg-gray-50 rounded-lg p-4 mb-4 border border-gray-200">
           <p className="text-gray-800 leading-relaxed">{post.content}</p>
         </div>
@@ -60,7 +59,7 @@ const TimelinePost = ({ post }: { post: PostWithStashItems }) => {
             </div>
             <div className="flex flex-wrap gap-2">
               {post.stashItems
-                .filter((item) => item.stashItem && item.stashItem.name) 
+                .filter((item) => item.stashItem && item.stashItem.name)
                 .map((item) => (
                   <Badge
                     key={item.stashItemId}
@@ -78,7 +77,7 @@ const TimelinePost = ({ post }: { post: PostWithStashItems }) => {
             <div className="relative">
               <MessageCircle className="text-purple-600" size={30} />
               <span className="absolute -top-2 -right-2 bg-blue-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
-                {(post.comments?.length ?? 0)}
+                {post.comments?.length ?? 0}
               </span>
             </div>
             {/* <button className="flex items-center space-x-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg px-3 py-2">
