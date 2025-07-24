@@ -1,10 +1,10 @@
-import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { ArrowLeft, Edit } from 'lucide-react';
 import Image from 'next/image';
 import { getStashItemById } from '@/lib/actions/stash.actions';
 import { getCategoryIcon } from '@/lib/utils';
+import { notFound } from 'next/navigation';
 
 const StashItemPage = async ({
   params,
@@ -16,23 +16,7 @@ const StashItemPage = async ({
   const stashItem = result.data;
 
   if (!stashItem) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Card className="max-w-md w-full">
-          <div className="p-6 text-center">
-            <h1 className="text-xl font-semibold text-gray-800 mb-2">
-              Stash Item Not Found
-            </h1>
-            <p className="text-gray-600 mb-4">
-              The stash item you are looking for does not exist.
-            </p>
-            <Button asChild>
-              <Link href="/stash">Back to Stash</Link>
-            </Button>
-          </div>
-        </Card>
-      </div>
-    );
+    notFound();
   }
 
   return (
