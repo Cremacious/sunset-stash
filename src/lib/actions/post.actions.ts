@@ -463,3 +463,42 @@ export async function editPost(
     };
   }
 }
+export async function editComment({
+  commentId,
+  content,
+  postId,
+}: {
+  commentId: string;
+  content: string;
+  postId: string;
+}) {
+  try {
+    const session = await auth.api.getSession({ headers: await headers() });
+    if (!session?.user?.id) {
+      return { success: false, error: 'Not authenticated' };
+    }
+    const currentUserId = session.user.id;
+
+    const comment = await prisma.comment.findUnique({
+      where: { id: commentId },
+    });
+    if (!comment) {
+      return { success: false, error: 'Comment not found' };
+    }
+    if (comment.userId !== currentUserId) {
+      return {
+        success: false,
+        error: 'You do not have permission to edit this comment.',
+      };
+    }
+    await prisma.comment.update({
+      where: { id: commentId },
+      data: { content },
+    });
+    revalidatePath(`/social/${postId}`);
+    return { success: true };
+  } catch (error) {
+    console.error('Error editing comment:', error);
+    return { success: false, error: 'Failed to edit comment' };
+  }
+}

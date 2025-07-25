@@ -6,9 +6,10 @@ import Link from 'next/link';
 import { ArrowLeft, Edit, MessageCircle } from 'lucide-react';
 import { areUsersFriends } from '@/lib/actions/friend.actions';
 import CommentForm from '@/components/social/CommentForm';
-import CommentCard from '@/components/social/CommentCard';
 import { Comment } from '@/lib/types/post.types';
 import StashItemListCard from '@/components/stash/StashItemListCard';
+import { getAuthenticatedUser } from '@/lib/server-utils';
+import CommentSection from '@/components/social/CommentSection';
 
 const PostPage = async ({
   params,
@@ -40,6 +41,8 @@ const PostPage = async ({
 
   const post = result.data;
   const comments: Comment[] = post.comments;
+  const sessionUser = await getAuthenticatedUser();
+  const sessionUserId = sessionUser.user?.id;
 
   const getInitials = (name: string) => {
     return name
@@ -170,17 +173,11 @@ const PostPage = async ({
       <div className="bg-gradient-to-br from-pink-50 via-blue-100 to-purple-200 border-0 border-b-4 border-b-purple-300 shadow-xl overflow-hidden rounded-xl">
         <div className="p-4 space-y-4">
           {isFriend && <CommentForm postId={post.id} />}
-
-          {comments.length === 0 ? (
-            <div className="text-center py-8">
-              <MessageCircle className="w-12 h-12 text-gray-800 mx-auto mb-3" />
-              <p className="text-gray-800">No comments yet.</p>
-            </div>
-          ) : (
-            comments.map((comment: Comment) => (
-              <CommentCard key={comment.id} comment={comment} />
-            ))
-          )}
+          <CommentSection
+            comments={comments}
+            sessionUserId={sessionUserId}
+            postId={post.id}
+          />
         </div>
       </div>
     </div>
