@@ -78,7 +78,7 @@ const samplestash4 = {
 const ExamplePurchases = () => {
   return (
     <div className="max-w-6xl mx-auto space-y-12">
-      <div className="p-8">
+      <div className="">
         <h2 className="text-4xl font-bold text-white text-center drop-shadow-lg fugaz-font mb-6">
           Log Purchases and Save Favorites
         </h2>
@@ -172,7 +172,7 @@ const ExamplePurchases = () => {
             <StashItemListCard stashItem={samplestash4} />
           </div>
 
-          <div className="space-y-4 mt-4">
+          <div className="space-y-4 mt-4 ml-6 md:ml-1">
             <div className="space-y-4">
               <div className="bg-orange-100 rounded-xl p-4 border-orange-200 hover:shadow-md transition-all duration-300 border-b-orange-500 border-b-4">
                 <div className="flex items-center justify-between">
@@ -231,6 +231,7 @@ const ExamplePurchases = () => {
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>

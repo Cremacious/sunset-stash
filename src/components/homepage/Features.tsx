@@ -10,7 +10,7 @@ import { Heart, ShoppingCart, Users } from 'lucide-react';
 const Features = () => {
   return (
     <div className="max-w-6xl mx-auto px-4 py-12">
-      <div className=" rounded-3xl p-8">
+      <div className=" rounded-3xl">
         <h2 className="text-4xl font-bold text-white text-center mb-14 drop-shadow-lg fugaz-font">
           Everything You Need to Track Your Journey
         </h2>
