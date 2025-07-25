@@ -9,7 +9,6 @@ import SignInForm from '@/components/auth/SignInForm';
 import Link from 'next/link';
 import Image from 'next/image';
 import logo from '../../../../public/sunset-stash-logo.png';
-import SignInWithGoogle from '@/components/auth/SignInWithGoogle';
 
 export default function SignInPage() {
   return (
@@ -20,17 +19,19 @@ export default function SignInPage() {
             <Image
               src={logo}
               alt="Sunset Stash Logo"
-              className="w-50 h-50 mx-auto"
+              className="w-50 h-50 mx-auto round-full"
             />
-            <CardTitle className="text-4xl fugaz-font">Sunset Stash</CardTitle>
+            <CardTitle className="text-4xl fugaz-font text-purple-800">
+              Sunset Stash
+            </CardTitle>
             <CardDescription className="text-gray-600 text-base">
               Welcome to Florida&apos;s cannabis community
             </CardDescription>
           </CardHeader>
 
           <CardContent className="p-6 md:p-8">
-            <div className="space-y-3 mb-6">
-              <SignInWithGoogle />
+            <div className="space-y-3">
+              {/* <SignInWithGoogle /> */}
 
               {/* <Button
                 variant="outline"
@@ -45,7 +46,7 @@ export default function SignInPage() {
               </Button> */}
             </div>
 
-            <div className="relative mb-6">
+            {/* <div className="relative mb-6">
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full "></div>
               </div>
@@ -54,7 +55,7 @@ export default function SignInPage() {
                   Or sign in with email
                 </span>
               </div>
-            </div>
+            </div> */}
             <SignInForm />
 
             <div className="text-center mt-6 pt-6 border-t border-gray-200">
