@@ -67,7 +67,12 @@ const SignUpForm = () => {
             <FormItem>
               <FormLabel>Username</FormLabel>
               <FormControl>
-                <Input placeholder="" type="text" {...field} />
+                <Input
+                  className="bg-white"
+                  placeholder=""
+                  type="text"
+                  {...field}
+                />
               </FormControl>
               <FormDescription>
                 This is your public display name.
@@ -84,7 +89,12 @@ const SignUpForm = () => {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input placeholder="Enter your email" type="email" {...field} />
+                <Input
+                  className="bg-white"
+                  placeholder="Enter your email"
+                  type="email"
+                  {...field}
+                />
               </FormControl>
 
               <FormMessage />
@@ -100,6 +110,7 @@ const SignUpForm = () => {
               <FormLabel>Password</FormLabel>
               <FormControl>
                 <Input
+                  className="bg-white"
                   placeholder="Enter your password"
                   type="password"
                   {...field}
@@ -119,6 +130,7 @@ const SignUpForm = () => {
               <FormLabel>Confirm Password</FormLabel>
               <FormControl>
                 <Input
+                  className="bg-white"
                   placeholder="Confirm your password"
                   type="password"
                   {...field}
@@ -130,11 +142,7 @@ const SignUpForm = () => {
           )}
         />
 
-        <Button
-          disabled={isSubmitting}
-          className="w-full mt-4"
-          type="submit"
-        >
+        <Button disabled={isSubmitting} className="w-full mt-4" type="submit">
           {isSubmitting ? 'Creating Account...' : 'Create Account'}
         </Button>
       </form>

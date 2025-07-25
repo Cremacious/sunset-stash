@@ -15,7 +15,7 @@ export default function SignUpPage() {
   return (
     <div className="flex justify-center px-4 mt-4">
       <div className="w-full max-w-md relative z-1">
-        <Card className="bg-white shadow-2xl border-0 overflow-hidden">
+        <Card className="bg-gradient-to-br from-orange-50 via-white to-orange-100 shadow-2xl border-0 overflow-hidden">
           <CardHeader className="text-center">
             <Image
               src={logo}
@@ -47,10 +47,10 @@ export default function SignUpPage() {
 
             <div className="relative mb-6">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-200"></div>
+                <div className="w-full"></div>
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-4 bg-white text-gray-500 font-medium">
+                <span className="px-4 text-slate-800 font-medium ">
                   Or sign up with email
                 </span>
               </div>
@@ -58,9 +58,9 @@ export default function SignUpPage() {
             <SignUpForm />
 
             <div className="text-center mt-6 pt-6 border-t border-gray-200">
-              <p className="text-gray-600">
+              <p className="text-slate-800">
                 Already have an account?{' '}
-                <Link className="text-purple-600" href={'/sign-in'}>
+                <Link className="text-purple-800" href={'/sign-in'}>
                   Sign in here
                 </Link>
               </p>
@@ -69,11 +69,11 @@ export default function SignUpPage() {
             <div className="text-center mt-4">
               <p className="text-xs text-gray-500 leading-relaxed">
                 By creating an account, you agree to our{' '}
-                <span className="text-purple-600 hover:underline cursor-pointer">
+                <span className="text-purple-800 hover:underline cursor-pointer">
                   Terms of Service
                 </span>{' '}
                 and{' '}
-                <span className="text-purple-600 hover:underline cursor-pointer">
+                <span className="text-purple-800 hover:underline cursor-pointer">
                   Privacy Policy
                 </span>
               </p>

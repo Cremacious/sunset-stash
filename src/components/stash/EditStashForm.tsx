@@ -63,7 +63,7 @@ const EditStashForm = ({ stashItem }: { stashItem: StashItem }) => {
   return (
     <div className=" flex items-center justify-center py-10">
       <div className="max-w-3xl w-full mx-auto">
-        <div className="bg-gradient-to-br from-orange-50 via-pink-100 to-blue-200 border-0 border-b-4 border-b-purple-300 shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden rounded-3xl min-h-[110px] w-full relative">
+        <div className="bg-gradient-to-br from-orange-50 via-white to-orange-100 border-0 border-b-4 border-b-orange-300 shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden rounded-3xl min-h-[110px] w-full relative">
           <div className="p-2 md:p-4">
             <Form {...form}>
               <form

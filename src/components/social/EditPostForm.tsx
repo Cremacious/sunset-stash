@@ -107,14 +107,14 @@ const EditPostForm = ({ post, stashItems }: EditPostFormProps) => {
   return (
     <div className=" flex items-center justify-center py-10">
       <div className="max-w-3xl w-full mx-auto">
-        <div className="bg-gradient-to-br from-orange-50 via-pink-100 to-blue-200 border-0 border-b-4 border-b-purple-300 shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden rounded-3xl min-h-[110px] w-full relative ">
+        <div className="bg-gradient-to-br from-orange-50 via-white to-orange-100 border-0 border-b-4 border-b-purple-300 shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden rounded-3xl min-h-[110px] w-full relative ">
           <div className="p-2 md:p-4 ">
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
                 className="space-y-8"
               >
-                <div className="bg-white/70 backdrop-blur-md border border-white/30 rounded-2xl pl-2 pt-4 p-2 md:p-4">
+                <div className="bg-gradient-to-br from-orange-50 via-white to-orange-50 rounded-2xl pl-2 pt-4 p-2 md:p-4">
                   <div className="flex items-center space-x-3 mb-6">
                     <h2 className="text-2xl font-bold text-purple-800 permanent-marker-font">
                       Edit Post
