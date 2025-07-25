@@ -13,27 +13,27 @@ const PurchaseListCard = ({ purchase }: { purchase: Purchase }) => {
   };
 
   return (
-    <div className="bg-white rounded-lg border-b-4 border-b-orange-500  p-3 hover:shadow-md transition-shadow duration-200">
-      <Link className="my-4" href={`/purchases/${purchase.id}`}>
+    <div className="bg-gradient-to-br from-orange-50 via-red-100 to-orange-200 border-0 border-b-4 border-b-purple-300 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden rounded-xl min-h-[80px] w-full relative p-3">
+      <Link className="block" href={`/purchases/${purchase.id}`}>
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-4 flex-1">
             <div className="flex-1">
-              <h3 className="font-semibold text-gray-900 text-sm">
+              <h3 className="font-bold text-slate-800 text-lg permanent-marker-font  truncate">
                 {purchase.dispensary}
               </h3>
             </div>
             <div className="text-center">
-              <p className="font-bold text-green-600 text-sm">
+              <p className="font-bold text-orange-600 text-base bg-orange-100/80 rounded-lg px-3 py-1 border border-orange-200">
                 ${purchase.total.toFixed(2)}
               </p>
             </div>
             <div className="text-center">
-              <p className="text-sm text-gray-700">
+              <p className="text-xs bg-purple-500 text-white font-bold rounded-lg px-2 py-1 shadow-sm">
                 {purchase.items.length} items
               </p>
             </div>
             <div className="text-right">
-              <p className="text-sm text-gray-500">
+              <p className="text-xs text-gray-600">
                 {formatDate(purchase.date)}
               </p>
             </div>

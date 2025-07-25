@@ -126,16 +126,16 @@ export default function PurchaseForm() {
   return (
     <div className="min-h-screen">
       <div className="max-w-4xl mx-auto">
-        <div className="bg-white backdrop-blur-md rounded-3xl shadow-2xl overflow-hidden ">
+        <div className="bg-gradient-to-br from-orange-50 via-pink-100 to-blue-200 border-0 border-b-4 border-b-purple-300 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden rounded-3xl min-h-[110px] w-full relative">
           <div className="p-2 md:p-4">
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
                 className="space-y-8"
               >
-                <div className="bg-gradient-to-r from-purple-50/50 to-indigo-50/50 backdrop-blur-sm border border-purple-200/50 rounded-2xl pl-2 pt-4 p-2 md:p-4">
+                <div className="bg-white/70 backdrop-blur-md border border-white/30 rounded-2xl pl-2 pt-4 p-2 md:p-4">
                   <div className="flex items-center space-x-3 mb-6">
-                    <h2 className="text-2xl font-bold text-gray-800">
+                    <h2 className="text-2xl font-bold text-purple-800 permanent-marker-font">
                       Purchase Information
                     </h2>
                   </div>
@@ -233,10 +233,10 @@ export default function PurchaseForm() {
                   />
                 </div>
 
-                <div className="bg-blue-50 border-1 border-blue-200 rounded-2xl pl-2 pt-4 p-2 md:p-4">
+                <div className="bg-white/60 backdrop-blur-md border border-white/30 rounded-2xl pl-2 pt-4 p-2 md:p-4 mt-6">
                   <div className="flex items-center justify-between mb-6">
                     <div className="flex items-center space-x-3">
-                      <h2 className="text-2xl font-bold text-gray-800 ">
+                      <h2 className="text-2xl font-bold text-purple-800 permanent-marker-font">
                         Items Purchased
                       </h2>
                     </div>
@@ -245,6 +245,7 @@ export default function PurchaseForm() {
                       variant="outline"
                       size="sm"
                       onClick={addItem}
+                      className="text-purple-600 border-purple-300 hover:bg-purple-50 rounded-xl"
                     >
                       <Plus className="h-4 w-4 mr-2" />
                       Add Item
@@ -526,7 +527,7 @@ export default function PurchaseForm() {
                     ))}
                   </div>
 
-                  <div className="mt-8 p-6 bg-green-100 rounded-2xl border border-green-300">
+                  <div className="mt-8 p-6 bg-green-100/80 rounded-2xl border border-green-300">
                     <div className="flex justify-between items-center">
                       <span className="text-xl font-bold text-gray-800">
                         Total Purchase:

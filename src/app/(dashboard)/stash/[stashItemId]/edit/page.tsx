@@ -1,6 +1,5 @@
 import {
   Card,
-  CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
@@ -36,27 +35,13 @@ const EditStashItemPage = async ({
   }
 
   return (
-    <div className="relative w-full flex justify-center py-6 px-1">
-      <div className="max-w-4xl mx-auto space-y-8">
-        <Card className="bg-white shadow-xl border-0">
-          <CardHeader>
-            <CardTitle className="text-xl font-bold text-gray-800 flex items-center">
-              Strain Details
-            </CardTitle>
-            <CardDescription>
-              Fill in the details about your new strain
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <EditStashForm
-              stashItem={{
-                ...stashItemResult.data,
-                dateAdded: stashItemResult.data.dateAdded.toISOString(),
-              }}
-            />
-          </CardContent>
-        </Card>
-      </div>
+    <div>
+      <EditStashForm
+        stashItem={{
+          ...stashItemResult.data,
+          dateAdded: stashItemResult.data.dateAdded.toISOString(),
+        }}
+      />
     </div>
   );
 };

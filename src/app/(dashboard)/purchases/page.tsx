@@ -9,7 +9,7 @@ import {
 } from '@/lib/actions/purchase.actions';
 import PurchaseSearchBar from '@/components/purchases/PurchaseSearchBar';
 import { Purchase } from '@/lib/types/purchase.types';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { CardContent, CardHeader } from '@/components/ui/card';
 import { DollarSign, Sun } from 'lucide-react';
 
 //test
@@ -178,7 +178,7 @@ const PurchasesPage = () => {
               </div>
             </div>
             <div className="text-right ">
-              <div className="text-xs md:text-md text-gray-500">Viewing</div>
+              <div className="text-xs md:text-md text-gray-800">Viewing</div>
               <div className="md:text-1xl font-bold text-coral-600 ">
                 {selectedMonth && selectedYear
                   ? new Date(
@@ -228,17 +228,17 @@ const PurchasesPage = () => {
                   )}
                 </div>
               ) : (
-                <Card className="bg-white/70 backdrop-blur-sm rounded-lg border border-white/30 p-6">
+                <div className="glassCard h-[400px] flex flex-col items-center justify-center">
                   <CardHeader />
                   <CardContent>
                     <div className="flex flex-col items-center justify-center">
                       <DollarSign className="w-10 h-10 text-purple-500 mb-2" />
-                      <span className="text-gray-500">
+                      <span className="text-gray-800">
                         No recent purchases found.
                       </span>
                     </div>
                   </CardContent>
-                </Card>
+                </div>
               )}
             </div>
           )}

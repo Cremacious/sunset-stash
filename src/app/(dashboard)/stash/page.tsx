@@ -60,7 +60,7 @@ const StashPage = () => {
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         {loading ? (
           <div className="glassCard md:col-span-3">
-            <div className="animate-pulse h-full py-6 bg-gray-200 rounded flex items-center justify-center">
+            <div className="animate-pulse h-full py-6 rounded flex items-center justify-center">
               <Sun className="text-yellow-400 animate-spin" size={100} />
             </div>
           </div>
@@ -75,9 +75,9 @@ const StashPage = () => {
                 sortBy={sort}
               />
             ) : (
-              <div className="bg-white/70 backdrop-blur-sm rounded-lg border border-white/30 p-6 h-full flex flex-col items-center justify-center">
+              <div className="glassCard h-full flex flex-col items-center justify-center">
                 <Container className="w-10 h-10 text-purple-500 mb-2" />
-                <span className="text-gray-500">You have an empty stash.</span>
+                <span className="text-gray-800">You have an empty stash.</span>
               </div>
             )}
           </div>

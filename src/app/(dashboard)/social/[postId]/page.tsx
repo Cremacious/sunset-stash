@@ -52,9 +52,9 @@ const PostPage = async ({
 
   return (
     <div className="max-w-3xl mx-auto space-y-6">
-      <div className="">
+      <div>
         <Button
-          className="glassCard text-white font-bold"
+          className="bg-gradient-to-br from-pink-50 via-blue-100 to-purple-200 border-0 border-b-4 border-b-purple-300 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden rounded-xl text-purple-700 font-bold"
           variant="ghost"
           size="sm"
           asChild
@@ -66,42 +66,41 @@ const PostPage = async ({
         </Button>
       </div>
 
-      <div className="bg-white rounded-xl border-b-6 border-b-blue-500 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
-        <div className="bg-blue-50 p-4 border-b border-blue-100">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center shadow-md">
-                <span className="text-white font-bold text-lg">
-                  {getInitials(post.author)}
-                </span>
-              </div>
-              <div>
-                <p className="font-bold text-gray-800">{post.author}</p>
-                <p className="text-xs text-gray-600">
-                  {new Date(post.createdAt).toLocaleDateString()}
-                </p>
-              </div>
+      <div className="bg-gradient-to-br from-pink-50 via-blue-100 to-purple-200 border-0 border-b-4 border-b-purple-300 shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden rounded-xl min-h-[110px] w-full relative">
+        <div className="flex items-center justify-between p-3 pb-2 relative">
+          <div className="flex items-center space-x-3">
+            <div className="w-12 h-12 rounded-full bg-white/70 flex items-center justify-center shadow-md">
+              <span className="text-purple-700 font-bold text-lg">
+                {getInitials(post.author)}
+              </span>
+            </div>
+            <div>
+              <p className="font-bold text-xl permanent-marker-font text-purple-900">
+                {post.author}
+              </p>
+              <p className="text-xs text-gray-600">
+                {new Date(post.createdAt).toLocaleDateString()}
+              </p>
             </div>
           </div>
         </div>
         <div className="flex justify-center my-4">
-          {' '}
           <Badge
             variant="outline"
-            className="bg-blue-100 text-blue-700 border-blue-300 font-medium"
+            className="bg-orange-100/80 text-orange-700 border-orange-200 font-medium"
           >
             {post.activity}
           </Badge>
         </div>
         <div className="pb-4 px-4">
-          <div className="bg-gray-50 rounded-lg p-4 mb-4 border border-gray-200">
+          <div className="bg-white/70 backdrop-blur-sm rounded-lg p-4 mb-4 border border-white/30">
             <p className="text-gray-800 leading-relaxed">{post.content}</p>
           </div>
 
           {post.stashItems && post.stashItems.length > 0 && (
             <div className="mb-4">
               <div className="flex items-center mb-2">
-                <span className="text-sm font-medium text-gray-700">
+                <span className="text-sm font-medium text-purple-700">
                   Strains:
                 </span>
               </div>
@@ -109,7 +108,7 @@ const PostPage = async ({
                 {post.stashItems.map((item, index) => (
                   <Badge
                     key={index}
-                    className="bg-blue-500 hover:bg-blue-600 text-white font-bold shadow-sm"
+                    className="bg-purple-500 hover:bg-purple-600 text-white font-bold shadow-sm"
                   >
                     {item.stashItem.name}
                   </Badge>
@@ -120,7 +119,7 @@ const PostPage = async ({
 
           {post.stashItems && post.stashItems.length > 0 && (
             <div className="mb-6">
-              <h3 className="text-lg font-semibold text-gray-800 mb-4">
+              <h3 className="text-lg font-semibold text-purple-800 mb-4 permanent-marker-font">
                 Strain Details
               </h3>
               <div className="space-y-4">
@@ -142,17 +141,14 @@ const PostPage = async ({
             </div>
           )}
 
-          <div className="flex items-center justify-between  rounded-lg p-3">
+          <div className="flex items-center justify-between rounded-lg p-3 mt-2">
             <div className="flex items-center space-x-4">
               <div className="relative">
                 <MessageCircle className="text-purple-600" size={30} />
-                <span className="absolute -top-2 -right-2 bg-blue-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
+                <span className="absolute -top-2 -right-2 bg-purple-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
                   {comments.length}
                 </span>
               </div>
-              {/* <button className="flex items-center space-x-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg px-3 py-2">
-                <Heart fill="red" size={30} className="text-red-500" />
-              </button> */}
             </div>
             <div className="flex space-x-2">
               <Button
@@ -171,14 +167,14 @@ const PostPage = async ({
         </div>
       </div>
 
-      <div className="bg-white rounded-xl border-b-6 border-b-purple-500 shadow-lg overflow-hidden">
+      <div className="bg-gradient-to-br from-pink-50 via-blue-100 to-purple-200 border-0 border-b-4 border-b-purple-300 shadow-xl overflow-hidden rounded-xl">
         <div className="p-4 space-y-4">
           {isFriend && <CommentForm postId={post.id} />}
 
           {comments.length === 0 ? (
             <div className="text-center py-8">
-              <MessageCircle className="w-12 h-12 text-gray-400 mx-auto mb-3" />
-              <p className="text-gray-500">No comments yet.</p>
+              <MessageCircle className="w-12 h-12 text-gray-800 mx-auto mb-3" />
+              <p className="text-gray-800">No comments yet.</p>
             </div>
           ) : (
             comments.map((comment: Comment) => (

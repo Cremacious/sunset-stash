@@ -13,19 +13,21 @@ const FindFriends = () => {
     const response = await sendFriendRequestByEmail(email);
     if (response.success) {
       setStatus('Friend request sent!');
-      setEmail(''); 
+      setEmail('');
     } else {
       setStatus(response.error || 'Error sending request');
     }
   };
 
   return (
-    <div className="bg-white rounded-lg p-4 md:p-6">
+    <div className="bg-gradient-to-br from-pink-50 via-blue-50 to-pink-100 rounded-lg p-4 md:p-6">
       <div className="space-y-4">
-        <Label htmlFor="email">Search Friends by Email</Label>
+        <Label htmlFor="email" className='permanent-marker-font 0 text-lg'>Search Friends by Email</Label>
+        <div className="border-b-2 border-b-blue-200"></div>
         <Input
           id="email"
           type="email"
+          className='bg-white'
           placeholder="friend@email.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}

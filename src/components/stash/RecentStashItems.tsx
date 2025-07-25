@@ -1,24 +1,21 @@
 import { Button } from '../ui/button';
 import { StashItem } from '@/lib/types';
 import StashItemListCard from './StashItemListCard';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { CardContent, CardHeader } from '@/components/ui/card';
 import { Container } from 'lucide-react';
+import Link from 'next/link';
 
 const RecentStashItems = ({ stashItems }: { stashItems: StashItem[] }) => {
   const latestStashItems = stashItems.slice(0, 3);
 
   return (
     <div className="h-full space-y-4">
-      <div className="text-xl font-bold text-gray-800 flex items-center justify-between bg-white p-4 rounded-lg shadow-md border-b-4 border-b-purple-500">
+      <div className="text-xl font-bold text-gray-800 flex items-center justify-between bg-gradient-to-br from-blue-100 via-purple-100 to-blue-100 p-4 rounded-lg shadow-md border-b-4 border-b-purple-300">
         <div className="flex items-center permanent-marker-font text-2xl md:text-3xl text-purple-700">
           Latest Stash
         </div>
-        <Button
-          variant="outline"
-          size="sm"
-          // onClick={() => router.push('/stash')}
-        >
-          View Stash
+        <Button asChild size="sm">
+          <Link href="/stash">View All</Link>
         </Button>
       </div>
 
@@ -28,17 +25,17 @@ const RecentStashItems = ({ stashItems }: { stashItems: StashItem[] }) => {
             <StashItemListCard key={stashItem.id} stashItem={stashItem} />
           ))
         ) : (
-          <Card className="bg-white/70 backdrop-blur-sm rounded-lg border border-white/30 p-6">
+          <div className="glassCard h-[300px] flex flex-col items-center justify-center">
             <CardHeader />
             <CardContent>
               <div className="flex flex-col items-center justify-center">
                 <Container className="w-10 h-10 text-purple-500 mb-2" />
-                <span className="text-gray-500">
+                <span className="text-gray-800">
                   No recent purchases found.
                 </span>
               </div>
             </CardContent>
-          </Card>
+          </div>
         )}
       </div>
     </div>

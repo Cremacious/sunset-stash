@@ -108,7 +108,7 @@ const TimelineFeed = ({ posts, currentUserId }: Props) => {
             )}
           </>
         ) : (
-          <div className="bg-white p-12 flex flex-col justify-center items-center rounded-lg shadow-md">
+          <div className="p-12 flex flex-col justify-center items-center glassCard h-[500px] md:h-[600px]">
             <MessageSquare className="text-purple-500 w-16 h-16 mb-4" />
             <h3 className="text-lg font-semibold text-gray-800 mb-2">
               {postFilter === 'all'
@@ -117,18 +117,13 @@ const TimelineFeed = ({ posts, currentUserId }: Props) => {
                 ? 'No posts from you yet'
                 : 'No posts from friends yet'}
             </h3>
-            <p className="text-center text-gray-600 mb-4">
+            <p className="text-center text-gray-800 mb-4">
               {postFilter === 'all'
                 ? 'Create your first post to get started!'
                 : postFilter === 'user'
                 ? 'Share something with your friends!'
                 : 'Connect with friends to see their posts!'}
             </p>
-            {(postFilter === 'all' || postFilter === 'user') && (
-              <Button asChild className="bg-purple-600 hover:bg-purple-700">
-                <Link href="/social/new-post">Create Your First Post</Link>
-              </Button>
-            )}
           </div>
         )}
       </div>

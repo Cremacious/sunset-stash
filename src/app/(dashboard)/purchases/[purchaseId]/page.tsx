@@ -11,13 +11,12 @@ const PurchaseDetailsPage = async ({
   params: Promise<{ purchaseId: string }>;
 }) => {
   const { purchaseId } = await params;
-
   const { purchase } = await getPurchaseById(purchaseId);
 
   if (!purchase) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Card className="max-w-md w-full">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-50 via-pink-100 to-blue-200">
+        <Card className="max-w-md w-full bg-white/70 backdrop-blur-md rounded-3xl shadow-2xl overflow-hidden">
           <div className="p-6 text-center">
             <h1 className="text-xl font-semibold text-gray-800 mb-2">
               Purchase Not Found
@@ -35,116 +34,109 @@ const PurchaseDetailsPage = async ({
   }
 
   return (
-    <div className="max-w-3xl mx-auto space-y-6">
-      <div className="">
-        <Button
-          className="glassCard text-white font-bold"
-          variant="ghost"
-          size="sm"
-          asChild
-        >
-          <Link href="/purchases">
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Purchases
-          </Link>
-        </Button>
-      </div>
-
-      <div className="bg-white rounded-xl border-b-6 border-b-purple-500 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
-        <div className="bg-purple-100 p-4 border-b border-purple-300">
-          <div className="flex items-center justify-between">
-            <p className="font-bold text-3xl md:ml-4 permanent-marker-font text-purple-900">
-              {/* {purchase.dispensary} */}Trulieve
-            </p>
-
-            <p className="text-sm ">
-              Added: {new Date(purchase.date).toLocaleDateString()}
-            </p>
-          </div>
+    <div className="min-h-screen  flex items-center justify-center py-10">
+      <div className="max-w-3xl w-full mx-auto">
+        <div className="mb-6 flex items-center">
+          <Button
+            className="glassCard text-white font-bold"
+            variant="ghost"
+            size="sm"
+            asChild
+          >
+            <Link href="/purchases">
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Back to Purchases
+            </Link>
+          </Button>
         </div>
-
-        <div className="p-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-            <div className="bg-green-100 rounded-lg p-4 border border-green-300">
-              <div className="space-y-4">
-                <h4 className="font-bold text-gray-800 text-center flex items-center justify-center">
-                  <DollarSign className="w-5 h-5 mr-2 text-green-600" />
-                  Total Amount
-                </h4>
-
-                <div className="bg-white p-3 rounded-lg border">
-                  <p className="text-xl font-bold text-green-600 text-center">
-                    ${purchase.total.toFixed(2)}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-blue-100 rounded-lg p-4 border border-blue-300">
-              <div className="space-y-4">
-                <h4 className="font-bold text-gray-800 text-center flex items-center justify-center">
-                  <Container className="w-5 h-5 mr-2 text-blue-600" />
-                  Items Purchased
-                </h4>
-
-                <div className="bg-white p-3 rounded-lg border">
-                  <p className="text-xl font-bold text-blue-600 text-center">
-                    {purchase.items.length}
-                  </p>
-                </div>
-              </div>
+        <Card className="bg-white/70 backdrop-blur-md  shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden rounded-3xl min-h-[110px] w-full relative">
+          <div className="p-6 ">
+            <div className="flex items-center justify-between">
+              <p className="font-bold text-3xl permanent-marker-font text-purple-900">
+                {purchase.dispensary}
+              </p>
+              <p className="text-sm text-gray-700">
+                Added: {new Date(purchase.date).toLocaleDateString()}
+              </p>
             </div>
           </div>
-
-          {purchase.notes && (
-            <div className="bg-yellow-50 rounded-lg p-4 border border-yellow-300 mb-6">
-              <div className="flex items-center space-x-3 mb-3">
-                <div className="ml-2">
-                  <h4 className="text-lg font-bold text-gray-800">
-                    Purchase Notes
+          <div className="p-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-gradient-to-br from-orange-100/80 via-pink-100/80 to-yellow-100/80 rounded-xl p-4 border border-orange-200 shadow-sm">
+                <div className="space-y-4">
+                  <h4 className="font-bold text-orange-700 text-center flex items-center justify-center">
+                    <DollarSign className="w-5 h-5 mr-2 text-orange-500" />
+                    Total Amount
                   </h4>
+                  <div className="bg-white/70 p-3 rounded-lg border border-white/30">
+                    <p className="text-xl font-bold text-orange-700 text-center">
+                      ${purchase.total.toFixed(2)}
+                    </p>
+                  </div>
                 </div>
               </div>
-              <div className="bg-white p-3 rounded-lg border">
-                <p className="text-gray-800 font-medium">{purchase.notes}</p>
-              </div>
-            </div>
-          )}
-
-          {purchase.items.length > 0 && (
-            <div className="bg-purple-100 rounded-lg p-4 border border-purple-300 mb-6">
-              <div className="flex items-start space-x-3">
-                <div className="flex-1 ml-2">
-                  <h4 className="text-lg font-bold text-gray-800 mb-4">
-                    Items in this Purchase
+              <div className="bg-gradient-to-br from-blue-100/80 via-purple-100/80 to-pink-100/80 rounded-xl p-4 border border-blue-200 shadow-sm">
+                <div className="space-y-4">
+                  <h4 className="font-bold text-blue-700 text-center flex items-center justify-center">
+                    <Container className="w-5 h-5 mr-2 text-blue-500" />
+                    Items Purchased
                   </h4>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {purchase.items.map((item) => (
-                      <StashItemListCard
-                        key={item.id}
-                        price={item.price}
-                        stashItem={{
-                          ...item,
-                          dateAdded: purchase.date,
-                          userId: '',
-                        }}
-                      />
-                    ))}
+                  <div className="bg-white/70 p-3 rounded-lg border border-white/30">
+                    <p className="text-xl font-bold text-blue-700 text-center">
+                      {purchase.items.length}
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
-          )}
-
-          <div className="flex items-center justify-end ">
-            <Button variant="outline" size="sm" asChild>
-              <Link href={`/purchases/${purchaseId}/edit`}>
-                <Edit className="w-4 h-4 mr-1" />
-                Edit
-              </Link>
-            </Button>
+            {purchase.notes && (
+              <div className="bg-gradient-to-br from-yellow-50/80 via-orange-50/80 to-pink-50/80 rounded-xl p-4 border border-yellow-200 mb-8 shadow-sm">
+                <div className="flex items-center space-x-3 mb-3">
+                  <div className="ml-2">
+                    <h4 className="text-lg font-bold text-yellow-700">
+                      Purchase Notes
+                    </h4>
+                  </div>
+                </div>
+                <div className="bg-white/70 p-3 rounded-lg border border-white/30">
+                  <p className="text-gray-800 font-medium">{purchase.notes}</p>
+                </div>
+              </div>
+            )}
+            {purchase.items.length > 0 && (
+              <div className="bg-gradient-to-br from-purple-100/80 via-pink-100/80 to-blue-100/80 rounded-xl p-4 border border-purple-200 mb-8 shadow-sm">
+                <div className="flex items-start space-x-3">
+                  <div className="flex-1 ml-2">
+                    <h4 className="text-lg font-bold text-purple-700 mb-4">
+                      Items in this Purchase
+                    </h4>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {purchase.items.map((item) => (
+                        <StashItemListCard
+                          key={item.id}
+                          price={item.price}
+                          stashItem={{
+                            ...item,
+                            dateAdded: purchase.date,
+                            userId: '',
+                          }}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+            <div className="flex items-center justify-end mt-2">
+              <Button size="sm" asChild>
+                <Link href={`/purchases/${purchaseId}/edit`}>
+                  <Edit className="w-4 h-4 mr-1" />
+                  Edit
+                </Link>
+              </Button>
+            </div>
           </div>
-        </div>
+        </Card>
       </div>
     </div>
   );

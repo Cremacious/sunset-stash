@@ -33,7 +33,7 @@ export default function RootLayout({
         <div className="min-h-screen bg-gradient-to-br from-orange-400 via-pink-500 to-blue-600 relative overflow-hidden flex flex-col">
           <Navbar />
           <main className="mt-4 h-full flex-1">{children}</main>
-          <Toaster />
+          <Toaster richColors  />
           <Footer />
         </div>
       </body>
