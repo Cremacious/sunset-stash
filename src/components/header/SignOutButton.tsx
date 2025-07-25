@@ -1,15 +1,14 @@
 'use client';
 import { signOut } from '@/lib/auth-client';
-import { useRouter } from 'next/navigation';
-const SignOutButton = () => {
-  const router = useRouter();
+import { Button } from '../ui/button';
 
+const SignOutButton = () => {
   const handleSignOut = async () => {
     await signOut();
-    router.push('/');
+    window.location.href = '/';
   };
 
-  return <button onClick={handleSignOut}>Sign Out</button>;
+  return <Button onClick={handleSignOut}>Sign Out</Button>;
 };
 
 export default SignOutButton;

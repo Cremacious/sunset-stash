@@ -11,7 +11,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Button } from '../ui/button';
 import { CircleX } from 'lucide-react';
-import { useSession } from '@/lib/auth-client';
+import { signOut, useSession } from '@/lib/auth-client';
 
 interface Routes {
   name: string;
@@ -28,15 +28,20 @@ const Sidebar = ({ routes }: { routes: Routes[] }) => {
     router.push(path);
   };
 
+  const handleSignOut = async () => {
+    await signOut();
+    window.location.href = '/';
+  };
+
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
         <Button
           variant="ghost"
-          size="icon"
+          size="lg"
           className="md:hidden p-2 text-white bg-white/20 backdrop-blur-sm rounded-2xl border border-white/30 hover:bg-white/30 transition-all duration-200"
         >
-          <Menu size={24} />
+          <Menu className="w-16 h-16" />
         </Button>
       </SheetTrigger>
       <SheetContent className="w-80 p-0 border-none overflow-hidden">
@@ -55,7 +60,7 @@ const Sidebar = ({ routes }: { routes: Routes[] }) => {
           </SheetHeader>
 
           <div className="space-y-4">
-            {session ? (
+            {session?.data?.user ? (
               <div className="space-y-3">
                 {routes.map((route) => (
                   <Button
@@ -72,8 +77,8 @@ const Sidebar = ({ routes }: { routes: Routes[] }) => {
                   </Button>
                 ))}
                 <div className="pt-6 border-t border-white/20 space-y-3">
-                  <Button className="w-full text-xl p-6">
-                    <span className="relative z-10 text-white">Sign Out</span>
+                  <Button size="lg" className="w-full" onClick={handleSignOut}>
+                    Sign Out
                   </Button>
                 </div>
               </div>
