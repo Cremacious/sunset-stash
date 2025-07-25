@@ -9,6 +9,7 @@ export const getAuthenticatedUser = cache(async () => {
   });
 
   if (!session?.user) {
+    
     redirect('/sign-in');
   }
 

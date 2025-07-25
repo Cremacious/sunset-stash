@@ -1,14 +1,8 @@
 'use client';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { ShoppingCart, Heart, Users } from 'lucide-react';
+import Features from '@/components/homepage/Features';
 import Logo from '../../public/sunset-stash-logo.png';
 import Image from 'next/image';
 import AOS from 'aos';
@@ -18,6 +12,7 @@ import { useSession } from '@/lib/auth-client';
 
 import ExamplePurchases from '@/components/homepage/ExamplePurchases';
 import SocialPostExample from '@/components/homepage/SocialPostExample';
+import { Card, CardContent } from '@/components/ui/card';
 
 const Home = () => {
   const { data, isPending } = useSession();
@@ -28,14 +23,13 @@ const Home = () => {
       once: true,
       easing: 'ease-out-cubic',
     });
-    // Redirect signed-in users to dashboard
     if (data?.user && !isPending) {
       window.location.href = '/dashboard';
     }
   }, [data, isPending]);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen space-y-4">
       <section className="relative pb-20 px-4 ">
         <div className="max-w-6xl mx-auto text-center ">
           <div className="">
@@ -77,94 +71,7 @@ const Home = () => {
       </section>
 
       <section data-aos="fade-up" data-aos-delay="100" className="py-16 px-4">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-white text-center mb-12 drop-shadow-lg">
-            Everything You Need to Track Your Journey
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <Card className="bg-white shadow-xl border-0">
-              <CardHeader className="text-center">
-                <div className="mx-auto mb-4 p-3 bg-green-500 rounded-full w-16 h-16 flex items-center justify-center">
-                  <ShoppingCart className="w-8 h-8 text-white" />
-                </div>
-                <CardTitle className="text-gray-800 text-xl">
-                  Track Purchases
-                </CardTitle>
-                <CardDescription className="text-gray-600">
-                  Log every dispensary visit with detailed purchase information
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="text-gray-700">
-                <ul className="space-y-2 text-center text-sm">
-                  <li className="bg-green-100 p-2 rounded-lg">
-                    Track spending per dispensary visit
-                  </li>
-                  <li className="bg-green-100 p-2 rounded-lg">
-                    Monitor your monthly spending
-                  </li>
-                  <li className="bg-green-100 p-2 rounded-lg">
-                    See which dispensaries you visit most
-                  </li>
-                </ul>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-white shadow-xl border-0">
-              <CardHeader className="text-center">
-                <div className="mx-auto mb-4 p-3 bg-purple-500 rounded-full w-16 h-16 flex items-center justify-center">
-                  <Heart className="w-8 h-8 text-white" />
-                </div>
-                <CardTitle className="text-gray-800 text-xl">
-                  Favorite Stash
-                </CardTitle>
-                <CardDescription className="text-gray-600">
-                  Save and organize your favorite strains and products
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="text-gray-700">
-                <ul className="space-y-2 text-center text-sm">
-                  <li className="bg-purple-100 p-2 rounded-lg">
-                    Create entries for favorite strains
-                  </li>
-                  <li className="bg-purple-100 p-2 rounded-lg">
-                    Add from recent purchases easily
-                  </li>
-                  <li className="bg-purple-100 p-2 rounded-lg">
-                    Create custom strain notes
-                  </li>
-                </ul>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-white shadow-xl border-0">
-              <CardHeader className="text-center">
-                <div className="mx-auto mb-4 p-3 bg-blue-500 rounded-full w-16 h-16 flex items-center justify-center">
-                  <Users className="w-8 h-8 text-white" />
-                </div>
-                <CardTitle className="text-gray-800 text-xl">
-                  Social Community
-                </CardTitle>
-                <CardDescription className="text-gray-600">
-                  Connect with other Florida medical users
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="text-gray-700">
-                <ul className="space-y-2 text-center text-sm">
-                  <li className="bg-blue-100 p-2 rounded-lg">
-                    Share posts about your experiences
-                  </li>
-                  <li className="bg-blue-100 p-2 rounded-lg">
-                    Connect with friends and see their activities
-                  </li>
-                  <li className="bg-blue-100 p-2 rounded-lg">
-                    Discover new products through friends
-                  </li>
-                </ul>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
+        <Features />
       </section>
 
       <section data-aos="fade-up" data-aos-delay="100" className="py-16 px-4">
@@ -177,9 +84,9 @@ const Home = () => {
 
       <section data-aos="fade-up" data-aos-delay="100" className="py-16 px-4">
         <div className="max-w-4xl mx-auto text-center">
-          <Card className="bg-white shadow-xl border-0">
+          <Card className="bg-gradient-to-br from-blue-100 via-red-100 to-purple-100 shadow-xl border-0">
             <CardContent className="p-8">
-              <h2 className="text-3xl fugaz-font font-bold text-gray-800 mb-8">
+              <h2 className="text-3xl fugaz-font font-bold text-slate-800 mb-8">
                 Ready to Start Your Journey?
               </h2>
               {/* <p className="text-gray-600 text-lg mb-8">Join today!</p> */}

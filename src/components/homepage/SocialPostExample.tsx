@@ -35,7 +35,7 @@ const SocialPostExample = () => {
   return (
     <div className="grid md:grid-cols-2 items-center gap-8 max-w-5xl max-md:max-w-md mx-auto">
       <div className="md:order-1 max-md:text-center">
-        <h2 className="text-3xl font-bold text-white text-center mb-12 drop-shadow-lg">
+        <h2 className="text-3xl font-bold fugaz-font text-white text-center mb-12 drop-shadow-lg">
           Create Posts To Show Your Friends What You&apos;re Up To
         </h2>
         <p className="text-xl md:text-2xl text-center text-white/90 mb-8 max-w-3xl mx-auto">
