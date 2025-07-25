@@ -24,7 +24,9 @@ export default async function Navbar() {
         <div className="flex md:hidden">
           <Sidebar routes={routes} />
         </div>
-        <NavLinks routes={routes} />
+        <div className="hidden md:flex">
+          <NavLinks routes={routes} />
+        </div>
       </div>
     </nav>
   );
