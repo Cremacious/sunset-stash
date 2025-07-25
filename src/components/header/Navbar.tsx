@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Sidebar from './Sidebar';
 
-import AuthButtons from './AuthButtons';
+import NavLinks from './NavLinks';
 
 const routes = [
   { name: 'Dashboard', href: '/dashboard' },
@@ -12,7 +12,7 @@ const routes = [
 
 export default async function Navbar() {
   return (
-    <nav className="relative z-20 px-4 md:px-8 bg-white/10 backdrop-blur-md p-4 border border-white/20">
+    <nav className="relative z-20 mb-4 px-4 md:px-8 bg-white/10 backdrop-blur-md p-4 border border-white/20">
       <div className="flex justify-between items-center max-w-7xl mx-auto">
         <div className="flex items-center space-x-3">
           <Link href="/">
@@ -24,21 +24,7 @@ export default async function Navbar() {
         <div className="flex md:hidden">
           <Sidebar routes={routes} />
         </div>
-        <div className="hidden lg:flex items-center space-x-8">
-          {routes.map((route) => (
-            <Link
-              key={route.href}
-              href={route.href}
-              className="text-white hover:text-purple-600 text-lg font-bold transition-colors duration-200 hover:drop-shadow-md hover:cursor-pointer"
-            >
-              {route.name}
-            </Link>
-          ))}
-        </div>
-
-        <div className="hidden md:flex gap-2 md:gap-3 mr-2">
-          <AuthButtons />
-        </div>
+        <NavLinks routes={routes} />
       </div>
     </nav>
   );

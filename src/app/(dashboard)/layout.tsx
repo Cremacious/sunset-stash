@@ -17,10 +17,5 @@ export default async function DashboardLayout({
 }) {
   await getAuthenticatedUser();
 
-  return (
-    <div className="container mx-auto px-2">
-      {/* <UserNavbar /> */}
-      {children}
-    </div>
-  );
+  return <div className="container mx-auto px-2">{children}</div>;
 }

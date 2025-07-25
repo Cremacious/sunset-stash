@@ -16,6 +16,14 @@ export const getAuthenticatedUser = cache(async () => {
   return session.user;
 });
 
+export const getCurrentUser = cache(async () => {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  return session?.user || null;
+});
+
 export async function getOptionalUser() {
   try {
     const session = await auth.api.getSession({
