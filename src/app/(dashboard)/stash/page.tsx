@@ -82,7 +82,7 @@ const StashPage = () => {
             )}
           </div>
         )}
-        <div className="glassCard">
+        <div className="">
           <StashAnalytics stashItems={stashItems} />
         </div>
       </div>

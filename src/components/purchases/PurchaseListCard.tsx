@@ -13,7 +13,7 @@ const PurchaseListCard = ({ purchase }: { purchase: Purchase }) => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-orange-50 via-red-100 to-orange-200 border-0 border-b-4 border-b-purple-300 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden rounded-xl min-h-[80px] w-full relative p-3">
+    <div className="bg-gradient-to-br from-pink-100 via-white to-pink-200 border-0 border-b-4 border-b-pink-300 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden rounded-xl min-h-[80px] w-full relative p-3">
       <Link className="block" href={`/purchases/${purchase.id}`}>
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-4 flex-1">

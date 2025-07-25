@@ -11,7 +11,7 @@ const getInitials = (name: string) => {
 
 const PostListCard = ({ post }: { post: PostWithStashItems }) => {
   return (
-    <div className="bg-gradient-to-br from-pink-50 via-blue-100 to-purple-200 border-0 border-b-4 border-b-purple-300 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden rounded-xl min-h-[90px] w-full relative p-4">
+    <div className="bg-gradient-to-br from-blue-50 via-white to-blue-200 border-0 border-b-4 border-b-blue-300 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden rounded-xl min-h-[90px] w-full relative p-4">
       <Link href={`/social/${post.id}`}>
         <div className="flex items-center space-x-3 mb-2">
           <div className="w-10 h-10 rounded-full bg-white/70 flex items-center justify-center shadow-md">

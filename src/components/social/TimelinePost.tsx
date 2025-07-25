@@ -13,7 +13,7 @@ const TimelinePost = ({ post }: { post: PostWithStashItems }) => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-pink-50 via-blue-100 to-purple-200 border-0 border-b-4 border-b-purple-300 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden rounded-xl min-h-[110px] w-full relative">
+    <div className="bg-gradient-to-br from-blue-50 via-white to-blue-200 border-0 border-b-4 border-b-blue-300 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden rounded-xl min-h-[110px] w-full relative">
       <div className="flex items-center justify-between p-3 pb-2 relative">
         <div className="flex items-center space-x-3">
           <div className="w-12 h-12 rounded-full bg-white/70 flex items-center justify-center shadow-md">
@@ -43,7 +43,7 @@ const TimelinePost = ({ post }: { post: PostWithStashItems }) => {
         </Badge>
       </div>
       <div className="pb-4 px-4">
-        <div className="bg-white/70 backdrop-blur-sm rounded-lg p-4 mb-4 border border-white/30">
+        <div className="bg-white backdrop-blur-sm rounded-lg p-4 mb-4 border border-blue-100">
           <p className="text-gray-800 leading-relaxed">{post.content}</p>
         </div>
         {post.stashItems && post.stashItems.length > 0 && (
@@ -76,10 +76,7 @@ const TimelinePost = ({ post }: { post: PostWithStashItems }) => {
               </span>
             </div>
           </div>
-          <Button
-            asChild
-            className=""
-          >
+          <Button asChild className="">
             <Link href={`/social/${post.id}`}>View Post</Link>
           </Button>
         </div>
