@@ -3,24 +3,19 @@ import { PostWithStashItems } from '@/lib/types/social.types';
 import { Badge } from '../ui/badge';
 import Link from 'next/link';
 import { MessageCircle } from 'lucide-react';
+import UserImage from './UserImage';
 
 const TimelinePost = ({ post }: { post: PostWithStashItems }) => {
-  const getInitials = (name: string) => {
-    return name
-      .split(' ')
-      .map((n) => n[0])
-      .join('');
-  };
-
   return (
     <div className="bg-gradient-to-br from-blue-50 via-white to-blue-200 border-0 border-b-4 border-b-blue-300 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden rounded-xl min-h-[110px] w-full relative">
       <div className="flex items-center justify-between p-3 pb-2 relative">
         <div className="flex items-center space-x-3">
-          <div className="w-12 h-12 rounded-full bg-white/70 flex items-center justify-center shadow-md">
+          {/* <div className="w-12 h-12 rounded-full bg-white/70 flex items-center justify-center shadow-md">
             <span className="text-purple-700 font-bold text-lg">
               {getInitials(post.author)}
             </span>
-          </div>
+          </div> */}
+          <UserImage name={post.author} />
           <div>
             <Link
               href={`/profile/${post.userId}`}

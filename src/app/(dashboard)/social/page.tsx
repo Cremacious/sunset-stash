@@ -2,13 +2,13 @@ import TimelineFeed from '@/components/social/TimelineFeed';
 import FindFriends from '@/components/social/FindFriends';
 import FriendRequestDialog from '@/components/social/FriendRequestDialog';
 import RecentFriends from '@/components/social/RecentFriends';
-import UserImage from '@/components/social/UserImage';
 import { getAllTimelinePosts } from '@/lib/actions/post.actions';
 import {
   getUserFriendRequests,
   getAllUserFriends,
 } from '@/lib/actions/friend.actions';
 import Link from 'next/link';
+import { UserRound } from 'lucide-react';
 
 const SocialPage = async () => {
   const { posts = [], currentUserId } = await getAllTimelinePosts();
@@ -34,7 +34,7 @@ const SocialPage = async () => {
             <div className="bg-gradient-to-br from-orange-50 via-white to-orange-100 rounded-lg shadow-lg p-6">
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center space-x-4 ">
-                  <UserImage />
+                  <UserRound className="h-8 w-8 text-purple-500" />
                   <div>
                     <Link
                       className="text-3xl permanent-marker-font text-slate-800"

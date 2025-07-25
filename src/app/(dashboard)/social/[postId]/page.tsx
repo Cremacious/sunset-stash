@@ -10,6 +10,7 @@ import { Comment } from '@/lib/types/post.types';
 import StashItemListCard from '@/components/stash/StashItemListCard';
 import { getAuthenticatedUser } from '@/lib/server-utils';
 import CommentSection from '@/components/social/CommentSection';
+import UserImage from '@/components/social/UserImage';
 
 const PostPage = async ({
   params,
@@ -44,13 +45,6 @@ const PostPage = async ({
   const sessionUser = await getAuthenticatedUser();
   const sessionUserId = sessionUser.user?.id;
 
-  const getInitials = (name: string) => {
-    return name
-      .split(' ')
-      .map((n) => n[0])
-      .join('');
-  };
-
   const isFriend = await areUsersFriends(post.userId);
 
   return (
@@ -69,12 +63,12 @@ const PostPage = async ({
         </Button>
       </div>
 
-      <div className="bg-gradient-to-br from-blue-50 via-white to-blue-200 border-0 border-b-4 border-b-purple-300 shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden rounded-xl min-h-[110px] w-full relative">
+      <div className="bg-gradient-to-br from-blue-50 via-white to-blue-100 border-0 border-b-4 border-b-blue-300 shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden rounded-xl min-h-[110px] w-full relative">
         <div className="flex items-center justify-between p-3 pb-2 relative">
           <div className="flex items-center space-x-3">
             <div className="w-12 h-12 rounded-full bg-white/70 flex items-center justify-center shadow-md">
               <span className="text-purple-700 font-bold text-lg">
-                {getInitials(post.author)}
+                <UserImage name={post.author} />
               </span>
             </div>
             <div>
@@ -96,7 +90,7 @@ const PostPage = async ({
           </Badge>
         </div>
         <div className="pb-4 px-4">
-          <div className="bg-white/70 backdrop-blur-sm rounded-lg p-4 mb-4 border border-blue-100">
+          <div className="bg-white rounded-lg p-4 mb-4 border border-blue-100">
             <p className="text-gray-800 leading-relaxed">{post.content}</p>
           </div>
 
@@ -170,7 +164,7 @@ const PostPage = async ({
         </div>
       </div>
 
-      <div className="bg-gradient-to-br from-pink-50 via-blue-100 to-purple-200 border-0 border-b-4 border-b-purple-300 shadow-xl overflow-hidden rounded-xl">
+      <div className="bg-gradient-to-br from-blue-50 via-white to-blue-100 border-0 border-b-4 border-b-blue-300 shadow-xl overflow-hidden rounded-xl">
         <div className="p-4 space-y-4">
           {isFriend && <CommentForm postId={post.id} />}
           <CommentSection
