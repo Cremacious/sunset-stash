@@ -14,18 +14,25 @@ import Image from 'next/image';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useEffect } from 'react';
+import { useSession } from '@/lib/auth-client';
 
 import ExamplePurchases from '@/components/homepage/ExamplePurchases';
 import SocialPostExample from '@/components/homepage/SocialPostExample';
 
 const Home = () => {
+  const { data, isPending } = useSession();
+
   useEffect(() => {
     AOS.init({
       duration: 600,
       once: true,
       easing: 'ease-out-cubic',
     });
-  }, []);
+    // Redirect signed-in users to dashboard
+    if (data?.user && !isPending) {
+      window.location.href = '/dashboard';
+    }
+  }, [data, isPending]);
 
   return (
     <div className="min-h-screen">
