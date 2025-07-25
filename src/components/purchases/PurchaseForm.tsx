@@ -135,7 +135,7 @@ export default function PurchaseForm() {
               >
                 <div className="bg-white/70 backdrop-blur-md border border-white/30 rounded-2xl pl-2 pt-4 p-2 md:p-4">
                   <div className="flex items-center space-x-3 mb-6">
-                    <h2 className="text-2xl font-bold text-purple-800 permanent-marker-font">
+                    <h2 className="text-2xl font-bold text-slate-800 fugaz-font">
                       Purchase Information
                     </h2>
                   </div>
@@ -236,7 +236,7 @@ export default function PurchaseForm() {
                 <div className="bg-white/60 backdrop-blur-md border border-white/30 rounded-2xl pl-2 pt-4 p-2 md:p-4 mt-6">
                   <div className="flex items-center justify-between mb-6">
                     <div className="flex items-center space-x-3">
-                      <h2 className="text-2xl font-bold text-purple-800 permanent-marker-font">
+                      <h2 className="text-2xl font-bold text-slate-800 fugaz-font">
                         Items Purchased
                       </h2>
                     </div>

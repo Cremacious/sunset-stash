@@ -5,12 +5,12 @@ import UserImage from './UserImage';
 
 const PostListCard = ({ post }: { post: PostWithStashItems }) => {
   return (
-    <div className="bg-gradient-to-br from-blue-50 via-white to-blue-100 border-0 border-b-4 border-b-blue-300 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden rounded-xl min-h-[90px] w-full relative p-4">
+    <div className="bg-gradient-to-br from-white via-blue-50 to-blue-200 border-0 border-b-4 border-b-blue-300 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden rounded-xl min-h-[90px] w-full relative p-4">
       <Link href={`/social/${post.id}`}>
         <div className="flex items-center space-x-3 mb-2">
           <UserImage name={post.author} />
           <div>
-            <p className="font-bold text-lg permanent-marker-font text-slate-800">
+            <p className="font-bold text-lg fugaz-font text-slate-700">
               {post.author}
             </p>
             <p className="text-xs text-gray-600">

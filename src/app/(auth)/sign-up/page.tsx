@@ -9,7 +9,7 @@ import SignUpForm from '../../../components/auth/SignUpForm';
 import logo from '../../../../public/sunset-stash-logo.png';
 import Image from 'next/image';
 import Link from 'next/link';
-// import SignInWithGoogle from '@/components/auth/SignInWithGoogle';
+import SignInWithGoogle from '@/components/auth/SignInWithGoogle';
 
 export default function SignUpPage() {
   return (
@@ -30,7 +30,7 @@ export default function SignUpPage() {
 
           <CardContent className="p-6 md:p-8">
             <div className="space-y-3">
-              {/* <SignInWithGoogle /> */}
+              <SignInWithGoogle />
 
               {/* <Button
                 variant="outline"

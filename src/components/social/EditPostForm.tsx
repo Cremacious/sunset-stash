@@ -116,7 +116,7 @@ const EditPostForm = ({ post, stashItems }: EditPostFormProps) => {
               >
                 <div className="bg-gradient-to-br from-orange-50 via-white to-orange-50 rounded-2xl pl-2 pt-4 p-2 md:p-4">
                   <div className="flex items-center space-x-3 mb-6">
-                    <h2 className="text-2xl font-bold text-purple-800 permanent-marker-font">
+                    <h2 className="text-2xl font-bold fugaz-font text-slate-800">
                       Edit Post
                     </h2>
                   </div>

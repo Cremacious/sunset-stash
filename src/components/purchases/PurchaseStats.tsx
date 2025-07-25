@@ -28,7 +28,7 @@ const PurchaseStats = ({
                 <div className="p-2 bg-yellow-500 rounded-full">
                   <ShoppingCart className="w-5 h-5 text-white" />
                 </div>
-                <h4 className="font-semibold text-gray-800 text-sm">
+                <h4 className="font-semibold text-yellow-800 fugaz-font">
                   Total Purchases
                 </h4>
               </div>
@@ -44,8 +44,8 @@ const PurchaseStats = ({
               <div className="p-2 bg-orange-500 rounded-full">
                 <DollarSign className="w-5 h-5 text-white" />
               </div>
-              <h4 className="font-semibold text-gray-800 text-sm">
-                Total This Month
+              <h4 className="font-semibold text-orange-800 fugaz-font">
+                This Month
               </h4>
             </div>
             <p className="text-xl font-bold text-gray-800">${monthlyTotal}</p>
@@ -57,7 +57,7 @@ const PurchaseStats = ({
               <div className="p-2 bg-red-500 rounded-full">
                 <Calculator className="w-5 h-5 text-white" />
               </div>
-              <h4 className="font-semibold text-gray-800 text-sm">
+              <h4 className="font-semibold text-red-800 fugaz-font">
                 Avg Purchase
               </h4>
             </div>

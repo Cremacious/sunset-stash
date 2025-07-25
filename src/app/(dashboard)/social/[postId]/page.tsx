@@ -72,7 +72,7 @@ const PostPage = async ({
               </span>
             </div>
             <div>
-              <p className="font-bold text-xl permanent-marker-font text-slate-800">
+              <p className="font-bold text-xl fugaz-font text-slate-800">
                 {post.author}
               </p>
               <p className="text-xs text-gray-600">
@@ -116,7 +116,7 @@ const PostPage = async ({
 
           {post.stashItems && post.stashItems.length > 0 && (
             <div className="mb-6">
-              <h3 className="text-lg font-semibold text-slate-800 mb-4 permanent-marker-font">
+              <h3 className="text-lg font-semibold fugaz-font text-slate-800 mb-4">
                 Strain Details
               </h3>
               <div className="space-y-4">

@@ -30,7 +30,7 @@ const NavLinks = ({ routes }: { routes: { name: string; href: string }[] }) => {
       </div>
 
       {session ? (
-        <div className="flex items-center space-x-4">
+        <div className=" hidden md:flex items-center space-x-4">
           <Button onClick={handleSignOut} className="bg-purple-600 text-white">
             Sign Out
           </Button>

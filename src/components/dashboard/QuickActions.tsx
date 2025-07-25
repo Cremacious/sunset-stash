@@ -9,14 +9,14 @@ const QuickActions = () => {
         <Link href={'/purchases/new'}>
           <div className="h-auto p-4 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white flex flex-col items-center space-y-2 rounded-xl font-bold ">
             <CircleDollarSign size={40} />
-            <div>Log Purchase</div>
+            <div className="fugaz-font text-lg">Log Purchase</div>
           </div>
         </Link>
 
         <Link href={'/stash/new'}>
           <div className="h-auto p-4 bg-gradient-to-r from-yellow-500 to-orange-600 hover:from-yellow-600 hover:to-orange-700 text-white flex flex-col items-center space-y-2 rounded-xl">
             <Container size={40} />
-            <div>Add to Stash</div>
+            <div className="fugaz-font text-lg">Add to Stash</div>
           </div>
         </Link>
 
@@ -25,7 +25,7 @@ const QuickActions = () => {
             <span className="text-2xl">
               <Pen size={40} />
             </span>
-            <div>Create Post</div>
+            <div className="fugaz-font text-lg">Create Post</div>
           </div>
         </Link>
 
@@ -34,7 +34,7 @@ const QuickActions = () => {
             <span className="text-2xl">
               <SmilePlus size={40} />
             </span>
-            <span>Find Friends</span>
+            <span className="fugaz-font text-lg">Find Friends</span>
           </div>
         </FindFriendDialog>
       </div>

@@ -7,10 +7,11 @@ import {
   getUserFriendRequests,
   getAllUserFriends,
 } from '@/lib/actions/friend.actions';
-import Link from 'next/link';
 import { UserRound } from 'lucide-react';
+import { getCurrentUser } from '@/lib/auth-server-';
 
 const SocialPage = async () => {
+  const currentUser = await getCurrentUser();
   const { posts = [], currentUserId } = await getAllTimelinePosts();
   const friendRequestsResult = await getUserFriendRequests();
   const friendsResult = await getAllUserFriends();
@@ -35,14 +36,10 @@ const SocialPage = async () => {
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center space-x-4 ">
                   <UserRound className="h-8 w-8 text-purple-500" />
-                  <div>
-                    <Link
-                      className="text-3xl permanent-marker-font text-slate-800"
-                      href={`/profile/${currentUserId}`}
-                    >
-                      Profile
-                    </Link>
-                  </div>
+
+                  <h2 className="truncate max-w-[280px] fugaz-font text-slate-800 text-2xl mt-1">
+                    {currentUser?.name}
+                  </h2>
                 </div>
               </div>
 

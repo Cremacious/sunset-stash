@@ -72,7 +72,7 @@ const EditStashForm = ({ stashItem }: { stashItem: StashItem }) => {
               >
                 <div className="bg-white/70 backdrop-blur-md border border-white/30 rounded-2xl pl-2 pt-4 p-2 md:p-4">
                   <div className="flex items-center space-x-3 mb-6">
-                    <h2 className="text-2xl font-bold text-purple-800 permanent-marker-font">
+                    <h2 className="text-2xl font-bold text-slate-800 fugaz-font">
                       Edit Stash Item
                     </h2>
                   </div>

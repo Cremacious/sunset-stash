@@ -10,7 +10,7 @@ const StashCard = ({ stashItem }: { stashItem: StashItem }) => {
   return (
     <Card className="bg-gradient-to-br from-purple-100 via-white to-purple-200 border-0 border-b-4 border-b-purple-300 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden rounded-xl min-h-[110px] w-full relative">
       <div className="flex items-center justify-between p-3 pb-2 relative">
-        <CardTitle className="text-xl permanent-marker-font truncate max-w-[280px] md:max-w-[350px] text-left">
+        <CardTitle className="text-xl fugaz-font truncate max-w-[280px] md:max-w-[400px] text-left text-slate-800">
           {stashItem.name}
         </CardTitle>
         <div className="absolute top-2 right-3 w-12 h-12 rounded-full bg-white/70 flex items-center justify-center shadow-md">

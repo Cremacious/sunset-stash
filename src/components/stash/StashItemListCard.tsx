@@ -13,14 +13,14 @@ const StashItemListCard = ({
 }) => {
   return (
     <Link href={`/stash/${stashItem.id}`} className="block">
-      <Card className="bg-gradient-to-br from-purple-50 via-white to-purple-200 border-0 border-b-4 border-b-purple-400 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden rounded-xl min-h-[110px] w-full relative">
+      <Card className="bg-gradient-to-br from-white via-purple-50 to-purple-200 border-0 border-b-4 border-b-purple-400 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden rounded-xl min-h-[110px] w-full relative">
         {typeof price === 'number' ? (
           <div className="absolute top-2 left-3 text-sm font-bold text-green-600 bg-white/80 px-2 py-1 rounded-lg shadow z-10">
             ${price.toFixed(2)}
           </div>
         ) : null}
         <div className="flex items-center justify-between p-3 pb-2 relative">
-          <CardTitle className="text-xl text-slate-800 permanent-marker-font truncate max-w-[270px] md:max-w-[280px] text-left">
+          <CardTitle className="text-xl text-slate-700 fugaz-font truncate max-w-[270px] md:max-w-[280px] text-left">
             {stashItem.name}
           </CardTitle>
           <div className="absolute top-2 right-3 w-12 h-12 rounded-full bg-white/70 flex items-center justify-center shadow-md">

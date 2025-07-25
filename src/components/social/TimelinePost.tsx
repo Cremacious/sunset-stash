@@ -19,7 +19,7 @@ const TimelinePost = ({ post }: { post: PostWithStashItems }) => {
           <div>
             <Link
               href={`/profile/${post.userId}`}
-              className="font-bold text-xl hover:underline permanent-marker-font"
+              className="font-bold text-xl hover:underline fugaz-font text-slate-800"
             >
               {post.author}
             </Link>
@@ -44,7 +44,7 @@ const TimelinePost = ({ post }: { post: PostWithStashItems }) => {
         {post.stashItems && post.stashItems.length > 0 && (
           <div className="mb-4">
             <div className="flex items-center mb-2">
-              <span className="text-sm font-medium text-purple-700">
+              <span className="text-sm font-medium fugaz-font text-slate-800">
                 Strains:
               </span>
             </div>

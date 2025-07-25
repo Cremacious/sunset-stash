@@ -10,7 +10,7 @@ const RecentFriends = ({ friends }: { friends: Friend[] }) => {
     <div className="md:p-6 p-2 bg-orange-200/20 backdrop-blur-sm border border-orange-200/30 rounded-2xl shadow-xl ">
       <div className="bg-gradient-to-br from-orange-50 via-white to-orange-100 rounded-lg px-2 py-4 md:p-6 ">
         <div className="flex items-center justify-between mb-4 border-b-2 border-orange-200 pb-2">
-          <h2 className="  permanent-marker-font text-xl flex items-center">
+          <h2 className="  fugaz-font text-slate-800 text-xl flex items-center">
             Recent Friends
           </h2>
           <Button

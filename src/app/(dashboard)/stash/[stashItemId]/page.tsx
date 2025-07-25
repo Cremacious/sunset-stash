@@ -35,7 +35,7 @@ const StashItemPage = async ({
         </Button>
       </div>
 
-      <div className="bg-gradient-to-br from-pink-50 via-blue-100 to-purple-200 border-0 border-b-4 border-b-purple-300 shadow-xl rounded-xl overflow-hidden">
+      <div className="bg-gradient-to-br from-white via-orange-100 to-orange-200 border-0 border-b-4 border-b-purple-300 shadow-xl rounded-xl overflow-hidden">
         <div className=" p-4 ">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
@@ -45,11 +45,11 @@ const StashItemPage = async ({
                 src={getCategoryIcon(stashItem.category)}
                 alt={stashItem.category}
               />
-              <p className="text-slate-800 permanent-marker-font text-2xl md:text-3xl">
+              <p className="text-slate-800 fugaz-font text-2xl md:text-3xl">
                 {stashItem.name}
               </p>
             </div>
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-gray-600 fugaz-font">
               Added:{' '}
               {stashItem.dateAdded
                 ? new Date(stashItem.dateAdded).toLocaleDateString()
@@ -60,25 +60,25 @@ const StashItemPage = async ({
 
         <div className="p-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-            <div className="bg-orange-100/80 rounded-lg p-4 border border-orange-200 shadow-md">
+            <div className="bg-gradient-to-br from-yellow-100 via-yellow-200 to-yellow-200 rounded-lg shadow-md p-4 fugaz-font border-b-yellow-300 border-b-4">
               <div className="space-y-4">
-                <h4 className="font-bold text-orange-700 text-center flex items-center justify-center">
+                <h4 className="font-bold text-yellow-800 text-center flex items-center justify-center">
                   Category
                 </h4>
                 <div className="bg-white/70 p-3 rounded-lg border border-white/30">
-                  <p className="text-xl font-bold text-orange-600 text-center">
+                  <p className="text-xl font-bold text-yellow-800 text-center">
                     {stashItem.category || 'N/A'}
                   </p>
                 </div>
               </div>
             </div>
-            <div className="bg-blue-100/80 rounded-lg p-4 border border-blue-200 shadow-md">
+            <div className="bg-gradient-to-br from-orange-100 via-orange-200 to-orange-200 rounded-lg shadow-md p-4 fugaz-font border-b-orange-300 border-b-4">
               <div className="space-y-4">
-                <h4 className="font-bold text-blue-700 text-center flex items-center justify-center">
+                <h4 className="font-bold text-orange-700 text-center flex items-center justify-center">
                   Type
                 </h4>
                 <div className="bg-white/70 p-3 rounded-lg border border-white/30">
-                  <p className="text-xl font-bold text-blue-600 text-center">
+                  <p className="text-xl font-bold text-orange-700 text-center">
                     {stashItem.type || 'N/A'}
                   </p>
                 </div>
@@ -87,25 +87,25 @@ const StashItemPage = async ({
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-            <div className="bg-red-100/80 rounded-lg p-4 border border-red-200 shadow-md">
+            <div className="bg-gradient-to-br from-pink-100 via-pink-200 to-pink-200 rounded-lg shadow-md p-4 fugaz-font border-b-pink-300 border-b-4">
               <div className="space-y-4">
-                <h4 className="font-bold text-red-700 text-center flex items-center justify-center">
+                <h4 className="font-bold text-pink-700 text-center flex items-center justify-center">
                   THC %
                 </h4>
                 <div className="bg-white/70 p-3 rounded-lg border border-white/30">
-                  <p className="text-xl font-bold text-red-600 text-center">
+                  <p className="text-xl font-bold text-pink-700 text-center">
                     {stashItem.thc || 'N/A'}
                   </p>
                 </div>
               </div>
             </div>
-            <div className="bg-green-100/80 rounded-lg p-4 border border-green-200 shadow-md">
+            <div className="bg-gradient-to-br from-red-200 via-red-200 to-red-300 rounded-lg shadow-md p-4 fugaz-font border-b-red-400 border-b-4">
               <div className="space-y-4">
-                <h4 className="font-bold text-green-700 text-center flex items-center justify-center">
+                <h4 className="font-bold text-red-700 text-center flex items-center justify-center">
                   CBD %
                 </h4>
                 <div className="bg-white/70 p-3 rounded-lg border border-white/30">
-                  <p className="text-xl font-bold text-green-600 text-center">
+                  <p className="text-xl font-bold text-red-700 text-center">
                     {stashItem.cbd || 'N/A'}
                   </p>
                 </div>
@@ -113,7 +113,7 @@ const StashItemPage = async ({
             </div>
           </div>
           {stashItem.lineage && (
-            <div className="bg-purple-100/80 rounded-lg p-4 border border-purple-300 shadow-md mb-6">
+            <div className="bg-gradient-to-br from-purple-100 via-purple-200 to-purple-200 rounded-lg shadow-md p-4 fugaz-font border-b-purple-300 border-b-4 mb-4">
               <div className="flex items-center space-x-3 mb-3">
                 <div className="ml-2">
                   <h4 className="text-lg font-bold text-purple-800">Lineage</h4>
@@ -126,10 +126,10 @@ const StashItemPage = async ({
           )}
 
           {stashItem.notes && (
-            <div className="bg-yellow-100/80 rounded-lg p-4 border border-yellow-300 shadow-md mb-6">
+            <div className="bg-gradient-to-br from-indigo-100 via-indigo-200 to-indigo-200 rounded-lg shadow-md p-4 fugaz-font border-b-indigo-300 border-b-4 mb-4">
               <div className="flex items-center space-x-3 mb-3">
                 <div className="ml-2">
-                  <h4 className="text-lg font-bold text-yellow-700">Notes</h4>
+                  <h4 className="text-lg font-bold text-indigo-700">Notes</h4>
                 </div>
               </div>
               <div className="bg-white/70 p-3 rounded-lg border border-white/30">

@@ -39,7 +39,7 @@ const CommentCard = ({
         <UserImage name={comment.author} />
         <div className="flex-1">
           <div className="flex items-center space-x-2 mb-1">
-            <h4 className="font-semibold text-slate-800 permanent-marker-font">
+            <h4 className="font-semibold fugaz-font text-slate-800">
               {comment.author}
             </h4>
             <span className="text-sm text-gray-500">{formattedDate}</span>

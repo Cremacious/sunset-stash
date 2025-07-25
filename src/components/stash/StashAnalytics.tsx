@@ -37,7 +37,7 @@ const StashAnalytics = ({ stashItems }: StashAnalyticsProps) => {
               <div className="p-2 bg-yellow-500 rounded-full">
                 <Container className="w-5 h-5 text-white" />
               </div>
-              <h4 className="font-semibold text-gray-800 text-sm">
+              <h4 className="font-semibold text-yellow-800 fugaz-font">
                 Stash Count
               </h4>
             </div>
@@ -58,7 +58,7 @@ const StashAnalytics = ({ stashItems }: StashAnalyticsProps) => {
               </p>
             </div>
           </div>
-          <h4 className="font-semibold text-gray-800 text-sm">
+          <h4 className="font-semibold text-orange-800 fugaz-font">
             Most Common Type
           </h4>
           <div className="mt-2 h-2 bg-orange-200 rounded-full overflow-hidden">
@@ -87,7 +87,7 @@ const StashAnalytics = ({ stashItems }: StashAnalyticsProps) => {
               </p>
             </div>
           </div>
-          <h4 className="font-semibold text-gray-800 text-sm">
+          <h4 className="font-semibold text-red-800 fugaz-font">
             Most Common Category
           </h4>
           <div className="mt-2 h-2 bg-red-200 rounded-full overflow-hidden">

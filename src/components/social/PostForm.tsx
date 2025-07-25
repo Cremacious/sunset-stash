@@ -72,7 +72,7 @@ const PostForm = ({ stashItems }: { stashItems: StashItem[] }) => {
 
   const { isSubmitting } = form.formState;
 
-  // Sort and filter stash items for selector
+
   const sortedStashItems = [...stashItems].sort((a, b) => {
     const dateA = new Date(a.dateAdded).getTime();
     const dateB = new Date(b.dateAdded).getTime();
@@ -96,7 +96,7 @@ const PostForm = ({ stashItems }: { stashItems: StashItem[] }) => {
               >
                 <div className="bg-gradient-to-br from-orange-50 via-white to-orange-50 rounded-2xl pl-2 pt-4 p-2 md:p-4">
                   <div className="flex items-center space-x-3 mb-6">
-                    <h2 className="text-2xl font-bold text-purple-800 permanent-marker-font">
+                    <h2 className="text-2xl font-bold fugaz-font text-slate-800">
                       Create Post
                     </h2>
                   </div>

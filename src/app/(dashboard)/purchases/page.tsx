@@ -166,10 +166,10 @@ const PurchasesPage = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div className="md:col-span-3 glassCard">
-          <div className="flex items-center justify-between bg-gradient-to-br from-orange-50 via-green-50 to-orange-50 p-6 rounded-md shadow-md border-b-orange-200 border-b-4">
+          <div className="flex items-center justify-between bg-gradient-to-br from-white via-orange-50 to-orange-100 p-6 rounded-md shadow-md border-b-orange-200 border-b-4">
             <div className="flex items-center">
               <div className="md:ml-4">
-                <h2 className=" font-bold 0 permanent-marker-font text-xl md:text-2xl ">
+                <h2 className=" font-bold 0 fugaz-font text-xl md:text-2xl ">
                   Purchase History
                 </h2>
                 <p className="text-gray-600 text-sm md:text-md">
@@ -204,10 +204,10 @@ const PurchasesPage = () => {
               {filteredPurchases.length > 0 ? (
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <div className=" rounded-xl py-2 px-4  text-sm border-b-4 bg-gradient-to-br from-orange-50 via-green-50 to-green-100 border-b-orange-200">
+                    <div className=" rounded-xl py-2 px-4  text-sm border-b-4 bg-gradient-to-br from-white via-orange-50 to-orange-100 border-b-orange-200">
                       Latest Purchases
                     </div>
-                    <div className="text-sm rounded-xl py-2 px-4 bg-gradient-to-br from-pink-50 via-orange-100 to-purple-100 border-b-4 border-b-orange-200">
+                    <div className="text-sm rounded-xl py-2 px-4 bg-gradient-to-br from-white via-orange-50 to-orange-100 border-b-4 border-b-orange-200">
                       Showing {Math.min(filteredPurchases.length, 9)} of{' '}
                       {filteredPurchases.length}
                     </div>
