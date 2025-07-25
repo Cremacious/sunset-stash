@@ -44,13 +44,13 @@ const StashSearchBar = ({
     searchTerm || selectedCategory || selectedType || selectedSort !== 'newest';
 
   return (
-    <div className=" rounded-lg p-4 shadow-sm border-b-4 border-b-purple-300 bg-gradient-to-br from-orange-50 via-pink-100 to-blue-200 relative">
+    <div className=" rounded-lg p-4 shadow-sm border-b-4 border-b-orange-200 bg-gradient-to-br from-orange-100 via-white to-orange-100 relative">
       <div className="flex flex-col lg:flex-row gap-3 items-stretch lg:items-center">
         <div className="flex-shrink-0">
           <Button
             size="sm"
             onClick={() => router.push('/stash/new')}
-            className="w-full md:w-auto h-9 px-4 bg-purple-600 hover:bg-purple-700 text-white text-sm"
+            className="w-full "
           >
             <Plus className="w-4 h-4 mr-1" />
             <div className="mt-1">Add Item</div>

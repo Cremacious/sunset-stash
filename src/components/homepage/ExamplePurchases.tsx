@@ -1,5 +1,6 @@
 import {
   Container,
+  Dna,
   DollarSign,
   ShoppingCart,
   Star,
@@ -174,13 +175,13 @@ const ExamplePurchases = () => {
 
           <div className="space-y-4 mt-4 ml-6 md:ml-1">
             <div className="space-y-4">
-              <div className="bg-orange-100 rounded-xl p-4 border-orange-200 hover:shadow-md transition-all duration-300 border-b-orange-500 border-b-4">
+              <div className="bg-gradient-to-br from-yellow-50 via-yellow-100 to-yellow-200 rounded-xl p-4 border-orange-200 hover:shadow-md transition-all duration-300 border-b-yellow-500 border-b-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="p-2 bg-orange-500 rounded-full">
+                    <div className="p-2 bg-yellow-500 rounded-full">
                       <Container className="w-5 h-5 text-white" />
                     </div>
-                    <h4 className="font-semibold text-orange-800 text-sm">
+                    <h4 className="font-semibold text-slate-800 text-sm">
                       Stash Count
                     </h4>
                   </div>
@@ -188,50 +189,49 @@ const ExamplePurchases = () => {
                 </div>
               </div>
 
-              <div className="bg-red-100 rounded-xl p-4 border-b-4 border-b-red-500 border-red-200 hover:shadow-lg transition-all duration-300">
+              <div className="bg-gradient-to-br from-orange-50 via-orange-100 to-orange-200  rounded-xl p-4 border-b-4 border-b-orange-500 border-red-200 hover:shadow-lg transition-all duration-300">
                 <div className="flex items-center justify-between mb-3">
-                  <div className="p-2 bg-red-500 rounded-full">
-                    <TrendingUp className="w-5 h-5 text-white" />
+                  <div className="p-2 bg-orange-500 rounded-full">
+                    <Dna className="w-5 h-5 text-white" />
                   </div>
                   <div className="text-right">
-                    <p className="text-lg font-bold text-red-900">Sativa</p>
-                    <p className="text-xs text-red-500">dominant</p>
+                    <p className="text-lg font-bold text-orange-900">Hybrid</p>
+                    <p className="text-xs text-orange-500">dominant</p>
                   </div>
                 </div>
                 <h4 className="font-semibold text-red-900 text-sm mb-2">
                   Most Common Type
                 </h4>
-                <div className="h-2 bg-red-200 rounded-full overflow-hidden">
+                <div className="h-2 bg-orange-200 rounded-full overflow-hidden">
                   <div
-                    className="h-full bg-red-500 rounded-full"
+                    className="h-full bg-orange-500 rounded-full"
                     style={{ width: '60%' }}
                   ></div>
                 </div>
               </div>
 
-              <div className="bg-blue-100 rounded-xl p-4 border-b-4 border-b-blue-500 hover:shadow-lg transition-all duration-300">
+              <div className="bg-gradient-to-br from-red-50 via-red-100 to-red-200 rounded-xl p-4 border-b-4 border-b-red-500 hover:shadow-lg transition-all duration-300">
                 <div className="flex items-center justify-between mb-3">
-                  <div className="p-2 bg-blue-500 rounded-full">
+                  <div className="p-2 bg-red-500 rounded-full">
                     <Star className="w-5 h-5 text-white" />
                   </div>
                   <div className="text-right">
-                    <p className="text-lg font-bold text-blue-900">Flower</p>
-                    <p className="text-xs text-blue-500">preferred</p>
+                    <p className="text-lg font-bold text-red-900">Flower</p>
+                    <p className="text-xs text-red-500">preferred</p>
                   </div>
                 </div>
-                <h4 className="font-semibold text-blue-900 text-sm mb-2">
+                <h4 className="font-semibold text-red-900 text-sm mb-2">
                   Most Common Category
                 </h4>
-                <div className="h-2 bg-blue-200 rounded-full overflow-hidden">
+                <div className="h-2 bg-red-200 rounded-full overflow-hidden">
                   <div
-                    className="h-full bg-blue-500 rounded-full"
+                    className="h-full bg-red-500 rounded-full"
                     style={{ width: '80%' }}
                   ></div>
                 </div>
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </div>

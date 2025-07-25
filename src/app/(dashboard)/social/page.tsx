@@ -31,7 +31,7 @@ const SocialPage = async () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         <div className="space-y-4">
           <div className="glassCard">
-            <div className="bg-gradient-to-br from-pink-50 via-blue-50 to-pink-100 rounded-lg shadow-lg p-6">
+            <div className="bg-gradient-to-br from-orange-50 via-white to-orange-100 rounded-lg shadow-lg p-6">
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center space-x-4 ">
                   <UserImage />
@@ -46,7 +46,7 @@ const SocialPage = async () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-3 gap-4 mb-6 border-t-2 border-blue-200 pt-6 pb-2">
+              <div className="grid grid-cols-3 gap-4 mb-6 border-t-2 border-orange-200 pt-6 pb-2">
                 <div className="text-center p-3 bg-yellow-50 rounded-lg border-b-2 border-b-yellow-500">
                   <p className="text-2xl font-bold text-yellow-600">
                     {userPostsCount}

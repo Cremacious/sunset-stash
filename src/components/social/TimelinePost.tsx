@@ -78,7 +78,7 @@ const TimelinePost = ({ post }: { post: PostWithStashItems }) => {
           </div>
           <Button
             asChild
-            className="bg-purple-500 hover:bg-purple-600 text-white shadow-md px-4 py-2 rounded-lg text-sm font-medium"
+            className=""
           >
             <Link href={`/social/${post.id}`}>View Post</Link>
           </Button>

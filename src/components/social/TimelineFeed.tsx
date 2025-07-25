@@ -53,9 +53,9 @@ const TimelineFeed = ({ posts, currentUserId }: Props) => {
 
   return (
     <div className="space-y-4">
-      <div className="rounded-lg bg-gradient-to-br from-pink-50 via-blue-50 to-pink-100 p-4">
+      <div className="rounded-lg bg-gradient-to-br from-orange-50 via-white to-orange-100 p-4">
         <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between">
-          <Button asChild className="bg-purple-600 hover:bg-purple-700">
+          <Button asChild className="">
             <Link href="/social/new-post">Create New Post</Link>
           </Button>
           <div className="flex items-center gap-3">

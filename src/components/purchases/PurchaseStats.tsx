@@ -21,11 +21,11 @@ const PurchaseStats = ({
   return (
     <div className="">
       <div className="flex flex-col gap-4 glassCard">
-        <div className=" border-b-4 border-b-orange-500 bg-orange-100 rounded-xl p-4">
+        <div className=" border-b-4 border-b-yellow-500 bg-gradient-to-br from-yellow-50 via-yellow-100 to-yellow-200 rounded-xl p-4">
           <div className="relative z-10">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-orange-500 rounded-full">
+                <div className="p-2 bg-yellow-500 rounded-full">
                   <ShoppingCart className="w-5 h-5 text-white" />
                 </div>
                 <h4 className="font-semibold text-gray-800 text-sm">
@@ -38,10 +38,10 @@ const PurchaseStats = ({
             </div>
           </div>
         </div>
-        <div className="border-b-4 border-b-green-500 bg-green-100 rounded-xl p-4">
+        <div className="border-b-4 border-b-orange-500 bg-gradient-to-br from-orange-50 via-orange-100 to-orange-200 rounded-xl p-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-green-500 rounded-full">
+              <div className="p-2 bg-orange-500 rounded-full">
                 <DollarSign className="w-5 h-5 text-white" />
               </div>
               <h4 className="font-semibold text-gray-800 text-sm">
@@ -51,10 +51,10 @@ const PurchaseStats = ({
             <p className="text-xl font-bold text-gray-800">${monthlyTotal}</p>
           </div>
         </div>
-        <div className="border-b-4 border-b-blue-500 bg-blue-100 rounded-xl p-4">
+        <div className="border-b-4 border-b-red-500 bg-gradient-to-br from-red-50 via-red-100 to-red-200 rounded-xl p-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-blue-500 rounded-full">
+              <div className="p-2 bg-red-500 rounded-full">
                 <Calculator className="w-5 h-5 text-white" />
               </div>
               <h4 className="font-semibold text-gray-800 text-sm">

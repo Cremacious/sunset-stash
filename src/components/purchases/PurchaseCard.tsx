@@ -6,7 +6,7 @@ import { Edit, Eye } from 'lucide-react';
 
 const PurchaseCard = ({ purchase }: { purchase: Purchase }) => {
   return (
-    <Card className="bg-gradient-to-br from-orange-50 via-green-50 to-green-100 border-0 border-b-4 border-b-purple-300 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden rounded-xl min-h-[110px] w-full relative">
+    <Card className="bg-gradient-to-br from-orange-50 via-pink-100 to-purple-200 border-0 border-b-4 border-b-purple-300 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden rounded-xl min-h-[110px] w-full relative">
       <CardHeader className="p-3 pb-2 relative">
         <div className="flex items-center justify-between">
           <CardTitle className="text-xl permanent-marker-font truncate max-w-[280px] text-left ">
@@ -21,8 +21,6 @@ const PurchaseCard = ({ purchase }: { purchase: Purchase }) => {
         </div>
       </CardHeader>
       <CardContent className="px-3 pb-3 pt-0">
-
-
         <div className="grid grid-cols-2 gap-2">
           <div className="bg-orange-100/80 rounded-lg p-2 border border-orange-200 flex flex-col items-center min-h-[48px]">
             <div className="text-center text-xs text-gray-600">Date</div>
@@ -46,7 +44,6 @@ const PurchaseCard = ({ purchase }: { purchase: Purchase }) => {
             </p>
           </div>
         </div>
-
 
         <div className="flex items-center justify-between mt-4">
           <div className="flex space-x-2 w-full">

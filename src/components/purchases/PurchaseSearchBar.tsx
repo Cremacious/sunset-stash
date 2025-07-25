@@ -39,13 +39,13 @@ const PurchaseSearchBar = ({
     selectedMonth === currentMonth && selectedYear === currentYear;
 
   return (
-    <div className="rounded-lg p-4 shadow-sm relative bg-gradient-to-br from-orange-50 via-green-50 to-green-100 border-b-4 border-b-orange-200">
+    <div className="rounded-lg p-4 shadow-sm relative bg-gradient-to-br from-orange-100 via-white to-orange-100 border-b-4 border-b-orange-200">
       <div className="flex flex-col md:flex-row gap-6 items-stretch md:items-center justify-between">
         <div className="flex-shrink-0">
           <Button
             size="sm"
             onClick={() => router.push('/purchases/new')}
-            className="h-9 px-4 w-full md:w-auto bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium"
+            className="w-full "
           >
             <Plus className="w-4 h-4 mr-2" />
             Add Purchase

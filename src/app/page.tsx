@@ -84,7 +84,7 @@ const Home = () => {
 
       <section data-aos="fade-up" data-aos-delay="100" className="py-16 px-4">
         <div className="max-w-4xl mx-auto text-center">
-          <Card className="bg-gradient-to-br from-blue-100 via-red-100 to-purple-100 shadow-xl border-0">
+          <Card className="bg-gradient-to-br from-orange-100 via-purple-100 to-purple-200 shadow-xl border-0">
             <CardContent className="p-8">
               <h2 className="text-3xl fugaz-font font-bold text-slate-800 mb-8">
                 Ready to Start Your Journey?
