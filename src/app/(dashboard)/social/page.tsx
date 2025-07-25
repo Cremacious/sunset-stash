@@ -37,7 +37,7 @@ const SocialPage = async () => {
                   <UserImage />
                   <div>
                     <Link
-                      className="text-3xl permanent-marker-font text-purple-800"
+                      className="text-3xl permanent-marker-font text-slate-800"
                       href={`/profile/${currentUserId}`}
                     >
                       Profile

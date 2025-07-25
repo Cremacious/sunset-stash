@@ -57,7 +57,7 @@ const PostPage = async ({
     <div className="max-w-3xl mx-auto space-y-6">
       <div>
         <Button
-          className="bg-gradient-to-br from-pink-50 via-blue-100 to-purple-200 border-0 border-b-4 border-b-purple-300 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden rounded-xl text-purple-700 font-bold"
+          className="glassCard text-white font-bold"
           variant="ghost"
           size="sm"
           asChild
@@ -103,7 +103,7 @@ const PostPage = async ({
           {post.stashItems && post.stashItems.length > 0 && (
             <div className="mb-4">
               <div className="flex items-center mb-2">
-                <span className="text-sm font-medium text-purple-700">
+                <span className="text-sm font-bold text-slate-700">
                   Strains:
                 </span>
               </div>
@@ -122,7 +122,7 @@ const PostPage = async ({
 
           {post.stashItems && post.stashItems.length > 0 && (
             <div className="mb-6">
-              <h3 className="text-lg font-semibold text-purple-800 mb-4 permanent-marker-font">
+              <h3 className="text-lg font-semibold text-slate-800 mb-4 permanent-marker-font">
                 Strain Details
               </h3>
               <div className="space-y-4">
