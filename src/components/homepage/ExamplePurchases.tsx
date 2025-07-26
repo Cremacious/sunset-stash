@@ -33,35 +33,35 @@ const samplestash1 = {
   userId: 'user-1',
 };
 
-const samplestash2 = {
-  id: 'stash-1',
-  name: 'Gary Payton',
-  category: 'Vape',
-  type: 'Hybrid',
-  amount: '3.5g',
-  thc: 22.5,
-  cbd: 0.5,
-  lineage: 'Blueberry x Haze',
-  notes:
-    'Perfect for creative sessions and relaxation. Great for movie nights and social activities. The flavor is sweet with berry undertones.',
-  dateAdded: '2025-01-15T00:00:00.000Z',
-  userId: 'user-1',
-};
+// const samplestash2 = {
+//   id: 'stash-1',
+//   name: 'Gary Payton',
+//   category: 'Vape',
+//   type: 'Hybrid',
+//   amount: '3.5g',
+//   thc: 22.5,
+//   cbd: 0.5,
+//   lineage: 'Blueberry x Haze',
+//   notes:
+//     'Perfect for creative sessions and relaxation. Great for movie nights and social activities. The flavor is sweet with berry undertones.',
+//   dateAdded: '2025-01-15T00:00:00.000Z',
+//   userId: 'user-1',
+// };
 
-const samplestash3 = {
-  id: 'stash-1',
-  name: "Mack's Chocolate",
-  category: 'Edibles',
-  type: 'Hybrid',
-  amount: '3.5g',
-  thc: 10,
-  cbd: 0.5,
-  lineage: 'Blueberry x Haze',
-  notes:
-    'Perfect for creative sessions and relaxation. Great for movie nights and social activities. The flavor is sweet with berry undertones.',
-  dateAdded: '2025-01-15T00:00:00.000Z',
-  userId: 'user-1',
-};
+// const samplestash3 = {
+//   id: 'stash-1',
+//   name: "Mack's Chocolate",
+//   category: 'Edibles',
+//   type: 'Hybrid',
+//   amount: '3.5g',
+//   thc: 10,
+//   cbd: 0.5,
+//   lineage: 'Blueberry x Haze',
+//   notes:
+//     'Perfect for creative sessions and relaxation. Great for movie nights and social activities. The flavor is sweet with berry undertones.',
+//   dateAdded: '2025-01-15T00:00:00.000Z',
+//   userId: 'user-1',
+// };
 
 const samplestash4 = {
   id: 'stash-1',
@@ -92,17 +92,18 @@ const ExamplePurchases = () => {
       <div className="max-w-6xl mx-auto space-y-12">
         <div className="">
           <h2 className="text-4xl font-bold text-white text-center drop-shadow-lg fugaz-font mb-6">
-            Log Purchases and Save Favorites
+            Make tracking your purchases a breeze
           </h2>
-          <p className="text-xl md:text-2xl text-center text-white/90 mb-8 max-w-3xl mx-auto">
-            Keep your favorite strains stashed away, and see which are your
-            favorites
+          <p className="text-xl md:text-2xl text-center text-white/90 mb-12 max-w-3xl mx-auto">
+            Instantly visualize your monthly spending, average purchase price,
+            and most purchased categories. See which strains you love the most
+            and keep your favorites stashed away!
           </p>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <Card className="bg-gradient-to-br from-white via-green-100 to-white shadow-xl border-0 rounded-2xl hover:scale-105 transition-transform duration-200">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 ">
+            <Card className="bg-gradient-to-br from-white via-green-100 to-white shadow-xl border-0 border-b-4 border-b-green-300 rounded-2xl  transition-all duration-300 transform hover:-translate-y-1 ">
               <CardHeader>
-                <CardTitle className="text-slate-800 text-xl">
+                <CardTitle className="text-slate-800 text-xl fugaz-font">
                   Easy Purchase Logging
                 </CardTitle>
                 <CardDescription className="text-slate-700">
@@ -142,9 +143,9 @@ const ExamplePurchases = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-gradient-to-br from-purple-50 via-white to-blue-100 shadow-xl border-0 rounded-2xl hover:scale-105 transition-transform duration-200">
+            <Card className="bg-gradient-to-br from-purple-100 via-white to-purple-200 shadow-xl border-0 border-b-4 border-b-purple-300 rounded-2xl transition-all duration-300 transform hover:-translate-y-1">
               <CardHeader>
-                <CardTitle className="text-slate-800 text-xl">
+                <CardTitle className="text-slate-800 text-xl fugaz-font">
                   Spending Analytics
                 </CardTitle>
                 <CardDescription className="text-slate-700">
@@ -153,42 +154,41 @@ const ExamplePurchases = () => {
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-green-100 rounded-lg p-3 text-center">
-                    <DollarSign className="w-8 h-8 text-slate-600 mx-auto mb-2" />
-                    <p className="text-slate-700 text-sm">Monthly Spending</p>
-                    <p className="text-slate-900 font-bold text-lg">$340.25</p>
+                  <div className="bg-green-100 border-b-2 border-b-green-300 rounded-lg p-3 text-center">
+                    <DollarSign className="w-8 h-8 text-green-800 mx-auto mb-2" />
+                    <p className="text-slate-800 fugaz-font">Monthly Spending</p>
+                    <p className="text-slate-800 font-bold text-lg">$340.25</p>
                   </div>
-                  <div className="bg-orange-100 rounded-lg p-3 text-center">
-                    <TrendingUp className="w-8 h-8 text-orange-600 mx-auto mb-2" />
-                    <p className="text-slate-700 text-sm">Total Purchases</p>
-                    <p className="text-slate-900 font-bold text-lg">12</p>
+                  <div className="bg-indigo-100 border-b-2 border-b-indigo-300  rounded-lg p-3 text-center">
+                    <TrendingUp className="w-8 h-8 text-indigo-800 mx-auto mb-2" />
+                    <p className="text-slate-800 fugaz-font">Total Purchases</p>
+                    <p className="text-slate-800 font-bold text-lg">12</p>
                   </div>
-                  <div className="bg-blue-100 rounded-lg p-3 text-center">
-                    <Star className="w-8 h-8 text-slate-600 mx-auto mb-2" />
-                    <p className="text-slate-700 text-sm">Favorite Category</p>
-                    <p className="text-slate-900 font-bold text-sm">Flower</p>
+                  <div className="bg-pink-200 border-b-2 border-b-pink-300  rounded-lg p-3 text-center">
+                    <Star className="w-8 h-8 text-pink-800 mx-auto mb-2" />
+                    <p className="text-slate-800 fugaz-font">Favorite Category</p>
+                    <p className="text-slate-800 font-bold text-lg">Flower</p>
                   </div>
-                  <div className="bg-purple-100 rounded-lg p-3 text-center">
+                  <div className="bg-purple-200 border-b-2 border-b-purple-300  rounded-lg p-3 text-center">
                     <ShoppingCart className="w-8 h-8 text-purple-600 mx-auto mb-2" />
-                    <p className="text-slate-700 text-sm">Top Dispensary</p>
-                    <p className="text-slate-900 font-bold ">Trulieve</p>
+                    <p className="text-slate-800 fugaz-font">Top Dispensary</p>
+                    <p className="text-slate-800 font-bold ">Mack&apos;s</p>
                   </div>
                 </div>
               </CardContent>
             </Card>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-12">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 col-span-2">
+          {/* Stash Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-12 max-w-2xl mx-auto">
+            <div className="space-y-4">
               <StashItemListCard stashItem={samplestash1} />
-              <StashItemListCard stashItem={samplestash2} />
-              <StashItemListCard stashItem={samplestash3} />
               <StashItemListCard stashItem={samplestash4} />
             </div>
 
             <div className="space-y-4 mt-4 ml-6 md:ml-1">
               <div className="space-y-4">
-                <div className="bg-gradient-to-br from-yellow-50 via-yellow-100 to-yellow-200 rounded-xl p-4 border-orange-200 hover:shadow-md transition-all duration-300 border-b-yellow-500 border-b-4">
+                <div className=" transform hover:-translate-y-1 bg-gradient-to-br from-yellow-50 via-yellow-100 to-yellow-200 rounded-xl p-4 border-orange-200 hover:shadow-md transition-all duration-300 border-b-yellow-500 border-b-4">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div className="p-2 bg-yellow-500 rounded-full">
@@ -202,7 +202,7 @@ const ExamplePurchases = () => {
                   </div>
                 </div>
 
-                <div className="bg-gradient-to-br from-orange-50 via-orange-100 to-orange-200  rounded-xl p-4 border-b-4 border-b-orange-500 border-red-200 hover:shadow-lg transition-all duration-300">
+                <div className="transition-all duration-300 transform hover:-translate-y-1 bg-gradient-to-br from-orange-50 via-orange-100 to-orange-200  rounded-xl p-4 border-b-4 border-b-orange-500 border-red-200 hover:shadow-lg ">
                   <div className="flex items-center justify-between mb-3">
                     <div className="p-2 bg-orange-500 rounded-full">
                       <Dna className="w-5 h-5 text-white" />
@@ -225,7 +225,7 @@ const ExamplePurchases = () => {
                   </div>
                 </div>
 
-                <div className="bg-gradient-to-br from-red-50 via-red-100 to-red-200 rounded-xl p-4 border-b-4 border-b-red-500 hover:shadow-lg transition-all duration-300">
+                <div className="bg-gradient-to-br from-red-50 via-red-100 to-red-200 rounded-xl p-4 border-b-4 border-b-red-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
                   <div className="flex items-center justify-between mb-3">
                     <div className="p-2 bg-red-500 rounded-full">
                       <Star className="w-5 h-5 text-white" />
@@ -249,7 +249,7 @@ const ExamplePurchases = () => {
             </div>
           </div>
         </div>
-      </div>{' '}
+      </div>
     </section>
   );
 };

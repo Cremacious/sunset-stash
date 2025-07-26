@@ -28,9 +28,9 @@ const Features = () => {
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-            <Card className="bg-gradient-to-br from-green-50 via-white to-green-100 shadow-xl border-0 rounded-2xl hover:scale-105 transition-transform duration-200">
+            <Card className="bg-gradient-to-br from-green-50 border-0 via-white to-green-100 shadow-xl border-b-4 border-green-400 rounded-2xl hover:scale-105 transition-transform duration-200">
               <CardHeader className="text-center">
-                <div className="mx-auto mb-4 p-3 bg-gradient-to-br from-green-400 to-green-600 rounded-full w-20 h-20 flex items-center justify-center shadow-lg">
+                <div className="mx-auto mb-4 p-3 bg-gradient-to-br from-green-400 to-green-600  rounded-full w-20 h-20 flex items-center justify-center shadow-lg">
                   <ShoppingCart className="w-10 h-10 text-white drop-shadow-lg" />
                 </div>
                 <CardTitle className="text-green-800 text-2xl font-bold">
@@ -42,20 +42,20 @@ const Features = () => {
               </CardHeader>
               <CardContent className="text-green-900">
                 <ul className="space-y-3 text-center text-base">
-                  <li className="bg-green-100/80 p-3 rounded-xl shadow-sm">
+                  <li className="bg-green-100/80 p-3 rounded-xl shadow-sm border-b-2 border-b-green-200">
                     Track spending per dispensary visit
                   </li>
-                  <li className="bg-green-100/80 p-3 rounded-xl shadow-sm">
+                  <li className="bg-green-100/80 p-3 rounded-xl shadow-sm border-b-2 border-b-green-200">
                     Monitor your monthly spending
                   </li>
-                  <li className="bg-green-100/80 p-3 rounded-xl shadow-sm">
+                  <li className="bg-green-100/80 p-3 rounded-xl shadow-sm border-b-2 border-b-green-200">
                     See which dispensaries you visit most
                   </li>
                 </ul>
               </CardContent>
             </Card>
 
-            <Card className="bg-gradient-to-br from-purple-50 via-white to-pink-100 shadow-xl border-0 rounded-2xl hover:scale-105 transition-transform duration-200">
+            <Card className="bg-gradient-to-br from-purple-50 via-white to-pink-100 shadow-xl border-0 border-b-4 border-b-purple-300 rounded-2xl hover:scale-105 transition-transform duration-200">
               <CardHeader className="text-center">
                 <div className="mx-auto mb-4 p-3 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full w-20 h-20 flex items-center justify-center shadow-lg">
                   <Heart className="w-10 h-10 text-white drop-shadow-lg" />
@@ -69,20 +69,20 @@ const Features = () => {
               </CardHeader>
               <CardContent className="text-purple-900">
                 <ul className="space-y-3 text-center text-base">
-                  <li className="bg-purple-100/80 p-3 rounded-xl shadow-sm">
+                  <li className="bg-purple-100/80 p-3 rounded-xl shadow-sm border-b-2 border-b-purple-200">
                     Create entries for favorite strains
                   </li>
-                  <li className="bg-purple-100/80 p-3 rounded-xl shadow-sm">
+                  <li className="bg-purple-100/80 p-3 rounded-xl shadow-sm border-b-2 border-b-purple-200">
                     Add from recent purchases easily
                   </li>
-                  <li className="bg-purple-100/80 p-3 rounded-xl shadow-sm">
+                  <li className="bg-purple-100/80 p-3 rounded-xl shadow-sm border-b-2 border-b-purple-200">
                     Create custom strain notes
                   </li>
                 </ul>
               </CardContent>
             </Card>
 
-            <Card className="bg-gradient-to-br from-blue-50 via-white to-purple-100 shadow-xl border-0 rounded-2xl hover:scale-105 transition-transform duration-200">
+            <Card className="bg-gradient-to-br from-blue-50 via-white to-purple-100 shadow-xl border-0 border-b-4 border-b-blue-300 rounded-2xl hover:scale-105 transition-transform duration-200">
               <CardHeader className="text-center">
                 <div className="mx-auto mb-4 p-3 bg-gradient-to-br from-blue-400 to-purple-400 rounded-full w-20 h-20 flex items-center justify-center shadow-lg">
                   <Users className="w-10 h-10 text-white drop-shadow-lg" />
@@ -96,13 +96,13 @@ const Features = () => {
               </CardHeader>
               <CardContent className="text-blue-900">
                 <ul className="space-y-3 text-center text-base">
-                  <li className="bg-blue-100/80 p-3 rounded-xl shadow-sm">
+                  <li className="bg-blue-100/80 p-3 rounded-xl shadow-sm border-b-2 border-b-blue-200">
                     Share posts about your experiences
                   </li>
-                  <li className="bg-blue-100/80 p-3 rounded-xl shadow-sm">
+                  <li className="bg-blue-100/80 p-3 rounded-xl shadow-sm border-b-2 border-b-blue-200">
                     Connect with friends and see their activities
                   </li>
-                  <li className="bg-blue-100/80 p-3 rounded-xl shadow-sm">
+                  <li className="bg-blue-100/80 p-3 rounded-xl shadow-sm border-b-2 border-b-blue-200">
                     Discover new products through friends
                   </li>
                 </ul>

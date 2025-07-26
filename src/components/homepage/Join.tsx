@@ -1,7 +1,7 @@
 'use client';
 import { useEffect } from 'react';
 import AOS from 'aos';
-import { Card, CardContent } from '../ui/card';
+import { CardContent } from '../ui/card';
 import { Button } from '../ui/button';
 import Link from 'next/link';
 
@@ -15,11 +15,11 @@ const Join = () => {
   }, []);
 
   return (
-    <section data-aos="fade-up" data-aos-delay="100" className="py-16 px-4">
+    <section data-aos="fade-up" data-aos-delay="100" className="py-16 px-4 mt-8">
       <div className="max-w-4xl mx-auto text-center">
-        <Card className="bg-gradient-to-br from-orange-100 via-purple-100 to-purple-200 shadow-xl border-0">
+        <div className="bg-gradient-to-br from-orange-200 via-purple-200 to-blue-200 border-b-4 border-b-purple-500 shadow-xl rounded-xl transition-all duration-300 transform hover:-translate-y-1 ">
           <CardContent className="p-8">
-            <h2 className="text-3xl fugaz-font font-bold text-slate-800 mb-8">
+            <h2 className="text-3xl fugaz-font font-bold text-purple-800 mb-8">
               Ready to Start Your Journey?
             </h2>
             {/* <p className="text-gray-600 text-lg mb-8">Join today!</p> */}
@@ -41,7 +41,7 @@ const Join = () => {
                 </Button> */}
             </div>
           </CardContent>
-        </Card>
+        </div>
       </div>
     </section>
   );
