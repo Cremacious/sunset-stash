@@ -32,7 +32,7 @@ const TimelinePost = ({ post }: { post: PostWithStashItems }) => {
       <div className="flex justify-center my-4">
         <Badge
           variant="outline"
-          className="bg-orange-100/80 text-orange-700 border-orange-200 font-medium"
+          className="bg-blue-100/80 text-blue-700 border-blue-200 font-medium"
         >
           {post.activity}
         </Badge>

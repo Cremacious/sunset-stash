@@ -26,7 +26,7 @@ const PostListCard = ({ post }: { post: PostWithStashItems }) => {
         <div className="mt-2 flex flex-wrap gap-2">
           <Badge
             variant="outline"
-            className="bg-orange-100/80 text-orange-700 border-orange-200 font-medium text-xs"
+            className="bg-blue-100/80 text-blue-700 border-blue-200 font-medium text-xs"
           >
             {post.activity}
           </Badge>

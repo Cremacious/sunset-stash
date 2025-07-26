@@ -84,7 +84,7 @@ const PostPage = async ({
         <div className="flex justify-center my-4">
           <Badge
             variant="outline"
-            className="bg-orange-100/80 text-orange-700 border-orange-200 font-medium"
+            className="bg-blue-100/80 text-blue-700 border-blue-200 font-medium"
           >
             {post.activity}
           </Badge>
@@ -116,9 +116,6 @@ const PostPage = async ({
 
           {post.stashItems && post.stashItems.length > 0 && (
             <div className="mb-6">
-              <h3 className="text-lg font-semibold fugaz-font text-slate-800 mb-4">
-                Strain Details
-              </h3>
               <div className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {post.stashItems.map((item, index) => (

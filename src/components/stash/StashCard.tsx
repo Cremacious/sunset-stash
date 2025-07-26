@@ -24,25 +24,29 @@ const StashCard = ({ stashItem }: { stashItem: StashItem }) => {
         </div>
       </div>
       <CardContent className="px-3 pb-3 pt-0">
-        <div className="grid grid-cols-3 gap-2">
-          <div className="bg-orange-100/80 rounded-lg p-2 border border-orange-200 flex flex-col items-center min-h-[48px]">
-            <div className="text-center text-xs text-gray-600">Category</div>
-            <p className="font-bold text-orange-600 text-center text-xs truncate w-full">
+        <div className="grid grid-cols-2 gap-2">
+          <div className="bg-gradient-to-r from-indigo-200 to-indigo-300 rounded-lg p-2 border-b-4 border-indigo-400 flex flex-col items-center min-h-[48px]">
+            <div className="text-center text-xs text-indigo-800 fugaz-font">
+              Category
+            </div>
+            <p className="font-bold text-indigo-800 text-center truncate w-full">
               {stashItem.category.length > 0 ? stashItem.category : 'N/A'}
             </p>
           </div>
-          <div className="bg-red-100/80 rounded-lg p-2 border border-red-200 flex flex-col items-center min-h-[48px]">
-            <div className="text-center text-xs text-gray-600">Type</div>
-            <p className="font-bold text-red-600 text-center text-xs truncate w-full">
+          <div className="bg-gradient-to-r from-blue-200 to-blue-300 rounded-lg p-2 border-b-4 border-blue-400 flex flex-col items-center min-h-[48px]">
+            <div className="text-center text-xs text-blue-800 fugaz-font">
+              Type
+            </div>
+            <p className="font-bold text-blue-800 text-center truncate w-full">
               {stashItem.type.length > 0 ? stashItem.type : 'N/A'}
             </p>
           </div>
-          <div className="bg-blue-100/80 rounded-lg p-2 border border-blue-200 flex flex-col items-center min-h-[48px]">
+          {/* <div className="bg-blue-100/80 rounded-lg p-2 border border-blue-200 flex flex-col items-center min-h-[48px]">
             <div className="text-center text-xs text-gray-600">THC %</div>
             <p className="font-bold text-blue-600 text-center text-xs truncate w-full">
               {stashItem.thc}
             </p>
-          </div>
+          </div> */}
         </div>
         <div className="flex items-center justify-between mt-4">
           <div className="flex space-x-2 w-full">
@@ -60,11 +64,7 @@ const StashCard = ({ stashItem }: { stashItem: StashItem }) => {
                 Edit
               </Link>
             </Button>
-            <Button
-              asChild
-              size="sm"
-              className="flex-1 bg-purple-500 hover:bg-purple-600 text-white"
-            >
+            <Button asChild size="sm" className="flex-1 ">
               <Link
                 href={`/stash/${stashItem.id}`}
                 className="flex items-center justify-center gap-1"
