@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sunset Stash
+
+Florida Cannabis Community Platform
+
+## Overview
+
+Sunset Stash is a modern, sunset-themed web app for managing Florida medical marijuana purchases, discovering your favorite strains, and connecting with friends in a vibrant community. Built with Next.js, Neon, and a professional, responsive UI, Sunset Stash is your all-in-one cannabis companion.
+
+## Features
+
+- **Dashboard:** View your purchase history, stats, and recent activity in a beautiful, unified interface.
+- **Purchases:** Log, edit, and review your medical marijuana purchases. Filter and search by date, dispensary, or item. Responsive forms and instant UI updates.
+- **Stash:** Manage your stash items, view details, and track your favorite strains. "View All" stash page with search/filter and glassCard styling.
+- **Social:** Connect with friends, send/accept friend requests, and interact with posts and comments. Live updates for friend requests, comments, and social features.
+- **Profile:** View and edit your user profile, see your stash and purchase stats, and manage your social connections.
+- **Authentication:** Secure sign-in/sign-up flow with Google and email. Redirects and navigation optimized for user experience.
+- **Professional UI:** Sunset-themed design with gradient buttons, modern cards, and responsive layouts.
+- **Instant Feedback:** Spinning Sun icon loading indicators, animated transitions, and instant UI updates for interactive features.
+- **Accessibility:** Keyboard navigation, focus states, and mobile-friendly design.
+
+## Tech Stack
+
+- **Frontend:** Next.js, React, Typescript, Tailwind CSS
+- **Backend:** Prisma, Neon (Postgres)
+- **Auth:** better-auth
+- **Hosting:** Vercel
 
 ## Getting Started
 
-First, run the development server:
+1. **Clone the repo:**
+   ```bash
+   git clone https://github.com/yourusername/sunset-stash.git
+   cd sunset-stash
+   ```
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+3. **Set up environment variables:**
+   - Copy `.env.example` to `.env.local` and fill in your Neon, Auth, and other secrets.
+4. **Run the app locally:**
+   ```bash
+   npm run dev
+   ```
+5. **Open in browser:**
+   - Visit [http://localhost:3000](http://localhost:3000)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Usage
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Sign up or sign in to start managing your purchases and stash.
+- Add new purchases, edit details, and view your stats.
+- Connect with friends, comment on posts, and grow your cannabis community.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Contributing
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Pull requests and issues are welcome! Please open an issue to discuss major changes before submitting a PR.
 
-## Learn More
+## License
 
-To learn more about Next.js, take a look at the following resources:
+MIT
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Contact
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [Buy me a coffee](https://buymeacoffee.com/codemackcrh)
+- [Sunset Stash](https://sunsetstash.com)
