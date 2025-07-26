@@ -39,7 +39,9 @@ const Footer = () => {
               </Link>
             </div>
             <div className="text-center md:text-right">
-              <p className="text-white/80 text-sm mb-2">© 2025 Sunset Stash</p>
+              <p className="text-white/80 text-sm mb-2">
+                © {new Date().getFullYear()} Sunset Stash
+              </p>
             </div>
           </div>
         </div>
