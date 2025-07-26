@@ -127,9 +127,11 @@ export async function sendFriendRequestByEmail(userEmail: string) {
 
     const currentUserId = session.user.id;
 
+    const normalizedEmail = userEmail.toLowerCase();
+
     const friend = await prisma.user.findUnique({
       where: {
-        email: userEmail,
+        email: normalizedEmail,
       },
     });
     if (!friend) {
