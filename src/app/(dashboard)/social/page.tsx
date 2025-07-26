@@ -86,7 +86,7 @@ export default function SocialPage() {
                     href={`/profile/${currentUser?.id}`}
                     className="font-bold text-2xl hover:underline fugaz-font text-slate-800 truncate md:max-w-[270px] max-w-[250px]"
                   >
-                 {currentUser?.name}ffffffffffffffgg
+                    {currentUser?.name}
                   </Link>
                 </div>
               </div>

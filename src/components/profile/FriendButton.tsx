@@ -59,21 +59,24 @@ const FriendButton = ({
           text: 'Friends',
           icon: <Users className="w-4 h-4 mr-2" />,
           variant: 'default' as const,
-          className: 'bg-green-600 hover:bg-green-700 font-bold',
+          className:
+            'bg-green-600 hover:bg-green-700 font-bold hover:border-b-green-800 border-b-green-700 border-b-4',
         };
       case 'pending':
         return {
           text: 'Request Sent',
           icon: <Clock className="w-4 h-4 mr-2" />,
           variant: 'outline' as const,
-          className: 'border-purple-300 text-purple-600 hover:bg-purple-50',
+          className:
+            'text-white hover:text-white bg-orange-500 border-0 hover:bg-orange-600 hover:border-b-orange-700 border-b-orange-600 border-b-4 rounded-xl',
         };
       default:
         return {
           text: 'Add Friend',
           icon: <UserPlus className="w-4 h-4 mr-2" />,
           variant: 'default' as const,
-          className: 'bg-purple-600 hover:bg-purple-700',
+          className:
+            'bg-blue-600 hover:bg-blue-700 border-b-blue-700  hover:border-b-blue-700 ',
         };
     }
   };
@@ -88,10 +91,9 @@ const FriendButton = ({
       className={buttonConfig.className}
     >
       {loading ? (
-        <>
-          <Sun className="w-4 h-4 mr-2 text-orange-400 animate-spin" />
-          Loading...
-        </>
+        <div className="flex items-center justify-center space-x-2 px-4">
+          <Sun className="w-4 h-4 text-orange-400 animate-spin" />
+        </div>
       ) : (
         <>
           {buttonConfig.icon}

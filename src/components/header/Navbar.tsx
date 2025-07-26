@@ -59,12 +59,12 @@ export default function Navbar() {
           <div className="hidden md:flex justify-end items-center ml-4">
             <Link
               href="/sign-in"
-              className="px-3 py-2 mr-2 md:px-4 md:py-2 text-sm text-white border border-white/40 rounded-lg hover:bg-white/10 transition-all duration-200 backdrop-blur-sm font-medium hover:cursor-pointer"
+              className="px-3 py-2 mr-2 md:px-4 md:py-2 text-sm text-white border border-white/40 border-b-2 border-b-gray-100 rounded-lg hover:bg-white/10 transition-all duration-200 backdrop-blur-sm font-medium hover:cursor-pointer"
             >
               Sign In
             </Link>
             <Link href="/sign-up">
-              <Button className="px-3 py-2 md:px-4 md:py-2 text-sm bg-white text-purple-600 font-semibold rounded-lg hover:bg-white/90 transition-all duration-200 shadow-lg hover:cursor-pointer">
+              <Button className='className="px-3 py-2 mr-2 md:px-4 md:py-2 text-sm border-b-2 bg-white hover:bg-gray-100 text-purple-700 rounded-lg  transition-all duration-200 backdrop-blur-sm font-medium hover:cursor-pointer'>
                 Get Started
               </Button>
             </Link>

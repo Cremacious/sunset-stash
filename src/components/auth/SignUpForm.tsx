@@ -46,7 +46,6 @@ const SignUpForm = () => {
             'An error occurred'
         );
       } else {
-        toast.success('Sign up successful!');
         router.push('/dashboard');
       }
     } catch (error) {
