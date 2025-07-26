@@ -356,7 +356,7 @@ export default function PurchaseForm() {
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
-                          <FormField
+                          {/* <FormField
                             control={form.control}
                             name={`items.${index}.amount`}
                             render={({ field }) => (
@@ -374,7 +374,7 @@ export default function PurchaseForm() {
                                 <FormMessage />
                               </FormItem>
                             )}
-                          />
+                          /> */}
                           <FormField
                             control={form.control}
                             name={`items.${index}.price`}
@@ -539,7 +539,7 @@ export default function PurchaseForm() {
                   </div>
                 </div>
 
-                <div className="flex flex-col sm:flex-row gap-4 py-6 border-t border-gray-200/50">
+                <div className="flex flex-row gap-4 py-6 border-t border-gray-200/50">
                   <Button
                     type="button"
                     variant="outline"

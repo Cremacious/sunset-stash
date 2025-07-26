@@ -22,24 +22,24 @@ const PurchaseCard = ({ purchase }: { purchase: Purchase }) => {
       </CardHeader>
       <CardContent className="px-3 pb-3 pt-0">
         <div className="grid grid-cols-2 gap-2">
-          <div className="bg-orange-100/80 rounded-lg p-2 border border-orange-200 flex flex-col items-center min-h-[48px]">
-            <div className="text-center text-xs text-gray-600">Date</div>
-            <p className="font-bold text-orange-600 text-center text-xs truncate w-full">
+          <div className="bg-gradient-to-r from-rose-200 to-rose-300 border-b-4 border-rose-400 p-2 rounded-lg flex flex-col items-center min-h-[48px]">
+            <div className="text-center text-xs text-rose-800 fugaz-font">Date</div>
+            <p className="font-bold text-rose-800 text-center text-xs truncate w-full">
               {new Date(purchase.date).toLocaleDateString('en-US', {
                 month: 'short',
                 day: 'numeric',
               })}
             </p>
           </div>
-          <div className="bg-blue-100/80 rounded-lg p-2 border border-blue-200 flex flex-col items-center min-h-[48px]">
-            <div className="text-center text-xs text-gray-600">Items</div>
-            <p className="font-bold text-blue-600 text-center text-xs truncate w-full">
+          <div className="bg-gradient-to-r from-violet-200 to-violet-300 border-b-4 border-violet-400 p-2 rounded-lg flex flex-col items-center min-h-[48px]">
+            <div className="text-center text-xs text-violet-800 fugaz-font">Items</div>
+            <p className="font-bold text-violet-800 text-center text-xs truncate w-full">
               {purchase.items.length}
             </p>
           </div>
-          <div className="bg-pink-100/80 rounded-lg p-2 border border-pink-200 flex flex-col items-center min-h-[48px] col-span-2">
-            <div className="text-center text-xs text-gray-600">Notes</div>
-            <p className="font-bold text-pink-600 text-center text-xs truncate w-full">
+          <div className="bg-gradient-to-r from-pink-200 to-pink-300 border-b-4 border-pink-400 p-2 rounded-lg flex flex-col items-center min-h-[48px] col-span-2">
+            <div className="text-center text-xs text-pink-800 fugaz-font">Notes</div>
+            <p className="font-bold text-pink-800 text-center text-xs truncate w-full">
               {purchase.notes ? purchase.notes.slice(0, 24) : '—'}
             </p>
           </div>
@@ -64,7 +64,7 @@ const PurchaseCard = ({ purchase }: { purchase: Purchase }) => {
             <Button
               asChild
               size="sm"
-              className="flex-1 bg-purple-500 hover:bg-purple-600 text-white"
+              className="flex-1"
             >
               <Link
                 href={`/purchases/${purchase.id}`}

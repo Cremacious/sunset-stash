@@ -237,7 +237,7 @@ const PostForm = ({ stashItems }: { stashItems: StashItem[] }) => {
                     </div>
                   )}
                 </div>
-                <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-gray-200">
+                <div className="flex flex-row gap-3 pt-4 border-t border-gray-200">
                   <Button
                     type="button"
                     variant="outline"

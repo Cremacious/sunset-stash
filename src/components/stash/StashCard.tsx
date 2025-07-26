@@ -33,7 +33,7 @@ const StashCard = ({ stashItem }: { stashItem: StashItem }) => {
               {stashItem.category.length > 0 ? stashItem.category : 'N/A'}
             </p>
           </div>
-          <div className="bg-gradient-to-r from-blue-200 to-blue-300 rounded-lg p-2 border-b-4 border-blue-400 flex flex-col items-center min-h-[48px]">
+          <div className="bg-gradient-to-r from-blue-200 to-blue-300 border-b-4 border-blue-400 rounded-lg p-2  flex flex-col items-center min-h-[48px]">
             <div className="text-center text-xs text-blue-800 fugaz-font">
               Type
             </div>
