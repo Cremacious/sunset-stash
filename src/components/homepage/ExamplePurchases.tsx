@@ -92,10 +92,10 @@ const ExamplePurchases = () => {
       <div className="max-w-6xl mx-auto space-y-12">
         <div className="">
           <h2 className="text-4xl font-bold text-white text-center drop-shadow-lg fugaz-font mb-6">
-            Make tracking your purchases a breeze
+            Make organizing purchases a breeze
           </h2>
           <p className="text-xl md:text-2xl text-center text-white/90 mb-12 max-w-3xl mx-auto">
-            Instantly visualize your monthly spending, average purchase price,
+            Instantly visualize your monthly spending, averages,
             and most purchased categories. See which strains you love the most
             and keep your favorites stashed away!
           </p>

@@ -32,9 +32,9 @@ const Home = () => {
                 Sunset Stash
               </h1>
               <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto">
-                Your ultimate companion for tracking Florida medical marijuana
-                purchases, discovering favorites, and connecting with the
-                friends.
+                Your platform for managing Florida medical marijuana
+                purchases, discovering your favorite strains, and connecting
+                with friends in a vibrant community.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button
