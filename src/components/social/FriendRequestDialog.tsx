@@ -28,7 +28,7 @@ const FriendRequestDialog = ({
   const [processing, setProcessing] = useState<string | null>(null);
   const [friendRequests, setFriendRequests] = useState(initialRequests);
 
-  // Sync local state with parent prop
+
   useEffect(() => {
     setFriendRequests(initialRequests);
   }, [initialRequests]);

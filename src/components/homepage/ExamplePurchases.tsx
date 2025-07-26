@@ -179,7 +179,7 @@ const ExamplePurchases = () => {
             </Card>
           </div>
 
-          {/* Stash Grid */}
+   
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-12 max-w-2xl mx-auto">
             <div className="space-y-4">
               <StashItemListCard stashItem={samplestash1} />

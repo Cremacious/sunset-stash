@@ -4,19 +4,24 @@ import React, { useState } from 'react';
 import { Button } from '../ui/button';
 import { createComment } from '@/lib/actions/post.actions';
 import { toast } from 'sonner';
+import { Sun } from 'lucide-react';
 
 const CommentForm = ({ postId }: { postId: string }) => {
   const [comment, setComment] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async () => {
-    console.log('Submitting comment:', comment);
-    const response = await createComment(postId, comment);
-    console.log('Comment response:', response);
-    if (response.success) {
-      toast.success('Comment added successfully!');
-      setComment('');
-    } else {
-      toast.error('Failed to add comment.');
+    setIsSubmitting(true);
+    try {
+      const response = await createComment(postId, comment);
+      if (response.success) {
+        toast.success('Comment added successfully!');
+        setComment('');
+      } else {
+        toast.error('Failed to add comment.');
+      }
+    } finally {
+      setIsSubmitting(false);
     }
   };
   return (
@@ -33,9 +38,15 @@ const CommentForm = ({ postId }: { postId: string }) => {
           <div className="flex justify-end">
             <Button
               onClick={handleSubmit}
-              className="bg-purple-500 hover:bg-purple-600 text-white"
+              className="bg-purple-500 hover:bg-purple-600 text-white flex items-center justify-center"
+              disabled={isSubmitting}
             >
-              Post Comment
+              {isSubmitting ? (
+                <Sun className="animate-spin text-yellow-400" size={18} />
+              ) : (
+                <div>Post Comment</div>
+              )}
+             
             </Button>
           </div>
         </div>

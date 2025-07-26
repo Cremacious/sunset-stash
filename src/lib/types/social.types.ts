@@ -1,4 +1,4 @@
-// Define or import StashItems type
+
 import { StashItem } from './stash.types';
 
 export type Post = {
@@ -41,7 +41,7 @@ export type PostWithStashItems = {
     author: string;
     content: string;
     createdAt: string | Date;
-    // ...other fields
+  
   }>;
 };
 

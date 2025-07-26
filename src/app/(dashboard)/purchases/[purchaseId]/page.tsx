@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { ArrowLeft, Edit, Container, DollarSign } from 'lucide-react';
 import StashPurchaseCard from '@/components/stash/StashPurchaseCard';
 import { getPurchaseById } from '@/lib/actions/purchase.actions';
+import { notFound } from 'next/navigation';
 
 const PurchaseDetailsPage = async ({
   params,
@@ -14,23 +15,7 @@ const PurchaseDetailsPage = async ({
   const { purchase } = await getPurchaseById(purchaseId);
 
   if (!purchase) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-50 via-pink-100 to-blue-200">
-        <Card className="max-w-md w-full bg-white/70 backdrop-blur-md rounded-3xl shadow-2xl overflow-hidden">
-          <div className="p-6 text-center">
-            <h1 className="text-xl font-semibold text-gray-800 mb-2">
-              Purchase Not Found
-            </h1>
-            <p className="text-gray-600 mb-4">
-              The purchase you are looking for does not exist.
-            </p>
-            <Button asChild>
-              <Link href="/purchases">Back to Purchases</Link>
-            </Button>
-          </div>
-        </Card>
-      </div>
-    );
+    notFound();
   }
 
   return (

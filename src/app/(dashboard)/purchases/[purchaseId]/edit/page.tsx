@@ -1,5 +1,6 @@
 import EditPurchaseForm from '@/components/purchases/EditPurchaseForm';
 import { getPurchaseById } from '@/lib/actions/purchase.actions';
+import { notFound } from 'next/navigation';
 
 const EditPurchasePage = async ({
   params,
@@ -11,11 +12,7 @@ const EditPurchasePage = async ({
   const data = await getPurchaseById(purchaseId);
 
   if (!data.purchase) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p>Purchase not found.</p>
-      </div>
-    );
+    notFound();
   }
 
   return (

@@ -17,7 +17,7 @@ interface PurchaseSearchBarProps {
   onMonthChange: (month: string | undefined) => void;
   onYearChange: (year: string | undefined) => void;
   onClearFilters: () => void;
-  purchases?: Array<{ date: string | Date }>; // Add purchases prop to find latest date
+  purchases?: Array<{ date: string | Date }>; 
 }
 
 const PurchaseSearchBar = ({

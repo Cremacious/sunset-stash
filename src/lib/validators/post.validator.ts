@@ -1,4 +1,4 @@
-// src/lib/validators/post.validator.ts
+
 import { z } from 'zod';
 
 export const postFormSchema = z.object({

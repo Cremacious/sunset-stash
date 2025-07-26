@@ -1,4 +1,4 @@
-// src/lib/validators/purchase.validator.ts
+
 import { z } from 'zod';
 
 export const purchaseItemSchema = z.object({

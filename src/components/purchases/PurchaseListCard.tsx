@@ -2,7 +2,7 @@ import { Purchase } from '@/lib/types/purchase.types';
 import Link from 'next/link';
 
 const PurchaseListCard = ({ purchase }: { purchase: Purchase }) => {
-  // Format the date as MM/DD/YYYY
+ 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', {

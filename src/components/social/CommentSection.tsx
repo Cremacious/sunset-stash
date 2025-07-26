@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CommentCard from './CommentCard';
 import EditCommentCard from './EditCommentCard';
 import { Comment } from '@/lib/types/post.types';
@@ -18,6 +18,10 @@ const CommentSection = ({
   const [isSaving, setIsSaving] = useState(false);
   const [localComments, setLocalComments] = useState<Comment[]>(comments);
 
+  useEffect(() => {
+    setLocalComments(comments);
+  }, [comments]);
+
   const handleEdit = (comment: Comment) => {
     setEditingId(comment.id);
   };
@@ -29,7 +33,6 @@ const CommentSection = ({
   const handleSave = async (commentId: string, newContent: string) => {
     setIsSaving(true);
     try {
-      // Call your server action to update the comment
       const result = await editComment({
         commentId,
         content: newContent,
@@ -43,7 +46,6 @@ const CommentSection = ({
         );
         setEditingId(null);
       } else {
-        // Optionally show error
         alert(result.error || 'Failed to update comment');
       }
     } finally {
@@ -54,7 +56,9 @@ const CommentSection = ({
   return (
     <div className="space-y-4">
       {localComments.length === 0 ? (
-        <div className="text-center py-8 text-gray-800 fugaz-font">No comments yet.</div>
+        <div className="text-center py-8 text-gray-800 fugaz-font">
+          No comments yet.
+        </div>
       ) : (
         localComments.map((comment) =>
           editingId === comment.id ? (

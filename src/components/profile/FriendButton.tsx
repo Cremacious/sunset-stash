@@ -1,4 +1,4 @@
-// components/profile/FriendButton.tsx
+
 'use client';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
@@ -10,7 +10,6 @@ import {
   DialogContent,
   DialogFooter,
   DialogHeader,
-  DialogTitle,
 } from '@/components/ui/dialog';
 
 interface FriendButtonProps {

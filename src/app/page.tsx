@@ -9,12 +9,12 @@ import ExamplePurchases from '@/components/homepage/ExamplePurchases';
 import SocialPostExample from '@/components/homepage/SocialPostExample';
 import Join from '@/components/homepage/Join';
 
-// import Navbar from '@/components/header/Navbar';
+
 
 const Home = () => {
   return (
     <>
-      {/* <Navbar /> */}
+     
       <div className="min-h-screen space-y-4">
         <section className="relative pb-20 px-4 ">
           <div className="max-w-6xl mx-auto text-center ">

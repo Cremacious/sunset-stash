@@ -43,7 +43,7 @@ export function calculateMonthlyTotal(
   month?: number
 ): number {
   const targetYear = year || new Date().getFullYear();
-  const targetMonth = month || new Date().getMonth() + 1; // +1 because getMonth() is 0-indexed
+  const targetMonth = month || new Date().getMonth() + 1; 
 
   const total = purchases
     .filter((purchase) => {

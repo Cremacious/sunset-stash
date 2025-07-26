@@ -1,11 +1,11 @@
 export type Purchase = {
   id: string;
   dispensary: string;
-  date: string; // Will be converted from DateTime for display
+  date: string;
   total: number;
   items: PurchaseItem[];
   notes: string;
-  createdAt: string; // Will be converted from DateTime for display
+  createdAt: string;
   userId: string;
 };
 

@@ -1,7 +1,5 @@
 import type { Metadata } from 'next';
-// import { getAuthenticatedUser } from '@/lib/server-utils';
 
-// import UserNavbar from '@/components/header/UserNavbar';
 
 import { getAuthenticatedUser } from '@/lib/auth-server-';
 

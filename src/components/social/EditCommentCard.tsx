@@ -19,10 +19,10 @@ const EditCommentCard = ({
   return (
     <div className="bg-white/70 backdrop-blur-sm rounded-lg p-4 border border-white/30">
       <div className="flex items-center space-x-2 mb-3">
-        <span className="font-semibold text-purple-900 permanent-marker-font">
+        <span className="font-semibold text-purple-900 fugaz-font">
           Edit Comment
         </span>
-        <span className="text-sm text-gray-500">{comment.author}</span>
+
       </div>
       <textarea
         className="w-full rounded-lg border border-purple-200 p-2 mb-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-purple-400"

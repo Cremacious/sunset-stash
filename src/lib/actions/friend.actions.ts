@@ -1,4 +1,4 @@
-// lib/actions/friend.actions.ts
+
 'use server';
 import prisma from '@/lib/prisma';
 import { auth } from '@/lib/auth';

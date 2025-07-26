@@ -1,4 +1,4 @@
-// Import types
+
 import { StashItem } from './stash.types';
 import { Post, Friendship, FriendRequest } from './social.types';
 import { Purchase } from './purchase.types';
@@ -9,8 +9,8 @@ export type User = {
   email: string;
   emailVerified: boolean;
   image?: string;
-  createdAt: string; // Will be converted from DateTime for display
-  updatedAt: string; // Will be converted from DateTime for display
+  createdAt: string; 
+  updatedAt: string; 
 };
 
 export type UserWithRelations = User & {

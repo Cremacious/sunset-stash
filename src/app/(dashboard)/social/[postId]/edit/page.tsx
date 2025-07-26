@@ -16,7 +16,7 @@ const EditPostPage = async ({
     return <div>Post not found.</div>;
   }
 
-  // result.data is PostWithStashItems
+
   return (
     <div>
       <EditPostForm
