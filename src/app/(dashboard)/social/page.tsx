@@ -6,10 +6,10 @@ import {
   getUserFriendRequests,
   getAllUserFriends,
 } from '@/lib/actions/friend.actions';
-import { UserRound } from 'lucide-react';
 import { getCurrentUser } from '@/lib/auth-server-';
 import { Button } from '@/components/ui/button';
 import FindFriendDialog from '@/components/social/FindFriendDialog';
+import UserImage from '@/components/social/UserImage';
 
 const SocialPage = async () => {
   const currentUser = await getCurrentUser();
@@ -36,7 +36,7 @@ const SocialPage = async () => {
             <div className="bg-gradient-to-br from-orange-50 via-white to-orange-100 rounded-lg shadow-lg p-6">
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center space-x-4 ">
-                  <UserRound className="h-8 w-8 text-purple-500" />
+                  <UserImage name={currentUser?.name ?? 'Unknown User'} />
 
                   <h2 className="truncate max-w-[280px] fugaz-font text-slate-800 text-2xl mt-1">
                     {currentUser?.name}
