@@ -157,10 +157,7 @@ const ProfilePage = async ({
                   <Leaf className="w-5 h-5 mr-2 text-indigo-800" />
                   Latest Stash
                 </h3>
-                <Button
-                  variant={'outline'}
-                  className="text-purple-600 border-purple-300 hover:bg-purple-50 mb-2"
-                >
+                <Button className=" mb-2">
                   <Link href={`/profile/${profileId}/stash`}>View All</Link>
                 </Button>
               </div>

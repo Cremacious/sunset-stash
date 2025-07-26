@@ -1,4 +1,4 @@
-// components/stash/StashGrid.tsx - Client Component
+
 'use client';
 import { useMemo } from 'react';
 import StashCard from './StashCard';

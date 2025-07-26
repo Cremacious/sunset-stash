@@ -147,3 +147,24 @@ export async function deleteStashItem(stashItemId: string) {
     return { success: false, error: 'Failed to delete stash item' };
   }
 }
+
+export async function getStashItemsByUserId(userId: string) {
+  try {
+    const stashItems = await prisma.stashItem.findMany({
+      where: { userId },
+    });
+    return {
+      success: true,
+      stashItems: stashItems.map((item) => ({
+        ...item,
+        dateAdded: item.dateAdded.toISOString(),
+      })),
+    };
+  } catch (error) {
+    console.error('Error fetching stash items:', error);
+    return {
+      success: false,
+      error: 'Failed to fetch stash items. Please try again.',
+    };
+  }
+}
