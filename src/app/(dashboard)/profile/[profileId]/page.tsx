@@ -18,6 +18,7 @@ import {
 } from '@/lib/actions/profile.actions';
 import { ProfilePost } from '@/lib/types/profile.types';
 import UserImage from '@/components/social/UserImage';
+import NotFound from '@/components/NotFound';
 
 const ProfilePage = async ({
   params,
@@ -40,28 +41,10 @@ const ProfilePage = async ({
     currentUserId,
     isOwnProfile,
     friendshipStatus,
-    error,
   } = profileResult;
 
   if (!success || !profileUser) {
-    return (
-      <div className="max-w-4xl mx-auto space-y-6">
-        <div className="bg-gradient-to-br from-white via-orange-100 to-orange-200 border-0 border-b-4 border-b-orange-300 shadow-xl rounded-xl p-8 text-center">
-          <h1 className="text-2xl font-bold text-purple-800 mb-2 permanent-marker-font">
-            Profile Not Found
-          </h1>
-          <p className="text-purple-600 mb-4">
-            {error || 'This profile does not exist.'}
-          </p>
-          <Button
-            asChild
-            className="bg-purple-500 hover:bg-purple-600 text-white font-bold rounded-xl"
-          >
-            <Link href="/social">Back to Social</Link>
-          </Button>
-        </div>
-      </div>
-    );
+    return <NotFound message="Sorry, we could not find that profile." />;
   }
 
   const userStats = statsResult.stats;

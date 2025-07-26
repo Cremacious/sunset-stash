@@ -1,6 +1,5 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
 import { getPostById } from '@/lib/actions/post.actions';
 import Link from 'next/link';
 import { ArrowLeft, Edit, MessageCircle } from 'lucide-react';
@@ -11,6 +10,7 @@ import StashItemListCard from '@/components/stash/StashItemListCard';
 import { getAuthenticatedUser } from '@/lib/server-utils';
 import CommentSection from '@/components/social/CommentSection';
 import UserImage from '@/components/social/UserImage';
+import NotFound from '@/components/NotFound';
 
 const PostPage = async ({
   params,
@@ -21,23 +21,7 @@ const PostPage = async ({
   const result = await getPostById(postId);
 
   if (!result.success || !result.data) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Card className="max-w-md w-full">
-          <CardContent className="p-6 text-center">
-            <h1 className="text-xl font-semibold text-gray-800 mb-2">
-              Post Not Found
-            </h1>
-            <p className="text-gray-600 mb-4">
-              {result.error || 'The post you are looking for does not exist.'}
-            </p>
-            <Button asChild>
-              <Link href="/social">Back to Social Feed</Link>
-            </Button>
-          </CardContent>
-        </Card>
-      </div>
-    );
+    return <NotFound message="Sorry, we could not find that post." />;
   }
 
   const post = result.data;

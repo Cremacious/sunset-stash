@@ -1,6 +1,6 @@
+import NotFound from '@/components/NotFound';
 import EditPurchaseForm from '@/components/purchases/EditPurchaseForm';
 import { getPurchaseById } from '@/lib/actions/purchase.actions';
-import { notFound } from 'next/navigation';
 
 const EditPurchasePage = async ({
   params,
@@ -12,7 +12,7 @@ const EditPurchasePage = async ({
   const data = await getPurchaseById(purchaseId);
 
   if (!data.purchase) {
-    notFound();
+    return <NotFound message="Sorry, we could not find that purchase." />;
   }
 
   return (

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { ArrowLeft, Edit, Container, DollarSign } from 'lucide-react';
 import StashPurchaseCard from '@/components/stash/StashPurchaseCard';
 import { getPurchaseById } from '@/lib/actions/purchase.actions';
-import { notFound } from 'next/navigation';
+import NotFound from '@/components/NotFound';
 
 const PurchaseDetailsPage = async ({
   params,
@@ -15,7 +15,7 @@ const PurchaseDetailsPage = async ({
   const { purchase } = await getPurchaseById(purchaseId);
 
   if (!purchase) {
-    notFound();
+    return <NotFound message="Sorry, we could not find that purchase." />;
   }
 
   return (

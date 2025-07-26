@@ -4,7 +4,7 @@ import { ArrowLeft, Edit } from 'lucide-react';
 import Image from 'next/image';
 import { getStashItemById } from '@/lib/actions/stash.actions';
 import { getCategoryIcon } from '@/lib/utils';
-import { notFound } from 'next/navigation';
+import NotFound from '@/components/NotFound';
 
 const StashItemPage = async ({
   params,
@@ -16,7 +16,7 @@ const StashItemPage = async ({
   const stashItem = result.data;
 
   if (!stashItem) {
-    notFound();
+    return <NotFound message="Stash item not found." />;
   }
 
   return (

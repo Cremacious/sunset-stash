@@ -1,5 +1,6 @@
 import { getStashItemsByUserId } from '@/lib/actions/stash.actions';
 import UserStashGrid from './UserStashGrid';
+import NotFound from '@/components/NotFound';
 
 const UserStashPage = async ({
   params,
@@ -7,6 +8,10 @@ const UserStashPage = async ({
   params: Promise<{ profileId: string }>;
 }) => {
   const { profileId } = await params;
+
+  if (!profileId) {
+    return <NotFound message="Profile not found." />;
+  }
   const { stashItems = [] } = await getStashItemsByUserId(profileId);
 
   const availableCategories = [
@@ -16,7 +21,6 @@ const UserStashPage = async ({
 
   return (
     <div className="glassCard max-w-5xl mx-auto">
-      
       <UserStashGrid
         stashItems={stashItems}
         availableCategories={availableCategories}

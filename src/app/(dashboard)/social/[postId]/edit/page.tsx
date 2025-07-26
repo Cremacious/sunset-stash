@@ -2,6 +2,7 @@ import EditPostForm from '@/components/social/EditPostForm';
 import { getPostById } from '@/lib/actions/post.actions';
 import { PostWithStashItems } from '@/lib/types/social.types';
 import { getUserStashItems } from '@/lib/actions/stash.actions';
+import NotFound from '@/components/NotFound';
 
 const EditPostPage = async ({
   params,
@@ -13,9 +14,8 @@ const EditPostPage = async ({
   const { stashItems = [] } = await getUserStashItems();
 
   if (!result.success || !result.data) {
-    return <div>Post not found.</div>;
+    return <NotFound message="Post not found." />;
   }
-
 
   return (
     <div>
