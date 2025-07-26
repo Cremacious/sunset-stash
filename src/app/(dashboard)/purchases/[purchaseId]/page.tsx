@@ -5,6 +5,11 @@ import { ArrowLeft, Edit, Container, DollarSign } from 'lucide-react';
 import StashPurchaseCard from '@/components/stash/StashPurchaseCard';
 import { getPurchaseById } from '@/lib/actions/purchase.actions';
 import NotFound from '@/components/NotFound';
+import type { Metadata } from 'next';
+export const metadata: Metadata = {
+  title: 'Purchase Details | Sunset Stash',
+  description: 'Details about the purchase',
+};
 
 const PurchaseDetailsPage = async ({
   params,

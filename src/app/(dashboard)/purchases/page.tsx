@@ -13,7 +13,6 @@ import { CardContent, CardHeader } from '@/components/ui/card';
 import { DollarSign, Sun } from 'lucide-react';
 
 
-
 const PurchasesPage = () => {
   const [allPurchases, setAllPurchases] = useState<Purchase[]>([]);
   const [availableDates, setAvailableDates] = useState<{

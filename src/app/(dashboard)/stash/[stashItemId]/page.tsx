@@ -6,6 +6,12 @@ import { getStashItemById } from '@/lib/actions/stash.actions';
 import { getCategoryIcon } from '@/lib/utils';
 import NotFound from '@/components/NotFound';
 
+import type { Metadata } from 'next';
+export const metadata: Metadata = {
+  title: 'Stash | Sunset Stash',
+  description: 'Your stash item details',
+};
+
 const StashItemPage = async ({
   params,
 }: {

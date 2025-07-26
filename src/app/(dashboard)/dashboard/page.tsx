@@ -6,6 +6,12 @@ import { getAllTimelinePosts } from '@/lib/actions/post.actions';
 import { getAllUserPurchases } from '@/lib/actions/purchase.actions';
 import { getUserStashItems } from '@/lib/actions/stash.actions';
 
+import type { Metadata } from 'next';
+export const metadata: Metadata = {
+  title: 'Dashboard | Sunset Stash',
+  description: 'Your dashboard summary',
+};
+
 const DashboardPage = async () => {
   const { purchases = [] } = await getAllUserPurchases();
 

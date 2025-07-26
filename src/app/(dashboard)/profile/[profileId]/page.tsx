@@ -19,6 +19,11 @@ import {
 import { ProfilePost } from '@/lib/types/profile.types';
 import UserImage from '@/components/social/UserImage';
 import NotFound from '@/components/NotFound';
+import type { Metadata } from 'next';
+export const metadata: Metadata = {
+  title: 'Profile | Sunset Stash',
+  description: 'User profile page',
+};
 
 const ProfilePage = async ({
   params,

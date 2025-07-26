@@ -12,6 +12,11 @@ import CommentSection from '@/components/social/CommentSection';
 import UserImage from '@/components/social/UserImage';
 import NotFound from '@/components/NotFound';
 
+import type { Metadata } from 'next';
+export const metadata: Metadata = {
+  title: 'Post | Sunset Stash',
+  description: 'Details about a social post',
+};
 const PostPage = async ({
   params,
 }: {

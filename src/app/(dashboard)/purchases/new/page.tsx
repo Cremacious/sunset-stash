@@ -1,4 +1,9 @@
 import PurchaseForm from '@/components/purchases/PurchaseForm';
+import type { Metadata } from 'next';
+export const metadata: Metadata = {
+  title: 'New Purchase | Sunset Stash',
+  description: 'Create a new purchase',
+};
 
 const NewPurchasePage = () => {
   return (
