@@ -54,7 +54,7 @@ const StashCard = ({ stashItem }: { stashItem: StashItem }) => {
               asChild
               size="sm"
               variant="outline"
-              className="flex-1 text-purple-600 border-purple-300 hover:bg-purple-50"
+              className="flex-1 "
             >
               <Link
                 className="flex items-center justify-center gap-1"

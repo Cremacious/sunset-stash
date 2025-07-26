@@ -46,7 +46,9 @@ export function DeleteDialog({
     <Dialog>
       <form>
         <DialogTrigger asChild>
-          <Button className="bg-red-500">Delete</Button>
+          <Button className="bg-red-500 hover:bg-red-600 border-b-4 border-b-red-600 hover:border-b-red-700">
+            Delete
+          </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>

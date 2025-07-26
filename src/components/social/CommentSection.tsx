@@ -54,7 +54,7 @@ const CommentSection = ({
   return (
     <div className="space-y-4">
       {localComments.length === 0 ? (
-        <div className="text-center py-8 text-gray-800">No comments yet.</div>
+        <div className="text-center py-8 text-gray-800 fugaz-font">No comments yet.</div>
       ) : (
         localComments.map((comment) =>
           editingId === comment.id ? (

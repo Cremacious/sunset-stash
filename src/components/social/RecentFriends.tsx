@@ -31,8 +31,8 @@ const RecentFriends = ({ friends }: { friends: Friend[] }) => {
                   <RecentFriendCard key={friend.id} friend={friend} />
                 ))
               ) : (
-                <div className="flex justify-center items-center text-center">
-                  No friends yet
+                <div className="flex justify-center items-center text-center fugaz-font">
+                  Add some friends to see them here!
                 </div>
               )}
             </div>
@@ -43,7 +43,7 @@ const RecentFriends = ({ friends }: { friends: Friend[] }) => {
                 <RecentFriendCard key={friend.id} friend={friend} />
               ))
           ) : (
-            <div className="flex justify-center items-center text-center permanent-marker-font ">
+            <div className="flex justify-center items-center text-center fugaz-font ">
               No friends, yet...
             </div>
           )}

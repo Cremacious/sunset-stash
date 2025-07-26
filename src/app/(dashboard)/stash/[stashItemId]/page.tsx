@@ -35,26 +35,28 @@ const StashItemPage = async ({
         </Button>
       </div>
 
-      <div className="bg-gradient-to-br from-white via-orange-100 to-orange-200 border-0 border-b-4 border-b-purple-300 shadow-xl rounded-xl overflow-hidden">
+      <div className="bg-gradient-to-br from-white via-orange-100 to-orange-200 border-0 border-b-4 border-b-orange-300 shadow-xl rounded-xl overflow-hidden">
         <div className=" p-4 ">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <Image
-                width={35}
-                height={35}
-                src={getCategoryIcon(stashItem.category)}
-                alt={stashItem.category}
-              />
+              <div className="bg-white p-2 rounded-full shadow-md">
+                <Image
+                  width={35}
+                  height={35}
+                  src={getCategoryIcon(stashItem.category)}
+                  alt={stashItem.category}
+                />
+              </div>
               <p className="text-slate-800 fugaz-font text-2xl md:text-3xl">
                 {stashItem.name}
               </p>
             </div>
-            <p className="text-sm text-gray-600 fugaz-font">
+            {/* <p className="text-sm text-gray-600 fugaz-font">
               Added:{' '}
               {stashItem.dateAdded
                 ? new Date(stashItem.dateAdded).toLocaleDateString()
                 : 'N/A'}
-            </p>
+            </p> */}
           </div>
         </div>
 
@@ -138,8 +140,14 @@ const StashItemPage = async ({
             </div>
           )}
 
-          <div className="flex items-center justify-end">
-            <Button variant="outline" size="sm" asChild>
+          <div className="flex items-center justify-between">
+            <p className="text-sm text-slate-700 fugaz-font">
+              Added:{' '}
+              {stashItem.dateAdded
+                ? new Date(stashItem.dateAdded).toLocaleDateString()
+                : 'N/A'}
+            </p>
+            <Button size="sm" asChild>
               <Link href={`/stash/${stashItem.id}/edit`}>
                 <Edit className="w-4 h-4 mr-1" />
                 Edit

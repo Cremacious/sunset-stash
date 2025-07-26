@@ -48,12 +48,7 @@ export default function Navbar() {
               </div>
             </div>
             <div className="hidden md:flex justify-end items-center ml-4">
-              <Button
-                onClick={handleSignOut}
-                className="bg-purple-600 text-white"
-              >
-                Sign Out
-              </Button>
+              <Button onClick={handleSignOut}>Sign Out</Button>
             </div>
           </>
         ) : (

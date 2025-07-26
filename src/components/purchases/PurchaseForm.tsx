@@ -173,12 +173,11 @@ export default function PurchaseForm() {
                             <PopoverTrigger asChild>
                               <FormControl>
                                 <Button
-                                  variant="outline"
+                                  variant="secondary"
                                   className={cn(
                                     'w-full pl-3 text-left font-normal',
-                                    'bg-white/80 backdrop-blur-sm border-purple-200/50 text-gray-900 rounded-xl',
-                                    'hover:bg-purple-50 hover:text-gray-900 hover:border-purple-300',
-                                    'focus:ring-purple-400/20 focus:border-purple-400',
+                                    'bg-white backdrop-blur-sm  text-gray-900 rounded-xl',
+                              
                                     !field.value && 'text-gray-500'
                                   )}
                                 >
@@ -245,7 +244,7 @@ export default function PurchaseForm() {
                       variant="outline"
                       size="sm"
                       onClick={addItem}
-                      className="text-purple-600 border-purple-300 hover:bg-purple-50 rounded-xl"
+                 
                     >
                       <Plus className="h-4 w-4 mr-2" />
                       Add Item

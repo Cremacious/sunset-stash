@@ -8,7 +8,9 @@ const RecentFriendCard = ({ friend }: { friend: Friend }) => {
     <div className="flex items-center space-x-3 p-3  border-b-blue-200 border-b-3 bg-gradient-to-br from-blue-50 via-white to-blue-100 rounded-lg hover:bg-blue-50 transition-colors">
       <UserImage name={friend.name} />
       <div className="flex-1 min-w-0">
-        <p className="text-sm font-semibold text-gray-900">{friend.name}</p>
+        <p className=" font-semibold text-gray-900 fugaz-font truncate md:max-w-[180px] max-w-[250px] mt-2">
+          {friend.name}
+        </p>
         <div className="flex items-center space-x-2">
           <div className="w-2 h-2 rounded-full " />
         </div>

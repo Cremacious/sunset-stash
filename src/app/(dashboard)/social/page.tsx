@@ -19,6 +19,7 @@ import {
   PostWithStashItems,
 } from '@/lib/types/social.types';
 import { Sun } from 'lucide-react';
+import Link from 'next/link';
 
 export default function SocialPage() {
   const { data: session } = useSession();
@@ -81,9 +82,12 @@ export default function SocialPage() {
                 <div className="flex items-center space-x-4 ">
                   <UserImage name={currentUser?.name ?? 'Unknown User'} />
 
-                  <h2 className="truncate max-w-[280px] fugaz-font text-slate-800 text-2xl mt-1">
-                    {currentUser?.name}
-                  </h2>
+                  <Link
+                    href={`/profile/${currentUser?.id}`}
+                    className="font-bold text-2xl hover:underline fugaz-font text-slate-800 truncate md:max-w-[270px] max-w-[250px]"
+                  >
+                 {currentUser?.name}ffffffffffffffgg
+                  </Link>
                 </div>
               </div>
 

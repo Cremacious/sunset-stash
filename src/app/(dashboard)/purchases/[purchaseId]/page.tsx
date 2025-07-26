@@ -55,9 +55,9 @@ const PurchaseDetailsPage = async ({
               <p className="font-bold text-3xl fugaz-font text-slate-800">
                 {purchase.dispensary}
               </p>
-              <p className="text-sm text-gray-700 fugaz-font">
+              {/* <p className="text-sm text-gray-700 fugaz-font">
                 Added: {new Date(purchase.date).toLocaleDateString()}
-              </p>
+              </p> */}
             </div>
           </div>
           <div className="p-6">
@@ -127,7 +127,10 @@ const PurchaseDetailsPage = async ({
                 </div>
               </div>
             )}
-            <div className="flex items-center justify-end mt-2">
+            <div className="flex items-center justify-between mt-2">
+              <p className="text-sm text-gray-700 fugaz-font">
+                Added: {new Date(purchase.date).toLocaleDateString()}
+              </p>
               <Button size="sm" asChild>
                 <Link href={`/purchases/${purchaseId}/edit`}>
                   <Edit className="w-4 h-4 mr-1" />

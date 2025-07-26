@@ -72,9 +72,11 @@ const PostPage = async ({
               </span>
             </div>
             <div>
-              <p className="font-bold text-xl fugaz-font text-slate-800">
-                {post.author}
-              </p>
+              <Link href={`/profile/${post.userId}`}>
+                <p className="font-bold text-xl fugaz-font text-slate-800">
+                  {post.author}
+                </p>
+              </Link>
               <p className="text-xs text-gray-600">
                 {new Date(post.createdAt).toLocaleDateString()}
               </p>
@@ -145,12 +147,7 @@ const PostPage = async ({
               </div>
             </div>
             <div className="flex space-x-2">
-              <Button
-                variant="outline"
-                size="sm"
-                className="text-purple-600 border-purple-300 hover:bg-purple-50"
-                asChild
-              >
+              <Button variant="outline" size="sm" asChild>
                 <Link href={`/social/${post.id}/edit`}>
                   <Edit className="w-4 h-4 mr-1" />
                   Edit
