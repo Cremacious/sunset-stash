@@ -13,16 +13,18 @@ import Link from 'next/link';
 
 export default function SignUpPage() {
   return (
-    <div className="flex justify-center px-4 mt-4">
+    <div className="flex justify-center px-4 mt-4 ">
       <div className="w-full max-w-md relative z-1">
-        <Card className="bg-gradient-to-br from-orange-50 via-white to-orange-100 shadow-2xl border-0 overflow-hidden">
+        <Card className="bg-gradient-to-br from-orange-50 via-white to-orange-100  shadow-2xl border-0 overflow-hidden border-b-4 border-b-orange-400">
           <CardHeader className="text-center">
             <Image
               src={logo}
               alt="Sunset Stash Logo"
               className="w-50 h-50 mx-auto round-full"
             />
-            <CardTitle className="text-4xl fugaz-font text-purple-800 ">Sunset Stash</CardTitle>
+            <CardTitle className="text-4xl fugaz-font text-purple-800 ">
+              Sunset Stash
+            </CardTitle>
             <CardDescription className="text-gray-600 text-base">
               Welcome to Florida&apos;s cannabis community
             </CardDescription>
@@ -44,7 +46,7 @@ export default function SignUpPage() {
                 </div>
               </Button> */}
             </div>
-{/* 
+            {/* 
             <div className="relative mb-6">
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full"></div>
@@ -58,15 +60,13 @@ export default function SignUpPage() {
             <SignUpForm />
 
             <div className="text-center mt-6 pt-6 border-t border-gray-200">
-              <p className="text-slate-800">
-                Already have an account?{' '}
-                <Link className="text-purple-800" href={'/sign-in'}>
-                  Sign in here
-                </Link>
-              </p>
+              <p className="text-slate-800 mb-2">Already have an account? </p>
+              <Link className="text-purple-800" href={'/sign-in'}>
+                Sign in here
+              </Link>
             </div>
 
-            <div className="text-center mt-4">
+            {/* <div className="text-center mt-4">
               <p className="text-xs text-gray-500 leading-relaxed">
                 By creating an account, you agree to our{' '}
                 <span className="text-purple-800 hover:underline cursor-pointer">
@@ -77,7 +77,7 @@ export default function SignUpPage() {
                   Privacy Policy
                 </span>
               </p>
-            </div>
+            </div> */}
           </CardContent>
         </Card>
       </div>

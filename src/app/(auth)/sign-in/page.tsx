@@ -14,7 +14,7 @@ export default function SignInPage() {
   return (
     <div className=" flex justify-center px-4 mt-4">
       <div className="w-full max-w-md relative z-10">
-        <Card className="bg-gradient-to-br from-orange-50 via-white to-orange-100 shadow-2xl border-0 overflow-hidden">
+        <Card className="bg-gradient-to-br from-orange-50 via-white to-orange-100 shadow-2xl border-0 overflow-hidden border-b-4 border-b-orange-400">
           <CardHeader className="text-center">
             <Image
               src={logo}
@@ -59,15 +59,15 @@ export default function SignInPage() {
             <SignInForm />
 
             <div className="text-center mt-6 pt-6 border-t border-gray-200">
-              <p className="text-gray-600">
+              <p className="text-slate-800 mb-2">
                 Don&apos;t have an account?{' '}
-                <Link className="text-purple-800" href={'/sign-up'}>
-                  Sign up here
-                </Link>
               </p>
+              <Link className="text-purple-800" href={'/sign-up'}>
+                Sign up here
+              </Link>
             </div>
 
-            <div className="text-center mt-4">
+            {/* <div className="text-center mt-4">
               <p className="text-xs text-gray-500 leading-relaxed">
                 By creating an account, you agree to our{' '}
                 <span className="text-purple-800 hover:underline cursor-pointer">
@@ -78,7 +78,7 @@ export default function SignInPage() {
                   Privacy Policy
                 </span>
               </p>
-            </div>
+            </div> */}
           </CardContent>
         </Card>
       </div>

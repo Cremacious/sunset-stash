@@ -13,13 +13,30 @@ const routes = [
 ];
 
 export default function Navbar() {
-  const { data: session } = useSession();
+  const { data: session, isPending } = useSession();
   const router = useRouter();
 
   const handleSignOut = async () => {
     await signOut();
     router.push('/');
   };
+
+  // Only render session-dependent UI after session is loaded
+  if (isPending) {
+    return (
+      <nav className="relative z-20 mb-4 px-4 md:px-8 bg-white/10 backdrop-blur-md p-4 border border-white/20">
+        <div className="flex w-full items-center max-w-7xl mx-auto">
+          <div className="flex items-center space-x-3">
+            <Link href="/">
+              <h1 className="text-xl md:text-2xl ml-4 mt-1 fugaz-font text-white drop-shadow-md">
+                Sunset Stash <span className="text-purple-600"> Beta</span>
+              </h1>
+            </Link>
+          </div>
+        </div>
+      </nav>
+    );
+  }
 
   return (
     <nav className="relative z-20 mb-4 px-4 md:px-8 bg-white/10 backdrop-blur-md p-4 border border-white/20">
@@ -57,17 +74,12 @@ export default function Navbar() {
 
         {!session && (
           <div className="hidden md:flex justify-end items-center ml-4">
-            <Link
-              href="/sign-in"
-              className="px-3 py-2 mr-2 md:px-4 md:py-2 text-sm text-white border border-white/40 border-b-2 border-b-gray-100 rounded-lg hover:bg-white/10 transition-all duration-200 backdrop-blur-sm font-medium hover:cursor-pointer"
-            >
-              Sign In
-            </Link>
             <Link href="/sign-up">
-              <Button className='className="px-3 py-2 mr-2 md:px-4 md:py-2 text-sm border-b-2 bg-white hover:bg-gray-100 text-purple-700 rounded-lg  transition-all duration-200 backdrop-blur-sm font-medium hover:cursor-pointer'>
-                Get Started
-              </Button>
+              <Button>Get Started</Button>
             </Link>
+            <Button asChild variant={'outline'} className="ml-2">
+              <Link href="/sign-in">Sign In</Link>
+            </Button>
           </div>
         )}
 
