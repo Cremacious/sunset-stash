@@ -37,9 +37,9 @@ const Sidebar = ({ routes }: { routes: Routes[] }) => {
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
         <button
-          className="md:hidden p-2 text-white bg-white/20 backdrop-blur-sm rounded-2xl border border-white/30 hover:bg-white/30 transition-all duration-200"
+          className="md:hidden p-1 text-white bg-white/20 backdrop-blur-sm rounded-2xl border border-white/30 hover:bg-white/30 transition-all duration-200"
         >
-          <Menu className="w-9 h-8" />
+          <Menu className="w-10 h-7" />
         </button>
       </SheetTrigger>
       <SheetContent className="w-80 p-0 border-none overflow-hidden">
