@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Dialog,
   DialogClose,
@@ -27,6 +27,11 @@ const FriendRequestDialog = ({
 }) => {
   const [processing, setProcessing] = useState<string | null>(null);
   const [friendRequests, setFriendRequests] = useState(initialRequests);
+
+  // Sync local state with parent prop
+  useEffect(() => {
+    setFriendRequests(initialRequests);
+  }, [initialRequests]);
 
   const handleAccept = async (friendshipId: string) => {
     setProcessing(friendshipId);

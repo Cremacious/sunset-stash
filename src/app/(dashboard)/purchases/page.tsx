@@ -194,7 +194,7 @@ const PurchasesPage = () => {
           </div>
 
           {loading ? (
-            <div className="glassCard h-40 mt-4">
+            <div className=" h-[400px] mt-4">
               <div className="animate-pulse h-full flex items-center justify-center">
                 <Sun className="text-yellow-400 animate-spin" size={100} />
               </div>
