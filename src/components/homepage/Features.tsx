@@ -24,7 +24,7 @@ const Features = () => {
       <div className="max-w-6xl mx-auto px-4 py-12">
         <div className=" rounded-3xl">
           <h2 className="text-4xl font-bold text-white text-center mb-14 drop-shadow-lg fugaz-font">
-            Everything You Need to Track Your Journey
+            Everything You Need to Plan Your Journey
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
