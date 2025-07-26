@@ -19,22 +19,27 @@ import {
 import { PendingFriendship } from '@/lib/types/social.types';
 
 const FriendRequestDialog = ({
-  friendRequests,
+  friendRequests: initialRequests,
   onRequestUpdate,
 }: {
   friendRequests: PendingFriendship[];
   onRequestUpdate?: () => void;
 }) => {
   const [processing, setProcessing] = useState<string | null>(null);
+  const [friendRequests, setFriendRequests] = useState(initialRequests);
 
   const handleAccept = async (friendshipId: string) => {
     setProcessing(friendshipId);
+    setFriendRequests((prev) => prev.filter((req) => req.id !== friendshipId));
     try {
       const result = await acceptFriendRequest(friendshipId);
       if (result.success) {
-        console.log('Friend request accepted successfully');
         onRequestUpdate?.();
       } else {
+        setFriendRequests((prev) => [
+          ...prev,
+          initialRequests.find((req) => req.id === friendshipId)!,
+        ]);
         console.error('Error accepting friend request:', result.error);
       }
     } finally {
@@ -44,12 +49,16 @@ const FriendRequestDialog = ({
 
   const handleDecline = async (friendshipId: string) => {
     setProcessing(friendshipId);
+    setFriendRequests((prev) => prev.filter((req) => req.id !== friendshipId));
     try {
       const result = await declineFriendRequest(friendshipId);
       if (result.success) {
-        console.log('Friend request declined successfully');
         onRequestUpdate?.();
       } else {
+        setFriendRequests((prev) => [
+          ...prev,
+          initialRequests.find((req) => req.id === friendshipId)!,
+        ]);
         console.error('Error declining friend request:', result.error);
       }
     } finally {
@@ -77,21 +86,22 @@ const FriendRequestDialog = ({
               {friendRequests.map((request) => (
                 <div
                   key={request.id}
-                  className="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
+                  className="flex flex-col md:flex-row items-center justify-between p-3 bg-gray-50 rounded-lg w-full max-w-full overflow-hidden"
                 >
-                  <div className="flex flex-col">
-                    <span className="text-sm font-medium text-gray-900">
+                  <div className="flex flex-col w-full md:w-auto min-w-0">
+                    <span className="text-sm font-medium text-gray-900 truncate">
                       {request.user.name}
                     </span>
-                    <span className="text-xs text-gray-500">
+                    <span className="text-xs text-gray-500 break-all truncate max-w-[180px] md:max-w-[240px]">
                       {request.user.email}
                     </span>
                   </div>
-                  <div className="flex space-x-2">
+                  <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 w-full md:w-auto mt-2 md:mt-0">
                     <Button
                       size="sm"
                       onClick={() => handleAccept(request.id)}
                       disabled={processing === request.id}
+                      className="w-full md:w-auto"
                     >
                       {processing === request.id ? 'Processing...' : 'Accept'}
                     </Button>
@@ -100,6 +110,7 @@ const FriendRequestDialog = ({
                       variant="outline"
                       onClick={() => handleDecline(request.id)}
                       disabled={processing === request.id}
+                      className="w-full md:w-auto"
                     >
                       {processing === request.id ? 'Processing...' : 'Decline'}
                     </Button>
