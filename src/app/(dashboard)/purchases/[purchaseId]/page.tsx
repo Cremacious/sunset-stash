@@ -2,7 +2,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { ArrowLeft, Edit, Container, DollarSign } from 'lucide-react';
-import StashItemListCard from '@/components/stash/StashItemListCard';
+import StashPurchaseCard from '@/components/stash/StashPurchaseCard';
 import { getPurchaseById } from '@/lib/actions/purchase.actions';
 
 const PurchaseDetailsPage = async ({
@@ -34,7 +34,7 @@ const PurchaseDetailsPage = async ({
   }
 
   return (
-    <div className="min-h-screen  flex items-center justify-center">
+    <div className="flex items-center justify-center">
       <div className="max-w-3xl w-full mx-auto">
         <div className="mb-6 flex items-center">
           <Button
@@ -112,7 +112,7 @@ const PurchaseDetailsPage = async ({
                     </h4>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {purchase.items.map((item) => (
-                        <StashItemListCard
+                        <StashPurchaseCard
                           key={item.id}
                           price={item.price}
                           stashItem={{
