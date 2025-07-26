@@ -22,6 +22,7 @@ import { Container, Sun } from 'lucide-react';
 import { PostWithStashItems } from '@/lib/types/social.types';
 import { StashItem } from '@/lib/types/stash.types';
 import { Label } from '../ui/label';
+import { DeleteDialog } from '../DeleteDialog';
 
 type EditPostFormProps = {
   post: PostWithStashItems;
@@ -271,6 +272,7 @@ const EditPostForm = ({ post, stashItems }: EditPostFormProps) => {
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-3">
+                  <DeleteDialog deleteType={'post'} deleteId={post.id} />
                   <Button
                     type="button"
                     variant="outline"

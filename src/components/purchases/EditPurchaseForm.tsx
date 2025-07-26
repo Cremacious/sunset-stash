@@ -45,6 +45,7 @@ import { editPurchase } from '@/lib/actions/purchase.actions';
 import { useRouter } from 'next/navigation';
 import { CATEGORIES, TYPES } from '@/lib/constants';
 import { Purchase } from '@/lib/types';
+import { DeleteDialog } from '../DeleteDialog';
 
 export default function EditPurchaseForm({ purchase }: { purchase: Purchase }) {
   const router = useRouter();
@@ -567,6 +568,7 @@ export default function EditPurchaseForm({ purchase }: { purchase: Purchase }) {
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-4 py-6 border-t border-gray-200/50">
+                  <DeleteDialog deleteType={"purchase"} deleteId={purchase.id} />
                   <Button
                     type="button"
                     variant="outline"

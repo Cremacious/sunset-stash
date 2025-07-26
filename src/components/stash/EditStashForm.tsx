@@ -29,6 +29,7 @@ import { useRouter } from 'next/navigation';
 import { Sun } from 'lucide-react';
 import { TYPES, CATEGORIES } from '@/lib/constants';
 import { StashItem } from '@/lib/types';
+import { DeleteDialog } from '../DeleteDialog';
 
 const EditStashForm = ({ stashItem }: { stashItem: StashItem }) => {
   const router = useRouter();
@@ -248,6 +249,10 @@ const EditStashForm = ({ stashItem }: { stashItem: StashItem }) => {
                   />
                 </div>
                 <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-gray-200">
+                  <DeleteDialog
+                    deleteType={'stash'}
+                    deleteId={stashItem.id}
+                  />
                   <Button
                     type="button"
                     variant="outline"

@@ -124,3 +124,26 @@ export async function getStashItemById(stashItemId: string) {
     };
   }
 }
+
+export async function deleteStashItem(stashItemId: string) {
+  try {
+    const { user, error } = await getAuthenticatedUser();
+    if (!user) {
+      return { success: false, error };
+    }
+    const stashItem = await prisma.stashItem.findUnique({
+      where: { id: stashItemId, userId: user.id },
+    });
+    if (!stashItem) {
+      return { success: false, error: 'Stash item not found' };
+    }
+    await prisma.stashItem.delete({
+      where: { id: stashItemId },
+    });
+    revalidatePath('/stash');
+    return { success: true, message: 'Stash item deleted successfully' };
+  } catch (error) {
+    console.error('Error deleting stash item:', error);
+    return { success: false, error: 'Failed to delete stash item' };
+  }
+}

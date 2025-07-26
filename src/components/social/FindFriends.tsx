@@ -20,12 +20,11 @@ const FindFriends = () => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-orange-50 via-white0 to-orange-100 rounded-lg p-4 md:p-6">
+    <div className="">
       <div className="space-y-4">
         <Label htmlFor="email" className="fugaz-font text-slate-800 text-lg">
           Search Friends by Email
         </Label>
-        <div className="border-b-2 border-b-blue-200"></div>
         <Input
           id="email"
           type="email"

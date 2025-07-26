@@ -1,5 +1,4 @@
 import TimelineFeed from '@/components/social/TimelineFeed';
-import FindFriends from '@/components/social/FindFriends';
 import FriendRequestDialog from '@/components/social/FriendRequestDialog';
 import RecentFriends from '@/components/social/RecentFriends';
 import { getAllTimelinePosts } from '@/lib/actions/post.actions';
@@ -9,6 +8,8 @@ import {
 } from '@/lib/actions/friend.actions';
 import { UserRound } from 'lucide-react';
 import { getCurrentUser } from '@/lib/auth-server-';
+import { Button } from '@/components/ui/button';
+import FindFriendDialog from '@/components/social/FindFriendDialog';
 
 const SocialPage = async () => {
   const currentUser = await getCurrentUser();
@@ -66,17 +67,22 @@ const SocialPage = async () => {
                 </div>
               </div>
 
-              <div className="">
-                <div className="flex justify-center">
+              <div className=" flex justify-around">
+                <FindFriendDialog>
+                  <Button variant={'outline'} size={'sm'} className="">
+                    Find Friends
+                  </Button>
+                </FindFriendDialog>
+                <div className="">
                   <FriendRequestDialog friendRequests={friendRequests} />
                 </div>
               </div>
             </div>
           </div>
           <RecentFriends friends={friends} />
-          <div className="glassCard">
+          {/* <div className="glassCard">
             <FindFriends />
-          </div>
+          </div> */}
         </div>
         <div className="md:col-span-2 space-y-6 glassCard">
           <TimelineFeed posts={posts} currentUserId={currentUserId ?? ''} />
