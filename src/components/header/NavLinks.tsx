@@ -14,10 +14,10 @@ const NavLinks = ({ routes }: { routes: { name: string; href: string }[] }) => {
 
   return (
     <>
-      <div className="hidden lg:flex items-center space-x-8">
-        {session &&
-          routes.map((route: { name: string; href: string }) => (
-            <>
+      {session ? (
+        <div className="w-full flex items-center">
+          <div className="flex-1 flex justify-center items-center space-x-8">
+            {routes.map((route: { name: string; href: string }) => (
               <Link
                 key={route.href}
                 href={route.href}
@@ -25,29 +25,33 @@ const NavLinks = ({ routes }: { routes: { name: string; href: string }[] }) => {
               >
                 {route.name}
               </Link>
-            </>
-          ))}
-      </div>
-
-      {session ? (
-        <div className=" hidden md:flex items-center space-x-4">
-          <Button onClick={handleSignOut} className="bg-purple-600 text-white">
-            Sign Out
-          </Button>
+            ))}
+          </div>
+          <div className="flex justify-end items-center space-x-4">
+            <Button
+              onClick={handleSignOut}
+              className="bg-purple-600 text-white"
+            >
+              Sign Out
+            </Button>
+          </div>
         </div>
       ) : (
-        <div className="flex items-center space-x-4">
-          <Link
-            href="/sign-in"
-            className="px-3 py-2 md:px-4 md:py-2 text-sm text-white border border-white/40 rounded-lg hover:bg-white/10 transition-all duration-200 backdrop-blur-sm font-medium hover:cursor-pointer"
-          >
-            Sign In
-          </Link>
-          <Link href="/sign-up">
-            <Button className="px-3 py-2 md:px-4 md:py-2 text-sm bg-white text-purple-600 font-semibold rounded-lg hover:bg-white/90 transition-all duration-200 shadow-lg hover:cursor-pointer">
-              Get Started
-            </Button>
-          </Link>
+        <div className="w-full flex items-center">
+          <div className="flex-1" />
+          <div className="flex justify-end items-center space-x-4">
+            <Link
+              href="/sign-in"
+              className="px-3 py-2 md:px-4 md:py-2 text-sm text-white border border-white/40 rounded-lg hover:bg-white/10 transition-all duration-200 backdrop-blur-sm font-medium hover:cursor-pointer"
+            >
+              Sign In
+            </Link>
+            <Link href="/sign-up">
+              <Button className="px-3 py-2 md:px-4 md:py-2 text-sm bg-white text-purple-600 font-semibold rounded-lg hover:bg-white/90 transition-all duration-200 shadow-lg hover:cursor-pointer">
+                Get Started
+              </Button>
+            </Link>
+          </div>
         </div>
       )}
     </>
