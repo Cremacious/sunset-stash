@@ -1,4 +1,3 @@
-
 'use server';
 import prisma from '@/lib/prisma';
 import { purchaseFormSchema } from '../validators/purchase.validator';
@@ -269,12 +268,10 @@ export async function editPurchase(
 
     const parsedData = purchaseFormSchema.parse(data);
 
-
     await prisma.purchaseItem.deleteMany({
       where: { purchaseId: purchase.id },
     });
 
-   
     const total = parsedData.items.reduce((sum, item) => sum + item.price, 0);
 
     await prisma.purchase.update({
@@ -299,6 +296,33 @@ export async function editPurchase(
         },
       },
     });
+
+    const itemsToAddToStash = parsedData.items.filter(
+      (item) => item.addToStash
+    );
+    for (const item of itemsToAddToStash) {
+      const exists = await prisma.stashItem.findFirst({
+        where: {
+          userId: session.user.id,
+          name: item.name,
+        },
+      });
+      if (!exists) {
+        await prisma.stashItem.create({
+          data: {
+            name: item.name,
+            category: item.category,
+            type: item.type || '',
+            amount: item.amount || '',
+            thc: item.thc || 0,
+            cbd: item.cbd || 0,
+            lineage: item.lineage || '',
+            notes: item.notes || '',
+            userId: session.user.id,
+          },
+        });
+      }
+    }
 
     revalidatePath('/purchases');
     return { success: true, message: 'Purchase updated successfully' };
