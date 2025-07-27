@@ -122,10 +122,12 @@ export default function SocialPage() {
             <RecentFriends friends={friends} />
           )}
         </div>
-        <div className="md:col-span-2 space-y-6 glassCard relative">
+        <div className="md:col-span-2 space-y-6 glassCard relative min-h-[400px]">
           {loading ? (
-            <div className="absolute inset-0 flex justify-center items-center">
-              <Sun className="w-24 h-24 animate-spin text-yellow-400" />
+            <div className="absolute inset-0 flex justify-center items-center ">
+            
+                <Sun className="w-24 h-24 animate-spin text-yellow-400" />
+              
             </div>
           ) : (
             <TimelineFeed posts={posts} currentUserId={currentUserId ?? ''} />

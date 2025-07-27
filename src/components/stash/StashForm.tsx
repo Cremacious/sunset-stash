@@ -61,13 +61,14 @@ const StashForm = () => {
                 className="space-y-8"
               >
                 <div className="bg-white/70 backdrop-blur-md border border-white/30 rounded-2xl pl-2 pt-4 p-2 md:p-4">
-                  <div className="flex items-center space-x-3 mb-6">
+                  <div className="mb-6">
                     <h2 className="text-2xl font-bold text-slate-800 fugaz-font">
                       Add New Strain
                     </h2>
                   </div>
-                  <div className="grid grid-cols-12 gap-4">
-                    <div className="col-span-6">
+
+                  <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
+                    <div className="md:col-span-6">
                       <FormField
                         control={form.control}
                         name="name"
@@ -87,8 +88,7 @@ const StashForm = () => {
                         )}
                       />
                     </div>
-
-                    <div className="col-span-6">
+                    <div className="md:col-span-6">
                       <FormField
                         control={form.control}
                         name="category"
@@ -120,8 +120,8 @@ const StashForm = () => {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4 space-y-4 mt-6">
-                    <div className="">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+                    <div>
                       <FormField
                         control={form.control}
                         name="type"
@@ -151,8 +151,7 @@ const StashForm = () => {
                         )}
                       />
                     </div>
-
-                    <div className="">
+                    <div>
                       <FormField
                         control={form.control}
                         name="thc"
@@ -161,7 +160,7 @@ const StashForm = () => {
                             <FormLabel>THC %</FormLabel>
                             <FormControl>
                               <Input
-                                className="w-1/2"
+                                className="w-full md:w-1/2"
                                 placeholder="0"
                                 type="number"
                                 {...field}
@@ -173,8 +172,7 @@ const StashForm = () => {
                         )}
                       />
                     </div>
-
-                    <div className="">
+                    <div>
                       <FormField
                         control={form.control}
                         name="cbd"
@@ -183,7 +181,7 @@ const StashForm = () => {
                             <FormLabel>CBD %</FormLabel>
                             <FormControl>
                               <Input
-                                className="w-1/2"
+                                className="w-full md:w-1/2"
                                 placeholder="0"
                                 type="number"
                                 {...field}
@@ -196,46 +194,53 @@ const StashForm = () => {
                       />
                     </div>
                   </div>
-<div className="mb-3"></div>
-                  <FormField
-                    control={form.control}
-                    name="lineage"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Lineage</FormLabel>
-                        <FormControl>
-                          <Input placeholder="" type="text" {...field} />
-                        </FormControl>
-                        <FormDescription>
-                          Enter the parent strains or genetic background if
-                          known
-                        </FormDescription>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+
+                  <div className="mb-3"></div>
+                  <div className="grid grid-cols-1 gap-4">
+                    <FormField
+                      control={form.control}
+                      name="lineage"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Lineage</FormLabel>
+                          <FormControl>
+                            <Input placeholder="" type="text" {...field} />
+                          </FormControl>
+                          <FormDescription>
+                            Enter the parent strains or genetic background if
+                            known
+                          </FormDescription>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
                   <div className="mb-4"></div>
-                  <FormField
-                    control={form.control}
-                    name="notes"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Your Overall Thoughts</FormLabel>
-                        <FormControl>
-                          <Textarea
-                            placeholder=""
-                            className="resize-none"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormDescription>
-                          Share Your experiences, effects, taste, aroma, or any
-                          other notes about this strain.
-                        </FormDescription>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+
+         
+                  <div className="grid grid-cols-1 gap-4">
+                    <FormField
+                      control={form.control}
+                      name="notes"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Your Overall Thoughts</FormLabel>
+                          <FormControl>
+                            <Textarea
+                              placeholder=""
+                              className="resize-none"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormDescription>
+                            Share Your experiences, effects, taste, aroma, or
+                            any other notes about this strain.
+                          </FormDescription>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
                 </div>
                 <div className="flex flex-row gap-3 pt-4 border-t border-gray-200">
                   <Button
