@@ -177,7 +177,7 @@ export default function EditPurchaseForm({ purchase }: { purchase: Purchase }) {
               >
                 <div className="bg-white/70 backdrop-blur-md border border-white/30 rounded-2xl pl-2 pt-4 p-2 md:p-4">
                   <div className="flex items-center space-x-3 mb-6">
-                    <h2 className="text-2xl font-bold text-slate-800 fugaz-fon">
+                    <h2 className="text-2xl font-bold text-slate-800 fugaz-font">
                       Purchase Information
                     </h2>
                   </div>
@@ -277,7 +277,7 @@ export default function EditPurchaseForm({ purchase }: { purchase: Purchase }) {
                 <div className="bg-white/60 backdrop-blur-md border border-white/30 rounded-2xl pl-2 pt-4 p-2 md:p-4 mt-6">
                   <div className="flex items-center justify-between mb-6">
                     <div className="flex items-center space-x-3">
-                      <h2 className="text-2xl font-bold text-slate-800 fugaz-fon">
+                      <h2 className="text-xl md:text-2xl font-bold text-slate-800 fugaz-font">
                         Items Purchased
                       </h2>
                     </div>
@@ -291,7 +291,9 @@ export default function EditPurchaseForm({ purchase }: { purchase: Purchase }) {
                       Add Item
                     </Button>
                   </div>
-
+                  <p className="text-sm text-slate-600 mb-3">
+                    Click Add Item to add multiple items to this purchase
+                  </p>
                   <div className="space-y-6">
                     {fields.map((field, index) => (
                       <div

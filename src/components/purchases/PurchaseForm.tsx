@@ -181,7 +181,7 @@ export default function PurchaseForm() {
                                   className={cn(
                                     'w-full pl-3 text-left font-normal',
                                     'bg-white backdrop-blur-sm  text-gray-900 rounded-xl',
-                              
+
                                     !field.value && 'text-gray-500'
                                   )}
                                 >
@@ -239,7 +239,7 @@ export default function PurchaseForm() {
                 <div className="bg-white/60 backdrop-blur-md border border-white/30 rounded-2xl pl-2 pt-4 p-2 md:p-4 mt-6">
                   <div className="flex items-center justify-between mb-6">
                     <div className="flex items-center space-x-3">
-                      <h2 className="text-2xl font-bold text-slate-800 fugaz-font">
+                      <h2 className="md:text-2xl text-xl font-bold text-slate-800 fugaz-font">
                         Items Purchased
                       </h2>
                     </div>
@@ -248,12 +248,12 @@ export default function PurchaseForm() {
                       variant="outline"
                       size="sm"
                       onClick={addItem}
-                 
                     >
                       <Plus className="h-4 w-4 mr-2" />
                       Add Item
                     </Button>
                   </div>
+                  <p className='text-sm text-slate-600 mb-3'>Click Add Item to add multiple items to this purchase</p>
 
                   <div className="space-y-6">
                     {fields.map((field, index) => (
