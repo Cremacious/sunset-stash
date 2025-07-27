@@ -9,9 +9,16 @@ import SignUpForm from '../../../components/auth/SignUpForm';
 import logo from '../../../../public/sunset-stash-logo.png';
 import Image from 'next/image';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
+import { getOptionalUser } from '@/lib/server-utils';
 // import SignInWithGoogle from '@/components/auth/SignInWithG/oogle';
 
-export default function SignUpPage() {
+export default async function SignUpPage() {
+
+ const user = await getOptionalUser();
+  if (user) {
+    redirect('/dashboard');
+  }
   return (
     <div className="flex justify-center px-4 mt-4 ">
       <div className="w-full max-w-md relative z-1">
