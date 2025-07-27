@@ -45,6 +45,10 @@ import { createPurchase } from '@/lib/actions/purchase.actions';
 import { useRouter } from 'next/navigation';
 import { CATEGORIES, TYPES } from '@/lib/constants';
 
+// TODO: Edit purchase and be able to save a stash item after the fact
+
+// TODO: Only display add to stash if item isn't in stash already
+
 export default function PurchaseForm() {
   const router = useRouter();
   const form = useForm<PurchaseFormData>({

@@ -44,8 +44,10 @@ import {
 import { editPurchase } from '@/lib/actions/purchase.actions';
 import { useRouter } from 'next/navigation';
 import { CATEGORIES, TYPES } from '@/lib/constants';
-import { Purchase } from '@/lib/types';
+import { Purchase, StashItem } from '@/lib/types';
 import { DeleteDialog } from '../DeleteDialog';
+import { useEffect, useState } from 'react';
+import { getUserStashItems } from '@/lib/actions/stash.actions';
 
 export default function EditPurchaseForm({ purchase }: { purchase: Purchase }) {
   const router = useRouter();
@@ -124,6 +126,18 @@ export default function EditPurchaseForm({ purchase }: { purchase: Purchase }) {
     }
   };
 
+  const [stashItems, setStashItems] = useState<StashItem[]>([]);
+  useEffect(() => {
+    async function fetchStash() {
+      const { stashItems = [] } = await getUserStashItems();
+      setStashItems(stashItems);
+    }
+    fetchStash();
+  }, []);
+
+  const isItemInStash = (itemName: string) =>
+    stashItems.some((stashItem) => stashItem.name === itemName);
+
   async function onSubmit(values: PurchaseFormData) {
     try {
       console.log('Purchase form values:', values);
@@ -201,7 +215,7 @@ export default function EditPurchaseForm({ purchase }: { purchase: Purchase }) {
                             <PopoverTrigger asChild>
                               <FormControl>
                                 <Button
-                                variant={'secondary'}
+                                  variant={'secondary'}
                                   className={cn(
                                     'w-full pl-3 text-left font-normal',
                                     'bg-white/80 backdrop-blur-sm  text-gray-900 rounded-xl',
@@ -498,31 +512,44 @@ export default function EditPurchaseForm({ purchase }: { purchase: Purchase }) {
                             )}
                           />
 
-                          <FormField
-                            control={form.control}
-                            name={`items.${index}.addToStash`}
-                            render={({ field }) => (
-                              <FormItem className="flex flex-row items-center space-x-4 space-y-0 bg-gradient-to-r from-purple-50 to-indigo-50 rounded-2xl border border-purple-200/50 p-6">
-                                <FormControl className="flex items-center justify-center">
-                                  <Checkbox
-                                    checked={field.value}
-                                    onCheckedChange={field.onChange}
-                                    className="w-6 h-6 border-purple-500  focus:ring-purple-900"
-                                  />
-                                </FormControl>
-                                <div className="space-y-1 leading-none flex flex-col items-center">
-                                  <Container className="w-8 h-8 text-purple-600" />
-                                  <FormLabel className="font-bold text-gray-800">
-                                    Add to Stash
-                                  </FormLabel>
-                                  <FormDescription className="text-center text-gray-600">
-                                    Check the box to add this item to your stash
-                                    inventory
-                                  </FormDescription>
+                          {(() => {
+                            const alreadyInStash = isItemInStash(field.name);
+                            if (alreadyInStash) {
+                              return (
+                                <div className="text-slate-700 fugaz-font text-center bg-purple-50 border border-purple-200/50 rounded-xl p-4 flex items-center justify-between">
+                                  Already in stash
                                 </div>
-                              </FormItem>
-                            )}
-                          />
+                              );
+                            } else {
+                              return (
+                                <FormField
+                                  control={form.control}
+                                  name={`items.${index}.addToStash`}
+                                  render={({ field }) => (
+                                    <FormItem className="flex flex-row items-center space-x-4 space-y-0 bg-gradient-to-r from-purple-50 to-indigo-50 rounded-2xl border border-purple-200/50 p-6">
+                                      <FormControl className="flex items-center justify-center">
+                                        <Checkbox
+                                          checked={field.value}
+                                          onCheckedChange={field.onChange}
+                                          className="w-6 h-6 border-purple-500  focus:ring-purple-900"
+                                        />
+                                      </FormControl>
+                                      <div className="space-y-1 leading-none flex flex-col items-center">
+                                        <Container className="w-8 h-8 text-purple-600" />
+                                        <FormLabel className="font-bold text-gray-800">
+                                          Add to Stash
+                                        </FormLabel>
+                                        <FormDescription className="text-center text-gray-600">
+                                          Check the box to add this item to your
+                                          stash inventory
+                                        </FormDescription>
+                                      </div>
+                                    </FormItem>
+                                  )}
+                                />
+                              );
+                            }
+                          })()}
                         </div>
 
                         <FormField
