@@ -135,14 +135,17 @@ const PostPage = async ({
                 </span>
               </div>
             </div>
-            <div className="flex space-x-2">
-              <Button variant="outline" size="sm" asChild>
-                <Link href={`/social/${post.id}/edit`}>
-                  <Edit className="w-4 h-4 mr-1" />
-                  Edit
-                </Link>
-              </Button>
-            </div>
+
+            {post.userId === sessionUserId && (
+              <div className="flex space-x-2">
+                <Button variant="outline" size="sm" asChild>
+                  <Link href={`/social/${post.id}/edit`}>
+                    <Edit className="w-4 h-4 mr-1" />
+                    Edit
+                  </Link>
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       </div>

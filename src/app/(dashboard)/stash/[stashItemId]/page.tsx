@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { getStashItemById } from '@/lib/actions/stash.actions';
 import { getCategoryIcon } from '@/lib/utils';
 import NotFound from '@/components/NotFound';
+import { getAuthenticatedUser } from '@/lib/server-utils';
 
 import type { Metadata } from 'next';
 export const metadata: Metadata = {
@@ -153,12 +154,14 @@ const StashItemPage = async ({
                 ? new Date(stashItem.dateAdded).toLocaleDateString()
                 : 'N/A'}
             </p>
-            <Button size="sm" asChild>
-              <Link href={`/stash/${stashItem.id}/edit`}>
-                <Edit className="w-4 h-4 mr-1" />
-                Edit
-              </Link>
-            </Button>
+            {stashItem.userId === (await getAuthenticatedUser()).user?.id && (
+              <Button size="sm" asChild>
+                <Link href={`/stash/${stashItem.id}/edit`}>
+                  <Edit className="w-4 h-4 mr-1" />
+                  Edit
+                </Link>
+              </Button>
+            )}
           </div>
         </div>
       </div>
