@@ -196,7 +196,7 @@ const StashForm = () => {
                       />
                     </div>
                   </div>
-
+<div className="mb-3"></div>
                   <FormField
                     control={form.control}
                     name="lineage"

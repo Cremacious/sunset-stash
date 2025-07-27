@@ -140,9 +140,9 @@ const StashSearchBar = ({
               <SelectContent>
                 <SelectItem value="newest">Newest</SelectItem>
                 <SelectItem value="oldest">Oldest</SelectItem>
-                <SelectItem value="name">A-Z</SelectItem>
+                {/* <SelectItem value="name">A-Z</SelectItem>
                 <SelectItem value="thc-high">THC ↓</SelectItem>
-                <SelectItem value="thc-low">THC ↑</SelectItem>
+                <SelectItem value="thc-low">THC ↑</SelectItem> */}
               </SelectContent>
             </Select>
 
