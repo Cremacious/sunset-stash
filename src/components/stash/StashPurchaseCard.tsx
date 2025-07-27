@@ -3,7 +3,6 @@ import { getCategoryIcon } from '@/lib/utils';
 import Image from 'next/image';
 import { Card, CardContent, CardTitle } from '@/components/ui/card';
 
-
 const StashPurchaseCard = ({
   stashItem,
   price,
@@ -14,7 +13,7 @@ const StashPurchaseCard = ({
   return (
     <Card className="bg-gradient-to-br from-white via-purple-50 to-purple-200 border-0 border-b-4 border-b-purple-400 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden rounded-xl min-h-[110px] w-full relative">
       {typeof price === 'number' ? (
-        <div className="absolute top-2 left-3 text-sm font-bold text-green-600 bg-white/80 px-2 py-1 rounded-lg shadow z-10">
+        <div className="mb-2 absolute top-2 left-3 text-sm font-bold text-green-600 bg-white/80 px-2 py-1 rounded-lg shadow z-10">
           ${price.toFixed(2)}
         </div>
       ) : null}
@@ -33,25 +32,29 @@ const StashPurchaseCard = ({
         </div>
       </div>
       <CardContent className="px-3 pb-3 pt-0">
-        <div className="grid grid-cols-3 gap-2">
-          <div className="bg-orange-100/80 rounded-lg p-2 border border-orange-200 flex flex-col items-center min-h-[48px]">
-            <div className="text-center text-xs text-gray-600">Category</div>
-            <p className="font-bold text-orange-600 text-center text-xs truncate w-full">
+        <div className="grid grid-cols-2 gap-2">
+          <div className="bg-gradient-to-r from-indigo-200 to-indigo-300 rounded-lg p-2 border-b-4 border-indigo-400 flex flex-col items-center min-h-[48px] shadow-md">
+            <div className="text-center text-xs text-indigo-800 fugaz-font">
+              Category
+            </div>
+            <p className="font-bold text-indigo-800 text-center truncate w-full">
               {stashItem.category.length > 0 ? stashItem.category : 'N/A'}
             </p>
           </div>
-          <div className="bg-red-100/80 rounded-lg p-2 border border-red-200 flex flex-col items-center min-h-[48px]">
-            <div className="text-center text-xs text-gray-600">Type</div>
-            <p className="font-bold text-red-600 text-center text-xs truncate w-full">
+          <div className="bg-gradient-to-r from-blue-200 to-blue-300 rounded-lg p-2 border-b-4 border-blue-400 flex flex-col items-center min-h-[48px]">
+            <div className="text-center text-xs text-blue-800 fugaz-font">
+              Type
+            </div>
+            <p className="font-bold text-blue-800 text-center truncate w-full">
               {stashItem.type.length > 0 ? stashItem.type : 'N/A'}
             </p>
           </div>
-          <div className="bg-blue-100/80 rounded-lg p-2 border border-blue-200 flex flex-col items-center min-h-[48px]">
+          {/* <div className="bg-blue-100/80 rounded-lg p-2 border border-blue-200 flex flex-col items-center min-h-[48px]">
             <div className="text-center text-xs text-gray-600">THC %</div>
             <p className="font-bold text-blue-600 text-center text-xs truncate w-full">
               {stashItem.thc}
             </p>
-          </div>
+          </div> */}
         </div>
       </CardContent>
     </Card>

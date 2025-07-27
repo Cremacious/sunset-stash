@@ -9,7 +9,7 @@ const PurchaseCard = ({ purchase }: { purchase: Purchase }) => {
     <Card className="bg-gradient-to-br from-white via-pink-50 to-pink-200 border-0 border-b-4 border-b-pink-300 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden rounded-xl min-h-[110px] w-full relative">
       <CardHeader className="p-3 pb-2 relative">
         <div className="flex items-center justify-between">
-          <CardTitle className="text-xl fugaz-font truncate max-w-[190px] text-left ml-2 text-slate-800">
+          <CardTitle className="text-xl fugaz-font truncate max-w-[190px] text-left ml-2 text-pink-800">
             {purchase.dispensary}
           </CardTitle>
           <div className="text-right">

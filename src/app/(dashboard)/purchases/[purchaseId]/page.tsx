@@ -121,7 +121,7 @@ const PurchaseDetailsPage = async ({
               <p className="text-sm text-gray-700 fugaz-font">
                 Added: {new Date(purchase.date).toLocaleDateString()}
               </p>
-              <Button size="sm" asChild>
+              <Button variant={'outline'} size="sm" asChild>
                 <Link href={`/purchases/${purchaseId}/edit`}>
                   <Edit className="w-4 h-4 mr-1" />
                   Edit

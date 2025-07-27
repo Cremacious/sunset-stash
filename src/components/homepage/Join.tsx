@@ -17,9 +17,9 @@ const Join = () => {
   return (
     <section data-aos="fade-up" data-aos-delay="100" className="py-16 px-4 mt-8">
       <div className="max-w-4xl mx-auto text-center">
-        <div className="bg-gradient-to-br from-orange-200 via-purple-200 to-blue-200 border-b-4 border-b-purple-500 shadow-xl rounded-xl transition-all duration-300 transform hover:-translate-y-1 ">
+        <div className="bg-gradient-to-br from-pink-500 via-purple-500 to-blue-500 border-b-4 border-b-purple-800 shadow-xl rounded-xl transition-all duration-300 transform hover:-translate-y-1 ">
           <CardContent className="p-8">
-            <h2 className="text-3xl fugaz-font font-bold text-purple-800 mb-8">
+            <h2 className="text-3xl fugaz-font font-bold text-white mb-8">
               Ready to Start Your Journey?
             </h2>
             {/* <p className="text-gray-600 text-lg mb-8">Join today!</p> */}

@@ -103,7 +103,7 @@ const ExamplePurchases = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 ">
             <Card className="bg-gradient-to-br from-white via-green-100 to-white shadow-xl border-0 border-b-4 border-b-green-300 rounded-2xl  transition-all duration-300 transform hover:-translate-y-1 ">
               <CardHeader>
-                <CardTitle className="text-slate-800 text-xl fugaz-font">
+                <CardTitle className="text-slate-700 text-xl fugaz-font">
                   Easy Purchase Logging
                 </CardTitle>
                 <CardDescription className="text-slate-700">
@@ -111,31 +111,31 @@ const ExamplePurchases = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="bg-gradient-to-br bg-white rounded-lg p-4 space-y-3">
+                <div className="bg-gradient-to-br bg-white border-b-2 border-b-green-200 rounded-lg p-4 space-y-3">
                   <div className="flex justify-between items-center">
                     <span className="text-slate-700">Dispensary:</span>
-                    <span className="text-slate-900 font-semibold">
-                      Trulieve
+                    <span className="text-slate-700 font-semibold">
+                      Mack&apos;s Dispensary
                     </span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-slate-700">Date:</span>
-                    <span className="text-slate-900 font-semibold">
+                    <span className="text-slate-700 font-semibold">
                       Jan 15, 2025
                     </span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-slate-700">Total:</span>
-                    <span className="text-slate-600 font-bold">$89.50</span>
+                    <span className="text-slate-700 font-bold">$89.50</span>
                   </div>
                   <div className="border-t border-green-200 pt-3">
                     <p className="text-slate-700 text-sm">Items:</p>
                     <div className="ml-4 space-y-1">
-                      <p className="text-slate-900 text-sm">
-                        • Blue Dream (3.5g) - $45.00
+                      <p className="text-slate-700 text-sm">
+                        • Blue Dream - $45.00
                       </p>
-                      <p className="text-green-900 text-sm">
-                        • CBD Tincture (30ml) - $44.50
+                      <p className="text-slate-700 text-sm">
+                        • Sour Diesel - $44.50
                       </p>
                     </div>
                   </div>
@@ -145,7 +145,7 @@ const ExamplePurchases = () => {
 
             <Card className="bg-gradient-to-br from-purple-100 via-white to-purple-200 shadow-xl border-0 border-b-4 border-b-purple-300 rounded-2xl transition-all duration-300 transform hover:-translate-y-1">
               <CardHeader>
-                <CardTitle className="text-slate-800 text-xl fugaz-font">
+                <CardTitle className="text-slate-700 text-xl fugaz-font">
                   Spending Analytics
                 </CardTitle>
                 <CardDescription className="text-slate-700">
@@ -156,23 +156,23 @@ const ExamplePurchases = () => {
                 <div className="grid grid-cols-2 gap-4">
                   <div className="bg-green-100 border-b-2 border-b-green-300 rounded-lg p-3 text-center">
                     <DollarSign className="w-8 h-8 text-green-800 mx-auto mb-2" />
-                    <p className="text-slate-800 fugaz-font">Monthly Spending</p>
-                    <p className="text-slate-800 font-bold text-lg">$340.25</p>
+                    <p className="text-green-800 fugaz-font">Monthly Spending</p>
+                    <p className="text-green-800 font-bold text-lg">$340.25</p>
                   </div>
                   <div className="bg-indigo-100 border-b-2 border-b-indigo-300  rounded-lg p-3 text-center">
                     <TrendingUp className="w-8 h-8 text-indigo-800 mx-auto mb-2" />
-                    <p className="text-slate-800 fugaz-font">Total Purchases</p>
-                    <p className="text-slate-800 font-bold text-lg">12</p>
+                    <p className="text-indigo-800 fugaz-font">Total Purchases</p>
+                    <p className="text-indigo-800 font-bold text-lg">12</p>
                   </div>
                   <div className="bg-pink-200 border-b-2 border-b-pink-300  rounded-lg p-3 text-center">
                     <Star className="w-8 h-8 text-pink-800 mx-auto mb-2" />
-                    <p className="text-slate-800 fugaz-font">Favorite Category</p>
-                    <p className="text-slate-800 font-bold text-lg">Flower</p>
+                    <p className="text-pink-800 fugaz-font">Favorite Category</p>
+                    <p className="text-pink-800 font-bold text-lg">Flower</p>
                   </div>
                   <div className="bg-purple-200 border-b-2 border-b-purple-300  rounded-lg p-3 text-center">
                     <ShoppingCart className="w-8 h-8 text-purple-600 mx-auto mb-2" />
-                    <p className="text-slate-800 fugaz-font">Top Dispensary</p>
-                    <p className="text-slate-800 font-bold ">Mack&apos;s</p>
+                    <p className="text-purple-600 fugaz-font">Top Dispensary</p>
+                    <p className="text-purple-600 font-bold ">Mack&apos;s</p>
                   </div>
                 </div>
               </CardContent>

@@ -16,10 +16,10 @@ const exampleComment = {
 
 const examplePost = {
   id: 'post-1',
-  author: 'Chris Johnson',
-  activity: 'Relaxing after work',
+  author: 'John Doe',
+  activity: 'Chilling out on a Sunday afternoon',
   content:
-    'Just tried Blue Dream for the first time and wow! Perfect for a creative afternoon. The sweet berry flavor is amazing and the effects are exactly what I was looking for.',
+    "Just chilling at home and taking it easy after a long week. Thinking about watching a movie later. Wedding Cake is quickly becoming my favorite for relaxing. It's perfect for kicking back and enjoying some quiet time.",
   createdAt: new Date('2025-01-15T00:00:00.000Z'),
   userId: 'user-1',
   stashItems: [
@@ -28,7 +28,7 @@ const examplePost = {
       stashItemId: 'stash-1',
       stashItem: {
         id: 'stash-1',
-        name: 'Blue Dream',
+        name: 'Wedding Cake',
         category: 'Flower',
         type: 'Sativa',
         amount: '3.5g',
@@ -68,23 +68,22 @@ const SocialPostExample = () => {
             Share Your Experience and Connect With Friends
           </h2>
           <p className="text-xl md:text-2xl text-center text-white/90 mb-8 max-w-3xl mx-auto">
-            Express yourself by creating posts about your current
-            activities, thoughts, or experiences for your friends to see. Easily tag strains directly
-            from your personal stash to showcase what you&apos;re enjoying in the moment.
+            Express yourself by creating posts about your current activities,
+            thoughts, or experiences for your friends to see. Easily tag strains
+            directly from your personal stash to showcase what you&apos;re
+            enjoying in the moment.
           </p>
         </div>
 
         <div className="bg-gradient-to-br from-blue-50 via-white to-blue-200 border-0 border-b-4 border-b-blue-300 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden rounded-xl min-h-[110px] w-full relative">
           <div className="flex items-center justify-between p-3 pb-2 relative">
             <div className="flex items-center space-x-3">
-              <UserImage name={post.author} />
+              <UserImage name={'J'} />
               <div>
                 <div className="font-bold text-xl hover:underline fugaz-font text-slate-800">
                   {post.author}
                 </div>
-                <p className="text-xs text-gray-600">
-                  {new Date(post.createdAt).toLocaleDateString()}
-                </p>
+                <p className="text-xs text-gray-600">04/20/2025</p>
               </div>
             </div>
           </div>
@@ -103,8 +102,8 @@ const SocialPostExample = () => {
             {post.stashItems && post.stashItems.length > 0 && (
               <div className="mb-4">
                 <div className="flex items-center mb-2">
-                  <span className="text-sm font-medium fugaz-font text-slate-800">
-                    Strains:
+                  <span className="text-sm font-medium fugaz-font text-slate-700">
+                    I&apos;m enjoying...
                   </span>
                 </div>
                 <div className="flex flex-wrap gap-2">

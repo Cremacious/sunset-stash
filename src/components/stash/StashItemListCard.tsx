@@ -20,7 +20,7 @@ const StashItemListCard = ({
           </div>
         ) : null}
         <div className="flex items-center justify-between p-3 pb-2 relative">
-          <CardTitle className="text-xl text-slate-700 fugaz-font truncate max-w-[270px] md:max-w-[280px] text-left">
+          <CardTitle className="text-xl text-purple-800 fugaz-font truncate max-w-[270px] md:max-w-[280px] text-left">
             {stashItem.name}
           </CardTitle>
           <div className="absolute top-2 right-3 w-12 h-12 rounded-full bg-white/70 flex items-center justify-center shadow-md">

@@ -44,8 +44,8 @@ const TimelinePost = ({ post }: { post: PostWithStashItems }) => {
         {post.stashItems && post.stashItems.length > 0 && (
           <div className="mb-4">
             <div className="flex items-center mb-2">
-              <span className="text-sm font-medium fugaz-font text-slate-800">
-                Strains:
+              <span className="text-sm font-medium fugaz-font text-slate-700">
+                I&apos;m enjoying...
               </span>
             </div>
             <div className="flex flex-wrap gap-2">

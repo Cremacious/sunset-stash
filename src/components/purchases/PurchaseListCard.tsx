@@ -18,7 +18,7 @@ const PurchaseListCard = ({ purchase }: { purchase: Purchase }) => {
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-4 flex-1">
             <div className="flex-1">
-              <h3 className="font-bold text-slate-700 text-lg fugaz-font  truncate">
+              <h3 className="font-bold text-pink-800 text-lg fugaz-font  truncate">
                 {purchase.dispensary}
               </h3>
             </div>
