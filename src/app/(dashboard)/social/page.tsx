@@ -70,7 +70,10 @@ export default function SocialPage() {
     setLoading(false);
   };
 
-  const userPostsCount = posts.length;
+  // Only count posts created by the current user
+  const userPostsCount = posts.filter(
+    (post) => post.userId === currentUser?.id
+  ).length;
 
   return (
     <div className="max-w-7xl mx-auto">
